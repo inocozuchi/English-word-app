@@ -20,6 +20,7 @@
 </script>
 
 <Page title={r.root}>
+  <p class="eyebrow-en">{r.category === '接頭辞' ? 'Prefix' : 'Root'}</p>
   <p class="eyebrow">{ch.no}章 {ch.title} · {r.category}</p>
   <h1 class="root en">{r.root}</h1>
   <p class="meaning">{r.meaning}{#if r.meaningEn}<span class="en mEn">{r.meaningEn}</span>{/if}</p>
@@ -41,13 +42,15 @@
     <ul>
       {#each words as w}
         {@const st = wordStatus(store.progress.items, w)}
-        <li>
+        {@const isRef = r.refs.includes(w.id)}
+        <li class:ref={isRef}>
           <button class="branch press" onclick={() => router.push({ name: 'word', w: w.w })}>
             <span class="bw">
               <span class="en w">{w.w}</span>
               {#if affix(w)}<span class="affix en">{affix(w)}</span>{/if}
               <span class="st {st}" aria-label={st}></span>
             </span>
+            {#if isRef}<span class="refnote">覚え方として併記（語源は別系統）</span>{/if}
             <span class="kana"><Kana kana={w.kana} /></span>
             <span class="def">{w.defs.map((d) => d.ja).join('／')}</span>
           </button>
@@ -70,7 +73,7 @@
         <li>
           <p class="en pen">{p.en}</p>
           <p class="pja">{p.ja}</p>
-          {#if p.examples[0]}<div class="pex"><Example ex={p.examples[0]} /></div>{/if}
+          {#if p.examples[0]}<div class="pex"><Example ex={p.examples[0]} word={p.en} /></div>{/if}
         </li>
       {/each}
     </ul>
@@ -111,7 +114,7 @@
     margin-top: 16px;
     padding: 14px 16px;
     border-radius: var(--radius);
-    background: var(--accent-soft);
+    border: var(--frame) solid var(--ink);
   }
   .memo-label {
     font-size: 12px;
@@ -245,6 +248,15 @@
   }
   .kana {
     font-size: 13px;
+  }
+  .refnote {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text3);
+  }
+  li.ref .branch {
+    background: transparent;
+    border: 1.5px dashed var(--line-strong);
   }
   .def {
     font-size: 15px;

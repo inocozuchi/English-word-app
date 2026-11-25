@@ -19,6 +19,9 @@ const rawRoots: any[] = [...raw.roots].sort(
   (a, b) => chapterNos.indexOf(a.chapter) - chapterNos.indexOf(b.chapter),
 );
 
+/** note に「語源的には〜」「別系統」とある掲載は、覚え方として併記されているだけの参考語 */
+const isRefNote = (note: unknown) => typeof note === 'string' && /語源的には|別系統|別語源/.test(note);
+
 const words: Word[] = [];
 const wordByText = new Map<string, Word>();
 const phrases: Phrase[] = [];
@@ -36,17 +39,31 @@ for (const r of rawRoots) {
     memo: r.memo ?? '',
     note: r.note ?? null,
     words: [],
+    refs: [],
     phrases: [],
     order: roots.length,
   };
   for (const w of r.words) {
     if (!isValidKana(w.kana)) warnings.push(`kana の ^ が対になっていない: ${w.word} ${w.kana}`);
     if (!w.defs?.length) warnings.push(`defs が空: ${w.word}`);
+    const ref = isRefNote(w.note);
     const existing = wordByText.get(w.word);
     if (existing) {
       // 同じ単語が複数の語源に載っている → 1語として扱い、語源を追加
       if (!existing.roots.includes(root.id)) existing.roots.push(root.id);
       root.words.push(existing.id);
+      if (ref) {
+        existing.refIn.push(root.id);
+        root.refs.push(existing.id);
+      } else if (existing.refIn.includes(existing.roots[0])) {
+        // 先に参考語として出てきた単語 → 本来の語源の内容（分解・意味など）を主にする
+        existing.roots = [root.id, ...existing.roots.filter((id) => id !== root.id)];
+        existing.breakdown = w.breakdown ?? [];
+        existing.core = w.core ?? null;
+        existing.defs = w.defs.map((d: any) => ({ pos: d.pos, ja: d.ja }));
+        existing.examples = (w.examples ?? []).map((e: any) => ({ en: e.en, ja: e.ja }));
+        existing.derivatives = (w.derivatives ?? []).map((d: any) => ({ word: d.word, pos: d.pos, ja: d.ja }));
+      }
       continue;
     }
     const word: Word = {
@@ -60,11 +77,13 @@ for (const r of rawRoots) {
       examples: (w.examples ?? []).map((e: any) => ({ en: e.en, ja: e.ja })),
       derivatives: (w.derivatives ?? []).map((d: any) => ({ word: d.word, pos: d.pos, ja: d.ja })),
       note: w.note ?? null,
+      refIn: ref ? [root.id] : [],
       order: words.length,
     };
     words.push(word);
     wordByText.set(word.w, word);
     root.words.push(word.id);
+    if (ref) root.refs.push(word.id);
   }
   for (const p of r.phrases ?? []) {
     const ph: Phrase = {

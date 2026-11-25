@@ -21,6 +21,7 @@
 </script>
 
 <Page title={w.w}>
+  <p class="eyebrow-en">Word</p>
   <div class="top">
     <h1 class="en w">{w.w}</h1>
     <span class="badge {st}">{STATUS_LABEL[st]}</span>
@@ -54,6 +55,12 @@
 
   {#if w.note}<p class="note">{w.note}</p>{/if}
 
+  {#if w.refIn.length}
+    <p class="note">
+      {w.refIn.map((id) => ix.root.get(id)!.root).join('、')} の項目には覚え方として併記されています（語源的には別系統）。
+    </p>
+  {/if}
+
   <h2>語源</h2>
   <ul class="group">
     {#each w.roots as rid}
@@ -66,7 +73,7 @@
 
   {#if tries}
     <h2>学習</h2>
-    <p class="learn">{tries}回出題 · 正解 {oks}回{#if nextDue !== undefined} · 次の復習 {dayKey(nextDue).slice(5).replace('-', '/')}{/if}</p>
+    <p class="learn">{tries}回出題 · 正解 {oks}回{#if nextDue !== undefined} · 次の復習 {nextDue <= store.today ? '今日' : dayKey(nextDue).slice(5).replace('-', '/')}{/if}</p>
   {/if}
 </Page>
 

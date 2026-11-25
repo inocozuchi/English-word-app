@@ -20,6 +20,8 @@ export interface Word {
   examples: Example[];
   derivatives: Derivative[];
   note: string | null;
+  /** 覚え方として併記されているだけ（語源的には別系統）の語源ID */
+  refIn: string[];
   /** 学習順（章 → 語源 → 単語の並び） */
   order: number;
 }
@@ -45,6 +47,8 @@ export interface Root {
   memo: string;
   note: string | null;
   words: number[];
+  /** words のうち、覚え方として併記されている別語源の単語 */
+  refs: number[];
   phrases: number[];
   order: number;
 }
