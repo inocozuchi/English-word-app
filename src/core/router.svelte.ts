@@ -76,16 +76,24 @@ class Router {
     this.busy = false;
   }
 
-  /** 今の画面を差し替える（クイズ → 結果 など）。下から差し替え先が現れる */
+  /**
+   * 今の画面を差し替える（クイズ → 結果 など）。
+   * 新しい画面を右から重ねてスライドさせ、終わってから古い画面を外す（途中で背景だけになる瞬間を作らない）
+   */
   async replace(route: Route) {
     if (this.busy) return;
     this.busy = true;
+    this.revealing = true;
     const old = this.top;
-    const oldEl = this.els.get(old.id);
-    this.stack[this.stack.length - 1] = { id: seq++, route, kind: old.kind };
+    this.stack.push({ id: seq++, route, kind: 'push' });
     await tick();
-    const el = this.els.get(this.top.id);
-    if (el) await fadeIn(el, oldEl);
+    const { top, under } = this.pair();
+    await animateTransition(top, under, 'push', 0, 1);
+    // 古い画面を外し、新しい画面は古い画面の種類（モーダルなど）を引き継ぐ
+    const idx = this.stack.findIndex((e) => e.id === old.id);
+    if (idx >= 0) this.stack.splice(idx, 1);
+    this.top.kind = old.kind;
+    this.revealing = false;
     this.busy = false;
   }
 
@@ -186,20 +194,6 @@ async function animateTransition(
   anims.forEach((x) => x.cancel());
   // 表示中の画面は transform を外す（position: fixed 等の基準がずれないように）
   if (to === 1) top.style.transform = '';
-}
-
-async function fadeIn(el: HTMLElement, old: HTMLElement | undefined) {
-  if (reducedMotion()) return;
-  const s = spring(SPRINGS.card);
-  const anim = el.animate(
-    [
-      { opacity: 0, transform: 'translate3d(0, 24px, 0) scale(0.98)' },
-      { opacity: 1, transform: 'none' },
-    ],
-    { duration: s.duration, easing: s.easing },
-  );
-  void old;
-  await anim.finished.catch(() => {});
 }
 
 export const router = new Router();
