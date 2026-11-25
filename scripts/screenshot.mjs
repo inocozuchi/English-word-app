@@ -73,13 +73,19 @@ async function run(scheme) {
   await top().locator('.choice').nth(1).tap();
   await page.waitForTimeout(500);
   await shot('03-reveal');
-  // 残りは自動で進ませる（回答しながら）
-  for (let i = 0; i < 12; i++) {
-    await page.waitForTimeout(3300);
-    if (await page.locator('.result').count()) break;
-    const c = page.locator('.card .choice:not([disabled])');
-    if (await c.count()) await c.nth(i % 4).tap().catch(() => {});
-    if (i === 2) await shot(`04-quiz-q${i + 3}`);
+  // 残りは自動で進ませる（回答しながら）。めくる途中は答えられないので、答えられるときだけ押す
+  let answered = 1;
+  for (let k = 0; k < 80 && !(await page.locator('.result').count()); k++) {
+    const c = top().locator('.stage > .card:not(.peek) .choice:not([disabled])');
+    if (await c.count()) {
+      await c.nth(answered % 4).tap().catch(() => {});
+      answered++;
+      if (answered === 4) {
+        await page.waitForTimeout(900);
+        await page.screenshot({ path: `${OUT}${scheme}-04-quiz-q4.png` });
+      }
+    }
+    await page.waitForTimeout(500);
   }
   await page.waitForSelector('.result', { timeout: 20000 });
   await shot('05-result');

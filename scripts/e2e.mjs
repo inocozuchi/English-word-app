@@ -70,9 +70,9 @@ try {
     const day = Object.values(p1.days)[0];
     ok(day.a === 1, '解説中にもう一度押しても二重に記録されない');
 
-    // 自動で次へ（3秒）
-    await sleep(3400);
-    ok((await top().locator('.count').textContent()).includes('2'), '設定秒数で自動的に次の問題へ進む');
+    // 自動で次へ（3秒 ＋ バーを戻す 0.3秒 ＋ めくる 0.55秒）
+    await sleep(4300);
+    ok((await top().locator('.count').getAttribute('aria-label')).startsWith('2 '), '設定秒数で自動的に次の問題へ進む');
 
     // 2問目: 何もしない → 5秒で時間切れ
     await sleep(5600);
@@ -88,6 +88,7 @@ try {
     }
     await page.waitForSelector('.result', { timeout: 15000 });
     ok(true, '5問で結果画面になる');
+    await sleep(1500); // スコアが数え上がるのを待つ
     const score = await page.locator('.score').textContent();
     ok(/\d+\/5/.test(score.replace(/\s/g, '')), `結果のスコア（${score.replace(/\s/g, '')}）`);
     const missedRows = await page.locator('.result .row').count();
@@ -111,6 +112,7 @@ try {
     await top().locator('.close').tap();
     await settle();
     ok((await depth()) === 1, '✕ でホームに戻る');
+    await sleep(800); // 数字が数え上がるのを待つ
     const todayNum = await page.locator('.stat-c .num').nth(1).textContent();
     ok(+todayNum === 5, `ホームの「今日の回答」が更新される（${todayNum}）`);
 
@@ -282,15 +284,16 @@ try {
       }
       await sleep(80);
       await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-      await sleep(500);
+      await sleep(900); // めくり終わるまで
     };
-    const count = async () => (await top().locator('.count').textContent()).replace(/\s/g, '');
+    const count = async () => (await top().locator('.count').getAttribute('aria-label')).replace(/\s/g, '');
     // 回答前にスワイプしても進まない
     await drag(320, 60);
     ok((await count()).startsWith('1/'), '回答前のスワイプでは進まない');
     await top().locator('.choice').first().tap();
     await sleep(400);
-    ok((await top().locator('.judge').count()) === 1, '回答すると大きな ◯ / × が出る');
+    ok((await top().locator('.status .badge').count()) === 1, '回答すると ◯ / × のバッジが出る');
+    ok((await top().locator('.dot.ok, .dot.ng').count()) === 1, '進み具合の点に結果が付く');
     const st = (await top().locator('.status').textContent()).trim();
     ok(/^(正解|不正解)/.test(st), `正誤の文字が出る（${st.slice(0, 8)}）`);
     // 少しだけ動かして離す → 戻る
@@ -331,7 +334,7 @@ try {
     await page.locator('.review').tap();
     await settle();
     ok((await top().locator('.rv').count()) === 1, '復習モードの表示が出る');
-    ok((await top().locator('.count').textContent()).replace(/\s/g, '').endsWith('/2'), '復習モードはリストの件数だけ出題');
+    ok((await top().locator('.count').getAttribute('aria-label')).replace(/\s/g, '').endsWith('/2'), '復習モードはリストの件数だけ出題');
     for (let n = 0; n < 2; n++) {
       const head = (await top().locator('.prompt').textContent()).trim();
       if (head.startsWith('involve')) {
