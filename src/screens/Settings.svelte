@@ -11,7 +11,7 @@
   import { scopeLabel } from '../lib/summary.ts';
   import { haptic } from '../lib/haptics.ts';
 
-  const s = store.settings;
+  const s = $derived(store.settings);
   const FORMATS: { f: Format; desc: string }[] = [
     { f: 'ej', desc: '英単語を見て意味を選ぶ' },
     { f: 'je', desc: '意味を見て英単語を選ぶ（英→日で学んだ語から）' },
@@ -52,10 +52,12 @@
 
   let fileInput: HTMLInputElement;
   async function doImport(e: Event) {
-    const f = (e.currentTarget as HTMLInputElement).files?.[0];
+    // await の後では e.currentTarget が null になるので、先に取っておく
+    const input = e.currentTarget as HTMLInputElement;
+    const f = input.files?.[0];
     if (!f) return;
     const data = parseImport(await f.text());
-    (e.currentTarget as HTMLInputElement).value = '';
+    input.value = '';
     if (!data) return flash('読み込めませんでした（形式が違います）');
     if (!confirm('今の学習記録を、読み込んだデータで置き換えますか？')) return;
     replaceAll(data.settings, data.progress);
@@ -72,6 +74,7 @@
 </script>
 
 <Page title="設定">
+  <p class="eyebrow-en">Settings</p>
   <h1 class="title">設定</h1>
 
   <h2>クイズ</h2>
