@@ -117,7 +117,7 @@ async function run(scheme) {
     await b.tap({ timeout: 3000 }).catch(() => {});
     await page.waitForTimeout(800);
   }
-  await tap('nav button:nth-child(3)');
+  await tap('header .icon');
   await shot('12-settings');
   await top().locator('.scroll').first().evaluate((el) => el.scrollTo(0, 2000));
   await shot('13-settings-bottom');

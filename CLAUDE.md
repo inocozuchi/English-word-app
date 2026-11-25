@@ -8,9 +8,11 @@
 - `npm run dev` — データ変換 → 開発サーバー
 - `npm run build` — データ変換 → `dist/` に静的ファイル出力（Service Worker も生成）
 - `npm run preview` — ビルド結果の確認
-- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・カナ解析・日付）
+- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・カナ解析・日付・例文の強調）
+- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・検索・スワイプバック・設定・バックアップ・オフライン）
 - `npm run check` — svelte-check による型チェック
-- `npm run icons` — `scripts/icon.svg` からアイコン PNG を生成（Playwright）
+- `npm run icons` — `scripts/icon.svg` からアイコン PNG と起動画面（端末サイズ×ライト/ダーク）を生成（Playwright）。
+  起動画面の `<link>` は `scripts/splash-tags.html` に出力されるので、端末を追加したら index.html に貼り直す
 - `npm run shots` — iPhone 15 サイズのスクリーンショットを `screenshots/` に保存（要 `npm run build`。`node scripts/screenshot.mjs light|dark` で片方だけ）
 
 `icons` / `shots` は Playwright（Chromium）を使う。グローバルに無ければ `npm i -D playwright && npx playwright install chromium`。
@@ -27,6 +29,9 @@
   - kana は `^` で囲んだ部分が強く読む部分。`parseKana` で `{label, parts}` に分解済み（parts の奇数番目が強勢）。
   - schema / corrections / sources など学習に不要な項目は落とす。
 - groups（語源ではない単語グループ）は単語帳の「その他」にのみ表示し、出題しない。
+- note に「語源的には〜系」「別系統」とある掲載は「覚え方として併記されているだけ」の参考語（`Word.refIn` / `Root.refs`）。
+  例: cur の cure・curious・secure（本来は cure＝cura 系）、dom の kingdom、loc の lock。
+  主たる語源は参考でない掲載を優先し、語源クイズの解説には出さない。単語ツリーでは点線で区別する。
 
 ## 設計方針
 
@@ -43,6 +48,13 @@
 - 日付は午前4時区切り（`day.ts`）。
 - クイズのタイマーは WAAPI で細いバーを縮めるアニメーションそのもの（`finish` で次へ）。一時停止は `Animation.pause()`。
   `$effect` で `paused` を見るときは、早期 return より前に読んで依存に登録すること（過去にこれで一時停止が効かなかった）。
+
+## デザイン
+
+- 白・黒＋アクセント1色（#3d5afe / ダーク #7088ff）。
+- ANYCOLOR のサイトを参考に、ホームなど要所に「極太の欧文見出し（`.display`, Inter 850）」と「太い黒枠（`--frame` / `--ink`）」を使う。
+  一覧やクイズは読みやすさ優先で控えめに（薄い枠・薄い面）。
+- クイズは回答後も選択肢を見せたまま、上半分（問題のエリア）が解説に入れ替わる。
 
 ## iPhone 表示（重要）
 
