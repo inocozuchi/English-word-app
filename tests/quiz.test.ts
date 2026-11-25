@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import data from '../src/generated/words.json';
-import type { Dataset } from '../src/decks/etymology/types.ts';
-import { buildIndex } from '../src/decks/etymology/dataset.ts';
-import { questionFor, buildSession, buildCandidates } from '../src/decks/etymology/quiz.ts';
+import type { Dataset } from '../src/modes/etymology/types.ts';
+import { buildIndex } from '../src/modes/etymology/dataset.ts';
+import { questionFor, buildSession, buildCandidates } from '../src/modes/etymology/quiz.ts';
 import { meaningTokens, overlaps, pickDistractors } from '../src/core/distractors.ts';
 import { createRng } from '../src/core/rng.ts';
 import { review } from '../src/core/srs.ts';

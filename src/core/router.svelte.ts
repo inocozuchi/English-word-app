@@ -1,7 +1,7 @@
 // 画面スタック型のルーター。URL は使わず、状態だけで画面を積む。
 // 遷移アニメーションとスワイプバックは WAAPI で transform / opacity だけを動かす。
 import { tick } from "svelte";
-import type { Question, Route } from './deck.ts';
+import type { Question, Route } from './mode.ts';
 import type { ReviewEvent } from './review.ts';
 import { spring, SPRINGS, reducedMotion } from './spring.ts';
 import type { SpringOptions } from './spring.ts';

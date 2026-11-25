@@ -7,7 +7,7 @@
 </script>
 
 <div class="prompt">
-  {#if s.kind === 'word' && q.mode === 'ej'}
+  {#if s.kind === 'word' && q.pattern === 'ej'}
     <h1 class="headword en" class:long={s.word.w.length > 11}>{s.word.w}</h1>
     <p class="kana-line"><Kana kana={s.word.kana} /></p>
   {:else if s.kind === 'word'}

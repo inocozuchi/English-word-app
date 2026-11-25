@@ -1,13 +1,13 @@
 <script lang="ts">
   // クイズの1枚分（問題文 or 解説 ＋ 4択）。クイズ画面はこれを横に並べてめくる。
   import Icon from '../components/Icon.svelte';
-  import type { Deck, Question } from '../core/deck.ts';
+  import type { QuizMode, Question } from '../core/mode.ts';
   import type { ReviewEvent, ReviewEntry } from '../core/review.ts';
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
   import { promptOut, popScale, shake, stagger } from '../core/transitions.ts';
 
   let {
-    deck,
+    mode,
     q,
     phase,
     chosen,
@@ -16,7 +16,7 @@
     reviewGoal,
     onchoose,
   }: {
-    deck: Deck;
+    mode: QuizMode;
     q: Question;
     phase: 'ask' | 'reveal';
     chosen: number | null;
@@ -57,25 +57,39 @@
   }
 </script>
 
-<!-- 上半分: 回答前は問題、回答後は解説に入れ替わる（選択肢は見えたまま） -->
+{#snippet status()}
+  <div class="status" class:ok>
+    {#if ok}
+      <span class="badge ring" use:badgeFx={true}></span>正解
+    {:else}
+      <span class="badge cross" use:badgeFx={false}><Icon name="x" size={15} stroke={3.2} /></span>{chosen === null ? '時間切れ' : '不正解'}
+    {/if}
+    {#if event && REVIEW_NOTE[event]}
+      <span class="rnote" class:cleared={event === 'cleared'}>{REVIEW_NOTE[event]}</span>
+    {:else if event === 'progress' && reviewEntry}
+      <span class="rnote">復習 {reviewEntry.streak}/{reviewGoal}</span>
+    {/if}
+  </div>
+{/snippet}
+
+<!-- 上半分 -->
 <div class="upper">
-  {#if phase === 'ask'}
-    <div class="q-area" out:promptOut><deck.Prompt {q} /></div>
+  {#if mode.inlineExplain}
+    <!-- 問題文を残したまま、回答後はその上に解説を重ねる（音声変化のマーキングなど）。
+         正誤の行の場所は最初から確保しておき、回答の瞬間に文が動かないようにする -->
+    <div class="inline scroll">
+      <div class="status-slot">{#if phase === 'reveal'}{@render status()}{/if}</div>
+      <mode.Prompt {q} {phase} />
+      {#if phase === 'reveal' && mode.note}<p class="mode-note" use:explainFx>{mode.note}</p>{/if}
+    </div>
+  {:else if phase === 'ask'}
+    <!-- 回答前は問題、回答後は解説に入れ替わる（選択肢は見えたまま） -->
+    <div class="q-area" out:promptOut><mode.Prompt {q} {phase} /></div>
   {:else}
     <div class="explain scroll" use:explainFx>
-      <div class="status" class:ok>
-        {#if ok}
-          <span class="badge ring" use:badgeFx={true}></span>正解
-        {:else}
-          <span class="badge cross" use:badgeFx={false}><Icon name="x" size={15} stroke={3.2} /></span>{chosen === null ? '時間切れ' : '不正解'}
-        {/if}
-        {#if event && REVIEW_NOTE[event]}
-          <span class="rnote" class:cleared={event === 'cleared'}>{REVIEW_NOTE[event]}</span>
-        {:else if event === 'progress' && reviewEntry}
-          <span class="rnote">復習 {reviewEntry.streak}/{reviewGoal}</span>
-        {/if}
-      </div>
-      <deck.Explain {q} />
+      {@render status()}
+      {#if mode.Explain}<mode.Explain {q} />{/if}
+      {#if mode.note}<p class="mode-note">{mode.note}</p>{/if}
     </div>
   {/if}
 </div>
@@ -94,6 +108,7 @@
       onclick={() => onchoose(k)}
       use:choiceFx={k}
     >
+      {#if c.color}<span class="cdot" style:--c={c.color}></span>{/if}
       {#if c.tag}<span class="tag">{c.tag}</span>{/if}
       <span class="ct">{c.text}</span>
       {#if isAns}<span class="mark"><span class="mini-ring"></span></span>
@@ -110,9 +125,27 @@
     margin-bottom: 14px;
   }
   .q-area,
-  .explain {
+  .explain,
+  .inline {
     position: absolute;
     inset: 0;
+  }
+  .inline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 2px 18px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
+  }
+  .status-slot {
+    flex: none;
+    min-height: 30px;
+  }
+  .mode-note {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 2px;
   }
 
   /* 解説（問題のエリアに入れ替わる。長いときはスクロール、下端はフェード） */
@@ -214,6 +247,16 @@
     border-radius: 6px;
     padding: 0 5px;
     line-height: 1.6;
+  }
+  .cdot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  .choice.correct .cdot {
+    box-shadow: 0 0 0 2px var(--on-accent);
   }
   .choice.correct {
     background: var(--accent);

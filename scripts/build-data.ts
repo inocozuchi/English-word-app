@@ -3,8 +3,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseKana, isValidKana } from '../src/decks/etymology/kana.ts';
-import type { Dataset, Word, Root, Phrase, Chapter, Group } from '../src/decks/etymology/types.ts';
+import { parseKana, isValidKana } from '../src/modes/etymology/kana.ts';
+import type { Dataset, Word, Root, Phrase, Chapter, Group } from '../src/modes/etymology/types.ts';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(here, '../data/etymology_words.json');

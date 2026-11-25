@@ -3,22 +3,22 @@
   import Page from '../components/Page.svelte';
   import Icon from '../components/Icon.svelte';
   import { router } from '../core/router.svelte.ts';
-  import { store, activeDeck, loadData, removeFromReview } from '../core/store.svelte.ts';
+  import { store, activeMode, loadData, removeFromReview } from '../core/store.svelte.ts';
   import { reviewOrder } from '../core/review.ts';
   import { createRng } from '../core/rng.ts';
   import { haptic } from '../core/haptics.ts';
 
   loadData();
-  const deck = $derived(activeDeck());
+  const mode = $derived(activeMode());
   const goal = $derived(store.settings.reviewGoal);
-  const entries = $derived(deck.ready() ? reviewOrder(store.progress.review, deck.id, createRng(1)) : []);
+  const entries = $derived(mode.ready() ? reviewOrder(store.progress.review, createRng(1)) : []);
 
   function start() {
     haptic('light');
-    router.push({ name: 'quiz', params: { seed: Date.now(), mode: 'review' } }, 'modal');
+    router.push({ name: 'quiz', params: { seed: Date.now(), kind: 'review' } }, 'modal');
   }
   function open(key: string) {
-    const r = deck.detailRoute(key);
+    const r = mode.detailRoute(key);
     if (r) router.push(r);
   }
 </script>
@@ -31,7 +31,7 @@
   {#if entries.length}
     <ul class="ui-group list">
       {#each entries as e (e.key)}
-        {@const lb = deck.label(e.key)}
+        {@const lb = mode.label(e.key)}
         {#if lb}
           <li>
             <button class="row" onclick={() => open(e.key)}>

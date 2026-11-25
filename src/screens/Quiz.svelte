@@ -1,5 +1,5 @@
 <script lang="ts">
-  // 共通のクイズ画面。問題文と解説の中身はデッキ（deck.Prompt / deck.Explain）が描く。
+  // 共通のクイズ画面。問題文と解説の中身はモード（mode.Prompt / mode.Explain）が描く。
   // 問題の切り替えは「カルーセル」: 次の問題のカードが右に並んでいて、
   // 左スワイプでは指についてきて、自動で進むときも同じ動きで横にめくれる。
   import { onMount, tick } from 'svelte';
@@ -7,19 +7,20 @@
   import QuizCard from './QuizCard.svelte';
   import { router } from '../core/router.svelte.ts';
   import type { AnswerLog } from '../core/router.svelte.ts';
-  import { store, activeDeck, deckSettings, loadData, recordAnswer, today } from '../core/store.svelte.ts';
+  import { store, activeMode, modeSettings, timingOf, answeredCount, loadData, recordAnswer, today } from '../core/store.svelte.ts';
   import { buildSession } from '../core/session.ts';
-  import type { SessionMode } from '../core/session.ts';
-  import type { Question } from '../core/deck.ts';
+  import type { SessionKind } from '../core/session.ts';
+  import type { Question } from '../core/mode.ts';
   import type { ReviewEvent } from '../core/review.ts';
   import { createRng } from '../core/rng.ts';
   import { haptic } from '../core/haptics.ts';
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
   import { bump } from '../core/transitions.ts';
 
-  let { seed, mode = 'normal' }: { seed: number; mode?: SessionMode } = $props();
+  let { seed, kind = 'normal' }: { seed: number; kind?: SessionKind } = $props();
 
-  const deck = activeDeck();
+  const mode = activeMode();
+  const timing = timingOf(mode);
   let qs = $state<Question[]>([]);
   let ready = $state(false);
   let i = $state(0);
@@ -48,18 +49,20 @@
       await loadData();
       const s = store.settings;
       qs = buildSession({
-        deck,
-        deckSettings: deckSettings(deck),
         mode,
+        modeSettings: modeSettings(mode),
+        kind,
         count: s.count,
         items: store.progress.items,
         review: store.progress.review,
+        tags: store.progress.tags,
+        answered: answeredCount(store.progress),
         today: today(),
         rng: createRng(seed),
         lastBase: store.progress.lastBase,
       });
       ready = true;
-      if (qs.length) requestAnimationFrame(() => startTimer(s.answerSec, timeout));
+      if (qs.length) requestAnimationFrame(() => startTimer(timing.answerSec, timeout));
     })();
     const vis = () => (hidden = document.visibilityState === 'hidden');
     document.addEventListener('visibilitychange', vis);
@@ -114,13 +117,13 @@
     chosen = k;
     phase = 'reveal';
     const correct = k === q.answer;
-    event = recordAnswer(q.deck, q.key, q.base, correct);
+    event = recordAnswer(q.key, q.base, correct, q.tags);
     logs.push({ q, chosen: k, review: event });
     marks[i] = correct ? 'ok' : 'ng';
     combo = correct ? combo + 1 : 0;
     haptic(correct ? 'success' : 'error');
     tick().then(() => dots[i] && bump(dots[i], 1.6));
-    startTimer(store.settings.advanceSec, next);
+    startTimer(timing.advanceSec, next);
   }
 
   function timeout() {
@@ -185,7 +188,7 @@
       done = true;
       timer?.cancel();
       if (from) await slide(from, 0, 0);
-      router.replace({ name: 'result', params: { logs, mode, marks: [...marks] } });
+      router.replace({ name: 'result', params: { logs, kind, marks: [...marks] } });
       return;
     }
     peek = true;
@@ -203,7 +206,7 @@
     const c = els.get(i);
     if (c) c.style.transform = '';
     sliding = false;
-    startTimer(store.settings.answerSec, timeout);
+    startTimer(timing.answerSec, timeout);
   }
 
   // ---- タッチ: 長押しで一時停止 / 解説中に左スワイプで次へ ----
@@ -321,7 +324,7 @@
         </span>
       {:else if qs.length}{i + 1}<span class="of">&ensp;/&ensp;{qs.length}</span>{/if}
     </span>
-    <span class="fmt">{#if mode === 'review'}<span class="rv">復習</span>{/if}{q ? q.modeLabel : ''}</span>
+    <span class="fmt">{#if kind === 'review'}<span class="rv">復習</span>{/if}{q ? q.patternLabel : ''}</span>
   </header>
   <div class="track" class:reveal={phase === 'reveal'}>
     <div class="bar" bind:this={bar}></div>
@@ -338,7 +341,7 @@
     {#if ready && !qs.length}
       <!-- 範囲が空のときの案内（問題エリアの中だけに出す。✕ を塞がない） -->
       <div class="empty">
-        {#if mode === 'review'}
+        {#if kind === 'review'}
           <p>復習リストは空です。</p>
           <p class="sub">まちがえた問題が自動で入ります。</p>
         {:else}
@@ -352,7 +355,7 @@
     {#each shown as idx (idx)}
       <div class="card" class:peek={idx !== i} use:cardRef={idx} inert={idx !== i}>
         <QuizCard
-          {deck}
+          {mode}
           q={qs[idx]}
           phase={idx === i ? phase : 'ask'}
           chosen={idx === i ? chosen : null}

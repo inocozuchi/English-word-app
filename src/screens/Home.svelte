@@ -5,33 +5,33 @@
   import { booted, isBooted } from '../core/boot.ts';
   import { stagger } from '../core/transitions.ts';
   import { router } from '../core/router.svelte.ts';
-  import { store, activeDeck, deckSettings, loadData } from '../core/store.svelte.ts';
+  import { store, activeMode, modeSettings, loadData } from '../core/store.svelte.ts';
   import { streak, dayKey } from '../core/day.ts';
   import { isDue } from '../core/srs.ts';
   import { reviewCount } from '../core/review.ts';
   import { haptic } from '../core/haptics.ts';
 
   loadData();
-  const deck = $derived(activeDeck());
+  const mode = $derived(activeMode());
   const t = $derived(store.today);
   const days = $derived(streak(store.progress.days, t));
   const todayCount = $derived(store.progress.days[dayKey(t)]?.a ?? 0);
-  const inReview = $derived(reviewCount(store.progress.review, deck.id));
+  const inReview = $derived(reviewCount(store.progress.review));
   /** 出題範囲で、今日の復習待ち（間隔反復の期限が来ている問題） */
   const due = $derived.by(() => {
-    if (!deck.ready()) return 0;
+    if (!mode.ready()) return 0;
     let n = 0;
-    for (const c of deck.candidates(deckSettings(deck))) {
+    for (const c of mode.candidates(modeSettings(mode))) {
       const st = store.progress.items[c.key];
       if (st && isDue(st, t)) n++;
     }
     return n;
   });
-  const summary = $derived(`${store.settings.count}問 · ${deck.summary(deckSettings(deck))}`);
+  const summary = $derived(`${store.settings.count}問 · ${mode.summary(modeSettings(mode))}`);
 
   // 大見出し: \n で改行、*語* をアクセント色に
   const hero = $derived(
-    deck.hero.split('\n').map((line) => line.split(/(\*[^*]+\*)/).filter(Boolean).map((t) => ({ t: t.replace(/\*/g, ''), acc: t.startsWith('*') }))),
+    mode.hero.split('\n').map((line) => line.split(/(\*[^*]+\*)/).filter(Boolean).map((t) => ({ t: t.replace(/\*/g, ''), acc: t.startsWith('*') }))),
   );
 
   // 起動時だけ、要素を上から順に静かに出す（配置が確定してから。core/boot.ts）
@@ -40,10 +40,10 @@
     if (!isBooted()) booted.then(() => stagger([...root.querySelectorAll('[data-intro]')], { step: 55 }));
   });
 
-  async function start(mode: 'normal' | 'review') {
+  async function start(kind: 'normal' | 'review') {
     haptic('light');
     await loadData();
-    router.push({ name: 'quiz', params: { seed: Date.now(), mode } }, 'modal');
+    router.push({ name: 'quiz', params: { seed: Date.now(), kind } }, 'modal');
   }
 </script>
 
@@ -54,8 +54,8 @@
   </header>
 
   <div class="hero" data-intro>
-    <p class="deck"><span class="chip">{deck.title}</span>{#if deck.stat()}<span class="stat">{deck.stat()}</span>{/if}</p>
-    <p class="tagline">{deck.tagline}</p>
+    <p class="mode"><span class="chip">{mode.title}</span>{#if mode.stat()}<span class="stat">{mode.stat()}</span>{/if}</p>
+    <p class="tagline">{mode.tagline}</p>
     <h1 class="display">
       {#each hero as line, li}{#if li > 0}<br />{/if}{#each line as part}{#if part.acc}<span class="acc">{part.t}</span>{:else}{part.t}{/if}{/each}{/each}
     </h1>
@@ -93,8 +93,8 @@
   </div>
 
   <nav data-intro>
-    {#if deck.browse}
-      <button class="press" onclick={() => router.push(deck.browse!.route)}><Icon name="book" size={20} /><span>{deck.browse.label}</span></button>
+    {#if mode.browse}
+      <button class="press" onclick={() => router.push(mode.browse!.route)}><Icon name="book" size={20} /><span>{mode.browse.label}</span></button>
     {/if}
     <button class="press" onclick={() => router.push({ name: 'review' })}><Icon name="review" size={20} /><span>復習リスト</span></button>
     <button class="press" onclick={() => router.push({ name: 'stats' })}><Icon name="chart" size={20} /><span>記録</span></button>
@@ -142,7 +142,7 @@
     gap: 8px;
     min-height: 0;
   }
-  .deck {
+  .mode {
     display: flex;
     align-items: center;
     gap: 8px;

@@ -2,17 +2,17 @@
   import { ety } from '../state.svelte.ts';
   import Page from '../../../components/Page.svelte';
   import Icon from '../../../components/Icon.svelte';
-  import { deckSettings, updateDeckSettings } from '../../../core/store.svelte.ts';
-  import { etymologyDeck } from '../deck.ts';
+  import { modeSettings, updateModeSettings } from '../../../core/store.svelte.ts';
+  import { etymologyMode } from '../mode.ts';
 
   const ix = ety.index!;
-  const ex = $derived(new Set(deckSettings(etymologyDeck).excludedRoots));
+  const ex = $derived(new Set(modeSettings(etymologyMode).excludedRoots));
   let open = $state<Record<number, boolean>>({});
 
   function setRoots(ids: string[], include: boolean) {
-    const next = new Set(deckSettings(etymologyDeck).excludedRoots);
+    const next = new Set(modeSettings(etymologyMode).excludedRoots);
     for (const id of ids) include ? next.delete(id) : next.add(id);
-    updateDeckSettings(etymologyDeck, { excludedRoots: [...next] });
+    updateModeSettings(etymologyMode, { excludedRoots: [...next] });
   }
   function chState(roots: string[]) {
     const n = roots.filter((r) => !ex.has(r)).length;
@@ -26,7 +26,7 @@
   <h1 class="title">出題範囲</h1>
   <p class="lead">{total} / {ix.ds.roots.length} 語源を出題します</p>
   <div class="bulk">
-    <button class="pill press" onclick={() => updateDeckSettings(etymologyDeck, { excludedRoots: [] })}>すべて選択</button>
+    <button class="pill press" onclick={() => updateModeSettings(etymologyMode, { excludedRoots: [] })}>すべて選択</button>
     <button class="pill press" onclick={() => setRoots(ix.ds.roots.map((r) => r.id), false)}>すべて解除</button>
   </div>
 

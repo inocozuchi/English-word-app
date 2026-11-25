@@ -2,16 +2,16 @@
   import Page from '../components/Page.svelte';
   import Icon from '../components/Icon.svelte';
   import { router } from '../core/router.svelte.ts';
-  import { store, activeDeck, loadData } from '../core/store.svelte.ts';
+  import { store, activeMode, loadData } from '../core/store.svelte.ts';
   import { streak, dayKey, keyToDay } from '../core/day.ts';
   import { reviewCount } from '../core/review.ts';
 
   loadData();
-  const deck = $derived(activeDeck());
+  const mode = $derived(activeMode());
   const t = $derived(store.today);
   const p = $derived(store.progress);
   const days = $derived(streak(p.days, t));
-  const inReview = $derived(reviewCount(p.review, deck.id));
+  const inReview = $derived(reviewCount(p.review));
 
   const totals = $derived.by(() => {
     let a = 0, c = 0, a7 = 0, c7 = 0;
@@ -76,7 +76,7 @@
     {/each}
   </div>
 
-  {#if deck.StatsSection}<deck.StatsSection />{/if}
+  {#if mode.StatsSection}<mode.StatsSection />{/if}
 </Page>
 
 <style>

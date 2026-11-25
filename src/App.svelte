@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import { router, swipeBack } from './core/router.svelte.ts';
-  import { store, decks } from './core/store.svelte.ts';
+  import { store, modes } from './core/store.svelte.ts';
   import Home from './screens/Home.svelte';
   import Quiz from './screens/Quiz.svelte';
   import Result from './screens/Result.svelte';
@@ -17,7 +17,7 @@
     settings: Settings,
     stats: Stats,
     review: ReviewList,
-    ...Object.assign({}, ...decks.map((d) => d.screens)),
+    ...Object.assign({}, ...modes.map((d) => d.screens)),
   };
 
   function reg(node: HTMLElement, id: number) {

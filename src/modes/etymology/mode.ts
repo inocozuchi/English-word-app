@@ -1,8 +1,8 @@
-// 語源英単語デッキ
-import type { Deck } from '../../core/deck.ts';
+// 語源英単語モード
+import type { QuizMode } from '../../core/mode.ts';
 import type { Format } from './types.ts';
 import type { Scope } from './quiz.ts';
-import { buildCandidates, questionFor, subjectOf, DECK_ID, FORMAT_LABEL } from './quiz.ts';
+import { buildCandidates, questionFor, subjectOf, MODE_ID, FORMAT_LABEL } from './quiz.ts';
 import { ety, loadEty } from './state.svelte.ts';
 import { settingsSummary } from './summary.ts';
 import Prompt from './Prompt.svelte';
@@ -27,17 +27,18 @@ export function normalizeScope(raw: any): Scope {
   };
 }
 
-export const etymologyDeck: Deck<Scope> = {
-  id: DECK_ID,
+export const etymologyMode: QuizMode<Scope> = {
+  id: MODE_ID,
   title: '語源英単語',
   hero: 'Learn words\nby *roots*',
   tagline: '語源で、英単語を。',
-  modes: [
+  patterns: [
     { id: 'ej', label: '英 → 日', desc: '英単語を見て意味を選ぶ' },
     { id: 'je', label: '日 → 英', desc: '意味を見て英単語を選ぶ（英→日で学んだ語から）' },
     { id: 'rm', label: '語源の意味', desc: '語源（語根・接頭辞）の意味を選ぶ' },
     { id: 'ph', label: '熟語の意味', desc: '熟語の意味を選ぶ' },
   ],
+  timing: { advanceSec: 5, answerSec: 8 },
   normalizeSettings: normalizeScope,
   load: () => loadEty().then(() => {}),
   ready: () => !!ety.index,

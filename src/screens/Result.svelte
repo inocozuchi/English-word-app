@@ -3,16 +3,16 @@
   import Num from '../components/Num.svelte';
   import { router } from '../core/router.svelte.ts';
   import type { AnswerLog } from '../core/router.svelte.ts';
-  import type { SessionMode } from '../core/session.ts';
-  import { store, activeDeck } from '../core/store.svelte.ts';
+  import type { SessionKind } from '../core/session.ts';
+  import { store, activeMode } from '../core/store.svelte.ts';
   import { streak } from '../core/day.ts';
   import { reviewCount } from '../core/review.ts';
   import { rise, burst, stagger } from '../core/transitions.ts';
   import Icon from '../components/Icon.svelte';
-  import type { Question } from '../core/deck.ts';
+  import type { Question } from '../core/mode.ts';
 
-  let { logs, mode = 'normal', marks = [] }: { logs: AnswerLog[]; mode?: SessionMode; marks?: ('ok' | 'ng')[] } = $props();
-  const deck = activeDeck();
+  let { logs, kind = 'normal', marks = [] }: { logs: AnswerLog[]; kind?: SessionKind; marks?: ('ok' | 'ng')[] } = $props();
+  const mode = activeMode();
   // 結果画面は表示中に logs が変わらないので、最初の値だけ使う
   // svelte-ignore state_referenced_locally
   const correct = logs.filter((l) => l.chosen === l.q.answer).length;
@@ -26,11 +26,11 @@
   // svelte-ignore state_referenced_locally
   const cleared = logs.filter((l) => l.review === 'cleared').length;
   const days = $derived(streak(store.progress.days, store.today));
-  const left = $derived(reviewCount(store.progress.review, deck.id));
+  const left = $derived(reviewCount(store.progress.review));
 
-  const label = (q: Question) => deck.label(q.key) ?? { title: q.key, sub: '' };
+  const label = (q: Question) => mode.label(q.key) ?? { title: q.key, sub: '' };
   function open(q: Question) {
-    const r = deck.detailRoute(q.key);
+    const r = mode.detailRoute(q.key);
     if (r) router.push(r);
   }
   // 画面がスライドし終わるころに、スコアを 0 から数え上げ、各問の点を順に弾ませる。よければ紙吹雪
@@ -56,7 +56,7 @@
 <div class="result">
   <div class="scroll body">
     <div class="hero" in:rise>
-      <p class="eyebrow-en">{mode === 'review' ? 'Review result' : 'Result'}</p>
+      <p class="eyebrow-en">{kind === 'review' ? 'Review result' : 'Result'}</p>
       <p class="msg">{message}</p>
       <p class="score en" bind:this={scoreEl}><Num value={score} duration={Math.min(900, 120 * correct + 200)} /><span class="slash">/</span><span class="total">{total}</span></p>
       {#if marks.length}
@@ -95,8 +95,8 @@
     {/if}
   </div>
   <div class="actions">
-    <button class="primary press" onclick={() => router.replace({ name: 'quiz', params: { seed: Date.now(), mode: mode === 'review' && left === 0 ? 'normal' : mode } })}>
-      {mode === 'review' && left > 0 ? '続けて復習' : 'もう一度'}
+    <button class="primary press" onclick={() => router.replace({ name: 'quiz', params: { seed: Date.now(), kind: kind === 'review' && left === 0 ? 'normal' : kind } })}>
+      {kind === 'review' && left > 0 ? '続けて復習' : 'もう一度'}
     </button>
     <button class="secondary press" onclick={() => router.pop()}>ホーム</button>
   </div>

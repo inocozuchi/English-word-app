@@ -6,9 +6,9 @@ import { selectItems } from '../../core/srs.ts';
 import { pickDistractors } from '../../core/distractors.ts';
 import type { Rng } from '../../core/rng.ts';
 import { shuffle } from '../../core/rng.ts';
-import type { Question as CoreQuestion } from '../../core/deck.ts';
+import type { Question as CoreQuestion } from '../../core/mode.ts';
 
-export const DECK_ID = 'etymology';
+export const MODE_ID = 'etymology';
 
 export type Subject =
   | { kind: 'word'; word: Word }
@@ -19,7 +19,7 @@ export type Subject =
 export type Question = CoreQuestion<Subject>;
 
 function make(format: Format, key: string, base: string, group: string, subject: Subject, choices: Question['choices'], answer: number): Question {
-  return { deck: DECK_ID, key, base, group, mode: format, modeLabel: FORMAT_LABEL[format], data: subject, choices, answer };
+  return { modeId: MODE_ID, key, base, group, pattern: format, patternLabel: FORMAT_LABEL[format], data: subject, choices, answer };
 }
 
 export const FORMAT_LABEL: Record<Format, string> = {
