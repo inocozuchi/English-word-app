@@ -1,7 +1,10 @@
 <script lang="ts">
   // 共通のクイズ画面。問題文と解説の中身はデッキ（deck.Prompt / deck.Explain）が描く。
-  import { onMount } from 'svelte';
+  // 問題の切り替えは「カルーセル」: 次の問題のカードが右に並んでいて、
+  // 左スワイプでは指についてきて、自動で進むときも同じ動きで横にめくれる。
+  import { onMount, tick } from 'svelte';
   import Icon from '../components/Icon.svelte';
+  import QuizCard from './QuizCard.svelte';
   import { router } from '../core/router.svelte.ts';
   import type { AnswerLog } from '../core/router.svelte.ts';
   import { store, activeDeck, deckSettings, loadData, recordAnswer, today } from '../core/store.svelte.ts';
@@ -12,7 +15,7 @@
   import { createRng } from '../core/rng.ts';
   import { haptic } from '../core/haptics.ts';
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
-  import { cardIn, promptOut, explainIn, popScale, shake } from '../core/transitions.ts';
+  import { bump } from '../core/transitions.ts';
 
   let { seed, mode = 'normal' }: { seed: number; mode?: SessionMode } = $props();
 
@@ -26,14 +29,17 @@
   let held = $state(false);
   let hidden = $state(false);
   let dragging = $state(false);
-  let dragX = $state(0);
   const paused = $derived(held || hidden || dragging);
   const logs: AnswerLog[] = [];
+  /** 各問の結果（ヘッダーの点） */
+  let marks = $state<('ok' | 'ng')[]>([]);
+  /** 連続正解 */
+  let combo = $state(0);
 
   const q = $derived(qs[i]);
-  const ok = $derived(phase === 'reveal' && chosen === q?.answer);
 
   let bar: HTMLElement | undefined = $state();
+  let stage: HTMLElement | undefined = $state();
   let timer: Animation | null = null;
   let done = false;
 
@@ -64,15 +70,30 @@
     };
   });
 
-  // 残り時間は WAAPI で細いバーを縮める（コンポジタで動くので JS は毎フレーム動かない）
+  // ---- タイマー: WAAPI で細いバーを縮める（コンポジタで動くので JS は毎フレーム動かない） ----
+  /** 今のバーの長さ（0〜1） */
+  function barScale(): number {
+    if (!bar) return 1;
+    const m = getComputedStyle(bar).transform;
+    if (!m || m === 'none') return 1;
+    const a = parseFloat(m.slice(m.indexOf('(') + 1));
+    return isFinite(a) ? a : 1;
+  }
   function startTimer(sec: number, onEnd: () => void) {
-    timer?.cancel();
     if (!bar || done) return;
-    const anim = bar.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], {
-      duration: sec * 1000,
-      easing: 'linear',
-      fill: 'forwards',
-    });
+    // バーを一気に満タンに戻さず、今の長さからなめらかに戻してから減らす
+    const from = barScale();
+    timer?.cancel();
+    const refill = reducedMotion() || from > 0.97 ? 0 : 320;
+    const total = refill + sec * 1000;
+    const kf: Keyframe[] = refill
+      ? [
+          { transform: `scaleX(${from})`, easing: 'cubic-bezier(.2,.8,.2,1)' },
+          { transform: 'scaleX(1)', offset: refill / total, easing: 'linear' },
+          { transform: 'scaleX(0)' },
+        ]
+      : [{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }];
+    const anim = bar.animate(kf, { duration: total, fill: 'forwards' });
     anim.onfinish = () => {
       if (timer === anim && !done) onEnd();
     };
@@ -87,14 +108,18 @@
     else if (timer.playState === 'paused') timer.play();
   });
 
+  let dots: HTMLElement[] = $state([]);
   function answer(k: number | null) {
-    if (phase !== 'ask' || !q) return;
+    if (phase !== 'ask' || !q || sliding) return;
     chosen = k;
     phase = 'reveal';
     const correct = k === q.answer;
     event = recordAnswer(q.deck, q.key, q.base, correct);
     logs.push({ q, chosen: k, review: event });
+    marks[i] = correct ? 'ok' : 'ng';
+    combo = correct ? combo + 1 : 0;
     haptic(correct ? 'success' : 'error');
+    tick().then(() => dots[i] && bump(dots[i], 1.6));
     startTimer(store.settings.advanceSec, next);
   }
 
@@ -102,21 +127,82 @@
     answer(null);
   }
 
-  /** 左へスワイプして抜けたカードの位置（次のカードの出入りに使う） */
-  let swipeFrom = 0;
-
   function next() {
-    if (done) return;
+    advance(0, 0);
+  }
+
+  // ---- カルーセル ----
+  const GAP = 24;
+  /** 次の問題のカードも並べる（スワイプ中・めくる途中） */
+  let peek = $state(false);
+  let sliding = false;
+  const shown = $derived(!qs.length ? [] : peek && i + 1 < qs.length ? [i, i + 1] : [i]);
+  const els = new Map<number, HTMLElement>();
+  const width = () => (stage?.clientWidth ?? window.innerWidth) + GAP;
+
+  function cardRef(node: HTMLElement, idx: number) {
+    els.set(idx, node);
+    // 次のカードは右に控えておく
+    if (idx !== i) node.style.transform = `translate3d(${width() + offset}px,0,0)`;
+    return {
+      destroy() {
+        if (els.get(idx) === node) els.delete(idx);
+      },
+    };
+  }
+
+  /** 今のカードの横位置（px）。次のカードはその右に並ぶ */
+  let offset = 0;
+  function setOffset(off: number) {
+    offset = off;
+    const c = els.get(i), n = els.get(i + 1);
+    if (c) c.style.transform = off ? `translate3d(${off}px,0,0)` : '';
+    if (n) n.style.transform = `translate3d(${width() + off}px,0,0)`;
+  }
+
+  /** from → to へ、2枚そろってスプリングで動かす。velocity は px/秒（to に向かう向きが正） */
+  async function slide(from: number, to: number, velocity: number) {
+    const c = els.get(i), n = els.get(i + 1);
+    const w = width();
+    const dist = Math.abs(to - from) || 1;
+    const s = spring({ ...SPRINGS.nav, velocity: Math.max(0, velocity) / dist });
+    const o = { duration: reducedMotion() ? 1 : s.duration, easing: s.easing };
+    const anims: Animation[] = [];
+    if (c) anims.push(c.animate([{ transform: `translate3d(${from}px,0,0)` }, { transform: `translate3d(${to}px,0,0)` }], o));
+    if (n) anims.push(n.animate([{ transform: `translate3d(${w + from}px,0,0)` }, { transform: `translate3d(${w + to}px,0,0)` }], o));
+    setOffset(to);
+    await Promise.all(anims.map((a) => a.finished.catch(() => {})));
+    anims.forEach((a) => a.cancel());
+  }
+
+  /** 次の問題へめくる。from は今のカードの位置、velocity は左向きの速さ（px/秒） */
+  async function advance(from: number, velocity: number) {
+    if (sliding || done) return;
+    sliding = true;
+    timer?.pause();
     if (i + 1 >= qs.length) {
+      // 最後の問題: 結果画面が右から重なってくる
       done = true;
       timer?.cancel();
-      router.replace({ name: 'result', params: { logs, mode } });
+      if (from) await slide(from, 0, 0);
+      router.replace({ name: 'result', params: { logs, mode, marks: [...marks] } });
       return;
     }
+    peek = true;
+    await tick();
+    setOffset(from);
+    await slide(from, -width(), velocity);
+    // めくり終わったら、右にあったカードを今の問題にする（同じ要素のまま。差し替えのちらつきなし）
     i++;
     chosen = null;
     event = null;
     phase = 'ask';
+    peek = false;
+    await tick();
+    offset = 0;
+    const c = els.get(i);
+    if (c) c.style.transform = '';
+    sliding = false;
     startTimer(store.settings.answerSec, timeout);
   }
 
@@ -151,34 +237,37 @@
     const dx = pt.clientX - x0, dy = pt.clientY - y0;
     if (!axis && Math.hypot(dx, dy) > 10) {
       axis = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'x' : 'y';
-      if (axis === 'x' && phase === 'reveal') {
+      if (axis === 'x' && phase === 'reveal' && !sliding) {
         clearTimeout(holdTimer);
         held = false;
         dragging = true;
+        peek = true; // 次の問題を右に並べる
       }
     }
     if (!dragging) return;
     hist.push({ t: e.timeStamp, x: pt.clientX });
     if (hist.length > 6) hist.shift();
-    // 左へは指についてくる。右へは少しだけ（戻れないことを示す）
-    dragX = dx < 0 ? dx : dx * 0.2;
+    // 左へは指にぴったりついてくる。右へは少しだけ（戻れないことを示すゴムのような抵抗）
+    setOffset(dx < 0 ? dx : dx * 0.18);
   }
-  function touchEnd(e: Event) {
+  async function touchEnd(e: Event) {
     if (e.type !== 'touchend' && e.type !== 'touchcancel' && Date.now() - lastTouch < 800) return;
     clearTimeout(holdTimer);
     if (dragging) {
       const a = hist[0], b = hist[hist.length - 1];
-      const vx = (b.x - a.x) / Math.max(1, b.t - a.t);
-      const commit = e.type !== 'touchcancel' && (dragX < -70 || (vx < -0.45 && dragX < -20));
+      const vx = (b.x - a.x) / Math.max(1, b.t - a.t); // px/ms（左が負）
+      const off = offset;
+      const commit = e.type !== 'touchcancel' && (off < -70 || (vx < -0.35 && off < -16));
       dragging = false;
       suppress();
       if (commit && phase === 'reveal') {
-        swipeFrom = dragX;
-        dragX = 0;
         haptic('light');
-        next();
+        advance(off, -vx * 1000);
       } else {
-        dragX = 0; // CSS transition でスプリングのように戻る
+        sliding = true;
+        await slide(off, 0, vx > 0 ? vx * 1000 : 0);
+        peek = false;
+        sliding = false;
       }
       return;
     }
@@ -199,54 +288,14 @@
     router.pop();
   }
 
-  /** 前のカードの退場: スワイプなら指を離した位置からそのまま左へ抜ける */
-  function cardLeave(_node: Element) {
-    const from = swipeFrom;
-    swipeFrom = 0;
-    if (reducedMotion()) return { duration: 100, css: (t: number) => `opacity:${t}` };
-    if (from) {
-      const w = window.innerWidth;
-      return {
-        duration: 260,
-        css: (_t: number, u: number) => `transform:translate3d(${from + (-w * 0.9 - from) * u * (2 - u)}px,0,0);opacity:${1 - u * 0.6}`,
-      };
-    }
-    return {
-      duration: 200,
-      css: (t: number, u: number) => `transform:translate3d(${-u * u * 48}px,0,0) scale(${1 - u * 0.03});opacity:${t * t}`,
-    };
-  }
-
-  function choiceFx(node: HTMLElement, k: number) {
-    // 回答時の動き: 正解はポップ、選んだ誤答は横揺れ
-    $effect(() => {
-      if (phase !== 'reveal') return;
-      if (k === q.answer) popScale(node);
-      else if (k === chosen) shake(node);
-    });
-  }
-
-  /** 回答した瞬間の大きな ◯ / ×（色だけに頼らず形で正誤を示す） */
-  function judgeFx(node: HTMLElement) {
-    if (reducedMotion()) {
-      node.animate([{ opacity: 0 }, { opacity: 1, offset: 0.2 }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], { duration: 700, fill: 'forwards' });
-      return;
-    }
+  /** 連続正解のバッジ: 数が増えるたびに弾む */
+  function comboFx(node: HTMLElement) {
+    if (reducedMotion()) return;
     const s = spring(SPRINGS.pop);
-    node.animate([{ transform: 'scale(0.4)' }, { transform: 'scale(1)' }], { duration: s.duration, easing: s.easing });
-    node.animate(
-      [{ opacity: 0 }, { opacity: 1, offset: 0.12 }, { opacity: 1, offset: 0.6 }, { opacity: 0 }],
-      { duration: 820, fill: 'forwards' },
-    );
+    node.animate([{ transform: 'scale(0.5)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: s.duration, easing: s.easing });
   }
 
-  const REVIEW_NOTE: Record<Exclude<ReviewEvent, null>, string> = {
-    added: '復習リストに追加',
-    missed: '復習リスト：やり直し',
-    progress: '',
-    cleared: '復習リストから外れました',
-  };
-  const reviewEntry = $derived(q ? store.progress.review[q.key] : undefined);
+  const useDots = $derived(qs.length > 0 && qs.length <= 20);
 </script>
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
@@ -263,18 +312,29 @@
 >
   <header>
     <button class="close press" onclick={close} aria-label="やめる"><Icon name="close" size={22} /></button>
-    <span class="count en">{#if qs.length}{i + 1}<span class="of">&ensp;/&ensp;{qs.length}</span>{/if}</span>
+    <span class="count en" aria-label="{i + 1} / {qs.length}">
+      {#if useDots}
+        <span class="dots">
+          {#each qs as _, k}
+            <span bind:this={dots[k]} class="dot {marks[k] ?? ''}" class:cur={k === i && !marks[k]}></span>
+          {/each}
+        </span>
+      {:else if qs.length}{i + 1}<span class="of">&ensp;/&ensp;{qs.length}</span>{/if}
+    </span>
     <span class="fmt">{#if mode === 'review'}<span class="rv">復習</span>{/if}{q ? q.modeLabel : ''}</span>
   </header>
   <div class="track" class:reveal={phase === 'reveal'}>
     <div class="bar" bind:this={bar}></div>
   </div>
   <div class="sub-row">
+    {#if combo >= 2}
+      {#key combo}<span class="combo" use:comboFx><b class="en">{combo}</b>連続正解</span>{/key}
+    {/if}
     <span class="pause-note" aria-live="polite"><Icon name="pause" size={14} stroke={2.4} />一時停止中</span>
     <span class="swipe-hint" class:show={phase === 'reveal' && !paused}><Icon name="back" size={14} stroke={2.4} />スワイプで次へ</span>
   </div>
 
-  <div class="stage">
+  <div class="stage" bind:this={stage}>
     {#if ready && !qs.length}
       <!-- 範囲が空のときの案内（問題エリアの中だけに出す。✕ を塞がない） -->
       <div class="empty">
@@ -289,65 +349,20 @@
       </div>
     {/if}
 
-    {#key i}
-      {#if q}
-        <div
-          class="card"
-          class:dragging
-          style:transform={dragX ? `translate3d(${dragX}px,0,0)` : null}
-          in:cardIn
-          out:cardLeave
-        >
-          <!-- 上半分: 回答前は問題、回答後は解説に入れ替わる（選択肢は見えたまま） -->
-          <div class="upper">
-            {#if phase === 'ask'}
-              <div class="q-area" out:promptOut><deck.Prompt {q} /></div>
-            {:else}
-              <div class="explain scroll" in:explainIn>
-                <div class="status" class:ok>
-                  {#if ok}
-                    <span class="badge ring"></span>正解
-                  {:else}
-                    <span class="badge cross"><Icon name="x" size={15} stroke={3.2} /></span>{chosen === null ? '時間切れ' : '不正解'}
-                  {/if}
-                  {#if event && REVIEW_NOTE[event]}
-                    <span class="rnote" class:cleared={event === 'cleared'}>{REVIEW_NOTE[event]}</span>
-                  {:else if event === 'progress' && reviewEntry}
-                    <span class="rnote">復習 {reviewEntry.streak}/{store.settings.reviewGoal}</span>
-                  {/if}
-                </div>
-                <deck.Explain {q} />
-              </div>
-              <div class="judge" class:ok use:judgeFx aria-hidden="true">
-                {#if ok}<span class="j-ring"></span>{:else}<Icon name="x" size={150} stroke={2.4} />{/if}
-              </div>
-            {/if}
-          </div>
-
-          <div class="choices">
-            {#each q.choices as c, k}
-              {@const isAns = phase === 'reveal' && k === q.answer}
-              {@const isMine = phase === 'reveal' && k === chosen && k !== q.answer}
-              <button
-                class="choice press"
-                class:en={c.latin}
-                class:correct={isAns}
-                class:wrong={isMine}
-                class:dim={phase === 'reveal' && !isAns && !isMine}
-                disabled={phase === 'reveal'}
-                onclick={() => choose(k)}
-                use:choiceFx={k}
-              >
-                {#if c.tag}<span class="tag">{c.tag}</span>{/if}
-                <span class="ct">{c.text}</span>
-                {#if isAns}<span class="mark"><span class="mini-ring"></span></span>
-                {:else if isMine}<span class="mine">あなたの答え</span><span class="mark"><Icon name="x" size={18} stroke={2.8} /></span>{/if}
-              </button>
-            {/each}
-          </div>
-        </div>
-      {/if}
-    {/key}
+    {#each shown as idx (idx)}
+      <div class="card" class:peek={idx !== i} use:cardRef={idx} inert={idx !== i}>
+        <QuizCard
+          {deck}
+          q={qs[idx]}
+          phase={idx === i ? phase : 'ask'}
+          chosen={idx === i ? chosen : null}
+          event={idx === i ? event : null}
+          reviewEntry={store.progress.review[qs[idx].key]}
+          reviewGoal={store.settings.reviewGoal}
+          onchoose={choose}
+        />
+      </div>
+    {/each}
   </div>
 </div>
 
@@ -385,6 +400,29 @@
     color: var(--text3);
     font-weight: 600;
   }
+  /* 進み具合の点: 正解 = 青、不正解 = 黒、今の問題 = 横長 */
+  .dots {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background: var(--fill-strong);
+    transition: width 0.35s var(--ease-card, ease-out), background-color 0.25s;
+  }
+  .dot.cur {
+    width: 18px;
+    background: var(--text3);
+  }
+  .dot.ok {
+    background: var(--accent);
+  }
+  .dot.ng {
+    background: var(--ink);
+  }
   .fmt {
     justify-self: end;
     display: flex;
@@ -414,7 +452,7 @@
     background: var(--text3);
     transform-origin: left center;
     border-radius: 2px;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background-color 0.35s;
   }
   .track.reveal .bar {
     background: var(--accent);
@@ -425,22 +463,41 @@
   .sub-row {
     position: relative;
     flex: none;
-    height: 20px;
-    margin: 4px var(--pad-x-r) 0 var(--pad-x);
+    height: 22px;
+    margin: 5px var(--pad-x-r) 0 var(--pad-x);
     font-size: 12px;
     font-weight: 600;
     color: var(--text3);
   }
+  .combo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    padding: 1px 9px 1px 8px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 11px;
+    font-weight: 700;
+    transform-origin: left center;
+  }
+  .combo b {
+    font-size: 14px;
+    font-weight: 800;
+  }
   .pause-note,
   .swipe-hint {
     position: absolute;
-    top: 0;
+    top: 2px;
     display: flex;
     align-items: center;
     gap: 3px;
     opacity: 0;
     transform: translateY(-3px);
-    transition: opacity 0.18s, transform 0.18s;
+    transition: opacity 0.25s, transform 0.25s;
     pointer-events: none;
   }
   .pause-note {
@@ -462,6 +519,7 @@
     display: grid;
     min-height: 0;
     position: relative;
+    overflow: hidden;
   }
   .card {
     grid-area: 1 / 1;
@@ -469,190 +527,8 @@
     flex-direction: column;
     min-height: 0;
     padding: 0 var(--pad-x-r) var(--pad-bottom) var(--pad-x);
-    transition: transform var(--dur-card, 400ms) var(--ease-card, ease-out);
-  }
-  .card.dragging {
-    transition: none;
-  }
-  .upper {
-    flex: 1;
-    position: relative;
-    min-height: 0;
-    margin-bottom: 14px;
-  }
-  .q-area,
-  .explain {
-    position: absolute;
-    inset: 0;
-  }
-
-  /* 解説（問題のエリアに入れ替わる。長いときはスクロール、下端はフェード） */
-  .explain {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 10px 2px 18px;
-    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
-    mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
-  }
-  .status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--text);
-    flex: none;
-  }
-  .status.ok {
-    color: var(--accent);
-  }
-  /* 正解 = ◯（輪）、不正解 = ×（黒地）。色が見分けにくくても形で分かる */
-  .badge {
-    flex: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-  }
-  .badge.ring {
-    border: 4px solid var(--accent);
-  }
-  .badge.cross {
-    background: var(--ink);
-    color: var(--bg);
-  }
-  .rnote {
-    margin-left: auto;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text2);
-    padding: 3px 9px;
-    border-radius: 999px;
-    border: 1.5px solid var(--line-strong);
-    white-space: nowrap;
-  }
-  .rnote.cleared {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* 回答の瞬間の大きな ◯ / × */
-  .judge {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 160px;
-    height: 160px;
-    margin: -80px 0 0 -80px;
-    display: grid;
-    place-items: center;
-    pointer-events: none;
-    color: var(--ink);
-    opacity: 0;
-    z-index: 3;
-  }
-  .j-ring {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 16px solid var(--accent);
-  }
-
-  /* 選択肢 */
-  .choices {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .choice {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 60px;
-    padding: 11px 46px 11px 16px;
-    border-radius: var(--radius);
-    border: 2px solid var(--line-strong);
     background: var(--bg);
-    text-align: left;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.35;
-    transition:
-      background-color 0.2s,
-      border-color 0.2s,
-      color 0.2s,
-      opacity 0.25s,
-      transform var(--dur-press, 300ms) var(--ease-press, ease-out);
-  }
-  .choice:active {
-    background: var(--fill);
-  }
-  .choice.en {
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .choice:disabled {
-    cursor: default;
-  }
-  .choice .tag {
-    flex: none;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text2);
-    border: 1px solid var(--line-strong);
-    border-radius: 6px;
-    padding: 0 5px;
-    line-height: 1.6;
-  }
-  .choice.correct {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--on-accent);
-    font-weight: 700;
-  }
-  .choice.correct .tag {
-    color: var(--on-accent);
-    border-color: color-mix(in srgb, var(--on-accent) 40%, transparent);
-  }
-  .choice.wrong {
-    background: var(--fill-strong);
-    border-color: var(--ink);
-    border-style: dashed;
-    color: var(--text2);
-    padding-top: 22px;
-  }
-  .choice.wrong .ct {
-    text-decoration: line-through;
-    text-decoration-thickness: 1.5px;
-  }
-  .mine {
-    position: absolute;
-    left: 16px;
-    top: 5px;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.04em;
-  }
-  .choice.dim {
-    opacity: 0.4;
-  }
-  .mark {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    translate: 0 -50%;
-    display: grid;
-  }
-  .mini-ring {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 3px solid currentColor;
+    will-change: transform;
   }
 
   .empty {

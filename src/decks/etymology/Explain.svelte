@@ -18,7 +18,7 @@
   <ul class="defs">
     {#each w.defs as d}<li><span class="pos">{d.pos}</span>{d.ja}</li>{/each}
   </ul>
-  <Breakdown parts={w.breakdown} core={w.core} />
+  <Breakdown parts={w.breakdown} core={w.core} animate />
   {#if w.examples[0]}<Example ex={w.examples[0]} word={w.w} />{/if}
 {:else if s.kind === 'root'}
   {@const r = s.root}
