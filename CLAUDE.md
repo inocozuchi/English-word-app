@@ -1,15 +1,16 @@
-# 語源で英単語（PWA）
+# EIGO LOOP（英語ループ・PWA）
 
-語源別に整理した英単語を学ぶ、iPhone 向けの単語クイズ PWA。個人利用。
-大学生が通学中に「片手で・負担なく」回せることを最優先する。
+iPhone 向けの英語クイズ PWA。個人利用。大学生が通学中に「片手で・負担なく」回せることを最優先する。
+複数のクイズ「モード」を設定で切り替える。今あるモード: **語源英単語**（etymology）/ **音声変化（聞こえ方）**（sound）。
+次に追加予定: 英会話チャンク（`data/chunks.json`、まだ未使用）。
 
 ## コマンド
 
-- `npm run dev` — データ変換 → 開発サーバー
+- `npm run dev` — データ変換（語源・音声変化）→ 開発サーバー
 - `npm run build` — データ変換 → `dist/` に静的ファイル出力（Service Worker も生成）
 - `npm run preview` — ビルド結果の確認
-- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・カナ解析・日付・例文の強調）
-- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・スワイプで次へ・復習リスト・検索・スワイプバック・設定・バックアップ・オフライン）
+- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・保存形式の移行・音声変化の①〜⑨・マーキング・カナ解析・日付・例文の強調）
+- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・スワイプで次へ・復習リスト・検索・スワイプバック・設定・バックアップ・モード切替・音声変化・旧データの移行・オフライン）
 - `npm run check` — svelte-check による型チェック
 - `npm run icons` — `scripts/icon.svg` からアイコン PNG と起動画面（端末サイズ×ライト/ダーク）を生成（Playwright）。
   起動画面の `<link>` は `scripts/splash-tags.html` に出力されるので、端末を追加したら index.html に貼り直す
@@ -23,7 +24,12 @@
 
 ## データ
 
-- `data/etymology_words.json` がマスター。**編集しない。**
+`data/` の JSON はマスター。**編集しない。** ビルド時（`npm run data`）に変換し、`src/generated/`（git 管理外）に出力する。
+モードのデータは別チャンクで、そのモードを使うときに読み込む（オフライン用に Service Worker はすべてプリキャッシュ）。
+
+### 語源英単語（etymology）
+
+- `data/etymology_words.json`
   構成: chapters（章）/ roots（語源: meaning, memo, intro, words, phrases, chapter）/ words（word, kana, breakdown, core, defs, examples, derivatives, alsoIn）/ groups。
 - `scripts/build-data.ts` がビルド時に `src/generated/words.json`（git 管理外）へ変換する。
   - 同じ単語が複数の語源に載っている場合は1語にまとめ、`roots` に全語源IDを持つ（先頭が主たる語源）。
@@ -34,41 +40,69 @@
   例: cur の cure・curious・secure（本来は cure＝cura 系）、dom の kingdom、loc の lock。
   主たる語源は参考でない掲載を優先し、語源クイズの解説には出さない。単語ツリーでは点線で区別する。
 
+### 音声変化（sound）
+
+- `data/sound_changes.json` → `scripts/build-sound.ts` → `src/generated/sound.json`（各フレーズの `rules`・`mora` を前計算し、不整合を警告）。
+- ルール6種: link（連結）/ elide（脱落）/ assim（同化）/ flap（Flap T）/ contraction（短縮形）/ hdrop（h消え）。色は `rules[].color`
+  （`modes/sound/rules.css` の `--rule-<id>`。ダークモードでは白と混ぜて明るくする）。
+- `items[]`（英文・marks・plain・kana・decoys・changes）と、出題パターン別の `contractions` / `assimilations` / `tFate` / `compounds` / `symptoms` / `concepts`。
+- `quiz: false` は出題しない。`source: supplement`（補足例）は設定で外せる（初期は含める）。`level` は items だけにある（compounds は 3、ほかは 1 扱い）。
+- データ側の既知の揺れ（アプリで吸収）: sc-028 は text が「hat you」で span「hate you」が見つからない（強調を省く）。
+  同じ span に2ルール（sc-003 gotta: flap+contraction、sc-060 about her: hdrop+flap）→ ③ では同じ span の別ルールを誤答にしない。
+
 ## 設計方針
 
 - Vite + TypeScript + **Svelte 5**（ランタイムが小さく、仮想DOMなし）。UI ライブラリ・アニメーションライブラリは入れない。
-- 将来は文法クイズなど英語全般のクイズに広げる予定。そのため **共通部分（core）** と **デッキ（クイズの種類）** を分けている。
+- クイズの種類を **モード** として分けている。共通部分（core・screens）はモードに依存しない。
 
 ```
 src/
-  core/            デッキに依存しない仕組み（テストあり）
-    deck.ts        デッキのインターフェース（Deck / Question / Route）
-    session.ts     1セッションの組み立て（通常 / 復習モード）
+  core/            モードに依存しない仕組み（テストあり）
+    mode.ts        モードのインターフェース（QuizMode / Question / Choice / Route）
+    session.ts     1セッションの組み立て（通常 / 復習モード。mode.pick があれば選び方を任せる）
     srs.ts         間隔反復   review.ts  復習リスト   storage.ts  保存と旧形式の移行
-    store.svelte.ts  状態（設定・履歴・使用中のデッキ）  router.svelte.ts  画面スタック
-    spring.ts / transitions.ts / haptics.ts / day.ts / rng.ts / distractors.ts / highlight.ts
-  screens/         共通の画面（ホーム・クイズ・結果・復習リスト・設定・学習記録）
-  components/      共通部品（Page, Icon, Toggle, Segmented, Example）
-  decks/
-    index.ts       使えるデッキの一覧
-    etymology/     語源英単語デッキ（deck.ts, quiz.ts, Prompt/Explain, 設定・記録のセクション, screens/）
+    store.svelte.ts  状態（設定・今のモードの記録・モード切替・秒数）  router.svelte.ts  画面スタック
+    spring.ts / transitions.ts / haptics.ts / boot.ts / day.ts / rng.ts / distractors.ts / highlight.ts
+  screens/         共通の画面（ホーム・クイズ・QuizCard・結果・復習リスト・設定・学習記録）
+  components/      共通部品（Page, Icon, Toggle, Segmented, Example, Num）
+  modes/
+    index.ts       使えるモードの一覧（設定の「モード」にこの順で並ぶ）
+    etymology/     語源英単語（mode.ts, quiz.ts, Prompt/Explain, 設定・記録のセクション, screens/）
+    sound/         音声変化（mode.ts, quiz.ts, marks.ts, Prompt, components/Marked など, screens/ 復習ノート）
 ```
 
-- **デッキの追加方法**（例: 文法クイズ）: `src/decks/grammar/` を作り、`Deck` を実装して `src/decks/index.ts` に足す。
-  - `candidates()` / `question()` で出題、`Prompt` / `Explain` で問題文と解説、`label()` / `detailRoute()` で結果・復習リストの表示。
-  - 画面は `screens: { 'grammar/xxx': Comp }` で登録（名前はデッキの接頭辞を付ける）。設定は `settings.decks[deckId]` に入る。
-  - 進捗のキーはデッキごとに重ならない接頭辞にする（語源デッキは `ej:` `je:` `rm:` `ph:`）。
-  - ホームの大見出し・説明・件数もデッキから取る。デッキが2つ以上になったら、ホームのデッキ表示（chip）を切り替えにする。
+### モードの追加方法（例: 英会話チャンク）
+
+1. **データ**: `data/<名前>.json` に置く（編集しない）。`scripts/build-<名前>.ts` で `src/generated/<名前>.json` に変換し、
+   `package.json` の `data` スクリプトに足す（`node scripts/build-data.ts && node scripts/build-sound.ts && …`）。
+2. **問題生成**: `src/modes/<id>/quiz.ts` に UI に依存しない関数を書く（テストを `tests/<id>.test.ts` に）。
+   - `candidates(settings)`: 出題範囲の候補 `{ key, base, group, newOrder }`。key はモードの中で一意（例: `s1:sc-001`）。
+     base が同じものは1セッションに1回。newOrder は未習のときの出題順。
+   - `question(key, rng)`: 4択の `Question` を返す（`choices` は重複なし・正解を含める。`answer` は正解の位置。`tags` にルールなどを入れると正答率が別に集計される）。
+   - 必要なら `pick(input, settings)`: パターンの比率や苦手の優先など、出題の選び方を上書き（省略時は間隔反復の優先順）。
+3. **登録**: `src/modes/<id>/mode.ts` で `QuizMode` を実装し、`src/modes/index.ts` の `MODES` に足す。これで設定のモード一覧に出る。
+   - `timing`（自動で次へ・制限時間の初期値）、`normalizeSettings`（設定の初期値と正規化。`settings.modes[id]` に保存される）
+   - `Prompt`（問題文）と `Explain`（解説）。問題文を残したまま解説を重ねるなら `inlineExplain: true` にして Prompt が `phase` を見て描く
+   - `label` / `detailRoute`（結果・復習リストの表示と詳細画面）、`summary` / `stat`（ホームの要約）、`note`（解説の下の注記）
+   - 任意: `SettingsSection` / `StatsSection` / `ResultSection`、一覧画面 `browse` と `screens`（名前は `<id>/xxx`）
+4. 記録・復習リスト・タイマー・結果・連続日数は共通部分が自動で扱う（モードごとに別保存）。
+
 - 画面遷移は自作のスタック型ルーター。Route は `{ name, params }`。URL は使わない。
 - アニメーションは **transform と opacity だけ**。スプリングは `core/spring.ts` で解いて CSS `linear()` イージングにし、Web Animations API / CSS transition で動かす。`prefers-reduced-motion` ではフェードのみ。
-- 保存は localStorage（`core/storage.ts`）。サーバー・アカウントなし。キー名は旧版から変えていない（`ety.settings.v1` / `ety.progress.v1`）。
-  旧形式（デッキ分け前・復習リストなし）は読み込み時に自動で移行する。
+- 保存は localStorage（`core/storage.ts`）。サーバー・アカウントなし。
+  - `eq.settings.v2`: 共通設定（問題数・テーマ・触覚・復習の回数・今のモード）＋ `modes[id]`（秒数 advanceSec / answerSec と各モードの範囲）
+  - `eq.progress.<モードID>.v1`: モードごとの記録（間隔反復・日ごとの回答数＝連続日数と正答率・復習リスト・タグ別正答率）
+  - 旧形式（`ety.settings.v1` / `ety.progress.v1`）は最初の起動時に語源英単語モードへ移行し、旧データは残す。書き出し・読み込みは全モード（旧ファイルも読める）。
 - オフライン: `scripts/vite-plugin-sw.ts` がビルド後に dist の全ファイルをプリキャッシュする `sw.js` を生成。キャッシュ優先、新版は次回起動から。
 - 出題:
   - `srs.ts` 簡易 Leitner（箱0〜5、間隔 0/1/3/7/16/35 日、まちがい・未回答で箱0）。
     優先度: 期限切れ×前回まちがい → 期限切れ → 未習（学習順）→ 期限前。1セッション内で同じ対象は1回、前回最後の問題を先頭にしない、同じまとまりをなるべく隣接させない。
-  - 語源デッキの選択肢は「同じ語源 → 同じ章 → 全体」の順で、同じ品詞を優先。意味の語句が正解と重なるものは除外。
-  - 語源デッキの出題形式: 英→日(ej) / 日→英(je, 英→日を学んだ語から) / 語源→意味(rm) / 熟語→意味(ph)。
+  - 語源: 選択肢は「同じ語源 → 同じ章 → 全体」の順で、同じ品詞を優先。意味の語句が正解と重なるものは除外。
+    出題パターン: 英→日(ej) / 日→英(je, 英→日を学んだ語から) / 語源→意味(rm) / 熟語→意味(ph)。
+  - 音声変化: ①聞こえ方当て ②元の英文当て ③原因ルール当て ④症状診断 ⑤元の形当て ⑥同化の対応 ⑦tの行方 ⑧複合変化の順序 ⑨知識問題（キー `s1:`〜`s9:`）。
+    比率は ①③⑦ 各20%、残りで40%（`allocate`）。⑧ は難易度「すべて」かつ30問答えてから。未習は苦手なルール（タグ別正答率が低い）から。
+    ② の誤答は同じルールの項目からモーラ数が近い順。⑧ は手順を A/B/C で示し、誤答は隣接入れ替え（足りなければ別の並び）。
+  - 秒数はモードごと（語源: 次へ5秒・制限8秒、音声変化: 次へ8秒・制限12秒）。
 - **復習リスト**（`core/review.ts`）: まちがえた（時間切れを含む）問題は自動で入る。連続で `reviewGoal` 回（初期3, 2〜5）正解すると自動で外れる。
   ホームの「復習する」で、リストの問題だけを出す復習モード（出題範囲・形式の設定は無視）。復習リスト画面で手動で外すこともできる。
 - 日付は午前4時区切り（`day.ts`）。
@@ -84,10 +118,14 @@ src/
   画面の差し替え（クイズ → 結果）も右から重ねるスライド（`router.replace`）で、背景だけになる瞬間を作らない。
 ## デザイン
 
-- 白・黒＋アクセント1色（#3d5afe / ダーク #7088ff）。
+- 白・黒＋アクセント1色（#3d5afe / ダーク #7088ff）。音声変化のルール色は意味のある色として例外（マーキング・バッジ・バー）。
+- アプリ名は EIGO LOOP（ロゴは太枠に2行「EIGO / LOOP」、アイコンは青地に白い輪の矢印と E）。
 - ANYCOLOR のサイトを参考に、ホームなど要所に「極太の欧文見出し（`.display`, Inter 850）」と「太い黒枠（`--frame` / `--ink`）」を使う。
   一覧やクイズは読みやすさ優先で控えめに（薄い枠・薄い面）。
 - クイズは回答後も選択肢を見せたまま、上半分（問題のエリア）が解説に入れ替わる。
+- 音声変化の回答後: 英文はそのまま（inlineExplain）、マーキングが左から順に浮かび上がる（線は transform、弧は stroke-dashoffset）。
+  連結でつながる語は折り返さないまとまりにし、弧は固定幅のすき間の下に置く（画面幅で崩れない）。続いて聞こえ方・理由がフェードイン。
+  正誤の行の場所は回答前から確保して、英文が動かないようにする。
 - 正誤は色だけに頼らない: 状態行は「◯ 正解」/「× 不正解（黒地）」でバッジが弾む、
   選んだ誤答は破線の枠＋取り消し線＋「あなたの答え」、正解の選択肢には ◯ 印。
 - 手応えの演出: ヘッダーの点（正解=青・不正解=黒）が弾む、2問以上の連続正解バッジ、解説は上から順に浮かび、
@@ -110,7 +148,7 @@ src/
   日本語は system-ui（ヒラギノ）、英語は Inter（ラテン文字サブセットを同梱）。
 - スプリング系アニメーション、タップ時の縮小、スワイプバック、ネイティブ慣性スクロール。ダブルタップ拡大・選択ハイライト等は無効。
 - 触覚: `navigator.vibrate` があれば使う。iOS Safari には無いので iOS 18+ の `<input switch>` を使う方法で代用（設定でOFF可）。
-- ホームの大きな「スタート」1タップで前回設定のまま即開始。
+- ホームの大きな「スタート」1タップで、選んでいるモードのクイズを前回設定のまま即開始。モードの選択は設定で（ホームはスタート上にモード名を小さく出すだけ）。
 - 1問: 4択 → 即正誤 → 解説（意味・語源分解・例文）→ **設定秒数（初期5秒, 3〜10）で自動で次へ**（左スワイプですぐ次へも可）。
   回答の制限時間（初期8秒, 5〜15）を過ぎたら未回答（不正解）。長押し中は一時停止。
 - 1セッション10問（設定可）。終了時に結果とまちがえた語の一覧。

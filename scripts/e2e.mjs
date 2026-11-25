@@ -388,6 +388,91 @@ try {
   }
 
 
+
+  // ---------- 音声変化モード ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.waitForSelector('button.start');
+    // 語源モードで1問答えておく（記録がモードごとに分かれることの確認用）
+    await page.locator('button.start').tap();
+    await settle();
+    await top().locator('.choice').first().tap();
+    await sleep(300);
+    await top().locator('.close').tap();
+    await settle();
+    // 設定でモードを切り替える
+    await page.locator('header .icon').tap();
+    await settle();
+    await top().locator('.mode-row', { hasText: '音声変化' }).tap();
+    await sleep(300);
+    ok((await settingsOf(page)).activeMode === 'sound', '設定でモードを切り替えて保存できる');
+    ok((await top().locator('.ui-h2', { hasText: '出題パターン' }).count()) === 1, '音声変化モードの設定（出題パターン）が出る');
+    ok((await top().locator('.ui-val').first().textContent()).includes('8'), '自動で次への秒数は音声変化の初期値（8秒）');
+    await top().locator('header .back').tap();
+    await settle();
+    ok((await page.locator('.mode-line').textContent()).includes('音声変化'), 'ホームのスタート上に今のモード名が出る');
+    ok((await page.locator('.stat-c .num').nth(1).textContent()).trim() === '0', '今日の回答はモードごとに別（音声変化は 0）');
+    await page.reload();
+    await page.waitForSelector('button.start');
+    ok((await page.locator('.mode-line').textContent()).includes('音声変化'), '再起動しても選んだモードのまま');
+    // 聞こえ方当てだけにして1セッション
+    await page.evaluate(() => {
+      const s = JSON.parse(localStorage.getItem('eq.settings.v2'));
+      s.count = 3;
+      s.modes.sound = { ...(s.modes.sound || {}), patterns: ['s1', 's3'], advanceSec: 3, answerSec: 20 };
+      localStorage.setItem('eq.settings.v2', JSON.stringify(s));
+    });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    ok((await top().locator('.choice').count()) === 4, '音声変化の4択が出る');
+    const texts = await top().locator('.stage > .card:not(.peek) .choice').allTextContents();
+    ok(new Set(texts.map((t) => t.trim())).size === 4, '選択肢に同じ文字列がない');
+    await top().locator('.stage > .card:not(.peek) .choice').first().tap();
+    await sleep(1500);
+    ok((await top().locator('.status').count()) === 1, '回答すると正誤が出る（英文はそのまま）');
+    ok((await top().locator('.why li').count()) >= 1, '変化の理由がルールのバッジ付きで出る');
+    ok((await top().locator('.mode-note').textContent()).includes('カタカナは目安'), '「カタカナは目安です」と出る');
+    const marks = await top().locator('.stage > .card:not(.peek) .marked.show').count();
+    ok(marks === 1, 'マーキングが表示される');
+    for (let k = 0; k < 40 && !(await page.locator('.result').count()); k++) {
+      const c = top().locator('.stage > .card:not(.peek) .choice:not([disabled])');
+      if (await c.count()) await c.first().tap().catch(() => {});
+      await sleep(500);
+    }
+    await page.waitForSelector('.result', { timeout: 15000 });
+    await sleep(800);
+    ok((await page.locator('.result .bars li').count()) === 6, '結果にルール別の正答率（6本）が出る');
+    const sp = await page.evaluate(() => JSON.parse(localStorage.getItem('eq.progress.sound.v1')));
+    ok(Object.keys(sp.tags).length > 0, 'ルール別の正答数を記録する');
+    const ep = await progressOf(page);
+    ok(Object.keys(ep.items).length === 1 && !Object.keys(ep.items).some((k) => k.startsWith('s')), '語源英単語の記録とは別に保存される');
+    if (await page.locator('.result .go').count()) {
+      await page.locator('.result .go').tap();
+      await settle();
+      ok((await top().locator('.eyebrow-en').textContent()).startsWith('Rule'), '苦手なルールの復習ノートに移動できる');
+      await top().locator('header .back').tap();
+      await settle();
+    }
+    await page.locator('.result .secondary').tap();
+    await settle();
+    // 復習ノート
+    await page.locator('nav button').first().tap();
+    await settle();
+    ok((await top().locator('.list li').count()) === 11, '復習ノート: 講（0〜10）の一覧');
+    await top().locator('.seg button', { hasText: 'ルールごと' }).tap();
+    await sleep(200);
+    ok((await top().locator('.list li').count()) === 6, '復習ノート: ルール（6種）の一覧');
+    await top().locator('.list .row').first().tap();
+    await settle();
+    ok((await top().locator('.card').count()) > 0 && (await top().locator('.cmp').first().textContent()).includes('学校読み'), 'ルールの早見表に、学校読みと聞こえ方を並べた項目が出る');
+    ok((await depth()) === 3, '画面遷移が正しい');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
   // ---------- 旧データの移行 ----------
   {
     const { page, errors, ctx } = await newPage(browser);
