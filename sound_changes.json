@@ -1,0 +1,3617 @@
+{
+  "title": "英語の音声変化 クイズデータ",
+  "version": "1.0",
+  "description": "「英語の音声変化 完全教科書（第0講〜第10講）」をもとに作成した、音声変化（連結・脱落・同化・Flap T・短縮形・h消え）のクイズ用データ。カタカナは近似表記で、実際のスピード・話者によって揺れる。source が supplement の項目は教科書の補足例または追加例。",
+  "schema": {
+    "rules[]": "ルール6種。color はマーキングの推奨色",
+    "lectures[]": "講の一覧。rules はその講で扱うルール",
+    "items[]": "フレーズ。text=英文, words=単語配列, marks=視覚マーキング, plain=学校読み（1語ずつ区切った読み）, kana=実際の聞こえ方, decoys=紛らわしい誤答カナ2つ, changes=変化箇所（span/rule/why/ask）, quiz=falseなら出題しない",
+    "items[].marks[]": "type は link（word と word+1 の間に赤い弧）/ elide（取り消し線）/ assim（橙の下線）/ flap（青の二重線）。elide・assim・flap は words[word] の文字範囲 [from,to)",
+    "contractions[]": "短縮形と元の形",
+    "assimilations[]": "t/d/s/z＋y の融合表",
+    "tFate[]": "t の行方（target の t が、flap/elide/absorb/clear のどうなるか）",
+    "compounds[]": "複合変化。steps の順序を当てる",
+    "symptoms[]": "聞こえ方の症状 → 疑うルール",
+    "concepts[]": "知識問題（answer と wrong 3つ。選択肢は実行時にシャッフル）",
+    "fateLabels": "tFate の選択肢ラベル"
+  },
+  "rules": [
+    {
+      "id": "link",
+      "name": "連結",
+      "nameEn": "Linking",
+      "color": "#C0392B",
+      "summary": "語末の子音の音＋次の語頭の母音 → 1つの音のようにつながる",
+      "lectures": [
+        3
+      ]
+    },
+    {
+      "id": "elide",
+      "name": "脱落",
+      "nameEn": "Elision",
+      "color": "#2F5D9E",
+      "summary": "子音が続くと前の子音が落ちる／文末の p b t d k g は口の形で止めるだけ／t＋n など",
+      "lectures": [
+        4,
+        5,
+        8
+      ]
+    },
+    {
+      "id": "assim",
+      "name": "同化",
+      "nameEn": "Assimilation",
+      "color": "#E08A1E",
+      "summary": "t・d・s・z＋y → ch・j・sh・zh／nt＋母音 → t が n に吸収される",
+      "lectures": [
+        6,
+        9
+      ]
+    },
+    {
+      "id": "flap",
+      "name": "Flap T",
+      "nameEn": "Flapping",
+      "color": "#1E7FC4",
+      "summary": "母音(＋r)＋t＋母音、母音＋t＋l の t が、ラ行・ダ行風の弾き音になる",
+      "lectures": [
+        7
+      ]
+    },
+    {
+      "id": "contraction",
+      "name": "短縮形",
+      "nameEn": "Contractions",
+      "color": "#1F7A68",
+      "summary": "wanna・gotta・gonna・tryna、-ng＋to → -na、're・'ll など",
+      "lectures": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "hdrop",
+      "name": "h消え",
+      "nameEn": "H-dropping",
+      "color": "#7B4FA0",
+      "summary": "he・him・her・here・have など機能語の語頭 h が聞こえず、前の語につながる",
+      "lectures": [
+        10
+      ]
+    }
+  ],
+  "lectures": [
+    {
+      "no": 0,
+      "title": "導入編：なぜ聞き取れない？",
+      "rules": [],
+      "summary": "聞き取れない主因は音声変化。字幕なし→英語字幕→ルールで原因分析→オーバーラッピングの4ステップで学ぶ。"
+    },
+    {
+      "no": 1,
+      "title": "短縮形① wanna, gotta, gonna, tryna",
+      "rules": [
+        "contraction"
+      ],
+      "summary": "動詞らしい語＋to が1語になる。-ng＋to → -na は他の動詞にも使える。"
+    },
+    {
+      "no": 2,
+      "title": "短縮形② 're, 'll とダークL",
+      "rules": [
+        "contraction"
+      ],
+      "summary": "主語＋be／will は極端に短く曖昧。語末・子音前のLは暗い音（ダークL）で「ウ／オ」に聞こえる。"
+    },
+    {
+      "no": 3,
+      "title": "子音＋母音（連結）",
+      "rules": [
+        "link"
+      ],
+      "summary": "語末の子音の音＋次の語頭の母音はつながる。つづりではなく「音」で語末を判断する。"
+    },
+    {
+      "no": 4,
+      "title": "子音＋子音（脱落・統合）",
+      "rules": [
+        "elide"
+      ],
+      "summary": "子音が続くと前の子音が落ちやすい。同じ・似た子音は1つにまとまる。"
+    },
+    {
+      "no": 5,
+      "title": "消える文末破裂音",
+      "rules": [
+        "elide"
+      ],
+      "summary": "文末の p b t d k g は口の形を作って止めるだけで、ほとんど聞こえない。"
+    },
+    {
+      "no": 6,
+      "title": "同化（t, d, s, z ＋ y）",
+      "rules": [
+        "assim"
+      ],
+      "summary": "t+y→ch、d+y→j、s+y→sh、z+y→zh。d+y は伸ばせず、z+y は伸ばせる。"
+    },
+    {
+      "no": 7,
+      "title": "Flap T",
+      "rules": [
+        "flap"
+      ],
+      "summary": "母音(＋r)＋t＋母音、母音＋t＋l の t は、舌で軽く弾くラ行・ダ行風の音になる。"
+    },
+    {
+      "no": 8,
+      "title": "消えるT",
+      "rules": [
+        "elide"
+      ],
+      "summary": "t+n、子音＋t＋子音、s+k+t（asked）などで真ん中の音が落ちる。"
+    },
+    {
+      "no": 9,
+      "title": "Tの同化（nt＋母音）",
+      "rules": [
+        "assim"
+      ],
+      "summary": "nt の直後に母音が来ると t が n に吸収されて聞こえない（Internet, plenty）。"
+    },
+    {
+      "no": 10,
+      "title": "消えるh",
+      "rules": [
+        "hdrop"
+      ],
+      "summary": "he/him/her/here/have の h は前の語に連結して消える。1つの変化が次の変化の引き金になる（about her）。"
+    }
+  ],
+  "items": [
+    {
+      "id": "sc-001",
+      "lecture": 0,
+      "source": "video",
+      "level": 2,
+      "text": "Should I get rid of it?",
+      "words": [
+        "Should",
+        "I",
+        "get",
+        "rid",
+        "of",
+        "it?"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 3
+        },
+        {
+          "type": "link",
+          "word": 4
+        },
+        {
+          "type": "elide",
+          "word": 5,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "plain": "シュッド アイ ゲット リッド オブ イット",
+      "kana": "シュダイ ゲッリドヴィッ",
+      "ja": "それ、処分したほうがいいかな？",
+      "decoys": [
+        "シュッダイ ゲットリドビット",
+        "シュダイ ゲッティドヴィッ"
+      ],
+      "changes": [
+        {
+          "span": "Should I",
+          "rule": "link",
+          "why": "d＋母音 I がつながる → シュダイ"
+        },
+        {
+          "span": "get rid",
+          "rule": "elide",
+          "why": "t＋r（子音＋子音）で前の t が落ちる → ゲッリ"
+        },
+        {
+          "span": "rid of",
+          "rule": "link",
+          "why": "d＋母音 o がつながる → リドヴ"
+        },
+        {
+          "span": "of it",
+          "rule": "link",
+          "why": "v＋母音 i がつながる → オヴィッ"
+        },
+        {
+          "span": "it",
+          "rule": "elide",
+          "why": "文末の t は息を止めるだけ",
+          "ask": "文末の it の t で起きている変化は？"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-002",
+      "lecture": 1,
+      "source": "video",
+      "level": 1,
+      "text": "You wanna be my",
+      "words": [
+        "You",
+        "wanna",
+        "be",
+        "my"
+      ],
+      "marks": [],
+      "plain": "ユー ウォント トゥー ビー マイ",
+      "kana": "ユウワナビマイ",
+      "ja": "あなた、私の…になりたい？",
+      "decoys": [
+        "ユウワンタビマイ",
+        "ユウワットゥビマイ"
+      ],
+      "changes": [
+        {
+          "span": "wanna",
+          "rule": "contraction",
+          "why": "want to / want a が1語になる → ワナ"
+        }
+      ],
+      "quiz": true,
+      "ctx": "You wanna be my assistant?"
+    },
+    {
+      "id": "sc-003",
+      "lecture": 1,
+      "source": "video",
+      "level": 1,
+      "text": "We gotta run.",
+      "words": [
+        "We",
+        "gotta",
+        "run."
+      ],
+      "marks": [],
+      "plain": "ウィー ゴッタ ラン",
+      "kana": "ウィガラ ラン",
+      "ja": "逃げなきゃ！／走らなきゃ",
+      "decoys": [
+        "ウィゴッタ ラン",
+        "ウィガタ ラン"
+      ],
+      "changes": [
+        {
+          "span": "gotta",
+          "rule": "contraction",
+          "why": "(have) got to が1語になる → ガラ"
+        },
+        {
+          "span": "gotta",
+          "rule": "flap",
+          "why": "真ん中の tt は日本語のラ行に近い音"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-004",
+      "lecture": 1,
+      "source": "video",
+      "level": 1,
+      "text": "I'm gonna",
+      "words": [
+        "I'm",
+        "gonna"
+      ],
+      "marks": [],
+      "plain": "アイム ゴーイング トゥー",
+      "kana": "アムガナ",
+      "ja": "～するつもり／～しそう",
+      "decoys": [
+        "アイム ゴナ",
+        "アイムガーナ"
+      ],
+      "changes": [
+        {
+          "span": "I'm gonna",
+          "rule": "contraction",
+          "why": "I'm が弱まり、gonna は ガナ"
+        }
+      ],
+      "quiz": true,
+      "alt": "マガナ"
+    },
+    {
+      "id": "sc-005",
+      "lecture": 1,
+      "source": "video",
+      "level": 2,
+      "text": "tryna say",
+      "words": [
+        "tryna",
+        "say"
+      ],
+      "marks": [],
+      "plain": "トライング トゥー セイ",
+      "kana": "トライナセイ",
+      "ja": "言おうとしている",
+      "decoys": [
+        "トライタセイ",
+        "トライングトゥセイ"
+      ],
+      "changes": [
+        {
+          "span": "tryna",
+          "rule": "contraction",
+          "why": "trying to が融合 → トライナ"
+        }
+      ],
+      "quiz": true,
+      "ctx": "What was I tryna say?"
+    },
+    {
+      "id": "sc-006",
+      "lecture": 1,
+      "source": "video",
+      "level": 2,
+      "text": "talking to somebody",
+      "words": [
+        "talking",
+        "to",
+        "somebody"
+      ],
+      "marks": [],
+      "plain": "トーキング トゥー サムバディ",
+      "kana": "トーキナ サムバディ",
+      "ja": "誰かと話している",
+      "decoys": [
+        "トーキトゥ サムバディ",
+        "トーキングトゥ サムバディ"
+      ],
+      "changes": [
+        {
+          "span": "talking to",
+          "rule": "contraction",
+          "why": "-ng＋to → -na（他の動詞にも使える）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-007",
+      "lecture": 2,
+      "source": "video",
+      "level": 1,
+      "text": "You're",
+      "words": [
+        "You're"
+      ],
+      "marks": [],
+      "plain": "ユア",
+      "kana": "ヨ／ヤ",
+      "ja": "あなたは～だ",
+      "decoys": [
+        "ユー",
+        "ヨル"
+      ],
+      "changes": [
+        {
+          "span": "You're",
+          "rule": "contraction",
+          "why": "主語＋be は極端に短く曖昧になる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-008",
+      "lecture": 2,
+      "source": "video",
+      "level": 1,
+      "text": "We're",
+      "words": [
+        "We're"
+      ],
+      "marks": [],
+      "plain": "ウィア",
+      "kana": "ウェ／ウ",
+      "ja": "私たちは～だ",
+      "decoys": [
+        "ウィー",
+        "ウォー"
+      ],
+      "changes": [
+        {
+          "span": "We're",
+          "rule": "contraction",
+          "why": "主語＋be は極端に短く曖昧になる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-009",
+      "lecture": 2,
+      "source": "video",
+      "level": 1,
+      "text": "They're",
+      "words": [
+        "They're"
+      ],
+      "marks": [],
+      "plain": "ゼア",
+      "kana": "ゼ",
+      "ja": "彼らは～だ",
+      "decoys": [
+        "ゼイ",
+        "ザー"
+      ],
+      "changes": [
+        {
+          "span": "They're",
+          "rule": "contraction",
+          "why": "主語＋be は極端に短く曖昧になる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-010",
+      "lecture": 2,
+      "source": "video",
+      "level": 1,
+      "text": "I'll",
+      "words": [
+        "I'll"
+      ],
+      "marks": [],
+      "plain": "アイル",
+      "kana": "ア／アゥ",
+      "ja": "（私が）～するよ",
+      "decoys": [
+        "イル",
+        "アイール"
+      ],
+      "changes": [
+        {
+          "span": "I'll",
+          "rule": "contraction",
+          "why": "主語＋will は「ア」か「ウ」かも分からない曖昧な音"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-011",
+      "lecture": 2,
+      "source": "video",
+      "level": 1,
+      "text": "You'll",
+      "words": [
+        "You'll"
+      ],
+      "marks": [],
+      "plain": "ユール",
+      "kana": "ヨゥ／ユゥ",
+      "ja": "（あなたが）～してくれるよね",
+      "decoys": [
+        "ユーウィ",
+        "ユイル"
+      ],
+      "changes": [
+        {
+          "span": "You'll",
+          "rule": "contraction",
+          "why": "ダークLで伸びた「オ」「ウ」のような音"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-012",
+      "lecture": 3,
+      "source": "video",
+      "level": 1,
+      "text": "pineapple and",
+      "words": [
+        "pineapple",
+        "and"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "パイナップル アンド",
+      "kana": "バイナポーレン",
+      "ja": "パイナップルと～",
+      "decoys": [
+        "パイナポーアンド",
+        "パイナップルエン"
+      ],
+      "changes": [
+        {
+          "span": "pineapple and",
+          "rule": "link",
+          "why": "ダークL＋母音 a がつながる"
+        },
+        {
+          "span": "and",
+          "rule": "elide",
+          "why": "and の d が落ちて n で終わる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-013",
+      "lecture": 3,
+      "source": "video",
+      "level": 1,
+      "text": "came in and I",
+      "words": [
+        "came",
+        "in",
+        "and",
+        "I"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "link",
+          "word": 1
+        },
+        {
+          "type": "elide",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 2
+        }
+      ],
+      "plain": "ケイム イン アンド アイ",
+      "kana": "ケイミン イネナイ",
+      "ja": "（～が）入ってきて、私は…",
+      "decoys": [
+        "ケイミン アンダイ",
+        "ケイム イナナイ"
+      ],
+      "changes": [
+        {
+          "span": "came in",
+          "rule": "link",
+          "why": "m＋母音 i → ミン"
+        },
+        {
+          "span": "in and",
+          "rule": "link",
+          "why": "n＋母音 a。グラが速いと in と and が溶ける"
+        },
+        {
+          "span": "and I",
+          "rule": "link",
+          "why": "d が n に吸収され、n＋I → ナイ"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-014",
+      "lecture": 3,
+      "source": "video",
+      "level": 1,
+      "text": "nice if they",
+      "words": [
+        "nice",
+        "if",
+        "they"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        }
+      ],
+      "plain": "ナイス イフ ゼイ",
+      "kana": "ナイスィフ ゼイ",
+      "ja": "もし彼らが～だったらいいのに",
+      "decoys": [
+        "ナイ ズィフ ゼイ",
+        "ナイッシフ ゼイ"
+      ],
+      "changes": [
+        {
+          "span": "nice if",
+          "rule": "link",
+          "why": "s＋母音 i → スィ。区切りは「ナイ｜スィフ」"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-015",
+      "lecture": 3,
+      "source": "video",
+      "level": 2,
+      "text": "What if I",
+      "words": [
+        "What",
+        "if",
+        "I"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        },
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "link",
+          "word": 1
+        }
+      ],
+      "plain": "ホワット イフ アイ",
+      "kana": "ワレファイ",
+      "ja": "もし私が～したらどうする？",
+      "decoys": [
+        "ワッティファイ",
+        "ワリフ アイ"
+      ],
+      "changes": [
+        {
+          "span": "What if",
+          "rule": "flap",
+          "why": "what の t が弾き音に変化する"
+        },
+        {
+          "span": "What if I",
+          "rule": "link",
+          "why": "3語がすべて1つの流れになる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-016",
+      "lecture": 4,
+      "source": "video",
+      "level": 1,
+      "text": "At least",
+      "words": [
+        "At",
+        "least"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 1,
+          "to": 2
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 4,
+          "to": 5
+        }
+      ],
+      "plain": "アット リースト",
+      "kana": "アッリース(ト)",
+      "ja": "少なくとも",
+      "decoys": [
+        "アトリースト",
+        "アッティリース"
+      ],
+      "changes": [
+        {
+          "span": "At least",
+          "rule": "elide",
+          "why": "t＋l（子音＋子音）で前の t が落ちる。t のための「ため」は入る"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-017",
+      "lecture": 4,
+      "source": "video",
+      "level": 1,
+      "text": "it seems",
+      "words": [
+        "it",
+        "seems"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "plain": "イット スィームズ",
+      "kana": "イッスィームズ",
+      "ja": "それは～のようだ",
+      "decoys": [
+        "イリスィームズ",
+        "イスィーズ"
+      ],
+      "changes": [
+        {
+          "span": "it seems",
+          "rule": "elide",
+          "why": "破裂音 t＋子音 s なので t が落ちる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-018",
+      "lecture": 4,
+      "source": "video",
+      "level": 1,
+      "text": "like we",
+      "words": [
+        "like",
+        "we"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "ライク ウィー",
+      "kana": "ライッウィー",
+      "ja": "～のような私たち",
+      "decoys": [
+        "ライクウィー",
+        "ライウィー"
+      ],
+      "changes": [
+        {
+          "span": "like we",
+          "rule": "elide",
+          "why": "like は音では k で終わる。次が子音 w なので k が落ちる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-019",
+      "lecture": 4,
+      "source": "video",
+      "level": 1,
+      "text": "start living",
+      "words": [
+        "start",
+        "living"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        }
+      ],
+      "plain": "スタート リビング",
+      "kana": "スターリヴィン",
+      "ja": "住み始める",
+      "decoys": [
+        "スタートリビング",
+        "スターリビング"
+      ],
+      "changes": [
+        {
+          "span": "start living",
+          "rule": "elide",
+          "why": "破裂音 t の次が子音 l なので落ちる"
+        },
+        {
+          "span": "living",
+          "rule": "elide",
+          "why": "-ng は鼻音1つ。g は元々発音しない",
+          "ask": "living の語末で起きていることは？"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-020",
+      "lecture": 4,
+      "source": "video",
+      "level": 2,
+      "text": "did that",
+      "words": [
+        "did",
+        "that"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "ディッド ザット",
+      "kana": "ディッザッ",
+      "ja": "それをやった／うまくできた",
+      "decoys": [
+        "ディッダット",
+        "ディザット"
+      ],
+      "changes": [
+        {
+          "span": "did that",
+          "rule": "elide",
+          "why": "d＋th が連続。前の d が落ち、th に連なる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-021",
+      "lecture": 4,
+      "source": "video",
+      "level": 2,
+      "text": "with that",
+      "words": [
+        "with",
+        "that"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 4
+        }
+      ],
+      "plain": "ウィズ ザット",
+      "kana": "ウィザッ",
+      "ja": "それに対して",
+      "decoys": [
+        "ウィズザット",
+        "ウィッザット"
+      ],
+      "changes": [
+        {
+          "span": "with that",
+          "rule": "elide",
+          "why": "同じ th が連続 → 1つにまとまる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-022",
+      "lecture": 4,
+      "source": "video",
+      "level": 2,
+      "text": "used to",
+      "words": [
+        "used",
+        "to"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        }
+      ],
+      "plain": "ユーズド トゥー",
+      "kana": "ユースト(ゥ)",
+      "ja": "昔は～したものだ",
+      "decoys": [
+        "ユーズドゥ",
+        "ユーセッド"
+      ],
+      "changes": [
+        {
+          "span": "used to",
+          "rule": "elide",
+          "why": "d＋t が連続 → T と T が1つにまとまる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-023",
+      "lecture": 4,
+      "source": "video",
+      "level": 2,
+      "text": "dip pizza",
+      "words": [
+        "dip",
+        "pizza"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "ディップ ピザ",
+      "kana": "ディッピザ",
+      "ja": "ピザを浸す",
+      "decoys": [
+        "ディップ ピッザ",
+        "ディッピッピザ"
+      ],
+      "changes": [
+        {
+          "span": "dip pizza",
+          "rule": "elide",
+          "why": "p＋p が同じ音 → 1つの p にまとまる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-024",
+      "lecture": 4,
+      "source": "video",
+      "level": 2,
+      "text": "like Coca-Cola",
+      "words": [
+        "like",
+        "Coca-Cola"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "ライク コカ・コーラ",
+      "kana": "ライッコカコーラ",
+      "ja": "コカ・コーラのような",
+      "decoys": [
+        "ライクコーカコーラ",
+        "ライコカコーラ"
+      ],
+      "changes": [
+        {
+          "span": "like Coca-Cola",
+          "rule": "elide",
+          "why": "like の k と Coca の C（k）が同じ音 → 1つにまとまる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-025",
+      "lecture": 4,
+      "source": "video",
+      "level": 3,
+      "text": "I've been",
+      "words": [
+        "I've",
+        "been"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 4
+        }
+      ],
+      "plain": "アイヴ ビーン",
+      "kana": "アイビーン",
+      "ja": "私は～だった（ことがある）",
+      "decoys": [
+        "アイヴィン",
+        "アイブ ビン"
+      ],
+      "changes": [
+        {
+          "span": "I've been",
+          "rule": "elide",
+          "why": "v と b は口の形が似ているので1つにまとまる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-026",
+      "lecture": 5,
+      "source": "video",
+      "level": 1,
+      "text": "Stop it.",
+      "words": [
+        "Stop",
+        "it."
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "plain": "ストップ イット",
+      "kana": "ストッピ",
+      "ja": "やめて。",
+      "decoys": [
+        "ストッピット",
+        "ストッピッド"
+      ],
+      "changes": [
+        {
+          "span": "Stop it",
+          "rule": "link",
+          "why": "p＋母音 i がつながる → ストッピ"
+        },
+        {
+          "span": "it",
+          "rule": "elide",
+          "why": "文末の t は息を止めるだけ（無開放）",
+          "ask": "文末の it の t で起きている変化は？"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-027",
+      "lecture": 5,
+      "source": "video",
+      "level": 2,
+      "text": "naked",
+      "words": [
+        "naked"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        }
+      ],
+      "plain": "ネイキッド",
+      "kana": "ネイキッ",
+      "ja": "裸の",
+      "decoys": [
+        "ネイクド",
+        "ネイキドゥ"
+      ],
+      "changes": [
+        {
+          "span": "naked",
+          "rule": "elide",
+          "why": "語末（文末）の d が聞こえない"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-028",
+      "lecture": 6,
+      "source": "video",
+      "level": 1,
+      "text": "hat you",
+      "words": [
+        "hat",
+        "you"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ヘイト ユー",
+      "kana": "ヘイチュー",
+      "ja": "あなたが嫌い",
+      "decoys": [
+        "ヘイジュー",
+        "ヘイリュー"
+      ],
+      "changes": [
+        {
+          "span": "hate you",
+          "rule": "assim",
+          "why": "t＋y → ch（チュ）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-029",
+      "lecture": 6,
+      "source": "video",
+      "level": 1,
+      "text": "How about you?",
+      "words": [
+        "How",
+        "about",
+        "you?"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 4,
+          "to": 5
+        },
+        {
+          "type": "assim",
+          "word": 2,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ハウ アバウト ユー",
+      "kana": "ハウ アバウチュー",
+      "ja": "あなたはどう？",
+      "decoys": [
+        "ハウ アバウジュー",
+        "ハウ アバウリュー"
+      ],
+      "changes": [
+        {
+          "span": "about you",
+          "rule": "assim",
+          "why": "t＋y → ch（チュ）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-030",
+      "lecture": 6,
+      "source": "video",
+      "level": 1,
+      "text": "would you",
+      "words": [
+        "would",
+        "you"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ウッド ユー",
+      "kana": "ウッジュー",
+      "ja": "あなたは～するの？",
+      "decoys": [
+        "ウッチュー",
+        "ウッリュー"
+      ],
+      "changes": [
+        {
+          "span": "would you",
+          "rule": "assim",
+          "why": "d＋y → j（ジュ）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-031",
+      "lecture": 6,
+      "source": "video",
+      "level": 2,
+      "text": "as long as you're",
+      "words": [
+        "as",
+        "long",
+        "as",
+        "you're"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 2,
+          "from": 1,
+          "to": 2
+        },
+        {
+          "type": "assim",
+          "word": 3,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "アズ ロング アズ ユア",
+      "kana": "アズロンガジュア",
+      "ja": "あなたが～である限り",
+      "decoys": [
+        "アズロンガシュア",
+        "アズロンガチュア"
+      ],
+      "changes": [
+        {
+          "span": "as you",
+          "rule": "assim",
+          "why": "z＋y → zh（濁ったジュ）。as の s は発音上 z"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-032",
+      "lecture": 6,
+      "source": "video",
+      "level": 1,
+      "text": "miss you",
+      "words": [
+        "miss",
+        "you"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 0,
+          "from": 2,
+          "to": 4
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ミス ユー",
+      "kana": "ミッシュー",
+      "ja": "会いたい",
+      "decoys": [
+        "ミッジュー",
+        "ミッチュー"
+      ],
+      "changes": [
+        {
+          "span": "miss you",
+          "rule": "assim",
+          "why": "s＋y → sh（シュ）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-033",
+      "lecture": 6,
+      "source": "video",
+      "level": 1,
+      "text": "this year",
+      "words": [
+        "this",
+        "year"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ディス イヤー",
+      "kana": "ディッシュイア",
+      "ja": "今年",
+      "decoys": [
+        "ディッジュイア",
+        "ディッチュイア"
+      ],
+      "changes": [
+        {
+          "span": "this year",
+          "rule": "assim",
+          "why": "s＋y → sh（シュ）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-034",
+      "lecture": 6,
+      "source": "video",
+      "level": 1,
+      "text": "meet you",
+      "words": [
+        "meet",
+        "you"
+      ],
+      "marks": [
+        {
+          "type": "assim",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ミート ユー",
+      "kana": "ミーチュー",
+      "ja": "あなたに会う",
+      "decoys": [
+        "ミージュー",
+        "ミーリュー"
+      ],
+      "changes": [
+        {
+          "span": "meet you",
+          "rule": "assim",
+          "why": "t＋y → ch（チュ）。Nice to meet you のミーチュー"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-035",
+      "lecture": 7,
+      "source": "video",
+      "level": 1,
+      "text": "Shut up",
+      "words": [
+        "Shut",
+        "up"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        }
+      ],
+      "plain": "シャット アップ",
+      "kana": "シャラップ",
+      "ja": "黙れ！",
+      "decoys": [
+        "シャッタップ",
+        "シャッアップ"
+      ],
+      "changes": [
+        {
+          "span": "Shut up",
+          "rule": "flap",
+          "why": "母音＋t＋母音 → t が弾き音に"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-036",
+      "lecture": 7,
+      "source": "video",
+      "level": 1,
+      "text": "What are you",
+      "words": [
+        "What",
+        "are",
+        "you"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        }
+      ],
+      "plain": "ホワット アー ユー",
+      "kana": "ワラユ",
+      "ja": "あなたは何を～している？",
+      "decoys": [
+        "ワッタユー",
+        "ワラチュー"
+      ],
+      "changes": [
+        {
+          "span": "What are you",
+          "rule": "flap",
+          "why": "母音＋t＋母音 → ワラ／ワダ。「ホワットアーユー」とは言っていない"
+        }
+      ],
+      "quiz": true,
+      "alt": "ワダユ"
+    },
+    {
+      "id": "sc-037",
+      "lecture": 7,
+      "source": "video",
+      "level": 2,
+      "text": "put it in",
+      "words": [
+        "put",
+        "it",
+        "in"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "flap",
+          "word": 1,
+          "from": 1,
+          "to": 2
+        },
+        {
+          "type": "link",
+          "word": 1
+        }
+      ],
+      "plain": "プット イット イン",
+      "kana": "プリリン",
+      "ja": "～を（中に）入れる",
+      "decoys": [
+        "プティティン",
+        "プッティッイン"
+      ],
+      "changes": [
+        {
+          "span": "put it in",
+          "rule": "flap",
+          "why": "2つの t が連続してフラップT"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-038",
+      "lecture": 7,
+      "source": "video",
+      "level": 1,
+      "text": "little",
+      "words": [
+        "little"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 4
+        }
+      ],
+      "plain": "リトル",
+      "kana": "リロゥ",
+      "ja": "小さな～",
+      "decoys": [
+        "リットル",
+        "リッルル"
+      ],
+      "changes": [
+        {
+          "span": "little",
+          "rule": "flap",
+          "why": "母音＋t＋l。tt は発音上 t が1つ"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-039",
+      "lecture": 7,
+      "source": "video",
+      "level": 1,
+      "text": "titles",
+      "words": [
+        "titles"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "タイトルズ",
+      "kana": "タイロウズ",
+      "ja": "タイトル（題名）たち",
+      "decoys": [
+        "タイタルズ",
+        "タイトルス"
+      ],
+      "changes": [
+        {
+          "span": "titles",
+          "rule": "flap",
+          "why": "母音＋t＋l のフラップT"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-040",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 1,
+      "text": "water",
+      "words": [
+        "water"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "ウォーター",
+      "kana": "ワラー",
+      "ja": "水",
+      "decoys": [
+        "ワター",
+        "ワッラ"
+      ],
+      "changes": [
+        {
+          "span": "water",
+          "rule": "flap",
+          "why": "母音＋t＋母音（アメリカ英語）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-041",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 1,
+      "text": "better",
+      "words": [
+        "better"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 4
+        }
+      ],
+      "plain": "ベター",
+      "kana": "ベラー",
+      "ja": "より良い",
+      "decoys": [
+        "ベッタ",
+        "ベツー"
+      ],
+      "changes": [
+        {
+          "span": "better",
+          "rule": "flap",
+          "why": "母音＋t＋母音（アメリカ英語）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-042",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 1,
+      "text": "city",
+      "words": [
+        "city"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "シティ",
+      "kana": "スィリー",
+      "ja": "都市",
+      "decoys": [
+        "スィティ",
+        "スィッティー"
+      ],
+      "changes": [
+        {
+          "span": "city",
+          "rule": "flap",
+          "why": "母音＋t＋母音（アメリカ英語）"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-043",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 1,
+      "text": "party",
+      "words": [
+        "party"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        }
+      ],
+      "plain": "パーティー",
+      "kana": "パーリー",
+      "ja": "パーティー",
+      "decoys": [
+        "パーティ",
+        "パーッティー"
+      ],
+      "changes": [
+        {
+          "span": "party",
+          "rule": "flap",
+          "why": "r＋t＋母音でも起きる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-044",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 1,
+      "text": "get it",
+      "words": [
+        "get",
+        "it"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 0
+        }
+      ],
+      "plain": "ゲット イット",
+      "kana": "ゲリッ",
+      "ja": "それを手に入れる",
+      "decoys": [
+        "ゲッティット",
+        "ゲットイッ"
+      ],
+      "changes": [
+        {
+          "span": "get it",
+          "rule": "flap",
+          "why": "母音＋t＋母音。連結もしている"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-045",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 2,
+      "text": "a lot of",
+      "words": [
+        "a",
+        "lot",
+        "of"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 1,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 1
+        }
+      ],
+      "plain": "ア ロット オブ",
+      "kana": "アラロヴ",
+      "ja": "たくさんの～",
+      "decoys": [
+        "アロッタ",
+        "アロットブ"
+      ],
+      "changes": [
+        {
+          "span": "a lot of",
+          "rule": "flap",
+          "why": "母音＋t＋母音 → ラ行風"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-046",
+      "lecture": 7,
+      "source": "supplement",
+      "level": 2,
+      "text": "bottle",
+      "words": [
+        "bottle"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 2,
+          "to": 4
+        }
+      ],
+      "plain": "ボトル",
+      "kana": "バロウ",
+      "ja": "ボトル",
+      "decoys": [
+        "ボットゥル",
+        "バットル"
+      ],
+      "changes": [
+        {
+          "span": "bottle",
+          "rule": "flap",
+          "why": "母音＋t＋l → フラップT"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-047",
+      "lecture": 8,
+      "source": "video",
+      "level": 2,
+      "text": "gotten",
+      "words": [
+        "gotten"
+      ],
+      "marks": [],
+      "plain": "ゴットン",
+      "kana": "ガッン",
+      "ja": "（get の過去分詞）",
+      "decoys": [
+        "ガトゥン",
+        "ゴッテン"
+      ],
+      "changes": [
+        {
+          "span": "gotten",
+          "rule": "elide",
+          "why": "t の後ろに n。t が消える"
+        }
+      ],
+      "quiz": true,
+      "ctx": "If you haven't gotten the ticket yet, ..."
+    },
+    {
+      "id": "sc-048",
+      "lecture": 8,
+      "source": "supplement",
+      "level": 2,
+      "text": "didn't",
+      "words": [
+        "didn't"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 5,
+          "to": 6
+        }
+      ],
+      "plain": "ディドゥント",
+      "kana": "ディドゥン",
+      "ja": "～しなかった",
+      "decoys": [
+        "ディッドント",
+        "ディデント"
+      ],
+      "changes": [
+        {
+          "span": "didn't",
+          "rule": "elide",
+          "why": "t＋n の並びで t が消えやすい"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-049",
+      "lecture": 8,
+      "source": "video",
+      "level": 2,
+      "text": "recently",
+      "words": [
+        "recently"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 5,
+          "to": 6
+        }
+      ],
+      "plain": "リーセントリー",
+      "kana": "リースンリー",
+      "ja": "最近",
+      "decoys": [
+        "リーセンクリー",
+        "リセントゥリー"
+      ],
+      "changes": [
+        {
+          "span": "recently",
+          "rule": "elide",
+          "why": "n と l（子音）に挟まれた t が落ちる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-050",
+      "lecture": 8,
+      "source": "supplement",
+      "level": 2,
+      "text": "exactly",
+      "words": [
+        "exactly"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        }
+      ],
+      "plain": "イグザクトリー",
+      "kana": "イグザクリー",
+      "ja": "その通り／正確に",
+      "decoys": [
+        "イグザクトゥリー",
+        "エグザクトリー"
+      ],
+      "changes": [
+        {
+          "span": "exactly",
+          "rule": "elide",
+          "why": "子音＋t＋子音。-ly の語は t が落ちやすい"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-051",
+      "lecture": 8,
+      "source": "video",
+      "level": 2,
+      "text": "asked",
+      "words": [
+        "asked"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        }
+      ],
+      "plain": "アスクト",
+      "kana": "アスト",
+      "ja": "尋ねた",
+      "decoys": [
+        "アスキド",
+        "アストゥ"
+      ],
+      "changes": [
+        {
+          "span": "asked",
+          "rule": "elide",
+          "why": "s・k・t と子音が3つ並ぶと、真ん中の k が落ちる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-052",
+      "lecture": 9,
+      "source": "video",
+      "level": 1,
+      "text": "Internet",
+      "words": [
+        "Internet"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 7,
+          "to": 8
+        }
+      ],
+      "plain": "インターネット",
+      "kana": "イナネッ",
+      "ja": "インターネット",
+      "decoys": [
+        "インタネッ",
+        "イントゥネッ"
+      ],
+      "changes": [
+        {
+          "span": "Internet",
+          "rule": "assim",
+          "why": "n＋t＋母音 → t が n に吸収される"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-053",
+      "lecture": 9,
+      "source": "video",
+      "level": 2,
+      "text": "plenty",
+      "words": [
+        "plenty"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        }
+      ],
+      "plain": "プレンティー",
+      "kana": "プレニー",
+      "ja": "たくさんの",
+      "decoys": [
+        "プレンリー",
+        "プレンテー"
+      ],
+      "changes": [
+        {
+          "span": "plenty",
+          "rule": "assim",
+          "why": "nt＋y（語末の y は母音として働く）→ t が聞こえない"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-054",
+      "lecture": 9,
+      "source": "video",
+      "level": 2,
+      "text": "twenty",
+      "words": [
+        "twenty"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        }
+      ],
+      "plain": "トゥエンティー",
+      "kana": "トゥウェニー",
+      "ja": "20",
+      "decoys": [
+        "トゥエンリー",
+        "トゥウェンティー"
+      ],
+      "changes": [
+        {
+          "span": "twenty",
+          "rule": "assim",
+          "why": "nt＋母音（語末の y）→ t が聞こえない"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-055",
+      "lecture": 9,
+      "source": "video",
+      "level": 2,
+      "text": "in front of me",
+      "words": [
+        "in",
+        "front",
+        "of",
+        "me"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 4,
+          "to": 5
+        },
+        {
+          "type": "link",
+          "word": 1
+        },
+        {
+          "type": "link",
+          "word": 2
+        }
+      ],
+      "plain": "イン フロント オブ ミー",
+      "kana": "インフラノヴミー",
+      "ja": "私の目の前に",
+      "decoys": [
+        "インフラントヴミー",
+        "インフロンオブミー"
+      ],
+      "changes": [
+        {
+          "span": "front of",
+          "rule": "assim",
+          "why": "n＋t＋母音 o。t が吸収されて n から of につながる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-056",
+      "lecture": 9,
+      "source": "video",
+      "level": 2,
+      "text": "want it",
+      "words": [
+        "want",
+        "it"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        },
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "plain": "ウォント イット",
+      "kana": "ワニッ",
+      "ja": "それが欲しい",
+      "decoys": [
+        "ワリッ",
+        "ワンティッ"
+      ],
+      "changes": [
+        {
+          "span": "want it",
+          "rule": "assim",
+          "why": "n＋t＋母音 i → t が聞こえない。it の t は文末なので聞こえない"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-057",
+      "lecture": 10,
+      "source": "video",
+      "level": 1,
+      "text": "Come here.",
+      "words": [
+        "Come",
+        "here."
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "カム ヒア",
+      "kana": "カミア",
+      "ja": "こっちに来て。",
+      "decoys": [
+        "カムヒア",
+        "カニア"
+      ],
+      "changes": [
+        {
+          "span": "Come here",
+          "rule": "hdrop",
+          "why": "here の h が消え、m と here の母音がつながる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-058",
+      "lecture": 10,
+      "source": "video",
+      "level": 2,
+      "text": "might have",
+      "words": [
+        "might",
+        "have"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "マイト ハヴ",
+      "kana": "マイタヴ",
+      "ja": "～したかもしれない",
+      "decoys": [
+        "マイトハヴ",
+        "マイヒヴ"
+      ],
+      "changes": [
+        {
+          "span": "might have",
+          "rule": "hdrop",
+          "why": "have の h が消えて might've と同じ音に"
+        }
+      ],
+      "quiz": true,
+      "alt": "マイラヴ"
+    },
+    {
+      "id": "sc-059",
+      "lecture": 10,
+      "source": "video",
+      "level": 2,
+      "text": "think he",
+      "words": [
+        "think",
+        "he"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "スィンク ヒー",
+      "kana": "スィンキー",
+      "ja": "彼が～と思う",
+      "decoys": [
+        "スィンクヒー",
+        "スィンチー"
+      ],
+      "changes": [
+        {
+          "span": "think he",
+          "rule": "hdrop",
+          "why": "h を言おうとしても、つないで言うと消えてしまう"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-060",
+      "lecture": 10,
+      "source": "video",
+      "level": 3,
+      "text": "about her",
+      "words": [
+        "about",
+        "her"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        },
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "アバウト ハー",
+      "kana": "アバラー",
+      "ja": "彼女のことで",
+      "decoys": [
+        "アバウトハー",
+        "アバウタハー"
+      ],
+      "changes": [
+        {
+          "span": "about her",
+          "rule": "hdrop",
+          "why": "her の h が消え、about＋er の形になる"
+        },
+        {
+          "span": "about her",
+          "rule": "flap",
+          "why": "t が母音に挟まれ、フラップTでラ行風になる"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-061",
+      "lecture": 10,
+      "source": "video",
+      "level": 3,
+      "text": "does he",
+      "words": [
+        "does",
+        "he"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "plain": "ダズ ヒー",
+      "kana": "ダズィー",
+      "ja": "彼は～する？",
+      "decoys": [
+        "ダズヒー",
+        "ダヒー"
+      ],
+      "changes": [
+        {
+          "span": "does he",
+          "rule": "hdrop",
+          "why": "he の h が消えて does につながる"
+        }
+      ],
+      "quiz": false,
+      "note": "講座の話者は「ダッシ」に近い音で話していた（話者依存）。出題からは外し、解説でのみ使う。"
+    },
+    {
+      "id": "sc-062",
+      "lecture": 10,
+      "source": "supplement",
+      "level": 3,
+      "text": "Did you eat it?",
+      "words": [
+        "Did",
+        "you",
+        "eat",
+        "it?"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        },
+        {
+          "type": "flap",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "elide",
+          "word": 3,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "plain": "ディッド ユー イート イット",
+      "kana": "ディジュイーリッ",
+      "ja": "あなたはそれを食べた？",
+      "decoys": [
+        "ディッドユー イーティット",
+        "ディジュイーティッ"
+      ],
+      "changes": [
+        {
+          "span": "did you",
+          "rule": "assim",
+          "why": "d＋y → j（ジュ）"
+        },
+        {
+          "span": "eat it",
+          "rule": "flap",
+          "why": "母音＋t＋母音。連結してイーリッ"
+        },
+        {
+          "span": "it",
+          "rule": "elide",
+          "why": "文末の t は止めるだけ",
+          "ask": "文末の it の t で起きている変化は？"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-063",
+      "lecture": 10,
+      "source": "supplement",
+      "level": 3,
+      "text": "I'm gonna get it.",
+      "words": [
+        "I'm",
+        "gonna",
+        "get",
+        "it."
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 2
+        },
+        {
+          "type": "elide",
+          "word": 3,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "plain": "アイム ゴナ ゲット イット",
+      "kana": "アムガナゲリッ",
+      "ja": "それを手に入れるよ。",
+      "decoys": [
+        "アイムガナゲティット",
+        "アムガナゲットイット"
+      ],
+      "changes": [
+        {
+          "span": "I'm gonna",
+          "rule": "contraction",
+          "why": "I'm gonna → アムガナ"
+        },
+        {
+          "span": "get it",
+          "rule": "flap",
+          "why": "母音＋t＋母音。ゲリッ"
+        },
+        {
+          "span": "it",
+          "rule": "elide",
+          "why": "文末の t は止めるだけ",
+          "ask": "文末の it の t で起きている変化は？"
+        }
+      ],
+      "quiz": true
+    },
+    {
+      "id": "sc-064",
+      "lecture": 10,
+      "source": "supplement",
+      "level": 3,
+      "text": "What are you tryna say?",
+      "words": [
+        "What",
+        "are",
+        "you",
+        "tryna",
+        "say?"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 3,
+          "to": 4
+        }
+      ],
+      "plain": "ホワット アー ユー トライング トゥー セイ",
+      "kana": "ワラユ トライナセイ",
+      "ja": "何を言おうとしてるの？",
+      "decoys": [
+        "ワッタユートライナセイ",
+        "ワラチュー トライナセイ"
+      ],
+      "changes": [
+        {
+          "span": "What are you",
+          "rule": "flap",
+          "why": "母音＋t＋母音 → ワラユ"
+        },
+        {
+          "span": "tryna",
+          "rule": "contraction",
+          "why": "trying to → トライナ"
+        }
+      ],
+      "quiz": true
+    }
+  ],
+  "contractions": [
+    {
+      "id": "ct-01",
+      "lecture": 1,
+      "form": "wanna",
+      "original": [
+        "want to",
+        "want a"
+      ],
+      "ja": "～したい",
+      "kana": "ワナ"
+    },
+    {
+      "id": "ct-02",
+      "lecture": 1,
+      "form": "gotta",
+      "original": [
+        "(have) got to"
+      ],
+      "ja": "～しなきゃ",
+      "kana": "ガラ"
+    },
+    {
+      "id": "ct-03",
+      "lecture": 1,
+      "form": "gonna",
+      "original": [
+        "going to"
+      ],
+      "ja": "～するつもり／～になりそう",
+      "kana": "ガナ"
+    },
+    {
+      "id": "ct-04",
+      "lecture": 1,
+      "form": "tryna",
+      "original": [
+        "trying to"
+      ],
+      "ja": "～しようとしている",
+      "kana": "トライナ"
+    },
+    {
+      "id": "ct-05",
+      "lecture": 1,
+      "form": "talkin' na",
+      "original": [
+        "talking to"
+      ],
+      "ja": "～と話している（-ng＋to → -na）",
+      "kana": "トーキナ"
+    },
+    {
+      "id": "ct-06",
+      "lecture": 2,
+      "form": "You're",
+      "original": [
+        "You are"
+      ],
+      "ja": "あなたは～だ",
+      "kana": "ヨ／ヤ"
+    },
+    {
+      "id": "ct-07",
+      "lecture": 2,
+      "form": "We're",
+      "original": [
+        "We are"
+      ],
+      "ja": "私たちは～だ",
+      "kana": "ウェ／ウ"
+    },
+    {
+      "id": "ct-08",
+      "lecture": 2,
+      "form": "They're",
+      "original": [
+        "They are"
+      ],
+      "ja": "彼らは～だ",
+      "kana": "ゼ"
+    },
+    {
+      "id": "ct-09",
+      "lecture": 2,
+      "form": "I'll",
+      "original": [
+        "I will"
+      ],
+      "ja": "私は～する",
+      "kana": "ア／アゥ"
+    },
+    {
+      "id": "ct-10",
+      "lecture": 2,
+      "form": "You'll",
+      "original": [
+        "You will"
+      ],
+      "ja": "あなたは～する",
+      "kana": "ヨゥ／ユゥ"
+    }
+  ],
+  "assimilations": [
+    {
+      "id": "as-01",
+      "lecture": 6,
+      "combo": "t + y",
+      "result": "ch",
+      "kana": "チュ",
+      "example": "hate you → ヘイチュー"
+    },
+    {
+      "id": "as-02",
+      "lecture": 6,
+      "combo": "d + y",
+      "result": "j",
+      "kana": "ジュ",
+      "example": "would you → ウッジュー"
+    },
+    {
+      "id": "as-03",
+      "lecture": 6,
+      "combo": "s + y",
+      "result": "sh",
+      "kana": "シュ",
+      "example": "miss you → ミッシュー"
+    },
+    {
+      "id": "as-04",
+      "lecture": 6,
+      "combo": "z + y",
+      "result": "zh",
+      "kana": "ジュ（濁り）",
+      "example": "as you → アズジュ"
+    }
+  ],
+  "tFate": [
+    {
+      "id": "tf-01",
+      "lecture": 7,
+      "text": "water",
+      "words": [
+        "water"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 3
+      },
+      "fate": "flap",
+      "why": "母音＋t＋母音"
+    },
+    {
+      "id": "tf-02",
+      "lecture": 7,
+      "text": "better",
+      "words": [
+        "better"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 4
+      },
+      "fate": "flap",
+      "why": "母音＋t＋母音"
+    },
+    {
+      "id": "tf-03",
+      "lecture": 7,
+      "text": "little",
+      "words": [
+        "little"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 4
+      },
+      "fate": "flap",
+      "why": "母音＋t＋l"
+    },
+    {
+      "id": "tf-04",
+      "lecture": 7,
+      "text": "titles",
+      "words": [
+        "titles"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 3
+      },
+      "fate": "flap",
+      "why": "母音＋t＋l"
+    },
+    {
+      "id": "tf-05",
+      "lecture": 7,
+      "text": "Shut up",
+      "words": [
+        "Shut",
+        "up"
+      ],
+      "target": {
+        "word": 0,
+        "from": 3,
+        "to": 4
+      },
+      "fate": "flap",
+      "why": "母音＋t＋母音（up）"
+    },
+    {
+      "id": "tf-06",
+      "lecture": 7,
+      "text": "party",
+      "words": [
+        "party"
+      ],
+      "target": {
+        "word": 0,
+        "from": 3,
+        "to": 4
+      },
+      "fate": "flap",
+      "why": "r＋t＋母音"
+    },
+    {
+      "id": "tf-07",
+      "lecture": 7,
+      "text": "city",
+      "words": [
+        "city"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 3
+      },
+      "fate": "flap",
+      "why": "母音＋t＋母音"
+    },
+    {
+      "id": "tf-08",
+      "lecture": 7,
+      "text": "get it",
+      "words": [
+        "get",
+        "it"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 3
+      },
+      "fate": "flap",
+      "why": "母音＋t＋母音"
+    },
+    {
+      "id": "tf-09",
+      "lecture": 7,
+      "text": "bottle",
+      "words": [
+        "bottle"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 4
+      },
+      "fate": "flap",
+      "why": "母音＋t＋l"
+    },
+    {
+      "id": "tf-10",
+      "lecture": 7,
+      "text": "What are you",
+      "words": [
+        "What",
+        "are",
+        "you"
+      ],
+      "target": {
+        "word": 0,
+        "from": 3,
+        "to": 4
+      },
+      "fate": "flap",
+      "why": "母音＋t＋母音"
+    },
+    {
+      "id": "tf-11",
+      "lecture": 8,
+      "text": "recently",
+      "words": [
+        "recently"
+      ],
+      "target": {
+        "word": 0,
+        "from": 5,
+        "to": 6
+      },
+      "fate": "elide",
+      "why": "n と l（子音）に挟まれた t"
+    },
+    {
+      "id": "tf-12",
+      "lecture": 8,
+      "text": "exactly",
+      "words": [
+        "exactly"
+      ],
+      "target": {
+        "word": 0,
+        "from": 4,
+        "to": 5
+      },
+      "fate": "elide",
+      "why": "子音＋t＋子音"
+    },
+    {
+      "id": "tf-13",
+      "lecture": 8,
+      "text": "gotten",
+      "words": [
+        "gotten"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 4
+      },
+      "fate": "elide",
+      "why": "t＋n の並び"
+    },
+    {
+      "id": "tf-14",
+      "lecture": 4,
+      "text": "it seems",
+      "words": [
+        "it",
+        "seems"
+      ],
+      "target": {
+        "word": 0,
+        "from": 1,
+        "to": 2
+      },
+      "fate": "elide",
+      "why": "破裂音 t＋子音 s"
+    },
+    {
+      "id": "tf-15",
+      "lecture": 5,
+      "text": "Stop it",
+      "words": [
+        "Stop",
+        "it"
+      ],
+      "target": {
+        "word": 1,
+        "from": 1,
+        "to": 2
+      },
+      "fate": "elide",
+      "why": "文末の t は口の形で止めるだけ"
+    },
+    {
+      "id": "tf-16",
+      "lecture": 4,
+      "text": "start living",
+      "words": [
+        "start",
+        "living"
+      ],
+      "target": {
+        "word": 0,
+        "from": 4,
+        "to": 5
+      },
+      "fate": "elide",
+      "why": "破裂音 t＋子音 l"
+    },
+    {
+      "id": "tf-17",
+      "lecture": 9,
+      "text": "Internet",
+      "words": [
+        "Internet"
+      ],
+      "target": {
+        "word": 0,
+        "from": 2,
+        "to": 3
+      },
+      "fate": "absorb",
+      "why": "n＋t＋母音"
+    },
+    {
+      "id": "tf-18",
+      "lecture": 9,
+      "text": "plenty",
+      "words": [
+        "plenty"
+      ],
+      "target": {
+        "word": 0,
+        "from": 4,
+        "to": 5
+      },
+      "fate": "absorb",
+      "why": "n＋t＋母音（語末 y は母音）"
+    },
+    {
+      "id": "tf-19",
+      "lecture": 9,
+      "text": "twenty",
+      "words": [
+        "twenty"
+      ],
+      "target": {
+        "word": 0,
+        "from": 4,
+        "to": 5
+      },
+      "fate": "absorb",
+      "why": "n＋t＋母音（語末 y は母音）"
+    },
+    {
+      "id": "tf-20",
+      "lecture": 9,
+      "text": "want it",
+      "words": [
+        "want",
+        "it"
+      ],
+      "target": {
+        "word": 0,
+        "from": 3,
+        "to": 4
+      },
+      "fate": "absorb",
+      "why": "n＋t＋母音 i"
+    },
+    {
+      "id": "tf-21",
+      "lecture": 9,
+      "text": "in front of me",
+      "words": [
+        "in",
+        "front",
+        "of",
+        "me"
+      ],
+      "target": {
+        "word": 1,
+        "from": 4,
+        "to": 5
+      },
+      "fate": "absorb",
+      "why": "n＋t＋母音 o"
+    },
+    {
+      "id": "tf-22",
+      "lecture": 7,
+      "text": "table",
+      "words": [
+        "table"
+      ],
+      "target": {
+        "word": 0,
+        "from": 0,
+        "to": 1
+      },
+      "fate": "clear",
+      "why": "語頭の t は強く出る"
+    },
+    {
+      "id": "tf-23",
+      "lecture": 7,
+      "text": "ten",
+      "words": [
+        "ten"
+      ],
+      "target": {
+        "word": 0,
+        "from": 0,
+        "to": 1
+      },
+      "fate": "clear",
+      "why": "語頭の t は強く出る"
+    },
+    {
+      "id": "tf-24",
+      "lecture": 7,
+      "text": "take",
+      "words": [
+        "take"
+      ],
+      "target": {
+        "word": 0,
+        "from": 0,
+        "to": 1
+      },
+      "fate": "clear",
+      "why": "語頭の t は強く出る"
+    },
+    {
+      "id": "tf-25",
+      "lecture": 7,
+      "text": "tell",
+      "words": [
+        "tell"
+      ],
+      "target": {
+        "word": 0,
+        "from": 0,
+        "to": 1
+      },
+      "fate": "clear",
+      "why": "語頭の t は強く出る"
+    }
+  ],
+  "fateLabels": {
+    "flap": "ラ行・ダ行風に弾く（Flap T）",
+    "elide": "聞こえなくなる（脱落）",
+    "absorb": "n に吸収されて聞こえない（nt＋母音）",
+    "clear": "はっきり t と発音される"
+  },
+  "compounds": [
+    {
+      "id": "cp-01",
+      "text": "about her",
+      "words": [
+        "about",
+        "her"
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 0,
+          "from": 4,
+          "to": 5
+        },
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        }
+      ],
+      "kana": "アバラー",
+      "ja": "彼女のことで",
+      "steps": [
+        {
+          "label": "her の h が消える（about＋er の形になる）",
+          "rule": "hdrop"
+        },
+        {
+          "label": "about の t が母音に挟まれる形になる",
+          "rule": null
+        },
+        {
+          "label": "フラップTが起きる（アバラー）",
+          "rule": "flap"
+        }
+      ],
+      "note": "1つの変化が次の変化の引き金になる「連鎖」。"
+    },
+    {
+      "id": "cp-02",
+      "text": "Should I get rid of it?",
+      "words": [
+        "Should",
+        "I",
+        "get",
+        "rid",
+        "of",
+        "it?"
+      ],
+      "marks": [
+        {
+          "type": "link",
+          "word": 0
+        },
+        {
+          "type": "elide",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 3
+        },
+        {
+          "type": "link",
+          "word": 4
+        },
+        {
+          "type": "elide",
+          "word": 5,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "kana": "シュダイ ゲッリドヴィッ",
+      "ja": "それ、処分したほうがいいかな？",
+      "steps": [
+        {
+          "label": "Should I：d＋母音 I がつながる（連結）",
+          "rule": "link"
+        },
+        {
+          "label": "get rid：t＋r で t が落ちる（脱落）",
+          "rule": "elide"
+        },
+        {
+          "label": "rid of：d＋母音 o がつながる（連結）",
+          "rule": "link"
+        },
+        {
+          "label": "of it：v＋母音 i が連結し、文末の t が止まる（連結＋脱落）",
+          "rule": "link"
+        }
+      ],
+      "note": "左から順に1つずつ分解する。"
+    },
+    {
+      "id": "cp-03",
+      "text": "Did you eat it?",
+      "words": [
+        "Did",
+        "you",
+        "eat",
+        "it?"
+      ],
+      "marks": [
+        {
+          "type": "elide",
+          "word": 0,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "assim",
+          "word": 1,
+          "from": 0,
+          "to": 1
+        },
+        {
+          "type": "flap",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "elide",
+          "word": 3,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "kana": "ディジュイーリッ",
+      "ja": "あなたはそれを食べた？",
+      "steps": [
+        {
+          "label": "did you：d＋y が融合して j（同化）",
+          "rule": "assim"
+        },
+        {
+          "label": "eat it：母音＋t＋母音（Flap T）",
+          "rule": "flap"
+        },
+        {
+          "label": "it：文末の t を止める（脱落）",
+          "rule": "elide"
+        }
+      ],
+      "note": "補足例（動画外）。"
+    },
+    {
+      "id": "cp-04",
+      "text": "I'm gonna get it.",
+      "words": [
+        "I'm",
+        "gonna",
+        "get",
+        "it."
+      ],
+      "marks": [
+        {
+          "type": "flap",
+          "word": 2,
+          "from": 2,
+          "to": 3
+        },
+        {
+          "type": "link",
+          "word": 2
+        },
+        {
+          "type": "elide",
+          "word": 3,
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "kana": "アムガナゲリッ",
+      "ja": "それを手に入れるよ。",
+      "steps": [
+        {
+          "label": "I'm gonna：短縮形",
+          "rule": "contraction"
+        },
+        {
+          "label": "get it：母音＋t＋母音（Flap T）",
+          "rule": "flap"
+        },
+        {
+          "label": "it：文末の t を止める（脱落）",
+          "rule": "elide"
+        }
+      ],
+      "note": "補足例（動画外）。"
+    }
+  ],
+  "symptoms": [
+    {
+      "id": "sy-01",
+      "lecture": 3,
+      "rule": "link",
+      "symptom": "前の語が子音の音で終わり、次の語が母音で始まる"
+    },
+    {
+      "id": "sy-02",
+      "lecture": 4,
+      "rule": "elide",
+      "symptom": "子音が続くのに、前の語の語末が聞こえない"
+    },
+    {
+      "id": "sy-03",
+      "lecture": 5,
+      "rule": "elide",
+      "symptom": "文の最後の語尾（p b t d k g）が聞こえない"
+    },
+    {
+      "id": "sy-04",
+      "lecture": 6,
+      "rule": "assim",
+      "symptom": "t・d・s・z ＋ you/your/year が、チュ・ジュ・シュ・ジュに聞こえる"
+    },
+    {
+      "id": "sy-05",
+      "lecture": 7,
+      "rule": "flap",
+      "symptom": "母音に挟まれた t が、ラ行／ダ行に聞こえる（water, shut up, little）"
+    },
+    {
+      "id": "sy-06",
+      "lecture": 8,
+      "rule": "elide",
+      "symptom": "t が丸ごと消えている（t＋n、子音＋t＋子音、asked）"
+    },
+    {
+      "id": "sy-07",
+      "lecture": 9,
+      "rule": "assim",
+      "symptom": "nt の直後に母音が来て、t が聞こえない"
+    },
+    {
+      "id": "sy-08",
+      "lecture": 10,
+      "rule": "hdrop",
+      "symptom": "he / him / her / here / have が「エ」「イー」としか聞こえない"
+    },
+    {
+      "id": "sy-09",
+      "lecture": 1,
+      "rule": "contraction",
+      "symptom": "want to・going to・got to・trying to が1語に聞こえる"
+    },
+    {
+      "id": "sy-10",
+      "lecture": 2,
+      "rule": "contraction",
+      "symptom": "主語が異様に短い（ヨ・ウェ・アゥ…）、語末の L が「ウ／オ」に聞こえる"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "cn-01",
+      "lecture": 0,
+      "q": "英語が聞き取れない「主な原因」は？",
+      "answer": "音声そのものが変化しているから",
+      "wrong": [
+        "話すスピードが速すぎるから",
+        "語彙力が足りないから",
+        "発音記号を知らないから"
+      ],
+      "why": "速さや語彙も影響するが、主因は音声変化。ルールを知れば原因を言語化できる。"
+    },
+    {
+      "id": "cn-02",
+      "lecture": 0,
+      "q": "日本語字幕を見ながら英語を聞くのが危険な理由は？",
+      "answer": "脳が字幕に合わせて曖昧な音を補い、「聞き取れた」と錯覚するから",
+      "wrong": [
+        "字幕を読むのに集中して音が耳に入らないから",
+        "日本語字幕は必ず誤訳だから",
+        "英語字幕より情報量が少ないから"
+      ],
+      "why": "もう1つの理由は、意訳の字幕で本来と違う英語表現を覚えるリスク。"
+    },
+    {
+      "id": "cn-03",
+      "lecture": 0,
+      "q": "推奨される4ステップ学習法の最初のステップは？",
+      "answer": "字幕なしで聞く",
+      "wrong": [
+        "英語字幕で確認する",
+        "ルールで原因を分析する",
+        "オーバーラッピングで発音する"
+      ],
+      "why": "順番は 字幕なし → 英語字幕 → ルールで分析 → オーバーラッピング。"
+    },
+    {
+      "id": "cn-04",
+      "lecture": 0,
+      "q": "get rid の t が聞こえなくなるのはなぜ？",
+      "answer": "t（子音）の後に r（子音）が続き、前の子音が落ちやすいから",
+      "wrong": [
+        "t が母音に挟まれてフラップTになるから",
+        "get が機能語で弱く読まれるから",
+        "t と r が同化して別の音になるから"
+      ],
+      "why": "子音＋子音は前の子音が落ちやすい（第4講）。"
+    },
+    {
+      "id": "cn-05",
+      "lecture": 2,
+      "q": "I'll や You'll の L が「ル」でなく「ア／ウ／オ」に近く聞こえるのはなぜ？",
+      "answer": "語末の L はダークLで、舌の付け根が奥に引かれるから",
+      "wrong": [
+        "L が文末では必ず無声化するから",
+        "will の w が L に吸収されるから",
+        "ネイティブが L を省略しているから"
+      ],
+      "why": "ダークLは語末、または子音の前の L。"
+    },
+    {
+      "id": "cn-06",
+      "lecture": 2,
+      "q": "ライトL（明るいL）が現れる位置は？",
+      "answer": "直後に母音が続く L",
+      "wrong": [
+        "語末の L",
+        "子音の前の L",
+        "文頭の L だけ"
+      ],
+      "why": "light のように、舌先を歯ぐきにしっかりつけて明るく発音する。"
+    },
+    {
+      "id": "cn-07",
+      "lecture": 3,
+      "q": "日本人が連結を聞き取りにくい理由として、最も適切なのは？",
+      "answer": "日本語は母音で終わる言語で、語の切れ目を母音の終わりと捉える癖があるから",
+      "wrong": [
+        "英語の子音を日本語は区別できないから",
+        "英語は語と語の間にポーズを入れないから",
+        "日本語には子音がないから"
+      ],
+      "why": "nice if を「ナイス｜イフ」と聞いてしまい、実際の「ナイ｜スィフ」とズレる。"
+    },
+    {
+      "id": "cn-08",
+      "lecture": 3,
+      "q": "次の語のうち、音が子音で終わるのは？",
+      "answer": "nice（s）",
+      "wrong": [
+        "see（母音）",
+        "go（母音）",
+        "free（母音）"
+      ],
+      "why": "つづりが e で終わる語も、音は子音で終わることが多い（came は m、nice は s）。"
+    },
+    {
+      "id": "cn-09",
+      "lecture": 3,
+      "q": "like の「音の上での」語末は？",
+      "answer": "k（子音）",
+      "wrong": [
+        "e（母音）",
+        "i（母音）",
+        "l（子音）"
+      ],
+      "why": "つづりの e は発音されない。音は k で終わる。"
+    },
+    {
+      "id": "cn-10",
+      "lecture": 4,
+      "q": "living の語末の g を「次の子音で消えた」と言えないのはなぜ？",
+      "answer": "-ng は鼻音1つで、もともと g は発音しないから",
+      "wrong": [
+        "g は必ず最後に強く発音されるから",
+        "living は機能語だから",
+        "g は母音の前でしか消えないから"
+      ],
+      "why": "living の発音記号は /ˈlɪvɪŋ/。"
+    },
+    {
+      "id": "cn-11",
+      "lecture": 5,
+      "q": "cup の p は聞こえにくいのに、type of の p は聞こえやすいのはなぜ？",
+      "answer": "type of は後ろに母音が続いて連結し、cup の p は文末で無開放になるから",
+      "wrong": [
+        "of が機能語で強く読まれるから",
+        "cup は名詞だから",
+        "p は母音の前では必ず消えるから"
+      ],
+      "why": "同じ p でも位置で違う。"
+    },
+    {
+      "id": "cn-12",
+      "lecture": 5,
+      "q": "文末の t を自分で発音するときのコツは？",
+      "answer": "口の形（舌先を歯ぐきにつける）を作って止め、開けっぱなしにしない",
+      "wrong": [
+        "息を強く吐いて「ト」と言う",
+        "t を完全に省略する",
+        "舌を歯の間に挟む"
+      ],
+      "why": "p/b は唇を閉じる、t/d は舌先を歯ぐきに、k/g は舌の奥を上あごへ。"
+    },
+    {
+      "id": "cn-13",
+      "lecture": 6,
+      "q": "d＋y の「ジュ（j）」と z＋y の「ジュ（zh）」を見分ける方法は？",
+      "answer": "音を伸ばせるか（z＋y は伸ばせる）",
+      "wrong": [
+        "音の高さ（d＋y のほうが高い）",
+        "語頭か語末か",
+        "母音が続くかどうか"
+      ],
+      "why": "d＋y は舌先が上あごにつくので伸ばせない。z＋y はすき間があるので伸ばせる。"
+    },
+    {
+      "id": "cn-14",
+      "lecture": 6,
+      "q": "as long as you're の as の s は、発音記号上は何の音？",
+      "answer": "z",
+      "wrong": [
+        "s",
+        "sh",
+        "j"
+      ],
+      "why": "z＋y → zh（濁ったジュ）。"
+    },
+    {
+      "id": "cn-15",
+      "lecture": 7,
+      "q": "フラップTが起きやすい2つの条件は？",
+      "answer": "母音(＋r)＋t＋母音、母音＋t＋l",
+      "wrong": [
+        "語頭の t、文末の t",
+        "子音＋t＋子音、nt＋母音",
+        "t＋y、d＋y"
+      ],
+      "why": "water, party / little, titles など。"
+    },
+    {
+      "id": "cn-16",
+      "lecture": 7,
+      "q": "little の t は、発音上いくつ？",
+      "answer": "1つ",
+      "wrong": [
+        "2つ",
+        "0（どちらも発音しない）",
+        "3つ"
+      ],
+      "why": "tt は発音上 t が1つ。母音と L に挟まれてリロゥのように変化する。"
+    },
+    {
+      "id": "cn-17",
+      "lecture": 8,
+      "q": "recently の t が消えるのはなぜ？",
+      "answer": "n と l の子音に挟まれた、3子音の真ん中だから",
+      "wrong": [
+        "t が文末にあるから",
+        "t の後に母音が続くから",
+        "ly が機能語だから"
+      ],
+      "why": "子音が3つ連続すると、真ん中が落ちやすい。"
+    },
+    {
+      "id": "cn-18",
+      "lecture": 8,
+      "q": "asked で聞こえなくなる音は？",
+      "answer": "k",
+      "wrong": [
+        "s",
+        "t",
+        "ed 全体"
+      ],
+      "why": "s・k・t と3つ並び、真ん中の k が落ちる（アスト）。"
+    },
+    {
+      "id": "cn-19",
+      "lecture": 9,
+      "q": "nt の直後に母音が来たとき、t はどうなる？",
+      "answer": "n に吸収されて聞こえなくなる",
+      "wrong": [
+        "はっきり強く発音される",
+        "ラ行・ダ行風になる",
+        "ch の音に変わる"
+      ],
+      "why": "Internet, plenty, want it など（アメリカ英語で特に多い）。"
+    },
+    {
+      "id": "cn-20",
+      "lecture": 9,
+      "q": "twenty の y が「母音として働く」とはどういうこと？",
+      "answer": "語末の y は母音（イ）の働きをするので、nt＋母音の並びになるということ",
+      "wrong": [
+        "y が発音されないということ",
+        "y が t を強めるということ",
+        "y が子音 n に変わるということ"
+      ],
+      "why": "twen＋ty＝ n＋t＋母音。だから t が聞こえなくなる。"
+    },
+    {
+      "id": "cn-21",
+      "lecture": 10,
+      "q": "h が消えやすいのは、どんな語？",
+      "answer": "he, him, her, here, have などの機能語",
+      "wrong": [
+        "house, happy などの内容語",
+        "文頭のすべての語",
+        "語末に h がある語"
+      ],
+      "why": "内容語（house, happy）の h は普通は消えない。"
+    }
+  ]
+}
