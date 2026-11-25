@@ -1,13 +1,9 @@
 <script lang="ts">
   import type { Example } from '../lib/types.ts';
-  // 例文。見出し語を太字にする
+  import { splitHighlight } from '../lib/highlight.ts';
+  // 例文。見出し語（活用形を含む）を強調する
   let { ex, word = '' }: { ex: Example; word?: string } = $props();
-  const segs = $derived.by(() => {
-    if (!word) return [{ t: ex.en, hit: false }];
-    const stem = word.replace(/e$/, '');
-    const re = new RegExp(`(\\b${stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[a-z]*)`, 'gi');
-    return ex.en.split(re).map((t, i) => ({ t, hit: i % 2 === 1 }));
-  });
+  const segs = $derived(splitHighlight(ex.en, word));
 </script>
 
 <div class="ex">
