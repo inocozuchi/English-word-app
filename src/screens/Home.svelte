@@ -1,5 +1,9 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Icon from '../components/Icon.svelte';
+  import Num from '../components/Num.svelte';
+  import { booted, isBooted } from '../core/boot.ts';
+  import { stagger } from '../core/transitions.ts';
   import { router } from '../core/router.svelte.ts';
   import { store, activeDeck, deckSettings, loadData } from '../core/store.svelte.ts';
   import { streak, dayKey } from '../core/day.ts';
@@ -30,6 +34,12 @@
     deck.hero.split('\n').map((line) => line.split(/(\*[^*]+\*)/).filter(Boolean).map((t) => ({ t: t.replace(/\*/g, ''), acc: t.startsWith('*') }))),
   );
 
+  // 起動時だけ、要素を上から順に静かに出す（配置が確定してから。core/boot.ts）
+  let root: HTMLElement;
+  onMount(() => {
+    if (!isBooted()) booted.then(() => stagger([...root.querySelectorAll('[data-intro]')], { step: 55 }));
+  });
+
   async function start(mode: 'normal' | 'review') {
     haptic('light');
     await loadData();
@@ -37,13 +47,13 @@
   }
 </script>
 
-<div class="home">
-  <header>
+<div class="home" bind:this={root}>
+  <header data-intro>
     <div class="logo en" aria-label="語源で英単語"><span>ETYMO</span><span>WORDS</span></div>
     <button class="icon press" onclick={() => router.push({ name: 'settings' })} aria-label="設定"><Icon name="gear" size={24} /></button>
   </header>
 
-  <div class="hero">
+  <div class="hero" data-intro>
     <p class="deck"><span class="chip">{deck.title}</span>{#if deck.stat()}<span class="stat">{deck.stat()}</span>{/if}</p>
     <p class="tagline">{deck.tagline}</p>
     <h1 class="display">
@@ -51,38 +61,38 @@
     </h1>
   </div>
 
-  <button class="start press" onclick={() => start('normal')} aria-label="スタート">
+  <button class="start press" data-intro onclick={() => start('normal')} aria-label="スタート">
     <span class="start-en display">Start</span>
     <span class="start-ja">スタート</span>
     <span class="start-sum">{summary}</span>
     <span class="arrow"><Icon name="chevron" size={30} stroke={3} /></span>
   </button>
 
-  <button class="review press" class:empty={!inReview} onclick={() => (inReview ? start('review') : router.push({ name: 'review' }))}>
+  <button class="review press" data-intro class:empty={!inReview} onclick={() => (inReview ? start('review') : router.push({ name: 'review' }))}>
     <span class="r-icon"><Icon name="review" size={22} /></span>
     <span class="r-txt">
       <span class="r-title">復習する</span>
       <span class="r-sub">{inReview ? 'まちがえた問題だけを出題' : 'まちがえた問題がここに入ります'}</span>
     </span>
-    <span class="r-num en">{inReview}</span>
+    <span class="r-num en"><Num value={inReview} /></span>
   </button>
 
-  <div class="stats">
+  <div class="stats" data-intro>
     <div class="stat-c">
-      <span class="num en">{days}</span>
+      <span class="num en"><Num value={days} /></span>
       <span class="cap">連続日数</span>
     </div>
     <div class="stat-c">
-      <span class="num en">{todayCount}</span>
+      <span class="num en"><Num value={todayCount} /></span>
       <span class="cap">今日の回答</span>
     </div>
     <div class="stat-c">
-      <span class="num en">{due}</span>
+      <span class="num en"><Num value={due} /></span>
       <span class="cap">期限の来た語</span>
     </div>
   </div>
 
-  <nav>
+  <nav data-intro>
     {#if deck.browse}
       <button class="press" onclick={() => router.push(deck.browse!.route)}><Icon name="book" size={20} /><span>{deck.browse.label}</span></button>
     {/if}
