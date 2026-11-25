@@ -1,7 +1,7 @@
 {
-  "name": "語源で英単語",
-  "short_name": "語源単語",
-  "description": "語源で覚える英単語クイズ",
+  "name": "EIGO LOOP — 英語ループ",
+  "short_name": "EIGO LOOP",
+  "description": "通学中に1タップで回せる英語クイズ（語源英単語・音声変化）",
   "lang": "ja",
   "start_url": "./",
   "scope": "./",

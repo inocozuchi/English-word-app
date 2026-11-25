@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- 語源（下の大きな点）から単語が枝分かれして広がるイメージ -->
+  <!-- EIGO LOOP: 自動で次々と回って覚える「ループ」。太い輪と矢印、中に E -->
   <rect width="1024" height="1024" fill="#3d5afe"/>
-  <g fill="none" stroke="#fff" stroke-width="44" stroke-linecap="round">
-    <path d="M512 720 V330"/>
-    <path d="M512 600 C512 470 330 470 330 360"/>
-    <path d="M512 600 C512 470 694 470 694 360"/>
-  </g>
+  <!-- 輪（右上を少し空けて矢印に） -->
+  <path d="M 742 300 A 300 300 0 1 0 812 512" fill="none" stroke="#fff" stroke-width="78" stroke-linecap="round"/>
+  <!-- 矢印の先 -->
+  <path d="M 700 214 L 852 268 L 760 398 Z" fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round"/>
+  <!-- E（太い3本の横棒と縦棒） -->
   <g fill="#fff">
-    <circle cx="512" cy="740" r="78"/>
-    <circle cx="512" cy="300" r="52"/>
-    <circle cx="330" cy="340" r="52"/>
-    <circle cx="694" cy="340" r="52"/>
+    <rect x="418" y="372" width="70" height="280" rx="10"/>
+    <rect x="418" y="372" width="196" height="64" rx="10"/>
+    <rect x="418" y="480" width="170" height="64" rx="10"/>
+    <rect x="418" y="588" width="196" height="64" rx="10"/>
   </g>
 </svg>

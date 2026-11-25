@@ -49,7 +49,7 @@
 
 <div class="home" bind:this={root}>
   <header data-intro>
-    <div class="logo en" aria-label="語源で英単語"><span>ETYMO</span><span>WORDS</span></div>
+    <div class="logo en" aria-label="EIGO LOOP"><span>EIGO</span><span>LOOP</span></div>
     <button class="icon press" onclick={() => router.push({ name: 'settings' })} aria-label="設定"><Icon name="gear" size={24} /></button>
   </header>
 
