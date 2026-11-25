@@ -12,8 +12,19 @@ class Store {
   /** 中身は大きいので深いリアクティブにはせず、更新時に参照を差し替える */
   progress = $state.raw<Progress>(loadProgress());
   index = $state.raw<Index | null>(null);
+  /** 現在の学習日（復帰時・1分ごとに更新） */
+  today = $state(dayNumber(Date.now()));
 }
 export const store = new Store();
+
+if (typeof document !== 'undefined') {
+  const tick = () => {
+    const d = dayNumber(Date.now());
+    if (d !== store.today) store.today = d;
+  };
+  document.addEventListener('visibilitychange', tick);
+  setInterval(tick, 60_000);
+}
 
 let loading: Promise<Index> | null = null;
 /** 単語データを読み込む（別チャンク。起動直後に並行して読み込み始める） */
@@ -50,6 +61,7 @@ export function recordAnswer(key: string, base: string, ok: boolean) {
     lastBase: base,
   };
   store.progress = next;
+  store.today = today;
   saveProgress(next);
 }
 

@@ -36,6 +36,7 @@
 </script>
 
 <Page title="単語帳">
+  <p class="eyebrow-en">Wordbook</p>
   <h1 class="title">単語帳</h1>
   <label class="search">
     <Icon name="search" size={18} />

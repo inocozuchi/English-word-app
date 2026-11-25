@@ -16,7 +16,10 @@
   --fill: #efeff2;
   --fill-strong: #e2e2e7;
   --line: #e7e7eb;
+  --line-strong: #d6d6dc;
   --text: #111114;
+  /* ANYCOLOR 風の太い黒枠に使う色 */
+  --ink: #111114;
   --text2: #6b6b73;
   --text3: #a3a3ab;
   --accent: #3d5afe;
@@ -39,6 +42,7 @@
   --pad-x: max(calc(var(--safe-left) + 8px), 22px);
   --pad-x-r: max(calc(var(--safe-right) + 8px), 22px);
 
+  --frame: 2.5px;
   --radius: 16px;
   --radius-lg: 22px;
 }
@@ -50,7 +54,9 @@
     --fill: #1c1c20;
     --fill-strong: #2a2a30;
     --line: #26262b;
+    --line-strong: #3a3a41;
     --text: #f3f3f5;
+    --ink: #f3f3f5;
     --text2: #9d9da6;
     --text3: #5e5e66;
     --accent: #7088ff;
@@ -66,7 +72,9 @@
   --fill: #1c1c20;
   --fill-strong: #2a2a30;
   --line: #26262b;
+  --line-strong: #3a3a41;
   --text: #f3f3f5;
+  --ink: #f3f3f5;
   --text2: #9d9da6;
   --text3: #5e5e66;
   --accent: #7088ff;
@@ -132,6 +140,23 @@ textarea {
 }
 h1, h2, h3, p {
   margin: 0;
+}
+/* 極太の欧文見出し（ANYCOLOR のサイトを参考に） */
+.display {
+  font-family: var(--font-en);
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+/* 画面タイトルの上に置く小さな欧文ラベル */
+.eyebrow-en {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
 }
 .en {
   font-family: var(--font-en);

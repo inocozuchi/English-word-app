@@ -1,13 +1,12 @@
 <script lang="ts">
   import Icon from '../components/Icon.svelte';
   import { router } from '../lib/router.svelte.ts';
-  import { store, loadData, today } from '../lib/store.svelte.ts';
-  import { streak } from '../lib/day.ts';
-  import { dayKey } from '../lib/day.ts';
+  import { store, loadData } from '../lib/store.svelte.ts';
+  import { streak, dayKey } from '../lib/day.ts';
   import { dueCount, settingsSummary } from '../lib/summary.ts';
   import { haptic } from '../lib/haptics.ts';
 
-  const t = $derived(today());
+  const t = $derived(store.today);
   const days = $derived(streak(store.progress.days, t));
   const todayCount = $derived(store.progress.days[dayKey(t)]?.a ?? 0);
   const due = $derived(store.index ? dueCount(store.index, store.settings, store.progress, t) : 0);
@@ -21,36 +20,41 @@
 </script>
 
 <div class="home">
-  <div class="top">
-    <p class="brand">語源で英単語</p>
+  <header>
+    <div class="logo en" aria-label="語源で英単語"><span>ETYMO</span><span>WORDS</span></div>
+    <button class="icon press" onclick={() => router.push({ name: 'settings' })} aria-label="設定"><Icon name="gear" size={24} /></button>
+  </header>
+
+  <div class="hero">
+    <p class="tagline">語源で、英単語を。</p>
+    <h1 class="display">Learn words<br />by <span class="acc">roots</span></h1>
   </div>
 
-  <div class="center">
-    <button class="start press" onclick={start} aria-label="スタート">
-      <span class="label">スタート</span>
-    </button>
-    <button class="summary" onclick={() => router.push({ name: 'settings' })}>{summary}</button>
-  </div>
+  <button class="start press" onclick={start} aria-label="スタート">
+    <span class="start-en display">Start</span>
+    <span class="start-ja">スタート</span>
+    <span class="start-sum">{summary}</span>
+    <span class="arrow"><Icon name="chevron" size={30} stroke={3} /></span>
+  </button>
 
   <div class="stats">
     <div class="stat">
-      <span class="num">{days}<small>日</small></span>
-      <span class="cap">連続</span>
+      <span class="num en">{days}</span>
+      <span class="cap">連続日数</span>
     </div>
     <div class="stat">
-      <span class="num">{todayCount}<small>問</small></span>
-      <span class="cap">今日</span>
+      <span class="num en">{todayCount}</span>
+      <span class="cap">今日の回答</span>
     </div>
     <div class="stat">
-      <span class="num">{due}<small>語</small></span>
+      <span class="num en">{due}</span>
       <span class="cap">復習待ち</span>
     </div>
   </div>
 
   <nav>
-    <button class="press" onclick={() => router.push({ name: 'book' })}><Icon name="book" /><span>単語帳</span></button>
-    <button class="press" onclick={() => router.push({ name: 'stats' })}><Icon name="chart" /><span>記録</span></button>
-    <button class="press" onclick={() => router.push({ name: 'settings' })}><Icon name="gear" /><span>設定</span></button>
+    <button class="press" onclick={() => router.push({ name: 'book' })}><Icon name="book" size={22} /><span>単語帳</span></button>
+    <button class="press" onclick={() => router.push({ name: 'stats' })}><Icon name="chart" size={22} /><span>学習記録</span></button>
   </nav>
 </div>
 
@@ -61,94 +65,138 @@
     display: flex;
     flex-direction: column;
     padding: var(--pad-top) var(--pad-x-r) var(--pad-bottom) var(--pad-x);
+    gap: 14px;
   }
-  .top {
-    height: 44px;
+  header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
-  .brand {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text2);
-    letter-spacing: 0.04em;
+  /* ロゴ: 太い枠に2行の欧文 */
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 5px 9px 4px;
+    border: var(--frame) solid var(--ink);
+    font-weight: 850;
+    font-size: 14px;
+    line-height: 1.02;
+    letter-spacing: 0.02em;
   }
-  .center {
+  .icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    color: var(--text);
+  }
+  .hero {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 22px;
+    gap: 10px;
+    min-height: 0;
   }
+  .tagline {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 11.4vw, 54px);
+  }
+  .acc {
+    color: var(--accent);
+  }
+
+  /* スタート: 画面の主役。太い枠のアクセント色ブロック */
   .start {
-    width: min(62vw, 240px);
-    aspect-ratio: 1;
-    border-radius: 50%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    align-items: end;
+    text-align: left;
+    min-height: 196px;
+    padding: 22px 22px 20px 24px;
+    border: var(--frame) solid var(--ink);
+    border-radius: 28px;
     background: var(--accent);
     color: var(--on-accent);
+  }
+  .start-en {
+    grid-column: 1;
+    font-size: 64px;
+  }
+  .start-ja {
+    grid-column: 1;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-top: 6px;
+  }
+  .start-sum {
+    grid-column: 1;
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+  .arrow {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
     display: grid;
     place-items: center;
-    box-shadow: 0 12px 32px -8px color-mix(in srgb, var(--accent) 55%, transparent);
+    background: var(--on-accent);
+    color: var(--accent);
   }
-  .label {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-  .summary {
-    font-size: 14px;
-    color: var(--text2);
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: var(--fill);
-  }
+
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 28px;
+    border: var(--frame) solid var(--ink);
+    border-radius: 20px;
   }
   .stat {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 12px 14px 11px;
     gap: 2px;
   }
-  .num {
-    font-size: 28px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    font-family: var(--font-en);
-    line-height: 1.1;
+  .stat + .stat {
+    border-left: var(--frame) solid var(--ink);
   }
-  .num small {
-    font-size: 13px;
-    font-weight: 600;
-    margin-left: 2px;
-    color: var(--text2);
-    font-family: var(--font-ja);
+  .num {
+    font-size: 30px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
   }
   .cap {
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
     color: var(--text2);
   }
   nav {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
   nav button {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 12px 0 10px;
-    border-radius: var(--radius);
-    background: var(--surface);
-    color: var(--text);
-    font-size: 13px;
-  }
-  nav button :global(svg) {
-    color: var(--text2);
+    justify-content: center;
+    gap: 8px;
+    height: 56px;
+    border-radius: 18px;
+    border: var(--frame) solid var(--ink);
+    font-size: 15px;
+    font-weight: 700;
   }
 </style>

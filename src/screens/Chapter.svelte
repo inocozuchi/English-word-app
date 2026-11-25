@@ -13,7 +13,7 @@
 </script>
 
 <Page title={ch.title}>
-  <p class="eyebrow">第{ch.no}章</p>
+  <p class="eyebrow-en">Chapter {String(ch.no).padStart(2, '0')}</p>
   <h1 class="title">{ch.title}</h1>
   <ul class="group">
     {#each roots as r}
@@ -33,11 +33,6 @@
 </Page>
 
 <style>
-  .eyebrow {
-    font-size: 13px;
-    color: var(--text3);
-    margin-top: 4px;
-  }
   .title {
     font-size: 28px;
     font-weight: 750;

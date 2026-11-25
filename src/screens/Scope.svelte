@@ -20,6 +20,7 @@
 </script>
 
 <Page title="出題範囲">
+  <p class="eyebrow-en">Scope</p>
   <h1 class="title">出題範囲</h1>
   <p class="lead">{total} / {ix.ds.roots.length} 語源を出題します</p>
   <div class="bulk">

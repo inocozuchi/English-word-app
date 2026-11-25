@@ -38,13 +38,14 @@
 <div class="result">
   <div class="scroll body">
     <div class="hero" in:rise>
+      <p class="eyebrow-en">Result</p>
       <p class="msg">{message}</p>
       <p class="score en">{correct}<span class="slash">/</span><span class="total">{total}</span></p>
       <p class="rate">正答率 {rate}% {#if days > 0}<span class="dot">·</span><Icon name="flame" size={15} /> {days}日連続{/if}</p>
     </div>
 
     {#if missed.length}
-      <h2 in:rise={{ delay: 60 }}>まちがえた単語 <span class="n">{missed.length}</span></h2>
+      <h2 in:rise={{ delay: 60 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
       <ul class="list" in:rise={{ delay: 100 }}>
         {#each missed as l}
           <li>
@@ -77,6 +78,10 @@
   }
   .body {
     flex: 1;
+    /* 下にまだ続くことがわかるよう、下端をフェードさせる */
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+    padding-bottom: 32px !important;
     padding: calc(var(--pad-top) + 24px) var(--pad-x-r) 16px var(--pad-x);
   }
   .hero {
@@ -85,11 +90,12 @@
   }
   .msg {
     font-size: 15px;
-    color: var(--text2);
+    font-weight: 600;
+    margin-top: 6px;
   }
   .score {
-    font-size: 84px;
-    font-weight: 700;
+    font-size: 88px;
+    font-weight: 850;
     letter-spacing: -0.04em;
     line-height: 1.05;
     margin: 6px 0;
@@ -175,8 +181,9 @@
   }
   .actions button {
     flex: 1;
-    height: 56px;
-    border-radius: var(--radius);
+    height: 58px;
+    border-radius: 18px;
+    border: var(--frame) solid var(--ink);
     font-weight: 650;
     font-size: 17px;
   }
@@ -185,6 +192,6 @@
     color: var(--on-accent);
   }
   .secondary {
-    background: var(--fill);
+    background: var(--bg);
   }
 </style>

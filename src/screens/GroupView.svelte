@@ -9,7 +9,8 @@
 </script>
 
 <Page title={g.title}>
-  <p class="eyebrow">その他（語源ではないグループ）</p>
+  <p class="eyebrow-en">Others</p>
+  <p class="eyebrow">語源ではないグループ</p>
   <h1 class="title">{g.title}</h1>
   <ul class="list">
     {#each g.words as w}

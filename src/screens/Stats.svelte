@@ -89,6 +89,7 @@
 </script>
 
 <Page title="学習記録">
+  <p class="eyebrow-en">Records</p>
   <h1 class="title">学習記録</h1>
 
   <div class="hero">
