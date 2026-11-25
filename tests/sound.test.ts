@@ -210,3 +210,30 @@ describe('出題の選び方（比率・⑧の解禁・苦手なルール）', (
     for (const c of p) expect(ix.item.get(c.key.slice(3))!.rules).toContain('hdrop');
   });
 });
+
+import { segments, chains } from '../src/modes/sound/marks.ts';
+describe('マーキングの組み立て', () => {
+  it('文字範囲の境目で単語を区切り、線を割り当てる', () => {
+    const s = segments('get', [{ type: 'elide', from: 2, to: 3 }]);
+    expect(s).toEqual([
+      { text: 'ge', lines: [], target: false },
+      { text: 't', lines: ['elide'], target: false },
+    ]);
+  });
+  it('重なったマーキングと黄色マーカーも区切れる', () => {
+    const s = segments('better', [{ type: 'flap', from: 2, to: 4 }], { from: 2, to: 4 });
+    expect(s.map((x) => x.text).join('')).toBe('better');
+    expect(s.find((x) => x.text === 'tt')).toMatchObject({ lines: ['flap'], target: true });
+  });
+  it('連結でつながる単語を1つのまとまりにする（Should I / get / rid of it?）', () => {
+    const it0 = ix.item.get('sc-001')!;
+    expect(chains(it0.words.length, it0.marks)).toEqual([[0, 1], [2], [3, 4, 5]]);
+  });
+  it('全データでマーキングを区切っても文字が欠けない', () => {
+    for (const it of ix.d.items)
+      it.words.forEach((w, i) => {
+        const lines = it.marks.filter((m) => m.type !== 'link' && m.word === i).map((m) => ({ type: m.type as 'elide', from: m.from!, to: m.to! }));
+        expect(segments(w, lines).map((x) => x.text).join(''), it.id).toBe(w);
+      });
+  });
+});
