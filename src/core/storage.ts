@@ -1,43 +1,44 @@
 // 設定と学習履歴を localStorage に保存する。読み書きの失敗（プライベートモード等）でも落ちないようにする。
+//
+// 保存先:
+//   eq.settings.v2            共通設定 + モードごとの設定（modes[モードID]）
+//   eq.progress.<モードID>.v1  モードごとの学習記録（間隔反復・日ごとの回答数・復習リスト・タグ別正答率）
+// 旧形式（語源英単語だけだった頃の ety.settings.v1 / ety.progress.v1）は、最初の読み込み時に
+// 語源英単語モードのデータとして移行する。旧データは消さずに残す（戻し用）。
 import type { ItemState } from './srs.ts';
 import type { ReviewList } from './review.ts';
+import type { TagStats } from './mode.ts';
 import { REVIEW_GOAL } from './review.ts';
 
 export type Theme = 'system' | 'light' | 'dark';
 
 export interface Settings {
-  /** 解説を見せてから自動で次へ進むまでの秒数 */
-  advanceSec: number;
-  /** 回答の制限時間（秒） */
-  answerSec: number;
   count: number;
   theme: Theme;
   haptics: boolean;
   /** 復習リストから外れるまでの連続正解数 */
   reviewGoal: number;
-  /** 使っているデッキ */
-  activeDeck: string;
-  /** デッキごとの設定（中身は各デッキの normalizeSettings が解釈する） */
-  decks: Record<string, unknown>;
+  /** 使っているモード */
+  activeMode: string;
+  /** モードごとの設定（秒数 advanceSec / answerSec と、各モードの出題範囲など） */
+  modes: Record<string, any>;
 }
 
-/** 最初のデッキ。旧形式（デッキ分け前）のデータはこのデッキのものとして移行する */
-export const LEGACY_DECK = 'etymology';
+/** 最初のモード。旧形式のデータはこのモードのものとして移行する */
+export const LEGACY_MODE = 'etymology';
 
 export const DEFAULT_SETTINGS: Settings = {
-  advanceSec: 5,
-  answerSec: 8,
   count: 10,
   theme: 'system',
   haptics: true,
   reviewGoal: REVIEW_GOAL.default,
-  activeDeck: LEGACY_DECK,
-  decks: {},
+  activeMode: LEGACY_MODE,
+  modes: {},
 };
 
 export const LIMITS = {
-  advanceSec: [3, 10],
-  answerSec: [5, 15],
+  advanceSec: [3, 15],
+  answerSec: [5, 20],
   count: [5, 30],
   reviewGoal: [REVIEW_GOAL.min, REVIEW_GOAL.max],
 } as const;
@@ -53,10 +54,14 @@ export interface Progress {
   /** 直前のセッションの最後の問題（base） */
   lastBase: string | null;
   review: ReviewList;
+  /** タグ（音声変化のルールなど）ごとの正答数 */
+  tags: TagStats;
 }
 
-const K_SETTINGS = 'ety.settings.v1';
-const K_PROGRESS = 'ety.progress.v1';
+const K_SETTINGS = 'eq.settings.v2';
+const progressKey = (modeId: string) => `eq.progress.${modeId}.v1`;
+const K_LEGACY_SETTINGS = 'ety.settings.v1';
+const K_LEGACY_PROGRESS = 'ety.progress.v1';
 
 function read<T>(key: string): T | null {
   try {
@@ -75,58 +80,102 @@ function write(key: string, value: unknown) {
   }
 }
 
-const clamp = (n: unknown, [lo, hi]: readonly [number, number], d: number) =>
+export const clamp = (n: unknown, [lo, hi]: readonly [number, number], d: number) =>
   typeof n === 'number' && isFinite(n) ? Math.min(hi, Math.max(lo, Math.round(n))) : d;
 
+const isObj = (x: unknown): x is Record<string, any> => !!x && typeof x === 'object' && !Array.isArray(x);
+
+/** 設定を正規化する。旧形式（v1: 秒数が直下、語源の範囲が formats / excludedRoots / decks）も受け付ける */
 export function normalizeSettings(raw: any): Settings {
   const d = DEFAULT_SETTINGS;
-  const s = raw && typeof raw === 'object' ? raw : {};
-  const decks: Record<string, unknown> = s.decks && typeof s.decks === 'object' ? { ...s.decks } : {};
-  // 旧形式: formats / excludedRoots が直下にあった
-  if (!decks[LEGACY_DECK] && (s.formats || s.excludedRoots)) {
-    decks[LEGACY_DECK] = { formats: s.formats, excludedRoots: s.excludedRoots };
+  const s = isObj(raw) ? raw : {};
+  let modes: Record<string, any>;
+  if (isObj(s.modes)) {
+    modes = { ...s.modes };
+  } else {
+    // 旧形式 → 語源英単語モードの設定へ
+    const ety: Record<string, any> = isObj(s.decks?.[LEGACY_MODE])
+      ? { ...s.decks[LEGACY_MODE] }
+      : { formats: s.formats, excludedRoots: s.excludedRoots };
+    if (s.advanceSec !== undefined) ety.advanceSec = s.advanceSec;
+    if (s.answerSec !== undefined) ety.answerSec = s.answerSec;
+    for (const k of Object.keys(ety)) if (ety[k] === undefined) delete ety[k];
+    modes = Object.keys(ety).length ? { [LEGACY_MODE]: ety } : {};
   }
   return {
-    advanceSec: clamp(s.advanceSec, LIMITS.advanceSec, d.advanceSec),
-    answerSec: clamp(s.answerSec, LIMITS.answerSec, d.answerSec),
     count: clamp(s.count, LIMITS.count, d.count),
     theme: s.theme === 'light' || s.theme === 'dark' ? s.theme : 'system',
     haptics: typeof s.haptics === 'boolean' ? s.haptics : d.haptics,
     reviewGoal: clamp(s.reviewGoal, LIMITS.reviewGoal, d.reviewGoal),
-    activeDeck: typeof s.activeDeck === 'string' ? s.activeDeck : d.activeDeck,
-    decks,
+    activeMode: typeof s.activeMode === 'string' ? s.activeMode : typeof s.activeDeck === 'string' ? s.activeDeck : d.activeMode,
+    modes,
   };
 }
 
-export const loadSettings = () => normalizeSettings(read(K_SETTINGS));
+export function loadSettings(): Settings {
+  const v2 = read(K_SETTINGS);
+  if (v2) return normalizeSettings(v2);
+  const s = normalizeSettings(read(K_LEGACY_SETTINGS));
+  saveSettings(s);
+  return s;
+}
 export const saveSettings = (s: Settings) => write(K_SETTINGS, s);
 
+export function emptyProgress(): Progress {
+  return { items: {}, days: {}, lastBase: null, review: {}, tags: {} };
+}
+
 export function normalizeProgress(p: any): Progress {
-  const items: Record<string, ItemState> = p?.items && typeof p.items === 'object' ? p.items : {};
-  let review: ReviewList = p?.review && typeof p.review === 'object' ? p.review : (null as any);
+  const items: Record<string, ItemState> = isObj(p?.items) ? p.items : {};
+  let review: ReviewList | null = isObj(p?.review) ? p.review : null;
   if (!review) {
     // 旧形式: 復習リストが無かった → 前回まちがえた問題で作る
     review = {};
     for (const [key, s] of Object.entries(items))
-      if (s && s.lastOk === false)
-        review[key] = { deck: LEGACY_DECK, key, added: s.last, misses: Math.max(1, s.wrong), streak: 0, last: s.last };
+      if (s && s.lastOk === false) review[key] = { key, added: s.last, misses: Math.max(1, s.wrong), streak: 0, last: s.last };
   }
-  return { items, days: p?.days ?? {}, lastBase: p?.lastBase ?? null, review };
+  return {
+    items,
+    days: isObj(p?.days) ? p.days : {},
+    lastBase: typeof p?.lastBase === 'string' ? p.lastBase : null,
+    review,
+    tags: isObj(p?.tags) ? p.tags : {},
+  };
 }
 
-export const loadProgress = () => normalizeProgress(read(K_PROGRESS));
-export const saveProgress = (p: Progress) => write(K_PROGRESS, p);
+export function loadProgress(modeId: string): Progress {
+  const cur = read(progressKey(modeId));
+  if (cur) return normalizeProgress(cur);
+  if (modeId === LEGACY_MODE) {
+    const legacy = read(K_LEGACY_PROGRESS);
+    if (legacy) {
+      const p = normalizeProgress(legacy);
+      saveProgress(modeId, p);
+      return p;
+    }
+  }
+  return emptyProgress();
+}
+export const saveProgress = (modeId: string, p: Progress) => write(progressKey(modeId), p);
 
-/** バックアップ用（設定＋履歴を1つのJSONに） */
-export function exportData(s: Settings, p: Progress): string {
-  return JSON.stringify({ app: 'etymology-quiz', version: 2, exportedAt: new Date().toISOString(), settings: s, progress: p });
+/** バックアップ用（設定＋全モードの履歴を1つのJSONに） */
+export function exportData(s: Settings, progress: Record<string, Progress>): string {
+  return JSON.stringify({ app: 'eigo-loop', version: 3, exportedAt: new Date().toISOString(), settings: s, progress });
 }
 
-export function parseImport(text: string): { settings: Settings; progress: Progress } | null {
+/** バックアップを読む。旧形式（語源英単語だけのころの書き出し）も語源英単語モードとして読む */
+export function parseImport(text: string): { settings: Settings; progress: Record<string, Progress> } | null {
   try {
     const o = JSON.parse(text);
-    if (o?.app !== 'etymology-quiz' || typeof o.progress?.items !== 'object') return null;
-    return { settings: normalizeSettings(o.settings), progress: normalizeProgress(o.progress) };
+    if (o?.app === 'eigo-loop' && isObj(o.progress)) {
+      const progress: Record<string, Progress> = {};
+      for (const [id, p] of Object.entries(o.progress)) progress[id] = normalizeProgress(p);
+      return { settings: normalizeSettings(o.settings), progress };
+    }
+    if (o?.app === 'etymology-quiz' && isObj(o.progress?.items)) {
+      return { settings: normalizeSettings(o.settings), progress: { [LEGACY_MODE]: normalizeProgress(o.progress) } };
+    }
+    return null;
   } catch {
     return null;
   }

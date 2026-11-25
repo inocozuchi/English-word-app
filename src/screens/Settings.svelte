@@ -2,12 +2,13 @@
   import Page from '../components/Page.svelte';
   import Toggle from '../components/Toggle.svelte';
   import Segmented from '../components/Segmented.svelte';
-  import { store, updateSettings, replaceAll, activeDeck } from '../core/store.svelte.ts';
-  import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS } from '../core/storage.ts';
+  import { store, updateSettings, replaceAll, activeMode, modes, switchMode, timingOf, updateTiming, allProgress } from '../core/store.svelte.ts';
+  import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS, emptyProgress } from '../core/storage.ts';
   import { haptic } from '../core/haptics.ts';
 
   const s = $derived(store.settings);
-  const deck = $derived(activeDeck());
+  const mode = $derived(activeMode());
+  const timing = $derived(timingOf(mode));
 
   let message = $state('');
   function flash(m: string) {
@@ -16,8 +17,8 @@
   }
 
   async function doExport() {
-    const json = exportData($state.snapshot(store.settings), store.progress);
-    const name = `etymology-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    const json = exportData($state.snapshot(store.settings), allProgress());
+    const name = `eigo-loop-backup-${new Date().toISOString().slice(0, 10)}.json`;
     const file = new File([json], name, { type: 'application/json' });
     try {
       if (navigator.canShare?.({ files: [file] })) {
@@ -68,8 +69,8 @@
   function reset() {
     if (armed !== 'reset') return arm('reset');
     armed = null;
-    replaceAll($state.snapshot(store.settings), { items: {}, days: {}, lastBase: null, review: {} });
-    flash('学習記録を消去しました');
+    replaceAll($state.snapshot(store.settings), { [mode.id]: emptyProgress() });
+    flash(`${mode.title}の学習記録を消去しました`);
   }
 
   const counts = [5, 10, 15, 20].map((n) => ({ value: n, label: `${n}問` }));
@@ -81,38 +82,53 @@
   <p class="eyebrow-en">Settings</p>
   <h1 class="ui-title">設定</h1>
 
-  <h2 class="ui-h2">クイズ</h2>
+  <h2 class="ui-h2">モード</h2>
+  <div class="ui-group" role="radiogroup" aria-label="クイズのモード">
+    {#each modes as m}
+      <button class="ui-item mode-row" role="radio" aria-checked={m.id === mode.id} onclick={() => { switchMode(m.id); haptic('light'); }}>
+        <span class="ui-txt"><span class="mode-name">{m.title}</span><span class="ui-hint">{m.tagline}</span></span>
+        <span class="radio" class:on={m.id === mode.id}></span>
+      </button>
+    {/each}
+  </div>
+
+  <h2 class="ui-h2">{mode.title}</h2>
   <div class="ui-group">
     <div class="ui-item col">
-      <div class="ui-line"><span>自動で次へ</span><span class="ui-val">{s.advanceSec}<small>秒</small></span></div>
+      <div class="ui-line"><span>自動で次へ</span><span class="ui-val">{timing.advanceSec}<small>秒</small></span></div>
       <input
         type="range"
         min={LIMITS.advanceSec[0]}
         max={LIMITS.advanceSec[1]}
         step="1"
-        value={s.advanceSec}
-        style:--p={p(s.advanceSec, LIMITS.advanceSec)}
-        oninput={(e) => updateSettings({ advanceSec: +e.currentTarget.value })}
+        value={timing.advanceSec}
+        style:--p={p(timing.advanceSec, LIMITS.advanceSec)}
+        oninput={(e) => updateTiming(mode, { advanceSec: +e.currentTarget.value })}
         onchange={() => haptic('light')}
         aria-label="自動で次へ進むまでの秒数"
       />
-      <p class="ui-hint">答えたあと解説を表示する時間。左へスワイプすればすぐ次へ進めます</p>
+      <p class="ui-hint">答えたあと解説を表示する時間（モードごと）。左へスワイプすればすぐ次へ進めます</p>
     </div>
     <div class="ui-item col">
-      <div class="ui-line"><span>回答の制限時間</span><span class="ui-val">{s.answerSec}<small>秒</small></span></div>
+      <div class="ui-line"><span>回答の制限時間</span><span class="ui-val">{timing.answerSec}<small>秒</small></span></div>
       <input
         type="range"
         min={LIMITS.answerSec[0]}
         max={LIMITS.answerSec[1]}
         step="1"
-        value={s.answerSec}
-        style:--p={p(s.answerSec, LIMITS.answerSec)}
-        oninput={(e) => updateSettings({ answerSec: +e.currentTarget.value })}
+        value={timing.answerSec}
+        style:--p={p(timing.answerSec, LIMITS.answerSec)}
+        oninput={(e) => updateTiming(mode, { answerSec: +e.currentTarget.value })}
         onchange={() => haptic('light')}
         aria-label="回答の制限時間"
       />
       <p class="ui-hint">過ぎると未回答（不正解）として正解を表示します</p>
     </div>
+  </div>
+  {#if mode.SettingsSection}<mode.SettingsSection />{/if}
+
+  <h2 class="ui-h2">クイズ（共通）</h2>
+  <div class="ui-group">
     <div class="ui-item col">
       <div class="ui-line"><span>問題数</span></div>
       <Segmented options={counts} value={s.count} onchange={(v) => updateSettings({ count: v })} />
@@ -128,10 +144,6 @@
     </div>
   </div>
 
-  {#if deck.SettingsSection}
-    <p class="deck-label">{deck.title}</p>
-    <deck.SettingsSection />
-  {/if}
 
   <h2 class="ui-h2">表示と操作</h2>
   <div class="ui-group">
@@ -158,29 +170,50 @@
       <button class="ui-item" onclick={() => fileInput.click()}><span>学習記録を読み込む</span></button>
     {/if}
     <button class="ui-item danger" class:armed={armed === 'reset'} onclick={reset}>
-      <span>{armed === 'reset' ? 'もう一度タップで消去（元に戻せません）' : '学習記録を消去'}</span>
+      <span>{armed === 'reset' ? 'もう一度タップで消去（元に戻せません）' : `${mode.title}の学習記録を消去`}</span>
     </button>
     <button
       class="ui-item"
-      onclick={() => updateSettings({ ...DEFAULT_SETTINGS, activeDeck: s.activeDeck, decks: {} })}
+      onclick={() => updateSettings({ ...DEFAULT_SETTINGS, activeMode: s.activeMode, modes: {} })}
     ><span>設定を初期値に戻す</span></button>
   </div>
   <input bind:this={fileInput} type="file" accept="application/json,.json" hidden onchange={doImport} />
   {#if message}<p class="flash">{message}</p>{/if}
 
   <p class="foot">
-    {deck.title}{#if deck.stat()} · {deck.stat()}{/if}<br />
+    {mode.title}{#if mode.stat()} · {mode.stat()}{/if}<br />
     学習記録はこの端末にだけ保存されます
   </p>
 </Page>
 
 <style>
-  .deck-label {
-    margin: 30px 6px -12px;
-    font-size: 12px;
+  .mode-name {
     font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.04em;
+  }
+  .radio {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--line-strong);
+    display: grid;
+    place-items: center;
+    transition: border-color 0.2s;
+  }
+  .radio::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: scale(0);
+    transition: transform var(--dur-pop, 300ms) var(--ease-pop, ease-out);
+  }
+  .radio.on {
+    border-color: var(--accent);
+  }
+  .radio.on::after {
+    transform: scale(1);
   }
   .danger {
     color: #d93a3a;

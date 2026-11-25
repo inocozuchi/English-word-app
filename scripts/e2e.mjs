@@ -19,6 +19,18 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function newPage(browser, opts = {}) {
   const ctx = await browser.newContext({ viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true, acceptDownloads: true, ...opts });
+  // テスト用: 旧形式の書き方（秒数が直下）で書いた設定を新しい形式に変換する関数
+  await ctx.addInitScript(() => {
+    window.toV2 = (o) => {
+      const { advanceSec, answerSec, formats, excludedRoots, ...rest } = o;
+      const ety = {};
+      if (advanceSec !== undefined) ety.advanceSec = advanceSec;
+      if (answerSec !== undefined) ety.answerSec = answerSec;
+      if (formats) ety.formats = formats;
+      if (excludedRoots) ety.excludedRoots = excludedRoots;
+      return { activeMode: 'etymology', ...rest, modes: { etymology: ety } };
+    };
+  });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
@@ -29,9 +41,9 @@ async function newPage(browser, opts = {}) {
   return { ctx, page, errors, top, depth, settle };
 }
 
-const settingsOf = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('ety.settings.v1') || '{}'));
-const etyOf = async (page) => (await settingsOf(page)).decks?.etymology ?? { formats: ['ej'], excludedRoots: [] };
-const progressOf = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('ety.progress.v1') || '{}'));
+const settingsOf = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('eq.settings.v2') || '{}'));
+const etyOf = async (page) => ({ formats: ['ej'], excludedRoots: [], ...((await settingsOf(page)).modes?.etymology ?? {}) });
+const progressOf = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('eq.progress.etymology.v1') || '{}'));
 
 const browser = await chromium.launch();
 try {
@@ -39,7 +51,7 @@ try {
   {
     const { page, errors, top, depth, settle } = await newPage(browser);
     await page.goto(URL);
-    await page.evaluate(() => localStorage.setItem('ety.settings.v1', JSON.stringify({ advanceSec: 3, answerSec: 5, count: 5, formats: ['ej', 'je', 'rm', 'ph'] })));
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify(toV2({ advanceSec: 3, answerSec: 5, count: 5, formats: ['ej', 'je', 'rm', 'ph'] }))));
     await page.reload();
     await page.waitForSelector('button.start');
 
@@ -198,7 +210,7 @@ try {
     await settle();
     // スライダー
     await top().locator('input[type=range]').first().fill('7');
-    ok((await settingsOf(page)).advanceSec === 7, '自動で次への秒数を変更できる');
+    ok((await etyOf(page)).advanceSec === 7, '自動で次への秒数を変更できる');
     // 問題数
     await top().locator('.seg button', { hasText: '20問' }).tap();
     ok((await settingsOf(page)).count === 20, '問題数を変更できる');
@@ -234,7 +246,7 @@ try {
     // 書き出し → 消去 → 読み込み
     await page.evaluate(() => {
       const p = { items: { 'ej:involve': { box: 3, due: 1, seen: 4, correct: 3, wrong: 1, last: 1, lastOk: true } }, days: { '2026-11-24': { a: 4, c: 3 } }, lastBase: null };
-      localStorage.setItem('ety.progress.v1', JSON.stringify(p));
+      localStorage.setItem('eq.progress.etymology.v1', JSON.stringify(p));
     });
     await page.reload();
     await page.waitForSelector('button.start');
@@ -243,7 +255,7 @@ try {
     const [download] = await Promise.all([page.waitForEvent('download'), top().locator('.ui-item', { hasText: '書き出す' }).tap()]);
     const file = await download.path();
     const json = JSON.parse(readFileSync(file, 'utf8'));
-    ok(json.progress.items['ej:involve'].box === 3, '学習記録を JSON で書き出せる');
+    ok(json.progress.etymology.items['ej:involve'].box === 3, '学習記録を JSON で書き出せる');
     await top().locator('.ui-item', { hasText: '学習記録を消去' }).tap();
     await sleep(100);
     ok(Object.keys((await progressOf(page)).items).length === 1, '消去は1回目のタップでは実行されない');
@@ -270,7 +282,7 @@ try {
   {
     const { page, errors, top, settle, ctx } = await newPage(browser);
     await page.goto(URL);
-    await page.evaluate(() => localStorage.setItem('ety.settings.v1', JSON.stringify({ advanceSec: 10, answerSec: 15, count: 5 })));
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify(toV2({ advanceSec: 10, answerSec: 15, count: 5 }))));
     await page.reload();
     await page.waitForSelector('button.start');
     await page.locator('button.start').tap();
@@ -315,9 +327,9 @@ try {
     await page.goto(URL);
     // 復習リストに involve（あと1回でクリア）と revolve を入れておく
     await page.evaluate(() => {
-      localStorage.setItem('ety.settings.v1', JSON.stringify({ advanceSec: 3, answerSec: 15, count: 10, reviewGoal: 2 }));
+      localStorage.setItem('eq.settings.v2', JSON.stringify(toV2({ advanceSec: 3, answerSec: 15, count: 10, reviewGoal: 2 })));
       const e = (key, streak) => ({ deck: 'etymology', key, added: 1, misses: 1, streak, last: 1 });
-      localStorage.setItem('ety.progress.v1', JSON.stringify({ items: {}, days: {}, lastBase: null, review: { 'ej:involve': e('ej:involve', 1), 'ej:revolve': e('ej:revolve', 0) } }));
+      localStorage.setItem('eq.progress.etymology.v1', JSON.stringify({ items: {}, days: {}, lastBase: null, review: { 'ej:involve': e('ej:involve', 1), 'ej:revolve': e('ej:revolve', 0) } }));
     });
     await page.reload();
     await page.waitForSelector('button.start');
@@ -371,6 +383,30 @@ try {
     await sleep(200);
     ok((await top().locator('.list li').count()) === n0 - 1, '「外す」で手動で外せる');
     ok((await depth()) === 2, '画面遷移が正しい');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+
+  // ---------- 旧データの移行 ----------
+  {
+    const { page, errors, ctx } = await newPage(browser);
+    // 最初の読み込みより前に、旧形式のデータだけを置いておく
+    await ctx.addInitScript(() => {
+      if (sessionStorage.getItem('seeded')) return;
+      sessionStorage.setItem('seeded', '1');
+      localStorage.clear();
+      localStorage.setItem('ety.settings.v1', JSON.stringify({ advanceSec: 4, count: 15, formats: ['ej', 'rm'] }));
+      localStorage.setItem('ety.progress.v1', JSON.stringify({ items: { 'ej:involve': { box: 2, due: 1, seen: 3, correct: 2, wrong: 1, last: 1, lastOk: false } }, days: { '2026-11-24': { a: 3, c: 2 } }, lastBase: null }));
+    });
+    await page.goto(URL);
+    await page.waitForSelector('button.start');
+    await sleep(500);
+    const st = await settingsOf(page);
+    ok(st.modes?.etymology?.advanceSec === 4 && st.count === 15, '旧設定が語源英単語モードの設定に引き継がれる');
+    const pr = await progressOf(page);
+    ok(pr.items?.['ej:involve']?.box === 2 && pr.review?.['ej:involve'], '旧履歴が語源英単語モードの記録に引き継がれ、復習リストも作られる');
+    ok(await page.evaluate(() => !!localStorage.getItem('ety.progress.v1')), '旧データは消さずに残る');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }

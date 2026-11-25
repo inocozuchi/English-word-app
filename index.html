@@ -40,7 +40,7 @@
     <script>
       // 保存済みのテーマを描画前に反映（白→黒のちらつき防止）
       try {
-        var t = JSON.parse(localStorage.getItem('ety.settings.v1') || '{}').theme;
+        var t = JSON.parse(localStorage.getItem('eq.settings.v2') || localStorage.getItem('ety.settings.v1') || '{}').theme;
         if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
       } catch (e) {}
     </script>
