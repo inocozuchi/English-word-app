@@ -1,16 +1,15 @@
 # EIGO LOOP（英語ループ・PWA）
 
 iPhone 向けの英語クイズ PWA。個人利用。大学生が通学中に「片手で・負担なく」回せることを最優先する。
-複数のクイズ「モード」を設定で切り替える。今あるモード: **語源英単語**（etymology）/ **音声変化（聞こえ方）**（sound）。
-次に追加予定: 英会話チャンク（`data/chunks.json`、まだ未使用）。
+複数のクイズ「モード」を設定で切り替える。今あるモード: **語源英単語**（etymology）/ **音声変化（聞こえ方）**（sound）/ **会話チャンク**（chunks）。
 
 ## コマンド
 
-- `npm run dev` — データ変換（語源・音声変化）→ 開発サーバー
+- `npm run dev` — データ変換（語源・音声変化・会話チャンク）→ 開発サーバー
 - `npm run build` — データ変換 → `dist/` に静的ファイル出力（Service Worker も生成）
 - `npm run preview` — ビルド結果の確認
-- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・保存形式の移行・音声変化の①〜⑨・マーキング・カナ解析・日付・例文の強調）
-- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・スワイプで次へ・復習リスト・検索・スワイプバック・設定・バックアップ・モード切替・音声変化・旧データの移行・オフライン）
+- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・保存形式の移行・音声変化の①〜⑨・マーキング・会話チャンクの①〜④と段階解放・カナ解析・日付・例文の強調）
+- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・スワイプで次へ・復習リスト・検索・スワイプバック・設定・バックアップ・モード切替・音声変化・会話チャンク・旧データの移行・オフライン）
 - `npm run check` — svelte-check による型チェック
 - `npm run icons` — `scripts/icon.svg` からアイコン PNG と起動画面（端末サイズ×ライト/ダーク）を生成（Playwright）。
   起動画面の `<link>` は `scripts/splash-tags.html` に出力されるので、端末を追加したら index.html に貼り直す
@@ -50,6 +49,13 @@ iPhone 向けの英語クイズ PWA。個人利用。大学生が通学中に「
 - データ側の既知の揺れ（アプリで吸収）: sc-028 は text が「hat you」で span「hate you」が見つからない（強調を省く）。
   同じ span に2ルール（sc-003 gotta: flap+contraction、sc-060 about her: hdrop+flap）→ ③ では同じ span の別ルールを誤答にしない。
 
+### 会話チャンク（chunks）
+
+- `data/chunks.json` → `scripts/build-chunks.ts` → `src/generated/chunks.json`（番号の参照・穴埋めの ＿＿＿＿ を検査して警告）。
+- `entries[]` 498件（num・section 20章・priority A 300 / B 186 / C 12・chunk・bare・gloss・ex・meaning・exJa・note・region・style・blank・near・sameMeaning・similarMeaning・ambiguous・crossRef）と `pairs[]` 18組。
+- 注意: `blank.answer`（例: How often）は `bare`（How often ...?）と形が違う → ③ の答えは `blank.answer`（穴に入る形）。
+  別の表現どうしで meaning（6組）・exJa（5組）の文字列が同じものがある → どのパターンでも同じ文字列は選択肢に入れない。
+
 ## 設計方針
 
 - Vite + TypeScript + **Svelte 5**（ランタイムが小さく、仮想DOMなし）。UI ライブラリ・アニメーションライブラリは入れない。
@@ -69,17 +75,21 @@ src/
     index.ts       使えるモードの一覧（設定の「モード」にこの順で並ぶ）
     etymology/     語源英単語（mode.ts, quiz.ts, Prompt/Explain, 設定・記録のセクション, screens/）
     sound/         音声変化（mode.ts, quiz.ts, marks.ts, Prompt, components/Marked など, screens/ 復習ノート）
+    chunks/        会話チャンク（mode.ts, quiz.ts, sections.ts, Prompt, components/EntryDetail など, screens/ チャンク辞典）
 ```
 
-### モードの追加方法（例: 英会話チャンク）
+### モードの追加方法
 
 1. **データ**: `data/<名前>.json` に置く（編集しない）。`scripts/build-<名前>.ts` で `src/generated/<名前>.json` に変換し、
-   `package.json` の `data` スクリプトに足す（`node scripts/build-data.ts && node scripts/build-sound.ts && …`）。
+   `package.json` の `data` スクリプトに足す（`node scripts/build-data.ts && node scripts/build-sound.ts && node scripts/build-chunks.ts && …`）。
 2. **問題生成**: `src/modes/<id>/quiz.ts` に UI に依存しない関数を書く（テストを `tests/<id>.test.ts` に）。
    - `candidates(settings)`: 出題範囲の候補 `{ key, base, group, newOrder }`。key はモードの中で一意（例: `s1:sc-001`）。
      base が同じものは1セッションに1回。newOrder は未習のときの出題順。
    - `question(key, rng)`: 4択の `Question` を返す（`choices` は重複なし・正解を含める。`answer` は正解の位置。`tags` にルールなどを入れると正答率が別に集計される）。
    - 必要なら `pick(input, settings)`: パターンの比率や苦手の優先など、出題の選び方を上書き（省略時は間隔反復の優先順）。
+   - 記録の単位とパターンを分けたいとき（会話チャンク）: 候補のキーを記録の単位（表現の id）にし、pick で選んでから
+     `c1:ch-001` のようにパターンを付けたキーを返す。question はどちらの形も受け、返す `Question.key` は記録の単位にする
+     （復習リストからは id だけで呼ばれるので、そのとき使えるパターンを選ぶ）。
 3. **登録**: `src/modes/<id>/mode.ts` で `QuizMode` を実装し、`src/modes/index.ts` の `MODES` に足す。これで設定のモード一覧に出る。
    - `timing`（自動で次へ・制限時間の初期値）、`normalizeSettings`（設定の初期値と正規化。`settings.modes[id]` に保存される）
    - `Prompt`（問題文）と `Explain`（解説）。問題文を残したまま解説を重ねるなら `inlineExplain: true` にして Prompt が `phase` を見て描く
@@ -102,7 +112,14 @@ src/
   - 音声変化: ①聞こえ方当て ②元の英文当て ③原因ルール当て ④症状診断 ⑤元の形当て ⑥同化の対応 ⑦tの行方 ⑧複合変化の順序 ⑨知識問題（キー `s1:`〜`s9:`）。
     比率は ①③⑦ 各20%、残りで40%（`allocate`）。⑧ は難易度「すべて」かつ30問答えてから。未習は苦手なルール（タグ別正答率が低い）から。
     ② の誤答は同じルールの項目からモーラ数が近い順。⑧ は手順を A/B/C で示し、誤答は隣接入れ替え（足りなければ別の並び）。
-  - 秒数はモードごと（語源: 次へ5秒・制限8秒、音声変化: 次へ8秒・制限12秒）。
+  - 会話チャンク: ①英→和 ②和→英 ③穴埋め ④使い分け（比率 25:25:35:15）。記録は表現の id（使い分けは `pr-01#a`）。
+    誤答は near（形が近い順）→ 同じ章 → 全体から。sameMeaning / similarMeaning（どちら側に書かれていても）と同じ文字列は入れない。
+    ambiguous は②に、blank が null は③に出さない。③は頭の単語と語数が正解と同じ候補（How often に対する How long など、
+    文に入れても成り立ちやすいもの）を後回しにし、穴の位置で先頭の大文字・小文字をそろえる。
+    優先度は自動解放（最初は A、A の習得7割で B、B の7割で C。習得 = 箱3以上 = 3回続けて正解・次の間隔7日以上）か手動。
+    新しい表現は1回最大5件（章の順）、残りはまちがえた・期限の来た表現。復習するものが足りないときだけ新しい表現で埋める。
+    章ごとの正答率はタグ `sec:N` で集計（苦手な章）。読み上げ（聞き取り問題・例文の読み上げ）は今は入れていない。
+  - 秒数はモードごと（語源: 次へ5秒・制限8秒、音声変化: 次へ8秒・制限12秒、会話チャンク: 次へ7秒・制限10秒）。
 - **復習リスト**（`core/review.ts`）: まちがえた（時間切れを含む）問題は自動で入る。連続で `reviewGoal` 回（初期3, 2〜5）正解すると自動で外れる。
   ホームの「復習する」で、リストの問題だけを出す復習モード（出題範囲・形式の設定は無視）。復習リスト画面で手動で外すこともできる。
 - 日付は午前4時区切り（`day.ts`）。
@@ -123,6 +140,8 @@ src/
 - ANYCOLOR のサイトを参考に、ホームなど要所に「極太の欧文見出し（`.display`, Inter 850）」と「太い黒枠（`--frame` / `--ink`）」を使う。
   一覧やクイズは読みやすさ優先で控えめに（薄い枠・薄い面）。
 - クイズは回答後も選択肢を見せたまま、上半分（問題のエリア）が解説に入れ替わる。
+- 会話チャンクの回答後: 問題文はそのまま（inlineExplain）、表現・意味・例文・補足が順にフェードイン（問題文と同じものは繰り返さない）。
+  ③は空所に正解が「ポン」と入る。バッジ NZ／英／豪／米・丁寧／口語。
 - 音声変化の回答後: 英文はそのまま（inlineExplain）、マーキングが左から順に浮かび上がる（線は transform、弧は stroke-dashoffset）。
   連結でつながる語は折り返さないまとまりにし、弧は固定幅のすき間の下に置く（画面幅で崩れない）。続いて聞こえ方・理由がフェードイン。
   正誤の行の場所は回答前から確保して、英文が動かないようにする。

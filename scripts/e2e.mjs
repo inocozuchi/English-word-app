@@ -473,6 +473,80 @@ try {
     await page.context().close();
   }
 
+
+  // ---------- 会話チャンクモード ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.waitForSelector('button.start');
+    await page.locator('header .icon').tap();
+    await settle();
+    await top().locator('.mode-row', { hasText: '会話チャンク' }).tap();
+    await sleep(400);
+    ok((await settingsOf(page)).activeMode === 'chunks', '会話チャンクモードに切り替えられる');
+    ok((await top().locator('.ui-val').first().textContent()).includes('7'), '自動で次への初期値は7秒');
+    ok((await top().locator('.ui-hint', { hasText: '今: A' }).count()) === 1, '最初は A だけ（自動解放）');
+    await top().locator('header .back').tap();
+    await settle();
+    ok((await page.locator('.mode-line').textContent()).includes('会話チャンク'), 'ホームに今のモード名が出る');
+    await page.evaluate(() => {
+      const s = JSON.parse(localStorage.getItem('eq.settings.v2'));
+      s.count = 5;
+      s.modes.chunks = { ...(s.modes.chunks || {}), advanceSec: 3, answerSec: 20 };
+      localStorage.setItem('eq.settings.v2', JSON.stringify(s));
+    });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    const texts = await top().locator('.stage > .card:not(.peek) .choice').allTextContents();
+    ok(texts.length === 4 && new Set(texts.map((t) => t.trim())).size === 4, '会話チャンクの4択（同じ文字列なし）');
+    await top().locator('.stage > .card:not(.peek) .choice').first().tap();
+    await sleep(1200);
+    ok((await top().locator('.stage > .card:not(.peek) .rv').count()) === 1, '回答後に解説が出る');
+    for (let k = 0; k < 40 && !(await page.locator('.result').count()); k++) {
+      const c = top().locator('.stage > .card:not(.peek) .choice:not([disabled])');
+      if (await c.count()) await c.first().tap().catch(() => {});
+      await sleep(500);
+    }
+    await page.waitForSelector('.result', { timeout: 15000 });
+    await sleep(800);
+    ok((await page.locator('.result .pb li').count()) === 3, '結果に優先度ごとの進み具合（A/B/C）が出る');
+    const cp = await page.evaluate(() => JSON.parse(localStorage.getItem('eq.progress.chunks.v1')));
+    ok(Object.keys(cp.items).every((k) => /^ch-\d+$|^pr-\d+#[ab]$/.test(k)), '記録は表現の id 単位（パターンを含まない）');
+    ok(Object.keys(cp.tags).some((k) => k.startsWith('sec:')), '章ごとの正答数を記録する');
+    await page.locator('.result .secondary').tap();
+    await settle();
+    // 辞典
+    await page.locator('nav button').first().tap();
+    await settle();
+    ok((await top().locator('.list li').count()) === 20, 'チャンク辞典: 20章の一覧');
+    await top().locator('input[type=search]').fill('No worries');
+    await sleep(200);
+    ok((await top().locator('.list li').first().textContent()).includes('No worries'), '英語で検索できる');
+    await top().locator('input[type=search]').fill('気にしないで');
+    await sleep(200);
+    ok((await top().locator('.list li').count()) > 0, '日本語で検索できる');
+    await top().locator('.list .row').first().tap();
+    await settle();
+    ok((await top().locator('.card .meaning').count()) === 1, '表現の詳細に意味・例文が出る');
+    await top().locator('header .back').tap();
+    await settle();
+    await top().locator('input[type=search]').fill('');
+    await sleep(150);
+    await top().locator('.seg button', { hasText: '使い分け' }).tap();
+    await sleep(200);
+    ok((await top().locator('.pair').count()) === 18, '使い分け18組を並べて比較できる');
+    await top().locator('header .back').tap();
+    await settle();
+    await page.locator('nav button').nth(2).tap();
+    await settle();
+    ok((await top().locator('.pb li').count()) === 3, '学習記録に優先度ごとの進み具合が出る');
+    ok((await depth()) === 2, '画面遷移が正しい');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
   // ---------- 旧データの移行 ----------
   {
     const { page, errors, ctx } = await newPage(browser);
