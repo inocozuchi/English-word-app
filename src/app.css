@@ -1,0 +1,166 @@
+/* ---------- フォント ---------- */
+/* 英語: Inter（ラテン文字のみのサブセット・可変ウェイト。SIL OFL 1.1） */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- デザイントークン ---------- */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f5f7;
+  --fill: #efeff2;
+  --fill-strong: #e2e2e7;
+  --line: #e7e7eb;
+  --text: #111114;
+  --text2: #6b6b73;
+  --text3: #a3a3ab;
+  --accent: #3d5afe;
+  --accent-soft: rgba(61, 90, 254, 0.1);
+  --on-accent: #ffffff;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  color-scheme: light;
+
+  --font-ja: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', system-ui, 'Noto Sans JP', sans-serif;
+  --font-en: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* セーフエリア。npm run shots ではこの値を上書きして iPhone 15 の全画面描画を再現する */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  /* 画面の角が丸いので、セーフエリアに加えて上下に余裕を持たせる */
+  --pad-top: calc(max(var(--safe-top), 12px) + 14px);
+  --pad-bottom: calc(max(var(--safe-bottom), 14px) + 18px);
+  --pad-x: max(calc(var(--safe-left) + 8px), 22px);
+  --pad-x-r: max(calc(var(--safe-right) + 8px), 22px);
+
+  --radius: 16px;
+  --radius-lg: 22px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0b0b0d;
+    --surface: #161619;
+    --fill: #1c1c20;
+    --fill-strong: #2a2a30;
+    --line: #26262b;
+    --text: #f3f3f5;
+    --text2: #9d9da6;
+    --text3: #5e5e66;
+    --accent: #7088ff;
+    --accent-soft: rgba(112, 136, 255, 0.16);
+    --on-accent: #ffffff;
+    --shadow: none;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #0b0b0d;
+  --surface: #161619;
+  --fill: #1c1c20;
+  --fill-strong: #2a2a30;
+  --line: #26262b;
+  --text: #f3f3f5;
+  --text2: #9d9da6;
+  --text3: #5e5e66;
+  --accent: #7088ff;
+  --accent-soft: rgba(112, 136, 255, 0.16);
+  --on-accent: #ffffff;
+  --shadow: none;
+  color-scheme: dark;
+}
+
+/* ---------- ベース ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ja);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'palt' 1;
+  /* ブラウザ特有の挙動を止める */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+body {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+#app {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+  -webkit-user-select: text;
+  user-select: text;
+}
+h1, h2, h3, p {
+  margin: 0;
+}
+.en {
+  font-family: var(--font-en);
+  font-feature-settings: 'cv11' 1, 'ss01' 0;
+  letter-spacing: -0.01em;
+}
+
+/* タップ時の軽い縮小（:active は main.ts の touchstart リスナーで iOS でも有効） */
+.press {
+  transition: transform var(--dur-press, 300ms) var(--ease-press, ease-out), opacity 0.2s;
+  will-change: transform;
+}
+.press:active {
+  transform: scale(0.965);
+  transition: transform 90ms ease-out;
+}
+
+/* スクロール領域（ネイティブの慣性スクロール） */
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press,
+  .press:active {
+    transition: opacity 0.15s;
+    transform: none;
+  }
+}
