@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 語源（下の大きな点）から単語が枝分かれして広がるイメージ -->
+  <rect width="1024" height="1024" fill="#3d5afe"/>
+  <g fill="none" stroke="#fff" stroke-width="44" stroke-linecap="round">
+    <path d="M512 720 V330"/>
+    <path d="M512 600 C512 470 330 470 330 360"/>
+    <path d="M512 600 C512 470 694 470 694 360"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="512" cy="740" r="78"/>
+    <circle cx="512" cy="300" r="52"/>
+    <circle cx="330" cy="340" r="52"/>
+    <circle cx="694" cy="340" r="52"/>
+  </g>
+</svg>
