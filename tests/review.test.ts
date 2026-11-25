@@ -107,3 +107,17 @@ describe('buildSession（復習モード）', () => {
     expect(qs.map((x) => x.key)).toEqual(['b']);
   });
 });
+
+import { resolveTiming } from '../src/core/storage.ts';
+describe('秒数（正解・不正解で別）', () => {
+  const d = { advanceOkSec: 4, advanceNgSec: 7, answerSec: 8 };
+  it('未設定ならモードの初期値', () => {
+    expect(resolveTiming(undefined, d)).toEqual(d);
+  });
+  it('旧形式の advanceSec は正解・不正解の両方に引き継ぐ', () => {
+    expect(resolveTiming({ advanceSec: 5 }, d)).toEqual({ advanceOkSec: 5, advanceNgSec: 5, answerSec: 8 });
+  });
+  it('新しい値があればそちらを使い、範囲外は丸める', () => {
+    expect(resolveTiming({ advanceSec: 5, advanceOkSec: 3, advanceNgSec: 99, answerSec: 1 }, d)).toEqual({ advanceOkSec: 3, advanceNgSec: 15, answerSec: 5 });
+  });
+});

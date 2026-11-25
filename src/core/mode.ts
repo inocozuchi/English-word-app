@@ -59,8 +59,10 @@ export interface ItemLabel {
 
 /** 秒数（モードごとに設定できる） */
 export interface Timing {
-  /** 解説を見せてから自動で次へ進むまで */
-  advanceSec: number;
+  /** 解説を見せてから自動で次へ進むまで（正解のとき） */
+  advanceOkSec: number;
+  /** 同（不正解・時間切れのとき。解説を読む時間を長めに） */
+  advanceNgSec: number;
   /** 回答の制限時間 */
   answerSec: number;
 }

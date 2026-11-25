@@ -38,7 +38,7 @@ export const etymologyMode: QuizMode<Scope> = {
     { id: 'rm', label: '語源の意味', desc: '語源（語根・接頭辞）の意味を選ぶ' },
     { id: 'ph', label: '熟語の意味', desc: '熟語の意味を選ぶ' },
   ],
-  timing: { advanceSec: 5, answerSec: 8 },
+  timing: { advanceOkSec: 4, advanceNgSec: 7, answerSec: 8 },
   normalizeSettings: normalizeScope,
   load: () => loadEty().then(() => {}),
   ready: () => !!ety.index,

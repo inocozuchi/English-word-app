@@ -17,7 +17,7 @@ export const chunksMode: QuizMode<ChunkSettings> = {
   hero: 'Say it\nin *chunks*',
   tagline: 'そのまま使える、ひとかたまり。',
   patterns: PATTERNS.map(({ id, label, desc }) => ({ id, label, desc })),
-  timing: { advanceSec: 7, answerSec: 10 },
+  timing: { advanceOkSec: 5, advanceNgSec: 9, answerSec: 10 },
   normalizeSettings: normalizeChunkSettings,
   load: () => loadChunks().then(() => {}),
   ready: () => !!chk.index,

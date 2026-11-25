@@ -210,7 +210,7 @@ try {
     await settle();
     // スライダー
     await top().locator('input[type=range]').first().fill('7');
-    ok((await etyOf(page)).advanceSec === 7, '自動で次への秒数を変更できる');
+    ok((await etyOf(page)).advanceOkSec === 7, '正解のときの「自動で次へ」秒数を変更できる');
     // 問題数
     await top().locator('.seg button', { hasText: '20問' }).tap();
     ok((await settingsOf(page)).count === 20, '問題数を変更できる');
@@ -408,7 +408,7 @@ try {
     await sleep(300);
     ok((await settingsOf(page)).activeMode === 'sound', '設定でモードを切り替えて保存できる');
     ok((await top().locator('.ui-h2', { hasText: '出題パターン' }).count()) === 1, '音声変化モードの設定（出題パターン）が出る');
-    ok((await top().locator('.ui-val').first().textContent()).includes('8'), '自動で次への秒数は音声変化の初期値（8秒）');
+    ok((await top().locator('.ui-val').nth(1).textContent()).includes('10'), '不正解のときの自動で次へは音声変化の初期値（10秒）');
     await top().locator('header .back').tap();
     await settle();
     ok((await page.locator('.mode-line').textContent()).includes('音声変化'), 'ホームのスタート上に今のモード名が出る');
@@ -484,7 +484,7 @@ try {
     await top().locator('.mode-row', { hasText: '会話チャンク' }).tap();
     await sleep(400);
     ok((await settingsOf(page)).activeMode === 'chunks', '会話チャンクモードに切り替えられる');
-    ok((await top().locator('.ui-val').first().textContent()).includes('7'), '自動で次への初期値は7秒');
+    ok((await top().locator('.ui-val').first().textContent()).includes('5') && (await top().locator('.ui-val').nth(1).textContent()).includes('9'), '会話チャンクの自動で次へは 正解5秒・不正解9秒');
     ok((await top().locator('.ui-hint', { hasText: '今: A' }).count()) === 1, '最初は A だけ（自動解放）');
     await top().locator('header .back').tap();
     await settle();
@@ -566,6 +566,36 @@ try {
     const pr = await progressOf(page);
     ok(pr.items?.['ej:involve']?.box === 2 && pr.review?.['ej:involve'], '旧履歴が語源英単語モードの記録に引き継がれ、復習リストも作られる');
     ok(await page.evaluate(() => !!localStorage.getItem('ety.progress.v1')), '旧データは消さずに残る');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+
+  // ---------- 正解・不正解で「自動で次へ」の秒数が変わる ----------
+  {
+    const { page, errors, top, settle } = await newPage(browser);
+    const words = JSON.parse(readFileSync(new globalThis.URL('../src/generated/words.json', import.meta.url), 'utf8'));
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify({ activeMode: 'etymology', count: 5, modes: { etymology: { formats: ['ej'], advanceOkSec: 3, advanceNgSec: 10, answerSec: 20 } } })));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    const label = async () => (await top().locator('.count').getAttribute('aria-label')).replace(/\s/g, '');
+    const answerQ = async (right) => {
+      const head = (await top().locator('.stage > .card:not(.peek) .headword').textContent()).trim();
+      const w = words.words.find((x) => x.w === head);
+      const choices = top().locator('.stage > .card:not(.peek) .choice');
+      const texts = (await choices.allTextContents()).map((t) => t.trim());
+      const k = texts.findIndex((t) => (t.includes(w.defs[0].ja)) === right);
+      await choices.nth(k).tap();
+    };
+    await answerQ(true);
+    await sleep(4400);
+    ok((await label()).startsWith('2/'), '正解のときは短い秒数（3秒）で次へ');
+    await answerQ(false);
+    await sleep(4400);
+    ok((await label()).startsWith('2/'), '不正解のときは長い秒数（10秒）なので、まだ次へ進まない');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }

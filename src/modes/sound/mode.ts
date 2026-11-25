@@ -24,7 +24,7 @@ export const soundMode: QuizMode<SoundSettings> = {
   hero: 'Hear how it\n*really* sounds',
   tagline: '聞こえ方を、ルールで。',
   patterns: PATTERNS.map(({ id, label, desc }) => ({ id, label, desc })),
-  timing: { advanceSec: 8, answerSec: 12 },
+  timing: { advanceOkSec: 6, advanceNgSec: 10, answerSec: 12 },
   normalizeSettings: normalizeSoundSettings,
   load: () => loadSound().then(() => {}),
   ready: () => !!snd.index,

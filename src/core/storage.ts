@@ -7,7 +7,7 @@
 // 語源英単語モードのデータとして移行する。旧データは消さずに残す（戻し用）。
 import type { ItemState } from './srs.ts';
 import type { ReviewList } from './review.ts';
-import type { TagStats } from './mode.ts';
+import type { TagStats, Timing } from './mode.ts';
 import { REVIEW_GOAL } from './review.ts';
 
 export type Theme = 'system' | 'light' | 'dark';
@@ -20,7 +20,7 @@ export interface Settings {
   reviewGoal: number;
   /** 使っているモード */
   activeMode: string;
-  /** モードごとの設定（秒数 advanceSec / answerSec と、各モードの出題範囲など） */
+  /** モードごとの設定（秒数 advanceOkSec / advanceNgSec / answerSec と、各モードの出題範囲など）。旧 advanceSec は両方の初期値として読む */
   modes: Record<string, any>;
 }
 
@@ -37,7 +37,7 @@ export const DEFAULT_SETTINGS: Settings = {
 };
 
 export const LIMITS = {
-  advanceSec: [3, 15],
+  advanceSec: [2, 15],
   answerSec: [5, 20],
   count: [5, 30],
   reviewGoal: [REVIEW_GOAL.min, REVIEW_GOAL.max],
@@ -82,6 +82,16 @@ function write(key: string, value: unknown) {
 
 export const clamp = (n: unknown, [lo, hi]: readonly [number, number], d: number) =>
   typeof n === 'number' && isFinite(n) ? Math.min(hi, Math.max(lo, Math.round(n))) : d;
+
+/** モードの秒数。正解・不正解で分ける前の advanceSec は両方の値として引き継ぐ。範囲外は丸める */
+export function resolveTiming(raw: any, defaults: Timing): Timing {
+  const r = raw && typeof raw === 'object' ? raw : {};
+  return {
+    advanceOkSec: clamp(r.advanceOkSec ?? r.advanceSec, LIMITS.advanceSec, defaults.advanceOkSec),
+    advanceNgSec: clamp(r.advanceNgSec ?? r.advanceSec, LIMITS.advanceSec, defaults.advanceNgSec),
+    answerSec: clamp(r.answerSec, LIMITS.answerSec, defaults.answerSec),
+  };
+}
 
 const isObj = (x: unknown): x is Record<string, any> => !!x && typeof x === 'object' && !Array.isArray(x);
 

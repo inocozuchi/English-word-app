@@ -123,7 +123,7 @@
     combo = correct ? combo + 1 : 0;
     haptic(correct ? 'success' : 'error');
     tick().then(() => dots[i] && bump(dots[i], 1.6));
-    startTimer(timing.advanceSec, next);
+    startTimer(correct ? timing.advanceOkSec : timing.advanceNgSec, next);
   }
 
   function timeout() {

@@ -2,6 +2,7 @@
   import Page from '../components/Page.svelte';
   import Toggle from '../components/Toggle.svelte';
   import Segmented from '../components/Segmented.svelte';
+  import SliderRow from '../components/SliderRow.svelte';
   import { store, updateSettings, replaceAll, activeMode, modes, switchMode, timingOf, updateTiming, allProgress } from '../core/store.svelte.ts';
   import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS, emptyProgress } from '../core/storage.ts';
   import { haptic } from '../core/haptics.ts';
@@ -94,36 +95,26 @@
 
   <h2 class="ui-h2">{mode.title}</h2>
   <div class="ui-group">
-    <div class="ui-item col">
-      <div class="ui-line"><span>自動で次へ</span><span class="ui-val">{timing.advanceSec}<small>秒</small></span></div>
-      <input
-        type="range"
-        min={LIMITS.advanceSec[0]}
-        max={LIMITS.advanceSec[1]}
-        step="1"
-        value={timing.advanceSec}
-        style:--p={p(timing.advanceSec, LIMITS.advanceSec)}
-        oninput={(e) => updateTiming(mode, { advanceSec: +e.currentTarget.value })}
-        onchange={() => haptic('light')}
-        aria-label="自動で次へ進むまでの秒数"
-      />
-      <p class="ui-hint">答えたあと解説を表示する時間（モードごと）。左へスワイプすればすぐ次へ進めます</p>
-    </div>
-    <div class="ui-item col">
-      <div class="ui-line"><span>回答の制限時間</span><span class="ui-val">{timing.answerSec}<small>秒</small></span></div>
-      <input
-        type="range"
-        min={LIMITS.answerSec[0]}
-        max={LIMITS.answerSec[1]}
-        step="1"
-        value={timing.answerSec}
-        style:--p={p(timing.answerSec, LIMITS.answerSec)}
-        oninput={(e) => updateTiming(mode, { answerSec: +e.currentTarget.value })}
-        onchange={() => haptic('light')}
-        aria-label="回答の制限時間"
-      />
-      <p class="ui-hint">過ぎると未回答（不正解）として正解を表示します</p>
-    </div>
+    <SliderRow
+      label="正解のとき 自動で次へ"
+      value={timing.advanceOkSec}
+      range={LIMITS.advanceSec}
+      onchange={(v) => updateTiming(mode, { advanceOkSec: v })}
+    />
+    <SliderRow
+      label="不正解・時間切れのとき 自動で次へ"
+      value={timing.advanceNgSec}
+      range={LIMITS.advanceSec}
+      hint="答えたあと解説を表示する時間（モードごと）。左へスワイプすればすぐ次へ進めます"
+      onchange={(v) => updateTiming(mode, { advanceNgSec: v })}
+    />
+    <SliderRow
+      label="回答の制限時間"
+      value={timing.answerSec}
+      range={LIMITS.answerSec}
+      hint="過ぎると未回答（不正解）として正解を表示します"
+      onchange={(v) => updateTiming(mode, { answerSec: v })}
+    />
   </div>
   {#if mode.SettingsSection}<mode.SettingsSection />{/if}
 

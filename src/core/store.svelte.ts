@@ -2,7 +2,7 @@
 // store.progress は「今選んでいるモード」の学習記録。モードを切り替えると読み込み直す。
 import type { QuizMode, Timing } from './mode.ts';
 import type { Settings, Progress } from './storage.ts';
-import { loadSettings, saveSettings, loadProgress, saveProgress, clamp, LIMITS } from './storage.ts';
+import { loadSettings, saveSettings, loadProgress, saveProgress, resolveTiming } from './storage.ts';
 import { review } from './srs.ts';
 import { updateReview } from './review.ts';
 import type { ReviewEvent } from './review.ts';
@@ -47,11 +47,7 @@ export function updateModeSettings<S>(mode: QuizMode<S>, patch: Partial<S>) {
 
 /** モードごとの秒数 */
 export function timingOf(mode: QuizMode): Timing {
-  const raw = store.settings.modes[mode.id] ?? {};
-  return {
-    advanceSec: clamp(raw.advanceSec, LIMITS.advanceSec, mode.timing.advanceSec),
-    answerSec: clamp(raw.answerSec, LIMITS.answerSec, mode.timing.answerSec),
-  };
+  return resolveTiming(store.settings.modes[mode.id], mode.timing);
 }
 
 export function updateTiming(mode: QuizMode, patch: Partial<Timing>) {
