@@ -1,12 +1,13 @@
 <script lang="ts">
-  import Page from '../components/Page.svelte';
-  import Icon from '../components/Icon.svelte';
-  import { router } from '../lib/router.svelte.ts';
-  import { store } from '../lib/store.svelte.ts';
-  import { wordStatus } from '../lib/summary.ts';
+  import { ety } from '../state.svelte.ts';
+  import Page from '../../../components/Page.svelte';
+  import Icon from '../../../components/Icon.svelte';
+  import { router } from '../../../core/router.svelte.ts';
+  import { store } from '../../../core/store.svelte.ts';
+  import { wordStatus } from '../summary.ts';
 
   let { no }: { no: number } = $props();
-  const ix = store.index!;
+  const ix = ety.index!;
   const ch = $derived(ix.ds.chapters.find((c) => c.no === no)!);
   const roots = $derived(ix.rootsByChapter.get(no)!);
   const learned = (ids: number[]) => ids.filter((id) => wordStatus(store.progress.items, ix.ds.words[id]) === 'learned').length;
@@ -19,7 +20,7 @@
     {#each roots as r}
       {@const n = learned(r.words)}
       <li>
-        <button class="row press" onclick={() => router.push({ name: 'root', id: r.id })}>
+        <button class="row press" onclick={() => router.push({ name: 'ety/root', params: { id: r.id } })}>
           <span class="main">
             <span class="line"><span class="en root">{r.root}</span><span class="m">{r.meaning}</span></span>
             <span class="meta">{r.category} · {r.words.length}語{#if n} · <span class="acc">覚えた {n}</span>{/if}</span>

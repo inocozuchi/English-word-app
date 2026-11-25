@@ -1,5 +1,5 @@
 import type { Dataset, Word, Root, Phrase } from './types.ts';
-import { meaningTokens } from './distractors.ts';
+import { meaningTokens } from '../../core/distractors.ts';
 
 /** 出題や検索で使う索引 */
 export interface Index {

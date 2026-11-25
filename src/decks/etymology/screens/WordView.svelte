@@ -1,16 +1,17 @@
 <script lang="ts">
-  import Page from '../components/Page.svelte';
+  import { ety } from '../state.svelte.ts';
+  import Page from '../../../components/Page.svelte';
   import Kana from '../components/Kana.svelte';
   import Breakdown from '../components/Breakdown.svelte';
-  import Example from '../components/Example.svelte';
-  import Icon from '../components/Icon.svelte';
-  import { router } from '../lib/router.svelte.ts';
-  import { store } from '../lib/store.svelte.ts';
-  import { wordStatus, STATUS_LABEL } from '../lib/summary.ts';
-  import { dayKey } from '../lib/day.ts';
+  import Example from '../../../components/Example.svelte';
+  import Icon from '../../../components/Icon.svelte';
+  import { router } from '../../../core/router.svelte.ts';
+  import { store } from '../../../core/store.svelte.ts';
+  import { wordStatus, STATUS_LABEL } from '../summary.ts';
+  import { dayKey } from '../../../core/day.ts';
 
   let { w: text }: { w: string } = $props();
-  const ix = store.index!;
+  const ix = ety.index!;
   const w = $derived(ix.word.get(text)!);
   const st = $derived(wordStatus(store.progress.items, w));
   const ej = $derived(store.progress.items['ej:' + w.w]);
@@ -65,7 +66,7 @@
   <ul class="group">
     {#each w.roots as rid}
       {@const r = ix.root.get(rid)!}
-      <li><button class="row press" onclick={() => router.push({ name: 'root', id: rid })}>
+      <li><button class="row press" onclick={() => router.push({ name: 'ety/root', params: { id: rid } })}>
         <span class="en rr">{r.root}</span><span class="rm">{r.meaning}</span><span class="chev"><Icon name="chevron" size={18} /></span>
       </button></li>
     {/each}

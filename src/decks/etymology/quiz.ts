@@ -1,32 +1,25 @@
 // 1セッション分の問題を組み立てる。
 import type { Format, Word, Root, Phrase } from './types.ts';
 import type { Index } from './dataset.ts';
-import type { Candidate, ItemState } from './srs.ts';
-import { selectItems } from './srs.ts';
-import { pickDistractors } from './distractors.ts';
-import type { Rng } from './rng.ts';
-import { shuffle } from './rng.ts';
+import type { Candidate, ItemState } from '../../core/srs.ts';
+import { selectItems } from '../../core/srs.ts';
+import { pickDistractors } from '../../core/distractors.ts';
+import type { Rng } from '../../core/rng.ts';
+import { shuffle } from '../../core/rng.ts';
+import type { Question as CoreQuestion } from '../../core/deck.ts';
 
-export interface Choice {
-  text: string;
-  /** 品詞などの小さな補足 */
-  tag?: string;
-  /** 欧文（英単語・熟語）として表示する */
-  latin?: boolean;
-}
+export const DECK_ID = 'etymology';
 
 export type Subject =
   | { kind: 'word'; word: Word }
   | { kind: 'root'; root: Root }
   | { kind: 'phrase'; phrase: Phrase };
 
-export interface Question {
-  key: string;
-  base: string;
-  format: Format;
-  subject: Subject;
-  choices: Choice[];
-  answer: number;
+/** 語源デッキの問題。data に出題対象（単語・語源・熟語）が入る */
+export type Question = CoreQuestion<Subject>;
+
+function make(format: Format, key: string, base: string, group: string, subject: Subject, choices: Question['choices'], answer: number): Question {
+  return { deck: DECK_ID, key, base, group, mode: format, modeLabel: FORMAT_LABEL[format], data: subject, choices, answer };
 }
 
 export const FORMAT_LABEL: Record<Format, string> = {
@@ -98,16 +91,15 @@ function wordQuestion(ix: Index, w: Word, format: 'ej' | 'je', rng: Rng): Questi
     rng,
   });
   const opts = shuffle([w, ...ds], rng);
-  return {
-    key: `${format}:${w.w}`,
-    base: 'w:' + w.w,
+  return make(
     format,
-    subject: { kind: 'word', word: w },
-    choices: opts.map((x) =>
-      format === 'ej' ? { text: firstText(x), tag: x.defs[0]?.pos } : { text: x.w, latin: true },
-    ),
-    answer: opts.indexOf(w),
-  };
+    `${format}:${w.w}`,
+    'w:' + w.w,
+    w.roots[0],
+    { kind: 'word', word: w },
+    opts.map((x) => (format === 'ej' ? { text: firstText(x), tag: x.defs[0]?.pos } : { text: x.w, latin: true })),
+    opts.indexOf(w),
+  );
 }
 
 function rootQuestion(ix: Index, r: Root, rng: Rng): Question {
@@ -119,14 +111,7 @@ function rootQuestion(ix: Index, r: Root, rng: Rng): Question {
     rng,
   });
   const opts = shuffle([r, ...ds], rng);
-  return {
-    key: 'rm:' + r.id,
-    base: 'r:' + r.id,
-    format: 'rm',
-    subject: { kind: 'root', root: r },
-    choices: opts.map((x) => ({ text: x.meaning })),
-    answer: opts.indexOf(r),
-  };
+  return make('rm', 'rm:' + r.id, 'r:' + r.id, r.id, { kind: 'root', root: r }, opts.map((x) => ({ text: x.meaning })), opts.indexOf(r));
 }
 
 function phraseQuestion(ix: Index, p: Phrase, rng: Rng): Question {
@@ -139,17 +124,36 @@ function phraseQuestion(ix: Index, p: Phrase, rng: Rng): Question {
     rng,
   });
   const opts = shuffle([p, ...ds], rng);
-  return {
-    key: 'ph:' + p.en,
-    base: 'p:' + p.en,
-    format: 'ph',
-    subject: { kind: 'phrase', phrase: p },
-    choices: opts.map((x) => ({ text: x.ja })),
-    answer: opts.indexOf(p),
-  };
+  return make('ph', 'ph:' + p.en, 'p:' + p.en, p.root, { kind: 'phrase', phrase: p }, opts.map((x) => ({ text: x.ja })), opts.indexOf(p));
 }
 
 const phraseByEn = new WeakMap<Index, Map<string, Phrase>>();
+
+export function phraseOf(ix: Index, en: string): Phrase | undefined {
+  let m = phraseByEn.get(ix);
+  if (!m) phraseByEn.set(ix, (m = new Map(ix.ds.phrases.map((p) => [p.en, p]))));
+  return m.get(en);
+}
+
+/** 保存キー → 出題対象 */
+export function subjectOf(ix: Index, key: string): Subject | null {
+  const i = key.indexOf(':');
+  const f = key.slice(0, i);
+  const id = key.slice(i + 1);
+  if (f === 'ej' || f === 'je') {
+    const w = ix.word.get(id);
+    return w ? { kind: 'word', word: w } : null;
+  }
+  if (f === 'rm') {
+    const r = ix.root.get(id);
+    return r ? { kind: 'root', root: r } : null;
+  }
+  if (f === 'ph') {
+    const p = phraseOf(ix, id);
+    return p ? { kind: 'phrase', phrase: p } : null;
+  }
+  return null;
+}
 
 export function questionFor(ix: Index, key: string, rng: Rng): Question | null {
   const i = key.indexOf(':');
@@ -164,9 +168,7 @@ export function questionFor(ix: Index, key: string, rng: Rng): Question | null {
     return r ? rootQuestion(ix, r, rng) : null;
   }
   if (f === 'ph') {
-    let m = phraseByEn.get(ix);
-    if (!m) phraseByEn.set(ix, (m = new Map(ix.ds.phrases.map((p) => [p.en, p]))));
-    const p = m.get(id);
+    const p = phraseOf(ix, id);
     return p ? phraseQuestion(ix, p, rng) : null;
   }
   return null;

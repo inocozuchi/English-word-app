@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { review, selectItems, INTERVALS, MAX_BOX, arrange } from '../src/lib/srs.ts';
-import type { Candidate, ItemState } from '../src/lib/srs.ts';
-import { createRng } from '../src/lib/rng.ts';
+import { review, selectItems, INTERVALS, MAX_BOX, arrange } from '../src/core/srs.ts';
+import type { Candidate, ItemState } from '../src/core/srs.ts';
+import { createRng } from '../src/core/rng.ts';
 
 const T = 20000;
 const cand = (i: number, group = 'g' + i, extra: Partial<Candidate> = {}): Candidate => ({

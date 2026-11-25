@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseKana, isValidKana } from '../src/lib/kana.ts';
+import { parseKana, isValidKana } from '../src/decks/etymology/kana.ts';
 
 describe('parseKana', () => {
   it('^ で囲んだ部分を強勢として分ける', () => {

@@ -1,13 +1,14 @@
 <script lang="ts">
-  import Page from '../components/Page.svelte';
+  import { ety } from '../state.svelte.ts';
+  import Page from '../../../components/Page.svelte';
   import Kana from '../components/Kana.svelte';
-  import Example from '../components/Example.svelte';
-  import { router } from '../lib/router.svelte.ts';
-  import { store } from '../lib/store.svelte.ts';
-  import { wordStatus } from '../lib/summary.ts';
+  import Example from '../../../components/Example.svelte';
+  import { router } from '../../../core/router.svelte.ts';
+  import { store } from '../../../core/store.svelte.ts';
+  import { wordStatus } from '../summary.ts';
 
   let { id }: { id: string } = $props();
-  const ix = store.index!;
+  const ix = ety.index!;
   const r = $derived(ix.root.get(id)!);
   const ch = $derived(ix.ds.chapters.find((c) => c.no === r.chapter)!);
   const words = $derived(r.words.map((i) => ix.ds.words[i]));
@@ -44,7 +45,7 @@
         {@const st = wordStatus(store.progress.items, w)}
         {@const isRef = r.refs.includes(w.id)}
         <li class:ref={isRef}>
-          <button class="branch press" onclick={() => router.push({ name: 'word', w: w.w })}>
+          <button class="branch press" onclick={() => router.push({ name: 'ety/word', params: { w: w.w } })}>
             <span class="bw">
               <span class="en w">{w.w}</span>
               {#if affix(w)}<span class="affix en">{affix(w)}</span>{/if}

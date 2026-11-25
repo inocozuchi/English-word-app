@@ -1,13 +1,16 @@
 <script lang="ts">
-  import { router } from '../lib/router.svelte.ts';
-  import type { AnswerLog } from '../lib/router.svelte.ts';
-  import { store, today } from '../lib/store.svelte.ts';
-  import { streak } from '../lib/day.ts';
-  import { rise } from '../lib/transitions.ts';
+  import { router } from '../core/router.svelte.ts';
+  import type { AnswerLog } from '../core/router.svelte.ts';
+  import type { SessionMode } from '../core/session.ts';
+  import { store, activeDeck } from '../core/store.svelte.ts';
+  import { streak } from '../core/day.ts';
+  import { reviewCount } from '../core/review.ts';
+  import { rise } from '../core/transitions.ts';
   import Icon from '../components/Icon.svelte';
-  import type { Question } from '../lib/quiz.ts';
+  import type { Question } from '../core/deck.ts';
 
-  let { logs }: { logs: AnswerLog[] } = $props();
+  let { logs, mode = 'normal' }: { logs: AnswerLog[]; mode?: SessionMode } = $props();
+  const deck = activeDeck();
   // 結果画面は表示中に logs が変わらないので、最初の値だけ使う
   // svelte-ignore state_referenced_locally
   const correct = logs.filter((l) => l.chosen === l.q.answer).length;
@@ -16,43 +19,50 @@
   const rate = total ? Math.round((correct / total) * 100) : 0;
   // svelte-ignore state_referenced_locally
   const missed = logs.filter((l) => l.chosen !== l.q.answer);
-  const days = $derived(streak(store.progress.days, today()));
+  // svelte-ignore state_referenced_locally
+  const added = logs.filter((l) => l.review === 'added').length;
+  // svelte-ignore state_referenced_locally
+  const cleared = logs.filter((l) => l.review === 'cleared').length;
+  const days = $derived(streak(store.progress.days, store.today));
+  const left = $derived(reviewCount(store.progress.review, deck.id));
 
-  function title(q: Question) {
-    const s = q.subject;
-    return s.kind === 'word' ? s.word.w : s.kind === 'root' ? s.root.root : s.phrase.en;
-  }
-  function meaning(q: Question) {
-    const s = q.subject;
-    return s.kind === 'word' ? s.word.defs.map((d) => d.ja).join('／') : s.kind === 'root' ? s.root.meaning : s.phrase.ja;
-  }
+  const label = (q: Question) => deck.label(q.key) ?? { title: q.key, sub: '' };
   function open(q: Question) {
-    const s = q.subject;
-    if (s.kind === 'word') router.push({ name: 'word', w: s.word.w });
-    else if (s.kind === 'root') router.push({ name: 'root', id: s.root.id });
-    else router.push({ name: 'root', id: s.phrase.root });
+    const r = deck.detailRoute(q.key);
+    if (r) router.push(r);
   }
-  const message = rate === 100 ? '全問正解！' : rate >= 80 ? 'いい調子です' : rate >= 50 ? 'もう一息' : 'まちがえた語は次回また出ます';
+  const message = rate === 100 ? '全問正解！' : rate >= 80 ? 'いい調子です' : rate >= 50 ? 'もう一息' : 'まちがえた問題は復習リストに入りました';
 </script>
 
 <div class="result">
   <div class="scroll body">
     <div class="hero" in:rise>
-      <p class="eyebrow-en">Result</p>
+      <p class="eyebrow-en">{mode === 'review' ? 'Review result' : 'Result'}</p>
       <p class="msg">{message}</p>
       <p class="score en">{correct}<span class="slash">/</span><span class="total">{total}</span></p>
       <p class="rate">正答率 {rate}% {#if days > 0}<span class="dot">·</span><Icon name="flame" size={15} /> {days}日連続{/if}</p>
     </div>
 
+    {#if added || cleared}
+      <div class="review" in:rise={{ delay: 40 }}>
+        <Icon name="review" size={20} />
+        <span>
+          {#if added}復習リストに <b>{added}</b> 件追加{/if}{#if added && cleared}・{/if}{#if cleared}<b>{cleared}</b> 件クリア{/if}
+          <small>（リスト {left} 件）</small>
+        </span>
+      </div>
+    {/if}
+
     {#if missed.length}
       <h2 in:rise={{ delay: 60 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
       <ul class="list" in:rise={{ delay: 100 }}>
         {#each missed as l}
+          {@const lb = label(l.q)}
           <li>
             <button class="row press" onclick={() => open(l.q)}>
               <span class="main">
-                <span class="w en">{title(l.q)}</span>
-                <span class="m">{meaning(l.q)}</span>
+                <span class="w" class:en={lb.latin}>{lb.title}</span>
+                <span class="m">{lb.sub}</span>
                 <span class="yours">{l.chosen === null ? '時間切れ' : `あなたの答え: ${l.q.choices[l.chosen].text}`}</span>
               </span>
               <span class="chev"><Icon name="chevron" size={18} /></span>
@@ -63,7 +73,9 @@
     {/if}
   </div>
   <div class="actions">
-    <button class="primary press" onclick={() => router.replace({ name: 'quiz', seed: Date.now() })}>もう一度</button>
+    <button class="primary press" onclick={() => router.replace({ name: 'quiz', params: { seed: Date.now(), mode: mode === 'review' && left === 0 ? 'normal' : mode } })}>
+      {mode === 'review' && left > 0 ? '続けて復習' : 'もう一度'}
+    </button>
     <button class="secondary press" onclick={() => router.pop()}>ホーム</button>
   </div>
 </div>
@@ -78,15 +90,14 @@
   }
   .body {
     flex: 1;
+    padding: calc(var(--pad-top) + 24px) var(--pad-x-r) 32px var(--pad-x);
     /* 下にまだ続くことがわかるよう、下端をフェードさせる */
     -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
     mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
-    padding-bottom: 32px !important;
-    padding: calc(var(--pad-top) + 24px) var(--pad-x-r) 16px var(--pad-x);
   }
   .hero {
     text-align: center;
-    padding: 28px 0 32px;
+    padding: 28px 0 26px;
   }
   .msg {
     font-size: 15px;
@@ -121,6 +132,23 @@
   }
   .dot {
     margin: 0 4px;
+    color: var(--text3);
+  }
+  .review {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    border-radius: var(--radius);
+    border: var(--frame) solid var(--ink);
+    font-size: 14px;
+  }
+  .review b {
+    font-family: var(--font-en);
+    font-size: 17px;
+  }
+  .review small {
     color: var(--text3);
   }
   h2 {

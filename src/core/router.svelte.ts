@@ -1,28 +1,20 @@
 // 画面スタック型のルーター。URL は使わず、状態だけで画面を積む。
 // 遷移アニメーションとスワイプバックは WAAPI で transform / opacity だけを動かす。
 import { tick } from "svelte";
-import type { Question } from './quiz.ts';
+import type { Question, Route } from './deck.ts';
+import type { ReviewEvent } from './review.ts';
 import { spring, SPRINGS, reducedMotion } from './spring.ts';
 import type { SpringOptions } from './spring.ts';
+
+export type { Route };
 
 export interface AnswerLog {
   q: Question;
   /** 選んだ番号。未回答は null */
   chosen: number | null;
+  /** 復習リストの変化 */
+  review: ReviewEvent;
 }
-
-export type Route =
-  | { name: 'home' }
-  | { name: 'quiz'; seed: number }
-  | { name: 'result'; logs: AnswerLog[] }
-  | { name: 'book' }
-  | { name: 'chapter'; no: number }
-  | { name: 'root'; id: string }
-  | { name: 'word'; w: string }
-  | { name: 'group'; id: string }
-  | { name: 'settings' }
-  | { name: 'scope' }
-  | { name: 'stats' };
 
 export type Kind = 'push' | 'modal';
 

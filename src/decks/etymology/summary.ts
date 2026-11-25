@@ -1,9 +1,9 @@
-// 画面表示用の集計（ホーム・単語帳・学習記録）
+// 語源デッキの表示用の集計
 import type { Index } from './dataset.ts';
-import type { Progress, Settings } from './storage.ts';
-import type { ItemState } from './srs.ts';
-import { LEARNED_BOX, isDue } from './srs.ts';
-import { buildCandidates, FORMAT_LABEL } from './quiz.ts';
+import type { ItemState } from '../../core/srs.ts';
+import { LEARNED_BOX } from '../../core/srs.ts';
+import type { Scope } from './quiz.ts';
+import { FORMAT_LABEL } from './quiz.ts';
 import type { Word } from './types.ts';
 
 export type Status = 'new' | 'learning' | 'learned';
@@ -24,17 +24,7 @@ export function wordStatus(items: Record<string, ItemState>, w: Word): Status {
 
 export const STATUS_LABEL: Record<Status, string> = { new: '未習', learning: '学習中', learned: '覚えた' };
 
-/** 出題範囲で、今日の復習待ちの数 */
-export function dueCount(ix: Index, s: Settings, p: Progress, today: number): number {
-  let n = 0;
-  for (const c of buildCandidates(ix, s)) {
-    const st = p.items[c.key];
-    if (st && isDue(st, today)) n++;
-  }
-  return n;
-}
-
-export function scopeLabel(ix: Index | null, s: Settings): string {
+export function scopeLabel(ix: Index | null, s: Scope): string {
   if (!s.excludedRoots.length) return '全範囲';
   if (!ix) return '一部';
   const ex = new Set(s.excludedRoots);
@@ -47,7 +37,7 @@ export function scopeLabel(ix: Index | null, s: Settings): string {
   return `${chapters.length}章・${ix.ds.roots.length - ex.size}語源`;
 }
 
-export function settingsSummary(ix: Index | null, s: Settings): string {
+export function settingsSummary(ix: Index | null, s: Scope): string {
   const f = s.formats.length === 1 ? FORMAT_LABEL[s.formats[0]] : `${s.formats.length}形式`;
-  return `${s.count}問 · ${f} · ${scopeLabel(ix, s)}`;
+  return `${f} · ${scopeLabel(ix, s)}`;
 }

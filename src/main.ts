@@ -1,9 +1,9 @@
 import './app.css';
 import { mount } from 'svelte';
 import App from './App.svelte';
-import { installSpringVars } from './lib/spring.ts';
-import { loadData } from './lib/store.svelte.ts';
-import { requestPersist } from './lib/storage.ts';
+import { installSpringVars } from './core/spring.ts';
+import { loadData } from './core/store.svelte.ts';
+import { requestPersist } from './core/storage.ts';
 
 // 単語データ（別チャンク）を最初に読み込み始める
 loadData();

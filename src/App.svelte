@@ -1,17 +1,24 @@
 <script lang="ts">
-  import { router, swipeBack } from './lib/router.svelte.ts';
-  import { store } from './lib/store.svelte.ts';
+  import type { Component } from 'svelte';
+  import { router, swipeBack } from './core/router.svelte.ts';
+  import { store, decks } from './core/store.svelte.ts';
   import Home from './screens/Home.svelte';
   import Quiz from './screens/Quiz.svelte';
   import Result from './screens/Result.svelte';
-  import Book from './screens/Book.svelte';
-  import Chapter from './screens/Chapter.svelte';
-  import RootView from './screens/RootView.svelte';
-  import WordView from './screens/WordView.svelte';
-  import GroupView from './screens/GroupView.svelte';
   import Settings from './screens/Settings.svelte';
-  import Scope from './screens/Scope.svelte';
   import Stats from './screens/Stats.svelte';
+  import ReviewList from './screens/ReviewList.svelte';
+
+  // 画面の登録: 共通の画面 + 各デッキの画面（'ety/word' など）
+  const SCREENS: Record<string, Component<any>> = {
+    home: Home,
+    quiz: Quiz,
+    result: Result,
+    settings: Settings,
+    stats: Stats,
+    review: ReviewList,
+    ...Object.assign({}, ...decks.map((d) => d.screens)),
+  };
 
   function reg(node: HTMLElement, id: number) {
     return { destroy: router.register(id, node) };
@@ -33,6 +40,7 @@
 
 {#each router.stack as e, i (e.id)}
   {@const depth = router.stack.length - 1 - i}
+  {@const Screen = SCREENS[e.route.name] ?? Home}
   <div
     class="screen"
     class:hidden={depth > 1 || (depth === 1 && !router.revealing)}
@@ -41,18 +49,7 @@
     use:swipeBack={depth === 0 && i > 0 && e.kind === 'push'}
     inert={depth > 0}
   >
-    {#if e.route.name === 'home'}<Home />
-    {:else if e.route.name === 'quiz'}<Quiz seed={e.route.seed} />
-    {:else if e.route.name === 'result'}<Result logs={e.route.logs} />
-    {:else if e.route.name === 'book'}<Book />
-    {:else if e.route.name === 'chapter'}<Chapter no={e.route.no} />
-    {:else if e.route.name === 'root'}<RootView id={e.route.id} />
-    {:else if e.route.name === 'word'}<WordView w={e.route.w} />
-    {:else if e.route.name === 'group'}<GroupView id={e.route.id} />
-    {:else if e.route.name === 'settings'}<Settings />
-    {:else if e.route.name === 'scope'}<Scope />
-    {:else if e.route.name === 'stats'}<Stats />
-    {/if}
+    <Screen {...e.route.params ?? {}} />
     <div class="dim"></div>
   </div>
 {/each}

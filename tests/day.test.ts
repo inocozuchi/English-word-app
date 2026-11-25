@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { dayNumber, dayKey, keyToDay, streak } from '../src/lib/day.ts';
+import { dayNumber, dayKey, keyToDay, streak } from '../src/core/day.ts';
 
 describe('day', () => {
   it('午前4時で日が切り替わる', () => {

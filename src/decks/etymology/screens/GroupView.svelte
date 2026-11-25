@@ -1,11 +1,12 @@
 <script lang="ts">
-  import Page from '../components/Page.svelte';
+  import { ety } from '../state.svelte.ts';
+  import Page from '../../../components/Page.svelte';
   import Kana from '../components/Kana.svelte';
-  import Example from '../components/Example.svelte';
-  import { store } from '../lib/store.svelte.ts';
+  import Example from '../../../components/Example.svelte';
+  import { store } from '../../../core/store.svelte.ts';
 
   let { id }: { id: string } = $props();
-  const g = $derived(store.index!.ds.groups.find((x) => x.id === id)!);
+  const g = $derived(ety.index!.ds.groups.find((x) => x.id === id)!);
 </script>
 
 <Page title={g.title}>

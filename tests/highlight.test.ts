@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { splitHighlight, inflections } from '../src/lib/highlight.ts';
+import { splitHighlight, inflections } from '../src/core/highlight.ts';
 
 const hits = (text: string, w: string) => splitHighlight(text, w).filter((s) => s.hit).map((s) => s.t);
 

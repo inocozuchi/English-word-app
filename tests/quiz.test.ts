@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import data from '../src/generated/words.json';
-import type { Dataset } from '../src/lib/types.ts';
-import { buildIndex } from '../src/lib/dataset.ts';
-import { questionFor, buildSession, buildCandidates } from '../src/lib/quiz.ts';
-import { meaningTokens, overlaps, pickDistractors } from '../src/lib/distractors.ts';
-import { createRng } from '../src/lib/rng.ts';
-import { review } from '../src/lib/srs.ts';
+import type { Dataset } from '../src/decks/etymology/types.ts';
+import { buildIndex } from '../src/decks/etymology/dataset.ts';
+import { questionFor, buildSession, buildCandidates } from '../src/decks/etymology/quiz.ts';
+import { meaningTokens, overlaps, pickDistractors } from '../src/core/distractors.ts';
+import { createRng } from '../src/core/rng.ts';
+import { review } from '../src/core/srs.ts';
 
 const ix = buildIndex(data as Dataset);
 
@@ -83,7 +83,7 @@ describe('buildSession', () => {
   it('最初は最初の章から出題する（未習は学習順）', () => {
     const qs = buildSession(ix, { scope: { formats: ['ej'], excludedRoots: [] }, count: 10, items: {}, today: 100, rng: createRng(1) });
     const ch1 = new Set(ix.wordsByChapter.get(ix.ds.chapters[0].no)!.map((w) => w.w));
-    for (const q of qs) expect(ch1.has((q.subject as any).word.w)).toBe(true);
+    for (const q of qs) expect(ch1.has((q.data as any).word.w)).toBe(true);
   });
   it('出題範囲外の語源は出さない', () => {
     const keep = ix.ds.roots[5].id;

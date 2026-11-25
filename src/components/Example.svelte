@@ -1,6 +1,7 @@
 <script lang="ts">
-  import type { Example } from '../lib/types.ts';
-  import { splitHighlight } from '../lib/highlight.ts';
+  // 例文（英語と和訳）。デッキに依存しない共通部品
+  type Example = { en: string; ja: string };
+  import { splitHighlight } from '../core/highlight.ts';
   // 例文。見出し語（活用形を含む）を強調する
   let { ex, word = '' }: { ex: Example; word?: string } = $props();
   const segs = $derived(splitHighlight(ex.en, word));

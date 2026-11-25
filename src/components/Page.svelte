@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import Icon from './Icon.svelte';
-  import { router } from '../lib/router.svelte.ts';
+  import { router } from '../core/router.svelte.ts';
   // 戻るボタン付きの画面の枠。中身はネイティブスクロール
   let {
     title = '',

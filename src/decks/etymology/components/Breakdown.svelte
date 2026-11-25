@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Part } from '../lib/types.ts';
+  import type { Part } from '../types.ts';
   // 語源の分解: [in 中に] + [volve 回る] → コアイメージ
   let { parts, core = null }: { parts: Part[]; core?: string | null } = $props();
 </script>

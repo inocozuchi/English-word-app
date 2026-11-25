@@ -1,14 +1,15 @@
 <script lang="ts">
-  import Page from '../components/Page.svelte';
-  import Icon from '../components/Icon.svelte';
-  import { router } from '../lib/router.svelte.ts';
-  import { store, loadData } from '../lib/store.svelte.ts';
-  import { wordStatus } from '../lib/summary.ts';
-  import type { Word, Root } from '../lib/types.ts';
+  import { ety, loadEty } from '../state.svelte.ts';
+  import Page from '../../../components/Page.svelte';
+  import Icon from '../../../components/Icon.svelte';
+  import { router } from '../../../core/router.svelte.ts';
+  import { store } from '../../../core/store.svelte.ts';
+  import { wordStatus } from '../summary.ts';
+  import type { Word, Root } from '../types.ts';
 
-  if (!store.index) loadData();
+  loadEty();
   let q = $state('');
-  const ix = $derived(store.index);
+  const ix = $derived(ety.index);
 
   // 検索: 英単語（前方一致を優先）・日本語の意味・語源
   const results = $derived.by(() => {
@@ -50,7 +51,7 @@
       <h2>語源</h2>
       <ul class="group">
         {#each results.roots as r}
-          <li><button class="row press" onclick={() => router.push({ name: 'root', id: r.id })}>
+          <li><button class="row press" onclick={() => router.push({ name: 'ety/root', params: { id: r.id } })}>
             <span class="en strong">{r.root}</span><span class="sub">{r.meaning}</span><span class="chev"><Icon name="chevron" size={18} /></span>
           </button></li>
         {/each}
@@ -60,7 +61,7 @@
     {#if results.words.length}
       <ul class="group">
         {#each results.words as w}
-          <li><button class="row press" onclick={() => router.push({ name: 'word', w: w.w })}>
+          <li><button class="row press" onclick={() => router.push({ name: 'ety/word', params: { w: w.w } })}>
             <span class="en strong">{w.w}</span><span class="sub ell">{w.defs[0]?.ja}</span><span class="chev"><Icon name="chevron" size={18} /></span>
           </button></li>
         {/each}
@@ -72,7 +73,7 @@
     <ul class="group">
       {#each ix.ds.chapters as c}
         {@const st = chapterStats(c.no)}
-        <li><button class="row tall press" onclick={() => router.push({ name: 'chapter', no: c.no })}>
+        <li><button class="row tall press" onclick={() => router.push({ name: 'ety/chapter', params: { no: c.no } })}>
           <span class="no en">{c.no}</span>
           <span class="main">
             <span class="ct">{c.title}</span>
@@ -82,7 +83,7 @@
         </button></li>
       {/each}
       {#each ix.ds.groups as g}
-        <li><button class="row tall press" onclick={() => router.push({ name: 'group', id: g.id })}>
+        <li><button class="row tall press" onclick={() => router.push({ name: 'ety/group', params: { id: g.id } })}>
           <span class="no">他</span>
           <span class="main"><span class="ct">{g.title}</span><span class="meta">{g.words.length}語</span></span>
           <span class="chev"><Icon name="chevron" size={18} /></span>

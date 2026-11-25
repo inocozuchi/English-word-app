@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { KanaVariant } from '../lib/types.ts';
+  import type { KanaVariant } from '../types.ts';
   // 強く読む部分（^…^）を太字＋アクセント色で表示
   let { kana }: { kana: KanaVariant[] } = $props();
 </script>
