@@ -123,8 +123,12 @@ async function run(scheme) {
   await shot('13-settings-bottom');
   await top().locator('header .back').tap();
   await page.waitForTimeout(800);
-  await tap('nav button:nth-child(2)');
+  await tap('nav button:nth-child(3)');
   await shot('14-stats');
+  await top().locator('header .back').tap();
+  await page.waitForTimeout(800);
+  await tap('nav button:nth-child(2)');
+  await shot('15-review-list');
   if (errors.length) console.log('ERRORS', scheme, errors);
   await browser.close();
 }

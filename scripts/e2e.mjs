@@ -30,6 +30,7 @@ async function newPage(browser, opts = {}) {
 }
 
 const settingsOf = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('ety.settings.v1') || '{}'));
+const etyOf = async (page) => (await settingsOf(page)).decks?.etymology ?? { formats: ['ej'], excludedRoots: [] };
 const progressOf = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('ety.progress.v1') || '{}'));
 
 const browser = await chromium.launch();
@@ -110,15 +111,15 @@ try {
     await top().locator('.close').tap();
     await settle();
     ok((await depth()) === 1, '✕ でホームに戻る');
-    const todayNum = await page.locator('.stat .num').nth(1).textContent();
+    const todayNum = await page.locator('.stat-c .num').nth(1).textContent();
     ok(+todayNum === 5, `ホームの「今日の回答」が更新される（${todayNum}）`);
 
     // 再読み込みしても記録が残る
     await page.reload();
     await page.waitForSelector('button.start');
     await sleep(300);
-    ok(+(await page.locator('.stat .num').nth(1).textContent()) === 5, '再読み込みしても学習記録が残る');
-    ok(+(await page.locator('.stat .num').nth(0).textContent()) === 1, '連続日数が1日になる');
+    ok(+(await page.locator('.stat-c .num').nth(1).textContent()) === 5, '再読み込みしても学習記録が残る');
+    ok(+(await page.locator('.stat-c .num').nth(0).textContent()) === 1, '連続日数が1日になる');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }
@@ -201,21 +202,21 @@ try {
     ok((await settingsOf(page)).count === 20, '問題数を変更できる');
     // 出題形式: 最後の1つは外せない
     await top().locator('[role=switch][aria-label="英 → 日"]').tap();
-    ok(JSON.stringify((await settingsOf(page)).formats) === '["ej"]', '出題形式: 最後の1つは外せない');
+    ok(JSON.stringify((await etyOf(page)).formats) === '["ej"]', '出題形式: 最後の1つは外せない');
     await top().locator('[role=switch][aria-label="語源の意味"]').tap();
-    ok((await settingsOf(page)).formats.includes('rm'), '出題形式: 語源の意味を追加できる');
+    ok((await etyOf(page)).formats.includes('rm'), '出題形式: 語源の意味を追加できる');
     // テーマ
     await top().locator('.seg button', { hasText: 'ダーク' }).tap();
     ok((await page.evaluate(() => document.documentElement.dataset.theme)) === 'dark', 'テーマをダークに固定できる');
     ok((await page.evaluate(() => [...document.querySelectorAll('meta[name=theme-color]')].every((m) => m.content === '#0b0b0d'))), 'ステータスバーの色もダークになる');
     await top().locator('.seg button', { hasText: '自動' }).tap();
     // 出題範囲: すべて解除 → クイズは「出題できる問題がありません」
-    await top().locator('.press-row', { hasText: '章・語源を選ぶ' }).tap();
+    await top().locator('.ui-item', { hasText: '章・語源を選ぶ' }).tap();
     await settle();
     await top().locator('.pill', { hasText: 'すべて解除' }).tap();
-    ok((await settingsOf(page)).excludedRoots.length === 196, '出題範囲をすべて解除できる');
+    ok((await etyOf(page)).excludedRoots.length === 196, '出題範囲をすべて解除できる');
     await top().locator('.check').first().tap();
-    const ex = (await settingsOf(page)).excludedRoots.length;
+    const ex = (await etyOf(page)).excludedRoots.length;
     ok(ex < 196 && ex > 0, '章単位で選択できる');
     await top().locator('.pill', { hasText: 'すべて解除' }).tap();
     await top().locator('header .back').tap();
@@ -237,27 +238,136 @@ try {
     await page.waitForSelector('button.start');
     await page.locator('header .icon').tap();
     await settle();
-    const [download] = await Promise.all([page.waitForEvent('download'), top().locator('.press-row', { hasText: '書き出す' }).tap()]);
+    const [download] = await Promise.all([page.waitForEvent('download'), top().locator('.ui-item', { hasText: '書き出す' }).tap()]);
     const file = await download.path();
     const json = JSON.parse(readFileSync(file, 'utf8'));
     ok(json.progress.items['ej:involve'].box === 3, '学習記録を JSON で書き出せる');
-    await top().locator('.press-row', { hasText: '学習記録を消去' }).tap();
+    await top().locator('.ui-item', { hasText: '学習記録を消去' }).tap();
     await sleep(100);
     ok(Object.keys((await progressOf(page)).items).length === 1, '消去は1回目のタップでは実行されない');
-    await top().locator('.press-row', { hasText: 'もう一度タップで消去' }).tap();
+    await top().locator('.ui-item', { hasText: 'もう一度タップで消去' }).tap();
     await sleep(200);
     ok(Object.keys((await progressOf(page)).items).length === 0, '学習記録を消去できる');
     await top().locator('input[type=file]').setInputFiles(file);
     await sleep(300);
-    await top().locator('.press-row', { hasText: '置き換える' }).tap();
+    await top().locator('.ui-item', { hasText: '置き換える' }).tap();
     await sleep(300);
     ok((await progressOf(page)).items['ej:involve']?.box === 3, '書き出した JSON を読み込める');
     ok((await top().locator('input[type=range]').first().inputValue()) === '7', '読み込み後も設定画面の表示が正しい');
     await top().locator('header .back').tap();
     await settle();
-    await page.locator('nav button').nth(1).tap();
+    await page.locator('nav button').nth(2).tap();
     await settle();
     ok((await top().textContent()).includes('involve'), '学習記録に苦手な単語が出る');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+
+  // ---------- スワイプで次へ ----------
+  {
+    const { page, errors, top, settle, ctx } = await newPage(browser);
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('ety.settings.v1', JSON.stringify({ advanceSec: 10, answerSec: 15, count: 5 })));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    const cdp = await ctx.newCDPSession(page);
+    const drag = async (from, to, steps = 10) => {
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: from, y: 330 }] });
+      for (let k = 1; k <= steps; k++) {
+        await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: from + ((to - from) * k) / steps, y: 330 }] });
+        await sleep(16);
+      }
+      await sleep(80);
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await sleep(500);
+    };
+    const count = async () => (await top().locator('.count').textContent()).replace(/\s/g, '');
+    // 回答前にスワイプしても進まない
+    await drag(320, 60);
+    ok((await count()).startsWith('1/'), '回答前のスワイプでは進まない');
+    await top().locator('.choice').first().tap();
+    await sleep(400);
+    ok((await top().locator('.judge').count()) === 1, '回答すると大きな ◯ / × が出る');
+    const st = (await top().locator('.status').textContent()).trim();
+    ok(/^(正解|不正解)/.test(st), `正誤の文字が出る（${st.slice(0, 8)}）`);
+    // 少しだけ動かして離す → 戻る
+    await drag(320, 290, 4);
+    ok((await count()).startsWith('1/'), '少しのスワイプでは次へ進まない');
+    // 大きく左へ → すぐ次へ（自動で進む10秒を待たない）
+    const t0 = Date.now();
+    await drag(330, 60);
+    ok((await count()).startsWith('2/') && Date.now() - t0 < 3000, '解説中に左へスワイプするとすぐ次の問題へ');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+  // ---------- 復習リスト ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    const words = JSON.parse(readFileSync(new globalThis.URL('../src/generated/words.json', import.meta.url), 'utf8'));
+    const involve = words.words.find((w) => w.w === 'involve');
+    await page.goto(URL);
+    // 復習リストに involve（あと1回でクリア）と revolve を入れておく
+    await page.evaluate(() => {
+      localStorage.setItem('ety.settings.v1', JSON.stringify({ advanceSec: 3, answerSec: 15, count: 10, reviewGoal: 2 }));
+      const e = (key, streak) => ({ deck: 'etymology', key, added: 1, misses: 1, streak, last: 1 });
+      localStorage.setItem('ety.progress.v1', JSON.stringify({ items: {}, days: {}, lastBase: null, review: { 'ej:involve': e('ej:involve', 1), 'ej:revolve': e('ej:revolve', 0) } }));
+    });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await sleep(300);
+    ok((await page.locator('.review .r-num').textContent()).trim() === '2', 'ホームに復習リストの件数が出る');
+    // 一覧
+    await page.locator('nav button', { hasText: '復習リスト' }).tap();
+    await settle();
+    ok((await top().locator('.list li').count()) === 2, '復習リストの一覧に2件');
+    ok((await top().locator('.list li').first().locator('.dot.on').count()) <= 1, '連続正解の進み具合が点で出る');
+    await top().locator('header .back').tap();
+    await settle();
+    // 復習モード: リストの問題だけが出る
+    await page.locator('.review').tap();
+    await settle();
+    ok((await top().locator('.rv').count()) === 1, '復習モードの表示が出る');
+    ok((await top().locator('.count').textContent()).replace(/\s/g, '').endsWith('/2'), '復習モードはリストの件数だけ出題');
+    for (let n = 0; n < 2; n++) {
+      const head = (await top().locator('.prompt').textContent()).trim();
+      if (head.startsWith('involve')) {
+        await top().locator('.choice', { hasText: involve.defs[0].ja }).first().tap();
+        await sleep(300);
+        ok((await top().locator('.rnote').textContent()).includes('外れました'), '連続で正解すると復習リストから外れる');
+      } else {
+        await top().locator('.choice').first().tap();
+        await sleep(300);
+      }
+      await sleep(3300);
+    }
+    await page.waitForSelector('.result');
+    ok((await page.locator('.result .review').textContent()).includes('クリア'), '結果に復習リストの変化が出る');
+    await page.locator('.result .secondary').tap();
+    await settle();
+    const rev = (await progressOf(page)).review;
+    ok(!rev['ej:involve'], 'クリアした問題はリストから消える');
+    // 通常モードでまちがえると自動で追加される
+    const before = Object.keys(rev).length;
+    await page.locator('button.start').tap();
+    await settle();
+    await sleep(15500); // 何も押さずに時間切れ
+    const after = Object.keys((await progressOf(page)).review).length;
+    ok(after === before + 1 || after === before, `時間切れの問題が復習リストに入る（${before}→${after}）`);
+    ok(after >= 1, '復習リストが空ではない');
+    await top().locator('.close').tap();
+    await settle();
+    // 手動で外す
+    await page.locator('nav button', { hasText: '復習リスト' }).tap();
+    await settle();
+    const n0 = await top().locator('.list li').count();
+    await top().locator('.remove').first().tap();
+    await sleep(200);
+    ok((await top().locator('.list li').count()) === n0 - 1, '「外す」で手動で外せる');
+    ok((await depth()) === 2, '画面遷移が正しい');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }
