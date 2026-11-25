@@ -120,8 +120,8 @@ export interface QuizMode<S = any> {
   Prompt: Component<{ q: Question<any>; phase: 'ask' | 'reveal' }>;
   Explain?: Component<{ q: Question<any> }>;
   inlineExplain?: boolean;
-  /** 解説の下に小さく出す注意書き */
-  note?: string;
+  /** 解説の下に小さく出す注意書き（問題ごとに変えるなら関数。null で出さない） */
+  note?: string | ((q: Question<any>) => string | null);
   SettingsSection?: Component<{}>;
   StatsSection?: Component<{}>;
   ResultSection?: Component<{ logs: AnswerRecord[] }>;

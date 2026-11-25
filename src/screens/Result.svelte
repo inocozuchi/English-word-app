@@ -75,7 +75,10 @@
       </div>
     {/if}
 
-    {#if missed.length}
+    {#if mode.ResultSection}
+      <!-- モード独自の結果（音声変化: ルール別の正答率・まちがえた項目） -->
+      <mode.ResultSection {logs} />
+    {:else if missed.length}
       <h2 in:rise={{ delay: 60 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
       <ul class="list" in:rise={{ delay: 100 }}>
         {#each missed as l}

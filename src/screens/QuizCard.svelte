@@ -27,6 +27,7 @@
   } = $props();
 
   const ok = $derived(phase === 'reveal' && chosen === q.answer);
+  const note = $derived(typeof mode.note === 'function' ? mode.note(q) : (mode.note ?? null));
 
   const REVIEW_NOTE: Record<Exclude<ReviewEvent, null>, string> = {
     added: '復習リストに追加',
@@ -80,7 +81,7 @@
     <div class="inline scroll">
       <div class="status-slot">{#if phase === 'reveal'}{@render status()}{/if}</div>
       <mode.Prompt {q} {phase} />
-      {#if phase === 'reveal' && mode.note}<p class="mode-note" use:explainFx>{mode.note}</p>{/if}
+      {#if phase === 'reveal' && note}<p class="mode-note">{note}</p>{/if}
     </div>
   {:else if phase === 'ask'}
     <!-- 回答前は問題、回答後は解説に入れ替わる（選択肢は見えたまま） -->
@@ -89,7 +90,7 @@
     <div class="explain scroll" use:explainFx>
       {@render status()}
       {#if mode.Explain}<mode.Explain {q} />{/if}
-      {#if mode.note}<p class="mode-note">{mode.note}</p>{/if}
+      {#if note}<p class="mode-note">{note}</p>{/if}
     </div>
   {/if}
 </div>

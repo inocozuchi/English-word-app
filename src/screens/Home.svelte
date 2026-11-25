@@ -54,14 +54,15 @@
   </header>
 
   <div class="hero" data-intro>
-    <p class="mode"><span class="chip">{mode.title}</span>{#if mode.stat()}<span class="stat">{mode.stat()}</span>{/if}</p>
     <p class="tagline">{mode.tagline}</p>
     <h1 class="display">
       {#each hero as line, li}{#if li > 0}<br />{/if}{#each line as part}{#if part.acc}<span class="acc">{part.t}</span>{:else}{part.t}{/if}{/each}{/each}
     </h1>
   </div>
 
-  <button class="start press" data-intro onclick={() => start('normal')} aria-label="スタート">
+  <!-- 今のモード（切り替えは設定で。ここは表示だけ） -->
+  <p class="mode-line" data-intro><span class="eyebrow-en">Mode</span><span class="mname">{mode.title}</span>{#if mode.stat()}<span class="stat">{mode.stat()}</span>{/if}</p>
+  <button class="start press" data-intro onclick={() => start('normal')} aria-label="スタート（{mode.title}）">
     <span class="start-en display">Start</span>
     <span class="start-ja">スタート</span>
     <span class="start-sum">{summary}</span>
@@ -88,7 +89,7 @@
     </div>
     <div class="stat-c">
       <span class="num en"><Num value={due} /></span>
-      <span class="cap">期限の来た語</span>
+      <span class="cap">期限の来た問題</span>
     </div>
   </div>
 
@@ -142,19 +143,24 @@
     gap: 8px;
     min-height: 0;
   }
-  .mode {
+  .mode-line {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 8px;
-    font-size: 12px;
+    margin: 0 4px -4px;
+    font-size: 13px;
   }
-  .chip {
-    padding: 2px 9px;
-    border-radius: 999px;
-    border: 1.5px solid var(--ink);
+  .mode-line .eyebrow-en {
+    font-size: 10px;
+    color: var(--text3);
+  }
+  .mname {
     font-weight: 700;
+    color: var(--text2);
   }
   .stat {
+    margin-left: auto;
+    font-size: 11px;
     color: var(--text3);
     font-weight: 600;
   }
