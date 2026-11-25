@@ -50,7 +50,18 @@
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
 
+  // 確認は confirm() ではなく画面内で行う（「もう一度タップで確定」。confirm が使えない環境でも動く）
+  let armed = $state<'reset' | 'import' | null>(null);
+  let armTimer = 0;
+  function arm(kind: 'reset' | 'import') {
+    armed = kind;
+    clearTimeout(armTimer);
+    armTimer = window.setTimeout(() => (armed = null), 4000);
+    haptic('light');
+  }
+
   let fileInput: HTMLInputElement;
+  let pending = $state<ReturnType<typeof parseImport>>(null);
   async function doImport(e: Event) {
     // await の後では e.currentTarget が null になるので、先に取っておく
     const input = e.currentTarget as HTMLInputElement;
@@ -59,13 +70,20 @@
     const data = parseImport(await f.text());
     input.value = '';
     if (!data) return flash('読み込めませんでした（形式が違います）');
-    if (!confirm('今の学習記録を、読み込んだデータで置き換えますか？')) return;
-    replaceAll(data.settings, data.progress);
+    pending = data;
+    arm('import');
+  }
+  function confirmImport() {
+    if (!pending) return;
+    replaceAll(pending.settings, pending.progress);
+    pending = null;
+    armed = null;
     flash('読み込みました');
   }
 
   function reset() {
-    if (!confirm('学習記録をすべて消去しますか？（元に戻せません）')) return;
+    if (armed !== 'reset') return arm('reset');
+    armed = null;
     replaceAll($state.snapshot(store.settings), { items: {}, days: {}, lastBase: null });
     flash('学習記録を消去しました');
   }
@@ -152,8 +170,14 @@
   <h2>データ</h2>
   <div class="group">
     <button class="item press-row" onclick={doExport}><span>学習記録を書き出す</span><span class="right">JSON</span></button>
-    <button class="item press-row" onclick={() => fileInput.click()}><span>学習記録を読み込む</span></button>
-    <button class="item press-row danger" onclick={reset}><span>学習記録を消去</span></button>
+    {#if armed === 'import' && pending}
+      <button class="item press-row danger" onclick={confirmImport}><span>今の記録を置き換える（タップで確定）</span></button>
+    {:else}
+      <button class="item press-row" onclick={() => fileInput.click()}><span>学習記録を読み込む</span></button>
+    {/if}
+    <button class="item press-row danger" class:armed={armed === 'reset'} onclick={reset}>
+      <span>{armed === 'reset' ? 'もう一度タップで消去（元に戻せません）' : '学習記録を消去'}</span>
+    </button>
     <button class="item press-row" onclick={() => updateSettings({ ...DEFAULT_SETTINGS, excludedRoots: [...DEFAULT_SETTINGS.excludedRoots], formats: [...DEFAULT_SETTINGS.formats] })}><span>設定を初期値に戻す</span></button>
   </div>
   <input bind:this={fileInput} type="file" accept="application/json,.json" hidden onchange={doImport} />
@@ -245,6 +269,10 @@
   }
   .danger {
     color: #d93a3a;
+  }
+  .armed {
+    background: color-mix(in srgb, #d93a3a 10%, transparent);
+    font-weight: 700;
   }
   .flash {
     text-align: center;
