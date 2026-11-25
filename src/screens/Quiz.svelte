@@ -11,7 +11,7 @@
   import type { Question } from '../lib/quiz.ts';
   import { createRng } from '../lib/rng.ts';
   import { haptic } from '../lib/haptics.ts';
-  import { cardIn, cardOut, sheetIn, popScale, shake } from '../lib/transitions.ts';
+  import { cardIn, cardOut, promptOut, explainIn, popScale, shake } from '../lib/transitions.ts';
 
   let { seed }: { seed: number } = $props();
 
@@ -171,35 +171,80 @@
   </div>
   <div class="pause-note" aria-live="polite"><Icon name="pause" size={14} stroke={2.4} />一時停止中</div>
 
-  {#if ready && !qs.length}
-    <div class="empty">
-      <p>出題できる問題がありません。</p>
-      <p class="sub">設定で出題範囲や出題形式を確認してください。</p>
-      <button class="btn press" onclick={() => router.push({ name: 'settings' })}>設定を開く</button>
-    </div>
-  {/if}
-
   <div class="stage">
+    <!-- 範囲が空のときの案内（問題エリアの中だけに出す。✕ を塞がない） -->
+    {#if ready && !qs.length}
+      <div class="empty">
+        <p>出題できる問題がありません。</p>
+        <p class="sub">設定で出題範囲や出題形式を確認してください。</p>
+        <button class="btn press" onclick={() => router.push({ name: 'settings' })}>設定を開く</button>
+      </div>
+    {/if}
     {#key i}
       {#if q}
         <div class="card" in:cardIn out:cardOut>
-          <div class="prompt">
-            {#if q.subject.kind === 'word' && q.format === 'ej'}
-              <h1 class="headword en" class:long={q.subject.word.w.length > 11}>{q.subject.word.w}</h1>
-              <p class="kana-line"><Kana kana={q.subject.word.kana} /></p>
-            {:else if q.subject.kind === 'word'}
-              <p class="ask">この意味の英単語は？</p>
-              <h1 class="ja-prompt">
-                {#each q.subject.word.defs as d, di}
-                  {#if di === 0 || d.pos !== q.subject.word.defs[0].pos}<span class="def"><span class="pos">{d.pos}</span>{d.ja}</span>{/if}
-                {/each}
-              </h1>
-            {:else if q.subject.kind === 'root'}
-              <p class="ask">{q.subject.root.category === '接頭辞' ? '接頭辞' : '語源'}の意味は？</p>
-              <h1 class="headword en root" class:long={q.subject.root.root.length > 11}>{q.subject.root.root}</h1>
+          <!-- 上半分: 回答前は問題、回答後は解説に入れ替わる（選択肢は見えたまま） -->
+          <div class="upper">
+            {#if phase === 'ask'}
+              <div class="prompt" out:promptOut>
+                {#if q.subject.kind === 'word' && q.format === 'ej'}
+                  <h1 class="headword en" class:long={q.subject.word.w.length > 11}>{q.subject.word.w}</h1>
+                  <p class="kana-line"><Kana kana={q.subject.word.kana} /></p>
+                {:else if q.subject.kind === 'word'}
+                  <p class="ask">この意味の英単語は？</p>
+                  <h1 class="ja-prompt">
+                    {#each q.subject.word.defs as d, di}
+                      {#if di === 0 || d.pos !== q.subject.word.defs[0].pos}<span class="def"><span class="pos">{d.pos}</span>{d.ja}</span>{/if}
+                    {/each}
+                  </h1>
+                {:else if q.subject.kind === 'root'}
+                  <p class="ask">{q.subject.root.category === '接頭辞' ? '接頭辞' : '語源'}の意味は？</p>
+                  <h1 class="headword en root" class:long={q.subject.root.root.length > 11}>{q.subject.root.root}</h1>
+                {:else}
+                  <p class="ask">熟語の意味は？</p>
+                  <h1 class="phrase en">{q.subject.phrase.en}</h1>
+                {/if}
+              </div>
             {:else}
-              <p class="ask">熟語の意味は？</p>
-              <h1 class="phrase en">{q.subject.phrase.en}</h1>
+              <div class="explain scroll" in:explainIn>
+                <div class="status" class:ok>
+                  <span class="badge">{#if ok}<Icon name="check" size={16} stroke={3} />{:else}<Icon name="x" size={15} stroke={3} />{/if}</span>
+                  {ok ? '正解' : chosen === null ? '時間切れ' : '不正解'}
+                </div>
+
+                {#if q.subject.kind === 'word'}
+                  {@const w = q.subject.word}
+                  <div class="head">
+                    <span class="hw en" class:long={w.w.length > 12}>{w.w}</span>
+                    <Kana kana={w.kana} />
+                  </div>
+                  <ul class="defs">
+                    {#each w.defs as d}<li><span class="pos">{d.pos}</span>{d.ja}</li>{/each}
+                  </ul>
+                  <Breakdown parts={w.breakdown} core={w.core} />
+                  {#if w.examples[0]}<Example ex={w.examples[0]} word={w.w} />{/if}
+                {:else if q.subject.kind === 'root'}
+                  {@const r = q.subject.root}
+                  <div class="head">
+                    <span class="hw en">{r.root}</span>
+                    <span class="meaning">{r.meaning}<span class="en sub">{r.meaningEn}</span></span>
+                  </div>
+                  {#if r.memo}<p class="memo">{r.memo}</p>{/if}
+                  <ul class="mini">
+                    {#each r.words.filter((id) => !r.refs.includes(id)).slice(0, 4) as id}
+                      {@const w = store.index!.ds.words[id]}
+                      <li><span class="en">{w.w}</span><span class="mj">{w.defs[0]?.ja}</span></li>
+                    {/each}
+                  </ul>
+                {:else}
+                  {@const p = q.subject.phrase}
+                  <div class="head">
+                    <span class="hw en ph">{p.en}</span>
+                  </div>
+                  <p class="phrase-ja">{p.ja}</p>
+                  {#if p.examples[0]}<Example ex={p.examples[0]} word={p.en} />{/if}
+                {/if}
+              </div>
             {/if}
           </div>
 
@@ -222,49 +267,6 @@
               </button>
             {/each}
           </div>
-
-          {#if phase === 'reveal'}
-            <div class="sheet scroll" in:sheetIn={{ delay: 240 }}>
-              <div class="status" class:ok>
-                <span class="badge">{#if ok}<Icon name="check" size={16} stroke={3} />{:else}<Icon name="x" size={15} stroke={3} />{/if}</span>
-                {ok ? '正解' : chosen === null ? '時間切れ' : '不正解'}
-                {#if !ok && chosen !== null}<span class="yours">あなたの答え：<span class:en={q.choices[chosen].latin}>{q.choices[chosen].text}</span></span>{/if}
-              </div>
-
-              {#if q.subject.kind === 'word'}
-                {@const w = q.subject.word}
-                <div class="head">
-                  <span class="hw en">{w.w}</span>
-                  <Kana kana={w.kana} />
-                </div>
-                <ul class="defs">
-                  {#each w.defs as d}<li><span class="pos">{d.pos}</span>{d.ja}</li>{/each}
-                </ul>
-                <Breakdown parts={w.breakdown} core={w.core} />
-                {#if w.examples[0]}<Example ex={w.examples[0]} word={w.w} />{/if}
-              {:else if q.subject.kind === 'root'}
-                {@const r = q.subject.root}
-                <div class="head">
-                  <span class="hw en">{r.root}</span>
-                  <span class="meaning">{r.meaning}<span class="en sub">{r.meaningEn}</span></span>
-                </div>
-                {#if r.memo}<p class="memo">{r.memo}</p>{/if}
-                <ul class="mini">
-                  {#each r.words.slice(0, 4) as id}
-                    {@const w = store.index!.ds.words[id]}
-                    <li><span class="en">{w.w}</span><span class="mj">{w.defs[0]?.ja}</span></li>
-                  {/each}
-                </ul>
-              {:else}
-                {@const p = q.subject.phrase}
-                <div class="head">
-                  <span class="hw en ph">{p.en}</span>
-                </div>
-                <p class="phrase-ja">{p.ja}</p>
-                {#if p.examples[0]}<Example ex={p.examples[0]} />{/if}
-              {/if}
-            </div>
-          {/if}
         </div>
       {/if}
     {/key}
@@ -297,22 +299,23 @@
     border-radius: 22px;
   }
   .count {
-    font-weight: 650;
+    font-weight: 800;
     font-size: 16px;
     font-variant-numeric: tabular-nums;
   }
   .of {
     color: var(--text3);
-    font-weight: 500;
+    font-weight: 600;
   }
   .fmt {
     justify-self: end;
     font-size: 12px;
+    font-weight: 600;
     color: var(--text3);
   }
   .track {
     flex: none;
-    height: 3px;
+    height: 4px;
     margin: 6px var(--pad-x-r) 0 var(--pad-x);
     border-radius: 2px;
     background: var(--fill);
@@ -333,7 +336,7 @@
   }
   .pause-note {
     position: absolute;
-    top: calc(var(--pad-top) + 54px);
+    top: calc(var(--pad-top) + 58px);
     left: 0;
     right: 0;
     display: flex;
@@ -341,6 +344,7 @@
     align-items: center;
     gap: 4px;
     font-size: 12px;
+    font-weight: 600;
     color: var(--text2);
     opacity: 0;
     transform: translateY(-4px);
@@ -361,47 +365,56 @@
   }
   .card {
     grid-area: 1 / 1;
-    position: relative;
     display: flex;
     flex-direction: column;
     min-height: 0;
     padding: 0 var(--pad-x-r) var(--pad-bottom) var(--pad-x);
   }
-  .prompt {
+  .upper {
     flex: 1;
+    position: relative;
+    min-height: 0;
+    margin-bottom: 14px;
+  }
+  .prompt,
+  .explain {
+    position: absolute;
+    inset: 0;
+  }
+  .prompt {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     gap: 10px;
-    padding: 16px 0 24px;
-    min-height: 0;
+    padding: 12px 0;
   }
   .headword {
-    font-size: 46px;
-    font-weight: 650;
+    font-size: 48px;
+    font-weight: 750;
     line-height: 1.1;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
     overflow-wrap: anywhere;
   }
   .headword.long {
-    font-size: 36px;
+    font-size: 38px;
   }
   .headword.root {
-    font-size: 40px;
+    font-size: 42px;
   }
   .kana-line {
     font-size: 18px;
   }
   .ask {
     font-size: 13px;
+    font-weight: 600;
     color: var(--text3);
     letter-spacing: 0.04em;
   }
   .ja-prompt {
     font-size: 24px;
-    font-weight: 650;
+    font-weight: 700;
     line-height: 1.45;
     display: flex;
     flex-direction: column;
@@ -409,16 +422,16 @@
   }
   .phrase {
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.25;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
   .pos {
     display: inline-block;
     font-size: 0.55em;
     font-weight: 600;
     color: var(--text2);
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     border-radius: 6px;
     padding: 0 5px;
     margin-right: 8px;
@@ -426,94 +439,23 @@
     line-height: 1.6;
   }
 
-  .choices {
-    flex: none;
+  /* 解説（問題のエリアに入れ替わる。長いときはスクロール、下端はフェード） */
+  .explain {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  .choice {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 60px;
-    padding: 12px 48px 12px 18px;
-    border-radius: var(--radius);
-    background: var(--fill);
-    text-align: left;
-    font-size: 17px;
-    line-height: 1.35;
-    transition:
-      background-color 0.2s,
-      color 0.2s,
-      opacity 0.25s,
-      transform var(--dur-press, 300ms) var(--ease-press, ease-out);
-  }
-  .choice.en {
-    font-size: 20px;
-    font-weight: 550;
-  }
-  .choice:disabled {
-    cursor: default;
-  }
-  .choice .tag {
-    flex: none;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text2);
-    border: 1px solid var(--fill-strong);
-    border-radius: 6px;
-    padding: 0 5px;
-    line-height: 1.6;
-  }
-  .choice.correct {
-    background: var(--accent);
-    color: var(--on-accent);
-  }
-  .choice.correct .tag {
-    color: var(--on-accent);
-    border-color: color-mix(in srgb, var(--on-accent) 40%, transparent);
-  }
-  .choice.wrong {
-    background: var(--fill-strong);
-    color: var(--text2);
-  }
-  .choice.dim {
-    opacity: 0.38;
-  }
-  .mark {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    translate: 0 -50%;
-    display: grid;
-  }
-
-  /* 解説シート: 画面の下端にぴったり付ける（端末の角丸と干渉しないよう、角丸は上だけ） */
-  .sheet {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    max-height: 100%;
-    min-height: 60%;
-    padding: 22px var(--pad-x-r) var(--pad-bottom) var(--pad-x);
-    border-radius: 28px 28px 0 0;
-    background: var(--bg);
-    box-shadow: 0 0 0 1px var(--line), 0 -12px 40px -12px rgba(0, 0, 0, 0.18);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    z-index: 2;
+    gap: 12px;
+    padding: 18px 2px 18px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
   }
   .status {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 15px;
-    font-weight: 650;
+    font-weight: 700;
     color: var(--text2);
+    flex: none;
   }
   .status .badge {
     width: 26px;
@@ -523,17 +465,6 @@
     place-items: center;
     background: var(--fill-strong);
     color: var(--text2);
-  }
-  .yours {
-    margin-left: auto;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text3);
-    max-width: 60%;
-    text-align: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   .status.ok {
     color: var(--accent);
@@ -547,19 +478,23 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 4px 12px;
+    flex: none;
   }
   .hw {
-    font-size: 30px;
-    font-weight: 650;
-    letter-spacing: -0.02em;
+    font-size: 32px;
+    font-weight: 750;
+    letter-spacing: -0.025em;
     line-height: 1.15;
+  }
+  .hw.long {
+    font-size: 26px;
   }
   .hw.ph {
     font-size: 24px;
   }
   .meaning {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
   }
   .meaning .sub {
     margin-left: 8px;
@@ -572,10 +507,11 @@
     margin: 0;
     padding: 0;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     display: flex;
     flex-direction: column;
     gap: 2px;
+    flex: none;
   }
   .defs .pos {
     font-size: 11px;
@@ -600,8 +536,10 @@
     align-items: baseline;
   }
   .mini .en {
-    font-weight: 600;
-    min-width: 7.5em;
+    font-weight: 650;
+    flex: none;
+    width: 7.2em;
+    overflow-wrap: anywhere;
   }
   .mini .mj {
     font-size: 14px;
@@ -609,7 +547,81 @@
   }
   .phrase-ja {
     font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* 選択肢 */
+  .choices {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .choice {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 60px;
+    padding: 11px 46px 11px 16px;
+    border-radius: var(--radius);
+    border: 2px solid var(--line-strong);
+    background: var(--bg);
+    text-align: left;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.35;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s,
+      opacity 0.25s,
+      transform var(--dur-press, 300ms) var(--ease-press, ease-out);
+  }
+  .choice:active {
+    background: var(--fill);
+  }
+  .choice.en {
+    font-size: 20px;
     font-weight: 600;
+  }
+  .choice:disabled {
+    cursor: default;
+  }
+  .choice .tag {
+    flex: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text2);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 0 5px;
+    line-height: 1.6;
+  }
+  .choice.correct {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+    font-weight: 700;
+  }
+  .choice.correct .tag {
+    color: var(--on-accent);
+    border-color: color-mix(in srgb, var(--on-accent) 40%, transparent);
+  }
+  .choice.wrong {
+    background: var(--fill-strong);
+    border-color: var(--fill-strong);
+    color: var(--text2);
+  }
+  .choice.dim {
+    opacity: 0.4;
+  }
+  .mark {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    translate: 0 -50%;
+    display: grid;
   }
 
   .empty {
@@ -633,6 +645,6 @@
     border-radius: 999px;
     background: var(--accent);
     color: var(--on-accent);
-    font-weight: 600;
+    font-weight: 700;
   }
 </style>

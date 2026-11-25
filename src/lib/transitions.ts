@@ -23,15 +23,24 @@ export function cardOut(_node: Element) {
   };
 }
 
-/** 解説シート: 下から入る */
-export function sheetIn(_node: Element, { delay = 0 }: { delay?: number } = {}) {
-  if (reducedMotion()) return { ...fade(160), delay };
+/** 問題（回答前）: 少し上へ縮みながら消える */
+export function promptOut(_node: Element) {
+  if (reducedMotion()) return fade(100);
+  return {
+    duration: 180,
+    css: (t: number, u: number) => `transform:translate3d(0,${-u * 16}px,0) scale(${1 - u * 0.04});opacity:${t * t}`,
+  };
+}
+
+/** 解説: 下からふわっと入る（問題が消えるのを少し待つ） */
+export function explainIn(_node: Element) {
+  if (reducedMotion()) return { ...fade(160), delay: 80 };
   const s = spring(SPRINGS.card);
   return {
-    delay,
+    delay: 120,
     duration: s.duration,
     easing: s.ease,
-    css: (t: number, u: number) => `transform:translate3d(0,${u * 110}%,0);opacity:${Math.min(1, 0.4 + t)}`,
+    css: (t: number, u: number) => `transform:translate3d(0,${u * 28}px,0);opacity:${Math.min(1, t * 1.6)}`,
   };
 }
 
