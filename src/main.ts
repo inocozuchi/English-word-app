@@ -4,6 +4,7 @@ import App from './App.svelte';
 import { installSpringVars } from './core/spring.ts';
 import { loadData } from './core/store.svelte.ts';
 import { requestPersist } from './core/storage.ts';
+import { boot } from './core/boot.ts';
 
 // 単語データ（別チャンク）を最初に読み込み始める
 loadData();
@@ -16,6 +17,7 @@ document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
 mount(App, { target: document.getElementById('app')! });
+boot();
 
 requestPersist();
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {

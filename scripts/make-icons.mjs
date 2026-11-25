@@ -34,10 +34,8 @@ for (const [w, h, r] of devices) {
   for (const [theme, c] of Object.entries(themes)) {
     const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: r });
     const p = await ctx.newPage();
-    // アプリのロゴ（太枠に2行の欧文）を中央に置くだけの静かな起動画面
-    await p.setContent(`<html><body style="margin:0;height:100vh;display:grid;place-items:center;background:${c.bg}">
-      <div style="display:flex;flex-direction:column;padding:6px 11px 5px;border:3px solid ${c.ink};color:${c.ink};font:900 17px/1.02 Helvetica,Arial,sans-serif;letter-spacing:.02em">
-      <span>ETYMO</span><span>WORDS</span></div></body></html>`);
+    // 起動画面は背景色だけ（ロゴを置くと、アプリ表示に切り替わる瞬間に位置がずれて見えるため）
+    await p.setContent(`<html><body style="margin:0;height:100vh;background:${c.bg}"></body></html>`);
     const file = `splash/${theme}-${w}x${h}@${r}x.png`;
     await p.screenshot({ path: pub + file });
     await ctx.close();

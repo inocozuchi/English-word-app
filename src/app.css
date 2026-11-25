@@ -164,6 +164,11 @@ h1, h2, h3, p {
   letter-spacing: -0.01em;
 }
 
+/* 起動直後は、配置が確定する（html.booted）までホームの要素を隠しておく（core/boot.ts） */
+html:not(.booted) [data-intro] {
+  opacity: 0;
+}
+
 /* タップ時の軽い縮小（:active は main.ts の touchstart リスナーで iOS でも有効） */
 .press {
   transition: transform var(--dur-press, 300ms) var(--ease-press, ease-out), opacity 0.2s;
