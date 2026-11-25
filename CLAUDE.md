@@ -11,7 +11,9 @@
 - `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・カナ解析・日付）
 - `npm run check` — svelte-check による型チェック
 - `npm run icons` — `scripts/icon.svg` からアイコン PNG を生成（Playwright）
-- `npm run shots` — iPhone 15 サイズのスクリーンショットを `screenshots/` に保存（要 `npm run build`）
+- `npm run shots` — iPhone 15 サイズのスクリーンショットを `screenshots/` に保存（要 `npm run build`。`node scripts/screenshot.mjs light|dark` で片方だけ）
+
+`icons` / `shots` は Playwright（Chromium）を使う。グローバルに無ければ `npm i -D playwright && npx playwright install chromium`。
 
 デプロイ: `dist/` をそのまま静的ホスティング（Cloudflare Pages 想定。ビルドコマンド `npm run build`、出力 `dist`）。
 `base: './'` なのでサブパスでも動く。
@@ -39,6 +41,8 @@
   - `distractors.ts` / `quiz.ts` 選択肢は「同じ語源 → 同じ章 → 全体」の順で、同じ品詞を優先。意味の語句が正解と重なるものは除外。
   - 出題形式: 英→日(ej) / 日→英(je, 英→日を学んだ語から) / 語源→意味(rm) / 熟語→意味(ph)。
 - 日付は午前4時区切り（`day.ts`）。
+- クイズのタイマーは WAAPI で細いバーを縮めるアニメーションそのもの（`finish` で次へ）。一時停止は `Animation.pause()`。
+  `$effect` で `paused` を見るときは、早期 return より前に読んで依存に登録すること（過去にこれで一時停止が効かなかった）。
 
 ## iPhone 表示（重要）
 

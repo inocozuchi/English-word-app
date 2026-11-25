@@ -73,8 +73,9 @@
   }
 
   $effect(() => {
+    const p = paused; // 先に読んで依存に登録する（timer はリアクティブではない）
     if (!timer) return;
-    if (paused) timer.pause();
+    if (p) timer.pause();
     else if (timer.playState === 'paused') timer.play();
   });
 
