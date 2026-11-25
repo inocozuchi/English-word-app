@@ -1,15 +1,17 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import Num from '../components/Num.svelte';
   import { router } from '../core/router.svelte.ts';
   import type { AnswerLog } from '../core/router.svelte.ts';
   import type { SessionMode } from '../core/session.ts';
   import { store, activeDeck } from '../core/store.svelte.ts';
   import { streak } from '../core/day.ts';
   import { reviewCount } from '../core/review.ts';
-  import { rise } from '../core/transitions.ts';
+  import { rise, burst, stagger } from '../core/transitions.ts';
   import Icon from '../components/Icon.svelte';
   import type { Question } from '../core/deck.ts';
 
-  let { logs, mode = 'normal' }: { logs: AnswerLog[]; mode?: SessionMode } = $props();
+  let { logs, mode = 'normal', marks = [] }: { logs: AnswerLog[]; mode?: SessionMode; marks?: ('ok' | 'ng')[] } = $props();
   const deck = activeDeck();
   // 結果画面は表示中に logs が変わらないので、最初の値だけ使う
   // svelte-ignore state_referenced_locally
@@ -31,6 +33,23 @@
     const r = deck.detailRoute(q.key);
     if (r) router.push(r);
   }
+  // 画面がスライドし終わるころに、スコアを 0 から数え上げ、各問の点を順に弾ませる。よければ紙吹雪
+  let score = $state(0);
+  let scoreEl: HTMLElement;
+  let dotsEl: HTMLElement | undefined = $state();
+  onMount(() => {
+    // 点は最初から隠した状態で待たせる（表示→消える→出る、のちらつきを作らない）
+    if (dotsEl) stagger([...dotsEl.children], { step: 45, distance: 8, delay: 380 });
+    const t1 = setTimeout(() => (score = correct), 380);
+    const t2 = setTimeout(() => {
+      if (total && rate >= 80) burst(scoreEl, rate === 100 ? 40 : 26);
+    }, 950);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  });
+
   const message = rate === 100 ? '全問正解！' : rate >= 80 ? 'いい調子です' : rate >= 50 ? 'もう一息' : 'まちがえた問題は復習リストに入りました';
 </script>
 
@@ -39,7 +58,10 @@
     <div class="hero" in:rise>
       <p class="eyebrow-en">{mode === 'review' ? 'Review result' : 'Result'}</p>
       <p class="msg">{message}</p>
-      <p class="score en">{correct}<span class="slash">/</span><span class="total">{total}</span></p>
+      <p class="score en" bind:this={scoreEl}><Num value={score} duration={Math.min(900, 120 * correct + 200)} /><span class="slash">/</span><span class="total">{total}</span></p>
+      {#if marks.length}
+        <p class="dots" bind:this={dotsEl} aria-hidden="true">{#each marks as m}<span class="mk {m}"></span>{/each}</p>
+      {/if}
       <p class="rate">正答率 {rate}% {#if days > 0}<span class="dot">·</span><Icon name="flame" size={15} /> {days}日連続{/if}</p>
     </div>
 
@@ -111,6 +133,23 @@
     line-height: 1.05;
     margin: 6px 0;
     font-variant-numeric: tabular-nums;
+  }
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 4px 0 12px;
+  }
+  .mk {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .mk.ok {
+    background: var(--accent);
+  }
+  .mk.ng {
+    background: var(--ink);
   }
   .slash {
     color: var(--text3);
