@@ -48,7 +48,8 @@ export function spring({ response = 0.42, damping = 0.86, velocity = 0 }: Spring
     if (t >= next) {
       samples.push(x);
       next += step;
-      if (Math.abs(x - 1) < 0.001 && Math.abs(v) < 0.02) break;
+      // 目に見えない尾（1px 未満の動き）は切り捨て、次の操作を早く受け付ける
+      if (Math.abs(x - 1) < 0.002 && Math.abs(v) < 0.05) break;
     }
   }
   samples[samples.length - 1] = 1;
@@ -74,7 +75,7 @@ export function spring({ response = 0.42, damping = 0.86, velocity = 0 }: Spring
 /** よく使うスプリング */
 export const SPRINGS = {
   /** 画面遷移（跳ねない・iOS のナビゲーションに近い） */
-  nav: { response: 0.48, damping: 1 },
+  nav: { response: 0.4, damping: 1 },
   /** カードの出入り（ほんの少し跳ねる） */
   card: { response: 0.42, damping: 0.82 },
   /** 正誤のポップ（よく跳ねる） */
