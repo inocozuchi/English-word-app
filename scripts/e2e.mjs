@@ -380,7 +380,7 @@ try {
     await settle();
     const n0 = await top().locator('.list li').count();
     await top().locator('.remove').first().tap();
-    await sleep(200);
+    await sleep(600); // 行が横へ抜ける動き（0.24秒）を待つ
     ok((await top().locator('.list li').count()) === n0 - 1, '「外す」で手動で外せる');
     ok((await depth()) === 2, '画面遷移が正しい');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
