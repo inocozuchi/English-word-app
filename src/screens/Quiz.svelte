@@ -206,6 +206,10 @@
   /** 次の問題のカードも並べる（スワイプ中・めくる途中） */
   let peek = $state(false);
   let sliding = false;
+  /** めくっている途中（入ってくるカードもタップできるようにする） */
+  let incoming = $state(false);
+  /** めくっている途中に、入ってくるカードで選んだ選択肢（めくり終わったらすぐ回答にする） */
+  let pendingChoice: number | null = null;
   const shown = $derived(!qs.length ? [] : peek && i + 1 < qs.length ? [i, i + 1] : [i]);
   const els = new Map<number, HTMLElement>();
   const width = () => (stage?.clientWidth ?? window.innerWidth) + GAP;
@@ -259,9 +263,12 @@
       return;
     }
     peek = true;
+    pendingChoice = null;
     await tick();
     setOffset(from);
+    incoming = true;
     await slide(from, -width(), velocity);
+    incoming = false;
     // めくり終わったら、右にあったカードを今の問題にする（同じ要素のまま。差し替えのちらつきなし）
     i++;
     chosen = null;
@@ -274,7 +281,11 @@
     const c = els.get(i);
     if (c) c.style.transform = '';
     sliding = false;
-    startAsk();
+    if (pendingChoice !== null && q && !q.interactive) {
+      const k = pendingChoice;
+      pendingChoice = null;
+      answer(k);
+    } else startAsk();
   }
 
   // ---- タッチ: 長押しで一時停止 / 解説中に左スワイプで次へ ----
@@ -298,16 +309,19 @@
     axis = null;
     hist = [{ t: e.timeStamp, x: x0 }];
     clearTimeout(holdTimer);
+    // 長押しで一時停止（普通のタップを長押しと取り違えないよう、少し長めに）
     holdTimer = window.setTimeout(() => {
       held = true;
       haptic('light');
-    }, 280);
+    }, 450);
   }
   function touchMove(e: TouchEvent) {
     const pt = e.touches[0];
     const dx = pt.clientX - x0, dy = pt.clientY - y0;
     if (!axis && Math.hypot(dx, dy) > 10) {
       axis = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'x' : 'y';
+      // 指が動いたら長押しではない（スクロール中に一時停止しない）
+      if (!held) clearTimeout(holdTimer);
       if (axis === 'x' && phase === 'reveal' && !sliding) {
         clearTimeout(holdTimer);
         held = false;
@@ -348,9 +362,13 @@
       suppress();
     }
   }
-  function choose(k: number) {
+  function choose(k: number, idx: number) {
     if (suppressClick) return;
-    answer(k);
+    if (idx === i) answer(k);
+    else if (idx === i + 1 && sliding) {
+      pendingChoice = k;
+      haptic('light');
+    }
   }
 
   function close() {
@@ -425,7 +443,7 @@
     {/if}
 
     {#each shown as idx (idx)}
-      <div class="card" class:peek={idx !== i} use:cardRef={idx} inert={idx !== i}>
+      <div class="card" class:peek={idx !== i} use:cardRef={idx} inert={idx !== i && !incoming}>
         <QuizCard
           {mode}
           q={qs[idx]}
@@ -436,7 +454,7 @@
           oninteract={interact}
           reviewEntry={store.progress.review[qs[idx].key]}
           reviewGoal={store.settings.reviewGoal}
-          onchoose={choose}
+          onchoose={(k) => choose(k, idx)}
         />
       </div>
     {/each}
