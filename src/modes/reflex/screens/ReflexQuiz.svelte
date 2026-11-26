@@ -338,7 +338,7 @@
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
-<div class="rq" onclick={() => phase === 'feedback' && result && !result.ok && skip()}>
+<div class="rq" onclick={() => phase === 'feedback' && skip()}>
   <header>
     <button class="close press" onclick={close} aria-label="やめる"><Icon name="close" size={22} /></button>
     <span class="mid">
@@ -389,8 +389,13 @@
               class:correct={isAns}
               class:wrong={isMine}
               class:dim={phase === 'feedback' && !isAns && !isMine}
-              disabled={phase !== 'ask'}
-              onclick={(e) => { e.stopPropagation(); answer(k); }}
+              aria-disabled={phase !== 'ask'}
+              onclick={(e) => {
+                e.stopPropagation();
+                // 正誤の表示中に押したら、すぐ次の問題へ（押せないボタンにしない。連打しても反応する）
+                if (phase === 'feedback') skip();
+                else answer(k);
+              }}
             >
               <span class="kn en">{k + 1}</span>
               {#if c.figure}<img src={figSrc(c.figure)} alt={c.text} draggable="false" />{:else}<span class="ct">{c.text}</span>{/if}
@@ -401,7 +406,7 @@
       </div>
     {:else if card}
       <div class="stage" use:appear>
-        <button class="card press" class:flipped bind:this={cardEl} onclick={flip} disabled={phase !== 'ask'} aria-label={flipped ? '表に戻す' : 'めくる'}>
+        <button class="card press" class:flipped bind:this={cardEl} onclick={() => (phase === 'ask' ? flip() : skip())} aria-label={flipped ? '表に戻す' : 'めくる'}>
           <span class="cg">{card.group}</span>
           <span class="cw en">{card.word}</span>
           {#if flipped}
@@ -413,9 +418,9 @@
         </button>
         {#if flipped}
           <div class="judge">
-            <button class="j press" onclick={() => judge(0)} disabled={phase !== 'ask'}><span class="en kn2">3</span>出ない</button>
-            <button class="j press" onclick={() => judge(1)} disabled={phase !== 'ask'}><span class="en kn2">2</span>あやしい</button>
-            <button class="j pri press" onclick={() => judge(2)} disabled={phase !== 'ask'}><span class="en kn2">1</span>すぐ出た</button>
+            <button class="j press" onclick={() => (phase === 'ask' ? judge(0) : skip())}><span class="en kn2">3</span>出ない</button>
+            <button class="j press" onclick={() => (phase === 'ask' ? judge(1) : skip())}><span class="en kn2">2</span>あやしい</button>
+            <button class="j pri press" onclick={() => (phase === 'ask' ? judge(2) : skip())}><span class="en kn2">1</span>すぐ出た</button>
           </div>
         {:else}
           <div class="judge one"><button class="j pri press" onclick={flip}>めくる</button></div>
