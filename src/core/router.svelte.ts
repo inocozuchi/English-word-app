@@ -38,6 +38,29 @@ class Router {
   revealing = $state(false);
   private els = new Map<number, HTMLElement>();
   private busy = false;
+  /**
+   * 遷移中に来た操作（戻る・開く）。捨てずに1つだけ覚えておき、遷移が終わったらすぐ実行する
+   * （画面が入ってくる途中の「戻る」や一覧の行のタップが効かない、をなくす）
+   */
+  private pending: (() => void) | null = null;
+  private pendingKey = '';
+  /** 今している遷移（戻るの連打で2画面戻らないように、戻る途中の「戻る」は捨てる） */
+  private op: 'push' | 'pop' | 'replace' | 'gesture' | null = null;
+
+  private later(key: string, fn: () => void) {
+    this.pending = fn;
+    this.pendingKey = key;
+  }
+  private flush() {
+    this.op = null;
+    const fn = this.pending;
+    this.pending = null;
+    this.pendingKey = '';
+    fn?.();
+  }
+  private static key(route: Route) {
+    return route.name + JSON.stringify(route.params ?? {}, (k, v) => (k === 'seed' ? undefined : v));
+  }
 
   get top() {
     return this.stack[this.stack.length - 1];
@@ -56,8 +79,14 @@ class Router {
   }
 
   async push(route: Route, kind: Kind = 'push') {
-    if (this.busy) return;
+    if (this.busy) {
+      // 今まさに開いている画面と同じ（連打）なら捨てる。違う画面なら遷移のあとで開く
+      const k = Router.key(route);
+      if (this.op !== 'pop' && k !== Router.key(this.top.route) && k !== this.pendingKey) this.later(k, () => this.push(route, kind));
+      return;
+    }
     this.busy = true;
+    this.op = 'push';
     this.revealing = true;
     this.stack.push({ id: seq++, route, kind });
     await tick();
@@ -65,18 +94,24 @@ class Router {
     await animateTransition(top, under, kind, 0, 1);
     this.revealing = false;
     this.busy = false;
+    this.flush();
   }
 
   async pop(opts: { from?: number; velocity?: number } = {}) {
-    if (this.busy && opts.from === undefined) return;
+    if (this.busy && opts.from === undefined) {
+      if (this.op === 'push' || this.op === 'replace') this.later('pop', () => this.pop());
+      return;
+    }
     if (this.stack.length < 2) return;
     this.busy = true;
+    this.op = 'pop';
     this.revealing = true;
     const { top, under } = this.pair();
     await animateTransition(top, under, this.top.kind, opts.from ?? 1, 0, opts.velocity);
     this.stack.pop();
     this.revealing = false;
     this.busy = false;
+    this.flush();
   }
 
   /**
@@ -84,7 +119,11 @@ class Router {
    * 新しい画面を右から重ねてスライドさせ、終わってから古い画面を外す（途中で背景だけになる瞬間を作らない）
    */
   async replace(route: Route) {
-    if (this.busy) return;
+    if (this.busy) {
+      if (this.op !== 'pop') this.later('replace:' + Router.key(route), () => this.replace(route));
+      return;
+    }
+    this.op = 'replace';
     this.busy = true;
     this.revealing = true;
     const old = this.top;
@@ -98,6 +137,7 @@ class Router {
     this.top.kind = old.kind;
     this.revealing = false;
     this.busy = false;
+    this.flush();
   }
 
   /** ホームまで戻る（間の画面はアニメーションなしで捨てる） */
@@ -112,6 +152,7 @@ class Router {
   beginGesture(): boolean {
     if (this.busy || this.stack.length < 2 || this.top.kind !== 'push') return false;
     this.busy = true;
+    this.op = 'gesture';
     this.revealing = true;
     return true;
   }
@@ -131,6 +172,7 @@ class Router {
       await animateTransition(top, under, 'push', progress, 1);
       this.revealing = false;
       this.busy = false;
+      this.flush();
     }
   }
 }
