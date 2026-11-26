@@ -16,40 +16,35 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(var(--n), 1fr);
-    padding: 2px;
-    border-radius: 10px;
-    background: var(--fill);
+    padding: 3px;
+    border-radius: 14px;
+    border: 2px solid var(--ink);
+    background: var(--bg);
   }
   .thumb {
     position: absolute;
-    top: 2px;
-    bottom: 2px;
-    left: 2px;
-    width: calc((100% - 4px) / var(--n));
-    border-radius: 8px;
-    background: var(--bg);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc((100% - 6px) / var(--n));
+    border-radius: 10px;
+    background: var(--accent);
     transform: translateX(calc(100% * var(--i)));
     transition: transform var(--dur-card, 400ms) var(--ease-card, ease-out);
   }
-  :global(:root[data-theme='dark']) .thumb {
-    background: var(--fill-strong);
-  }
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .thumb {
-      background: var(--fill-strong);
-    }
-  }
   button {
     position: relative;
-    height: 34px;
+    height: 36px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text2);
     transition: color 0.2s;
   }
   button.sel {
+    color: var(--on-accent);
+    font-weight: 700;
+  }
+  button:active:not(.sel) {
     color: var(--text);
-    font-weight: 600;
   }
 </style>

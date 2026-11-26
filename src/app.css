@@ -43,6 +43,11 @@
   --pad-x-r: max(calc(var(--safe-right) + 8px), 22px);
 
   --frame: 2.5px;
+  /* 一覧・カードの「パネル」: ホームと同じ太い黒枠（ANYCOLOR 風）。中の区切りは薄い線 */
+  --panel-bg: var(--bg);
+  --panel-border: var(--frame) solid var(--ink);
+  /* 読み物のカードが続く所（ツリー・ノート・まちがえた一覧）は一段細い枠で、重くしない */
+  --card-border: 2px solid var(--line-strong);
   --radius: 16px;
   --radius-lg: 22px;
 }
@@ -202,14 +207,28 @@ html:not(.booted) [data-intro] {
   margin: 4px 0 6px;
 }
 .ui-h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text2);
-  margin: 24px 6px 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin: 28px 4px 10px;
+}
+/* 区切り見出しの左の短い棒（太枠と同じ黒） */
+.ui-h2::before {
+  content: '';
+  flex: none;
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink);
 }
 .ui-group {
-  border-radius: var(--radius-lg);
-  background: var(--surface);
+  border-radius: 20px;
+  background: var(--panel-bg);
+    border: var(--panel-border);
   overflow: hidden;
 }
 .ui-item {
@@ -223,7 +242,7 @@ html:not(.booted) [data-intro] {
   font-size: 16px;
 }
 .ui-item + .ui-item {
-  border-top: 0.5px solid var(--line);
+  border-top: 1.5px solid var(--line);
 }
 .ui-item.col {
   flex-direction: column;

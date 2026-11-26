@@ -15,6 +15,7 @@
     border-radius: 16px;
     background: var(--fill-strong);
     position: relative;
+    -webkit-tap-highlight-color: transparent;
     transition: background-color 0.25s;
   }
   .toggle.on {
@@ -33,5 +34,14 @@
   }
   .on .knob {
     transform: translateX(20px);
+  }
+  /* 押している間、つまみが少し伸びる（iOS のスイッチと同じ手応え） */
+  .toggle:active .knob {
+    transform: scaleX(1.22);
+    transform-origin: left center;
+  }
+  .toggle.on:active .knob {
+    transform: translateX(20px) scaleX(1.22);
+    transform-origin: right center;
   }
 </style>

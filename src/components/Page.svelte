@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
   import Icon from './Icon.svelte';
   import { router } from '../core/router.svelte.ts';
+  import { stagger } from '../core/transitions.ts';
   // 戻るボタン付きの画面の枠。中身はネイティブスクロール
   let {
     title = '',
@@ -10,6 +11,11 @@
     footer,
   }: { title?: string; back?: boolean; children: Snippet; footer?: Snippet } = $props();
   let scrolled = $state(false);
+
+  /** 開いたとき、中身が上から少しずつ浮かび上がる（画面のスライドと一緒に。控えめに） */
+  function intro(node: HTMLElement) {
+    stagger([...node.children].slice(0, 10), { step: 28, distance: 12, delay: 60 });
+  }
 </script>
 
 <div class="page">
@@ -19,7 +25,7 @@
     {/if}
     <span class="small-title" class:show={scrolled}>{title}</span>
   </header>
-  <div class="scroll body" onscroll={(e) => (scrolled = (e.currentTarget as HTMLElement).scrollTop > 40)}>
+  <div class="scroll body" use:intro onscroll={(e) => (scrolled = (e.currentTarget as HTMLElement).scrollTop > 40)}>
     {@render children()}
     <div class="end"></div>
   </div>
