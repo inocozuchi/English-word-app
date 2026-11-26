@@ -4,8 +4,13 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseKana, isValidKana } from '../src/modes/etymology/kana.ts';
+import { classify } from '../src/modes/etymology/morph.ts';
 import type { Dataset, Word, Root, Phrase, Chapter, Group } from '../src/modes/etymology/types.ts';
 
+/** 語源の分解に接頭辞・語根・接尾辞を付ける（src/modes/etymology/morph.ts） */
+function morph(w: any, r: any) {
+  return classify(w.word, w.breakdown ?? [], { spellings: String(r.root || r.id).split(/\s*\/\s*/), isPrefix: r.category === '接頭辞' });
+}
 const here = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(here, '../data/etymology_words.json');
 const OUT = resolve(here, '../src/generated/words.json');
@@ -58,7 +63,7 @@ for (const r of rawRoots) {
       } else if (existing.refIn.includes(existing.roots[0])) {
         // 先に参考語として出てきた単語 → 本来の語源の内容（分解・意味など）を主にする
         existing.roots = [root.id, ...existing.roots.filter((id) => id !== root.id)];
-        existing.breakdown = w.breakdown ?? [];
+        existing.breakdown = morph(w, r);
         existing.core = w.core ?? null;
         existing.defs = w.defs.map((d: any) => ({ pos: d.pos, ja: d.ja }));
         existing.examples = (w.examples ?? []).map((e: any) => ({ en: e.en, ja: e.ja }));
@@ -71,7 +76,7 @@ for (const r of rawRoots) {
       w: w.word,
       kana: parseKana(w.kana),
       roots: [root.id],
-      breakdown: w.breakdown ?? [],
+      breakdown: morph(w, r),
       core: w.core ?? null,
       defs: w.defs.map((d: any) => ({ pos: d.pos, ja: d.ja })),
       examples: (w.examples ?? []).map((e: any) => ({ en: e.en, ja: e.ja })),

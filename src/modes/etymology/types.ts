@@ -2,7 +2,8 @@
 
 export interface Def { pos: string; ja: string }
 export interface Example { en: string; ja: string }
-export interface Part { part: string; meaning: string }
+/** 語源の分解の1パーツ。kind は接頭辞・語根・接尾辞・つなぎ（ビルド時に morph.ts で付ける）。added は意味・接尾辞を補ったもの */
+export interface Part { part: string; meaning: string; kind?: 'pre' | 'root' | 'suf' | 'link'; added?: boolean }
 export interface Derivative { word: string; pos: string; ja: string }
 
 /** カナの1バリアント。parts は奇数番目が「強く読む」部分。label は（名）（動）など */
