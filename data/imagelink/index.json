@@ -1,0 +1,1709 @@
+{
+ "parts": [
+  {
+   "part": 1,
+   "name": "やり直し中学英語",
+   "file": "questions/part1.json"
+  },
+  {
+   "part": 2,
+   "name": "基本動詞",
+   "file": "questions/part2.json"
+  },
+  {
+   "part": 3,
+   "name": "基本単語と違い系",
+   "file": "questions/part3.json"
+  },
+  {
+   "part": 4,
+   "name": "文法の詳細",
+   "file": "questions/part4.json"
+  }
+ ],
+ "chapters": [
+  {
+   "no": 1,
+   "part": 1,
+   "title": "主語・動詞",
+   "subtitle": "モノの見方の違いから主語・動詞を捉えよう",
+   "source": "対応動画：やり直し中学英語 #1（約25分）／書籍『中学英語イメージリンク』第1〜3章",
+   "page_a5": 13,
+   "question_count": 16
+  },
+  {
+   "no": 2,
+   "part": 1,
+   "title": "be動詞（am・is・are）",
+   "subtitle": "主語の状態や存在を表す",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」be動詞（am/is/are）」",
+   "page_a5": 18,
+   "question_count": 30
+  },
+  {
+   "no": 3,
+   "part": 1,
+   "title": "一般動詞",
+   "subtitle": "動作を表す動詞。3人称単数では -s / -es",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」一般動詞」",
+   "page_a5": 20,
+   "question_count": 12
+  },
+  {
+   "no": 4,
+   "part": 1,
+   "title": "英語と日本語の違い（視点・語順・主語省略）",
+   "subtitle": "日本語は話し手の視界、英語は鳥の視点",
+   "source": "対応記事：英語イメージリンク「英語と日本語はここが違う！語順・視点・主語省略を図解で徹底比較」",
+   "page_a5": 22,
+   "question_count": 27
+  },
+  {
+   "no": 5,
+   "part": 1,
+   "title": "英語文法の基礎",
+   "subtitle": "静動の区別・場面展開・動詞の影響の及び方",
+   "source": "対応記事：英語イメージリンク「英語文法の基礎」",
+   "page_a5": 26,
+   "question_count": 34
+  },
+  {
+   "no": 6,
+   "part": 1,
+   "title": "英語を話すコツ（英語のモノの見方）",
+   "subtitle": "最初に「中心」を言い、周辺は後から足す",
+   "source": "対応記事：英語イメージリンク「英語を話すコツ」",
+   "page_a5": 29,
+   "question_count": 17
+  },
+  {
+   "no": 7,
+   "part": 1,
+   "title": "名詞",
+   "subtitle": "日本語は物の輪郭を無視してしまう",
+   "source": "対応動画：やり直し中学英語 #2（約24分）／書籍『中学英語イメージリンク』第4〜6章",
+   "page_a5": 32,
+   "question_count": 72
+  },
+  {
+   "no": 8,
+   "part": 1,
+   "title": "冠詞（a・an・the・無冠詞）",
+   "subtitle": "冠詞は名詞を入れる「枠組み」、名詞は「中身」",
+   "source": "まとめた内容：第8章「冠詞」・第8章「冠詞（a, an, the）」",
+   "page_a5": 38,
+   "question_count": 66
+  },
+  {
+   "no": 9,
+   "part": 1,
+   "title": "名詞の複数形",
+   "subtitle": "語尾によって -s・-es・-ies などに変わる",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」名詞の複数形」",
+   "page_a5": 42,
+   "question_count": 28
+  },
+  {
+   "no": 10,
+   "part": 1,
+   "title": "不可算名詞と単数形、可算名詞",
+   "subtitle": "可算は「輪郭のある個体」、不可算は「中身・素材」",
+   "source": "対応記事：英語イメージリンク「不可算名詞と可算名詞、単数形と複数形」",
+   "page_a5": 44,
+   "question_count": 22
+  },
+  {
+   "no": 11,
+   "part": 1,
+   "title": "some と any の違い",
+   "subtitle": "some は「ぼかし」、any は「無制限（どんな～も）」",
+   "source": "対応記事：英語イメージリンク「some と any の違い」",
+   "page_a5": 47,
+   "question_count": 56
+  },
+  {
+   "no": 12,
+   "part": 1,
+   "title": "some cake と some cakes の違い",
+   "subtitle": "a cake はホールケーキ、some cake は量をぼかした「ケーキをいくらか」",
+   "source": "対応記事：英語イメージリンク「some cake と some cakes の違い」",
+   "page_a5": 50,
+   "question_count": 38
+  },
+  {
+   "no": 13,
+   "part": 1,
+   "title": "形容詞・副詞",
+   "subtitle": "英語の副詞は動きを上乗せする",
+   "source": "対応動画：やり直し中学英語 #3（約23分）／書籍『中学英語イメージリンク』第7章",
+   "page_a5": 53,
+   "question_count": 27
+  },
+  {
+   "no": 14,
+   "part": 1,
+   "title": "副詞とは",
+   "subtitle": "副詞のコアイメージは「動きを加える」",
+   "source": "対応記事：英語イメージリンク「副詞とは」",
+   "page_a5": 57,
+   "question_count": 74
+  },
+  {
+   "no": 15,
+   "part": 1,
+   "title": "go home が正しく、go to home が誤りの理由",
+   "subtitle": "home は「住んでいる場所へ向かう」副詞",
+   "source": "対応記事：英語イメージリンク「go home と go to home の違い」",
+   "page_a5": 60,
+   "question_count": 24
+  },
+  {
+   "no": 16,
+   "part": 1,
+   "title": "up to",
+   "subtitle": "up の「完全・活発・近づく」と to の「到達点」",
+   "source": "対応記事：英語イメージリンク「up to の意味」",
+   "page_a5": 63,
+   "question_count": 43
+  },
+  {
+   "no": 17,
+   "part": 1,
+   "title": "前置詞",
+   "subtitle": "英語は中心から、日本語は周辺から",
+   "source": "対応動画：やり直し中学英語 #4（約31分）／書籍『中学英語イメージリンク』第8章",
+   "page_a5": 66,
+   "question_count": 62
+  },
+  {
+   "no": 18,
+   "part": 1,
+   "title": "否定・疑問",
+   "subtitle": "英語は最初に聞き手とやり取りする",
+   "source": "対応動画：やり直し中学英語 #5（約28分）／書籍『中学英語イメージリンク』第9〜11章",
+   "page_a5": 72,
+   "question_count": 21
+  },
+  {
+   "no": 19,
+   "part": 1,
+   "title": "一般動詞の否定文・疑問文",
+   "subtitle": "do / does ＋ 動詞の原形",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」一般動詞の否定文・疑問文」",
+   "page_a5": 77,
+   "question_count": 20
+  },
+  {
+   "no": 20,
+   "part": 1,
+   "title": "疑問詞の疑問文",
+   "subtitle": "相手に答えてほしいことを最初に提示",
+   "source": "対応動画：やり直し中学英語 #6（約22分）／書籍『中学英語イメージリンク』第12〜15章",
+   "page_a5": 79,
+   "question_count": 70
+  },
+  {
+   "no": 21,
+   "part": 1,
+   "title": "疑問詞（what・who・when・where・why・how）",
+   "subtitle": "語順は主語かどうかで決まる",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」疑問詞（what/why など）」",
+   "page_a5": 85,
+   "question_count": 32
+  },
+  {
+   "no": 22,
+   "part": 1,
+   "title": "これまでの補足",
+   "subtitle": "英文法を日本語に落とし込まないようにする",
+   "source": "対応動画：やり直し中学英語 #7（約38分）／動画#1〜#6の補足",
+   "page_a5": 87,
+   "question_count": 12
+  },
+  {
+   "no": 23,
+   "part": 1,
+   "title": "代名詞（主格・所有格・目的格）",
+   "subtitle": "文中の役割で形を変える",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」代名詞（主格・所有格・目的格）」",
+   "page_a5": 94,
+   "question_count": 49
+  },
+  {
+   "no": 24,
+   "part": 1,
+   "title": "指示代名詞（this・that・these・those）",
+   "subtitle": "話し手からの距離と数で区別する",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」指示代名詞（this/that など）」",
+   "page_a5": 96,
+   "question_count": 22
+  },
+  {
+   "no": 25,
+   "part": 1,
+   "title": "命令文",
+   "subtitle": "聞き手に対して動作を提示",
+   "source": "対応動画：やり直し中学英語 #8（約24分）／書籍『中学英語イメージリンク』第16章",
+   "page_a5": 98,
+   "question_count": 38
+  },
+  {
+   "no": 26,
+   "part": 1,
+   "title": "命令文・Let's 文",
+   "subtitle": "動詞の原形で始める",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」命令文・Let's 文」",
+   "page_a5": 104,
+   "question_count": 17
+  },
+  {
+   "no": 27,
+   "part": 1,
+   "title": "現在形と現在進行形",
+   "subtitle": "いつからいつまでという区切りがない現在形",
+   "source": "対応動画：やり直し中学英語 #9（約23分）／書籍『中学英語イメージリンク』第17章",
+   "page_a5": 106,
+   "question_count": 41
+  },
+  {
+   "no": 28,
+   "part": 1,
+   "title": "進行形（動詞のing形）",
+   "subtitle": "be動詞＋動詞の ing 形。動作の途中を表す",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」進行形（動詞のing形）」",
+   "page_a5": 113,
+   "question_count": 22
+  },
+  {
+   "no": 29,
+   "part": 1,
+   "title": "過去形と that節、時制の一致",
+   "subtitle": "日本語と英語の時制感覚の違い",
+   "source": "対応動画：やり直し中学英語 #10（約18分）／書籍『中学英語イメージリンク』第18〜21章",
+   "page_a5": 115,
+   "question_count": 43
+  },
+  {
+   "no": 30,
+   "part": 1,
+   "title": "過去形（一般動詞・be動詞）",
+   "subtitle": "規則動詞は -ed、不規則動詞は個別に覚える",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」過去形（一般動詞・be動詞）」",
+   "page_a5": 121,
+   "question_count": 35
+  },
+  {
+   "no": 31,
+   "part": 1,
+   "title": "There構文",
+   "subtitle": "聞き手の注意を向けさせる",
+   "source": "対応動画：やり直し中学英語 #11（約13分）／書籍『中学英語イメージリンク』第22章",
+   "page_a5": 123,
+   "question_count": 45
+  },
+  {
+   "no": 32,
+   "part": 1,
+   "title": "There is / are 構文",
+   "subtitle": "場所に「存在する」を表す",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」There is/are 構文」",
+   "page_a5": 128,
+   "question_count": 22
+  },
+  {
+   "no": 33,
+   "part": 1,
+   "title": "未来表現",
+   "subtitle": "will は未来形ではない",
+   "source": "対応動画：やり直し中学英語 #12（約13分）／書籍『中学英語イメージリンク』第23章",
+   "page_a5": 130,
+   "question_count": 43
+  },
+  {
+   "no": 34,
+   "part": 1,
+   "title": "未来表現（will・be going to）",
+   "subtitle": "will はその場の決定、be going to は前から決まった予定",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」未来表現（will, be going to）」",
+   "page_a5": 135,
+   "question_count": 26
+  },
+  {
+   "no": 35,
+   "part": 1,
+   "title": "助動詞まとめ",
+   "subtitle": "助動詞は心理や判断を表す",
+   "source": "対応動画：やり直し中学英語 #13（約19分）／書籍『中学英語イメージリンク』第24〜27章",
+   "page_a5": 137,
+   "question_count": 68
+  },
+  {
+   "no": 36,
+   "part": 1,
+   "title": "助動詞 can",
+   "subtitle": "「～できる」（能力・可能性・許可）",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」助動詞 can」",
+   "page_a5": 143,
+   "question_count": 22
+  },
+  {
+   "no": 37,
+   "part": 1,
+   "title": "助動詞（must・have to・should・may）",
+   "subtitle": "義務・助言・許可・推量",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」助動詞（must, have to, should, may）」",
+   "page_a5": 145,
+   "question_count": 42
+  },
+  {
+   "no": 38,
+   "part": 1,
+   "title": "to不定詞",
+   "subtitle": "to不定詞はものさしと一緒、使いこなそう",
+   "source": "対応動画：やり直し中学英語 #14（約16分）／書籍『中学英語イメージリンク』第28章",
+   "page_a5": 148,
+   "question_count": 35
+  },
+  {
+   "no": 39,
+   "part": 1,
+   "title": "to 不定詞（名詞的・形容詞的・副詞的用法）",
+   "subtitle": "to＋動詞の原形の3用法",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」不定詞（名詞的・形容詞的・副詞的用法）」",
+   "page_a5": 153,
+   "question_count": 34
+  },
+  {
+   "no": 40,
+   "part": 1,
+   "title": "疑問詞＋to 不定詞",
+   "subtitle": "what to do・how to do など",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」疑問詞＋不定詞」",
+   "page_a5": 155,
+   "question_count": 34
+  },
+  {
+   "no": 41,
+   "part": 1,
+   "title": "動名詞",
+   "subtitle": "これまでの動名詞、これからの to不定詞",
+   "source": "対応動画：やり直し中学英語 #15（約13分）／書籍『中学英語イメージリンク』第29章",
+   "page_a5": 157,
+   "question_count": 25
+  },
+  {
+   "no": 42,
+   "part": 1,
+   "title": "動名詞",
+   "subtitle": "動詞の -ing 形で「～すること」",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」動名詞」",
+   "page_a5": 162,
+   "question_count": 54
+  },
+  {
+   "no": 43,
+   "part": 1,
+   "title": "文型より大事なこと",
+   "subtitle": "特別な文型まとめと英語の「ふつう」",
+   "source": "対応動画：やり直し中学英語 #16（約21分）／書籍『中学英語イメージリンク』第30〜32章",
+   "page_a5": 165,
+   "question_count": 59
+  },
+  {
+   "no": 44,
+   "part": 1,
+   "title": "五文型",
+   "subtitle": "動きの向き（→）と結びつき（＝）で区別する。基本は能動態",
+   "source": "まとめた内容：第44章「基本の五文型」・第44章「文型（SVC, SVOO, SVOC）」・第83章の五文型の部分",
+   "page_a5": 172,
+   "question_count": 72
+  },
+  {
+   "no": 45,
+   "part": 1,
+   "title": "比較級・最上級・原級比較",
+   "subtitle": "比べるときの英語表現",
+   "source": "対応動画：やり直し中学英語 #17（約17分）／書籍『中学英語イメージリンク』第33〜34章",
+   "page_a5": 177,
+   "question_count": 48
+  },
+  {
+   "no": 46,
+   "part": 1,
+   "title": "比較級・最上級・原級比較",
+   "subtitle": "-er / -est、more / most、as … as",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」比較級・最上級・原級比較（as … as）」",
+   "page_a5": 183,
+   "question_count": 35
+  },
+  {
+   "no": 47,
+   "part": 1,
+   "title": "受け身",
+   "subtitle": "日本語と英語における受け身の違い",
+   "source": "対応動画：やり直し中学英語 #18（約19分）／書籍『中学英語イメージリンク』第37章",
+   "page_a5": 185,
+   "question_count": 37
+  },
+  {
+   "no": 48,
+   "part": 1,
+   "title": "受動態（受け身）",
+   "subtitle": "be動詞＋過去分詞",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」受け身形（受動態）」",
+   "page_a5": 192,
+   "question_count": 34
+  },
+  {
+   "no": 49,
+   "part": 1,
+   "title": "現在完了形",
+   "subtitle": "現在完了形が表すのは現在のこと",
+   "source": "対応動画：やり直し中学英語 #19（約24分）／書籍『中学英語イメージリンク』第38章",
+   "page_a5": 194,
+   "question_count": 53
+  },
+  {
+   "no": 50,
+   "part": 1,
+   "title": "現在完了形（継続・経験・完了）",
+   "subtitle": "have / has ＋ 過去分詞",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」現在完了形（継続・経験・完了）」",
+   "page_a5": 201,
+   "question_count": 42
+  },
+  {
+   "no": 51,
+   "part": 1,
+   "title": "形式主語構文",
+   "subtitle": "なぜ形式主語 it は必要なのか",
+   "source": "対応動画：やり直し中学英語 #20（約20分）／書籍『中学英語イメージリンク』第40章",
+   "page_a5": 204,
+   "question_count": 18
+  },
+  {
+   "no": 52,
+   "part": 1,
+   "title": "名詞の補足説明",
+   "subtitle": "名詞の肩に乗っける",
+   "source": "対応動画：やり直し中学英語 #21（約21分）／書籍『中学英語イメージリンク』第46章",
+   "page_a5": 210,
+   "question_count": 43
+  },
+  {
+   "no": 53,
+   "part": 1,
+   "title": "分詞の形容詞的用法",
+   "subtitle": "-ing は「～している」、過去分詞は「～された」",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」分詞の形容詞的用法」",
+   "page_a5": 217,
+   "question_count": 14
+  },
+  {
+   "no": 54,
+   "part": 1,
+   "title": "関係代名詞",
+   "subtitle": "初心者の間は使わないことをおすすめします",
+   "source": "対応動画：やり直し中学英語 #22（約26分）／書籍『中学英語イメージリンク』第47章",
+   "page_a5": 219,
+   "question_count": 40
+  },
+  {
+   "no": 55,
+   "part": 1,
+   "title": "関係代名詞",
+   "subtitle": "who・which・that で名詞を後ろから説明する",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」関係代名詞」",
+   "page_a5": 226,
+   "question_count": 30
+  },
+  {
+   "no": 56,
+   "part": 1,
+   "title": "仮定法",
+   "subtitle": "過去形で現実から距離をとる",
+   "source": "対応動画：やり直し中学英語 #23（約17分）／書籍『中学英語イメージリンク』第48章",
+   "page_a5": 228,
+   "question_count": 33
+  },
+  {
+   "no": 57,
+   "part": 1,
+   "title": "まとめ",
+   "subtitle": "言語とは・各動画の要点・おすすめ動画3選",
+   "source": "対応動画：やり直し中学英語 #24（約19分／遠藤さんのみ）／書籍『中学英語イメージリンク』全体",
+   "page_a5": 235,
+   "question_count": 10
+  },
+  {
+   "no": 58,
+   "part": 1,
+   "title": "受動態の使いすぎに注意",
+   "subtitle": "日本人が陥りがちな受動態のワナ（補講）",
+   "source": "対応動画：【受動態の使いすぎに注意】日本人が陥りがちな受動態のワナ（約35分／2024年）／サイト『英語イメージリンク』掲載記事「日本語と英語における受動態の違い」。第18章（受け身）の深掘り",
+   "page_a5": 241,
+   "question_count": 32
+  },
+  {
+   "no": 59,
+   "part": 1,
+   "title": "付加疑問文",
+   "subtitle": "文末に短い疑問文を付けて確認する",
+   "source": "対応記事：英語イメージリンク「やり直し中学英語」付加疑問文」",
+   "page_a5": 250,
+   "question_count": 34
+  },
+  {
+   "no": 60,
+   "part": 2,
+   "title": "基本動詞 work",
+   "subtitle": "コアイメージは「機能する・機能させる」",
+   "source": "対応動画：基本動詞 work のコアイメージ解説・意味の樹形図（約14分／2025年4月）",
+   "page_a5": 255,
+   "question_count": 59
+  },
+  {
+   "no": 61,
+   "part": 2,
+   "title": "基本動詞 find【前編】",
+   "subtitle": "コアイメージは「過程を経て見つける」",
+   "source": "対応動画：基本動詞 find のコアイメージ解説・意味の樹形図【前編】（約19分／2025年3月）",
+   "page_a5": 261,
+   "question_count": 36
+  },
+  {
+   "no": 62,
+   "part": 2,
+   "title": "基本動詞 find【後編】",
+   "subtitle": "意図せず見つける／経験して～だとわかる",
+   "source": "対応動画：基本動詞 find のコアイメージ解説・意味の樹形図【後編】（約15分／2025年4月）",
+   "page_a5": 268,
+   "question_count": 38
+  },
+  {
+   "no": 63,
+   "part": 2,
+   "title": "基本動詞 see",
+   "subtitle": "コアイメージは「視界に入ってくる」",
+   "source": "対応動画：基本動詞 see のコアイメージ解説・意味の樹形図（約18分／2025年3月）",
+   "page_a5": 274,
+   "question_count": 64
+  },
+  {
+   "no": 64,
+   "part": 2,
+   "title": "see のコアイメージ解説",
+   "subtitle": "コアイメージは「視界に入ってくる」",
+   "source": "対応記事：英語イメージリンク「see のコアイメージ解説」",
+   "page_a5": 281,
+   "question_count": 131
+  },
+  {
+   "no": 65,
+   "part": 2,
+   "title": "基本動詞 give【前編】",
+   "subtitle": "コアイメージは「相手に差し出して持たせる」",
+   "source": "対応動画：基本動詞 give のコアイメージ解説・意味の樹形図【前編】（約16分／2025年2月）。後編は第30章",
+   "page_a5": 286,
+   "question_count": 106
+  },
+  {
+   "no": 66,
+   "part": 2,
+   "title": "基本動詞 give【後編】",
+   "subtitle": "コアイメージは「相手に差し出して持たせる」",
+   "source": "対応動画：基本動詞 give のコアイメージ解説・意味の樹形図【後編】（約13分／2025年2月）。前編は第31章",
+   "page_a5": 295,
+   "question_count": 117
+  },
+  {
+   "no": 67,
+   "part": 2,
+   "title": "基本動詞 think【前編】",
+   "subtitle": "コアイメージは「考える」／I think は「～かなと思っている」",
+   "source": "対応動画：基本動詞 think のコアイメージ解説・意味の樹形図【前編】（約17分／2025年1月）",
+   "page_a5": 303,
+   "question_count": 41
+  },
+  {
+   "no": 68,
+   "part": 2,
+   "title": "基本動詞 think【後編】",
+   "subtitle": "「～ないんじゃないか」／日本語の「思う」の役割",
+   "source": "対応動画：基本動詞 think のコアイメージ解説・意味の樹形図【後編】（約23分／2025年1月）",
+   "page_a5": 310,
+   "question_count": 23
+  },
+  {
+   "no": 69,
+   "part": 2,
+   "title": "基本動詞 do",
+   "subtitle": "コアイメージは「行動する・実行する」",
+   "source": "対応動画：基本動詞 do のコアイメージ解説・意味の樹形図（約15分／2024年12月）",
+   "page_a5": 317,
+   "question_count": 36
+  },
+  {
+   "no": 70,
+   "part": 2,
+   "title": "基本動詞 go と come",
+   "subtitle": "日本語の「行く・来る」との違い",
+   "source": "対応動画：「イクッ」と「I'm coming.」に学ぶ「行く、来る」と「go、come」の違い（約19分／2024年12月）／サイト『英語イメージリンク』掲載記事を元にした解説",
+   "page_a5": 323,
+   "question_count": 40
+  },
+  {
+   "no": 71,
+   "part": 2,
+   "title": "基本動詞 come",
+   "subtitle": "コアイメージは「場の中心に近づいていってたどり着く」",
+   "source": "対応動画：基本動詞 come のコアイメージ解説・意味の樹形図（約20分／2024年12月）",
+   "page_a5": 330,
+   "question_count": 165
+  },
+  {
+   "no": 72,
+   "part": 2,
+   "title": "基本動詞 go【前編】",
+   "subtitle": "コアイメージは「場の中心から他のところへ動く」",
+   "source": "対応動画：基本動詞 go のコアイメージ解説・意味の樹形図【前編】（約32分／2024年10月）。後編は第38章",
+   "page_a5": 339,
+   "question_count": 46
+  },
+  {
+   "no": 73,
+   "part": 2,
+   "title": "基本動詞 go【後編】",
+   "subtitle": "作動する・進行する・機能する・通用する・合う・到達する・変化する",
+   "source": "対応動画：基本動詞 go のコアイメージ解説・意味の樹形図【後編】（約15分／2024年11月）。前編は第37章",
+   "page_a5": 345,
+   "question_count": 66
+  },
+  {
+   "no": 74,
+   "part": 2,
+   "title": "基本動詞 make",
+   "subtitle": "コアイメージは「こねて形作って固定する」",
+   "source": "対応動画：基本動詞 make のコアイメージ解説・意味の樹形図（約18分／2024年10月）",
+   "page_a5": 350,
+   "question_count": 100
+  },
+  {
+   "no": 75,
+   "part": 2,
+   "title": "基本動詞 take",
+   "subtitle": "コアイメージは「手を出して取る」",
+   "source": "対応動画：基本動詞 take のコアイメージ解説・意味の樹形図（約17分／2024年9月）",
+   "page_a5": 357,
+   "question_count": 104
+  },
+  {
+   "no": 76,
+   "part": 2,
+   "title": "基本動詞 have【前編】",
+   "subtitle": "コアイメージは「手に入れて範囲内にある」",
+   "source": "対応動画：基本動詞 have のコアイメージ解説【前編】（約31分／2024年7月）。後編は第44章",
+   "page_a5": 364,
+   "question_count": 39
+  },
+  {
+   "no": 77,
+   "part": 2,
+   "title": "基本動詞 have【後編】",
+   "subtitle": "予定・出来事・経験・痛み・家族・関係／手に入れる／過ごす／アクションをとる",
+   "source": "対応動画：基本動詞 have のコアイメージ解説【後編】（約30分／2024年8月）。前編は第45章",
+   "page_a5": 370,
+   "question_count": 95
+  },
+  {
+   "no": 78,
+   "part": 2,
+   "title": "have＋O＋C（Oを C の状態にする）",
+   "subtitle": "Thank you for having me around. などを根本から理解する",
+   "source": "対応動画：have＋O＋C（have＋目的語＋補語）の意味とイメージ解説（約18分／2024年8月）",
+   "page_a5": 378,
+   "question_count": 61
+  },
+  {
+   "no": 79,
+   "part": 2,
+   "title": "have＋O＋過去分詞",
+   "subtitle": "使役（～してもらう）・被害（～される）・完了（～し終える）",
+   "source": "対応動画：have＋O＋過去分詞（Oを～してもらう）の解説（約32分／2024年8月）",
+   "page_a5": 383,
+   "question_count": 72
+  },
+  {
+   "no": 80,
+   "part": 2,
+   "title": "have＋O＋動詞の原形／現在分詞",
+   "subtitle": "使役構文：「Oに～させる・～してもらう」と「～させている」の違い",
+   "source": "対応動画：使役構文「have＋O＋動詞の原形」をイメージ解説（約30分／2024年9月）",
+   "page_a5": 390,
+   "question_count": 90
+  },
+  {
+   "no": 81,
+   "part": 2,
+   "title": "使役構文（make・have・get・let）",
+   "subtitle": "強制・当然・説得・許可。O の後ろの形の全体地図",
+   "source": "まとめた内容：第81章「使役構文」・第87章の「使役構文：make／have／get／let の違い」・第74章（make）・第78〜80章（have）の要点",
+   "page_a5": 396,
+   "question_count": 92
+  },
+  {
+   "no": 82,
+   "part": 2,
+   "title": "You got this.",
+   "subtitle": "「君ならできる」と相手を励ますフレーズ（get の応用）",
+   "source": "対応動画：You got this. の意味と使い方（約47分／2024年7月）",
+   "page_a5": 401,
+   "question_count": 53
+  },
+  {
+   "no": 83,
+   "part": 2,
+   "title": "get の総まとめと英語の五文型（記事紹介）",
+   "subtitle": "get／get＋O＋C／You got me／五文型と「動作の発信源」",
+   "source": "対応動画：【記事紹介】get の総まとめと五文型解説（約40分／2024年6月）。サイト『英語イメージリンク』の4記事の紹介",
+   "page_a5": 407,
+   "question_count": 13
+  },
+  {
+   "no": 84,
+   "part": 2,
+   "title": "基本動詞 get #01",
+   "subtitle": "コアイメージは「何かのアクションによって自分のものにする」",
+   "source": "対応動画：基本動詞 get #01 コアイメージ、意味の樹形図、例文解説（約20分／2024年5月）",
+   "page_a5": 411,
+   "question_count": 86
+  },
+  {
+   "no": 85,
+   "part": 2,
+   "title": "基本動詞 get #02（get＋O＋C）",
+   "subtitle": "「Oを～になるようにする」",
+   "source": "対応動画：基本動詞 get #02「…を～になるようにする」（約19分／2024年5月）",
+   "page_a5": 419,
+   "question_count": 78
+  },
+  {
+   "no": 86,
+   "part": 2,
+   "title": "基本動詞 get #03（意味がわかりにくい get のフレーズ）",
+   "subtitle": "Did you get it? / You got me. / get along with / get on with",
+   "source": "対応動画：基本動詞 get #03「意味がわかりにくい get のフレーズ」（約12分／2024年5月）",
+   "page_a5": 426,
+   "question_count": 93
+  },
+  {
+   "no": 87,
+   "part": 2,
+   "title": "get＋O＋過去分詞／to do／ing と使役構文",
+   "subtitle": "get の構文を使い分ける",
+   "source": "対応記事：英語イメージリンク「get＋O＋過去分詞」「get＋O＋to do」「get＋O＋ing形」「使役構文（make, have, get, let）」",
+   "page_a5": 434,
+   "question_count": 145
+  },
+  {
+   "no": 88,
+   "part": 2,
+   "title": "get のフレーズ集",
+   "subtitle": "I got this. / I got you. / You got it. / You got me. / Don't get me wrong. ほか",
+   "source": "対応記事：英語イメージリンク「I got this.」「I got you.」「You got it.」「You got me.」「Don't get me wrong.」「Let me get this right.」「What's got into ～?」ほか",
+   "page_a5": 440,
+   "question_count": 86
+  },
+  {
+   "no": 89,
+   "part": 2,
+   "title": "get のイディオム（前編）",
+   "subtitle": "across / along / around / at / away / back / down / done / even / hold / home / in",
+   "source": "対応記事：英語イメージリンク「get ＋副詞・前置詞のイディオム」各記事",
+   "page_a5": 447,
+   "question_count": 353
+  },
+  {
+   "no": 90,
+   "part": 2,
+   "title": "get のイディオム（後編）",
+   "subtitle": "into / it right・wrong / lost / nowhere / off / on / over / stuck / the better of ほか",
+   "source": "対応記事：英語イメージリンク「get ＋副詞・前置詞のイディオム」各記事",
+   "page_a5": 460,
+   "question_count": 591
+  },
+  {
+   "no": 91,
+   "part": 2,
+   "title": "be のコアイメージ解説",
+   "subtitle": "コアイメージは「存在する」",
+   "source": "対応記事：英語イメージリンク「be の意味」",
+   "page_a5": 478,
+   "question_count": 21
+  },
+  {
+   "no": 92,
+   "part": 2,
+   "title": "being の意味",
+   "subtitle": "動名詞の being と現在分詞の being",
+   "source": "対応記事：英語イメージリンク「being の意味」",
+   "page_a5": 481,
+   "question_count": 29
+  },
+  {
+   "no": 93,
+   "part": 2,
+   "title": "need のコアイメージ解説",
+   "subtitle": "コアイメージは「必要とする」",
+   "source": "対応記事：英語イメージリンク「need のコアイメージ解説」",
+   "page_a5": 483,
+   "question_count": 93
+  },
+  {
+   "no": 94,
+   "part": 2,
+   "title": "want のコアイメージ解説",
+   "subtitle": "コアイメージは「欠けているものが欲しい」",
+   "source": "対応記事：英語イメージリンク「want のコアイメージ解説」",
+   "page_a5": 487,
+   "question_count": 98
+  },
+  {
+   "no": 95,
+   "part": 2,
+   "title": "put のコアイメージ解説",
+   "subtitle": "コアイメージは「移して位置づける」",
+   "source": "対応記事：英語イメージリンク「put のコアイメージ解説・意味の樹形図」",
+   "page_a5": 491,
+   "question_count": 281
+  },
+  {
+   "no": 96,
+   "part": 2,
+   "title": "turn のコアイメージ解説",
+   "subtitle": "コアイメージは「ろくろを回す」",
+   "source": "対応記事：英語イメージリンク「turn のコアイメージ解説」",
+   "page_a5": 500,
+   "question_count": 119
+  },
+  {
+   "no": 97,
+   "part": 2,
+   "title": "tell のコアイメージ解説",
+   "subtitle": "コアイメージは「相手にまとめた内容を伝える」",
+   "source": "対応記事：英語イメージリンク「tell の意味」",
+   "page_a5": 506,
+   "question_count": 27
+  },
+  {
+   "no": 98,
+   "part": 2,
+   "title": "call のコアイメージ解説",
+   "subtitle": "コアイメージは「遠くへ声をかける」",
+   "source": "対応記事：英語イメージリンク「call のコアイメージ解説・意味の樹形図」",
+   "page_a5": 509,
+   "question_count": 50
+  },
+  {
+   "no": 99,
+   "part": 2,
+   "title": "catch のコアイメージ解説",
+   "subtitle": "コアイメージは「動いているものをつかまえる」",
+   "source": "対応記事：英語イメージリンク「catch のコアイメージ解説・意味の樹形図」",
+   "page_a5": 512,
+   "question_count": 119
+  },
+  {
+   "no": 100,
+   "part": 2,
+   "title": "close のコアイメージ解説",
+   "subtitle": "コアイメージは「閉じる」",
+   "source": "対応記事：英語イメージリンク「close のコアイメージ解説・意味の樹形図」",
+   "page_a5": 517,
+   "question_count": 144
+  },
+  {
+   "no": 101,
+   "part": 2,
+   "title": "feel のコアイメージ解説",
+   "subtitle": "コアイメージは「触れて感じる」",
+   "source": "対応記事：英語イメージリンク「feel のコアイメージ解説・意味の樹形図」",
+   "page_a5": 522,
+   "question_count": 158
+  },
+  {
+   "no": 102,
+   "part": 2,
+   "title": "leave のコアイメージ解説",
+   "subtitle": "コアイメージは「ものを残したまま、その場から離れる」",
+   "source": "対応記事：英語イメージリンク「leave のコアイメージ解説・意味の樹形図」",
+   "page_a5": 528,
+   "question_count": 151
+  },
+  {
+   "no": 103,
+   "part": 2,
+   "title": "look のコアイメージ解説",
+   "subtitle": "コアイメージは「視線を向ける」",
+   "source": "対応記事：英語イメージリンク「look のコアイメージ解説・意味の樹形図」",
+   "page_a5": 533,
+   "question_count": 49
+  },
+  {
+   "no": 104,
+   "part": 3,
+   "title": "as（意味・用法と as…as）",
+   "subtitle": "広げて重ね合わせる。進行→到達→重ね合わせ",
+   "source": "まとめた内容：第104章「基本単語 as」・第104章「as の意味・用法」",
+   "page_a5": 539,
+   "question_count": 115
+  },
+  {
+   "no": 105,
+   "part": 3,
+   "title": "so のコアイメージ解説",
+   "subtitle": "コアイメージは「引き継いでゴールへ」",
+   "source": "対応記事：英語イメージリンク「so のコアイメージ解説・意味の樹形図」",
+   "page_a5": 545,
+   "question_count": 142
+  },
+  {
+   "no": 106,
+   "part": 3,
+   "title": "but のコアイメージ解説",
+   "subtitle": "コアイメージは「それまでの流れから外す」",
+   "source": "対応記事：英語イメージリンク「but のコアイメージ解説・意味の樹形図」",
+   "page_a5": 551,
+   "question_count": 98
+  },
+  {
+   "no": 107,
+   "part": 3,
+   "title": "just のコアイメージ解説",
+   "subtitle": "コアイメージは「ぴったりと収まっている」",
+   "source": "対応記事：英語イメージリンク「just のコアイメージ解説・意味の樹形図」",
+   "page_a5": 555,
+   "question_count": 116
+  },
+  {
+   "no": 108,
+   "part": 3,
+   "title": "still のコアイメージ解説",
+   "subtitle": "コアイメージは「変わらない」",
+   "source": "対応記事：英語イメージリンク「still のコアイメージ解説・意味の樹形図」",
+   "page_a5": 560,
+   "question_count": 78
+  },
+  {
+   "no": 109,
+   "part": 3,
+   "title": "yet のコアイメージ解説",
+   "subtitle": "コアイメージは「流れを予期したうえで、今までのところ」",
+   "source": "対応記事：英語イメージリンク「yet のコアイメージ解説・意味の樹形図」",
+   "page_a5": 564,
+   "question_count": 131
+  },
+  {
+   "no": 110,
+   "part": 3,
+   "title": "even のコアイメージ解説",
+   "subtitle": "コアイメージは「差に注目して、上乗せして、平らにする」",
+   "source": "対応記事：英語イメージリンク「even の意味」",
+   "page_a5": 569,
+   "question_count": 45
+  },
+  {
+   "no": 111,
+   "part": 3,
+   "title": "please の意味と使い方",
+   "subtitle": "コアイメージは「受け入れてもらう、喜ばせる」",
+   "source": "対応記事：英語イメージリンク「please の意味」",
+   "page_a5": 572,
+   "question_count": 33
+  },
+  {
+   "no": 112,
+   "part": 3,
+   "title": "may well と might well",
+   "subtitle": "「～するのもわかる」と「～するのもわからなくはない」",
+   "source": "対応記事：英語イメージリンク「may well と might well の違い」",
+   "page_a5": 574,
+   "question_count": 31
+  },
+  {
+   "no": 113,
+   "part": 3,
+   "title": "時間を表す語の違い",
+   "subtitle": "ago と before ／ in と after",
+   "source": "対応記事：英語イメージリンク「ago と before の違い」「in と after の違い」",
+   "page_a5": 577,
+   "question_count": 30
+  },
+  {
+   "no": 114,
+   "part": 3,
+   "title": "figure のコアイメージ解説",
+   "subtitle": "コアイメージは「描いて表す」",
+   "source": "対応記事：英語イメージリンク「figure の意味」",
+   "page_a5": 580,
+   "question_count": 11
+  },
+  {
+   "no": 115,
+   "part": 3,
+   "title": "out のコアイメージ解説",
+   "subtitle": "コアイメージは「内側から外側へ」",
+   "source": "対応記事：英語イメージリンク「out のコアイメージ解説」",
+   "page_a5": 582,
+   "question_count": 144
+  },
+  {
+   "no": 116,
+   "part": 3,
+   "title": "hear と listen の違い",
+   "subtitle": "hear は「耳にする」、listen は「耳を傾けて聞く」",
+   "source": "対応記事：英語イメージリンク「hear と listen の違い」",
+   "page_a5": 587,
+   "question_count": 27
+  },
+  {
+   "no": 117,
+   "part": 3,
+   "title": "keep と hold の違い",
+   "subtitle": "keep は「持ち続ける」、hold は「握って離さないでいる」",
+   "source": "対応記事：英語イメージリンク「keep と hold の違い」",
+   "page_a5": 590,
+   "question_count": 33
+  },
+  {
+   "no": 118,
+   "part": 3,
+   "title": "speak・talk・say・tell の違い",
+   "subtitle": "speak と talk は話す「行為」、say と tell は話した「内容」",
+   "source": "対応記事：英語イメージリンク「speak と say と talk と tell の違い」",
+   "page_a5": 592,
+   "question_count": 39
+  },
+  {
+   "no": 119,
+   "part": 3,
+   "title": "see・look・watch の違い",
+   "subtitle": "see は「視界に入る」、look は「視線を向ける」、watch は「動きに意識を向ける」",
+   "source": "対応記事：英語イメージリンク「see と look と watch の違い」",
+   "page_a5": 595,
+   "question_count": 51
+  },
+  {
+   "no": 120,
+   "part": 3,
+   "title": "look・seem・appear の違い",
+   "subtitle": "look は「目を向ける」、seem は「話し手の推量を込めた見方」、appear は「外見上の見え方」",
+   "source": "対応記事：英語イメージリンク「look と seem と appear の違い」",
+   "page_a5": 598,
+   "question_count": 13
+  },
+  {
+   "no": 121,
+   "part": 3,
+   "title": "try to do と try -ing の違い",
+   "subtitle": "to不定詞は「向かう先への動き」、動名詞は「まさにその動き」",
+   "source": "対応記事：英語イメージリンク「try to do と try -ing の違い」",
+   "page_a5": 600,
+   "question_count": 49
+  },
+  {
+   "no": 122,
+   "part": 3,
+   "title": "stop to do と stop -ing の違い",
+   "subtitle": "to不定詞は「目的」、動名詞は「止める対象の動作」",
+   "source": "対応記事：英語イメージリンク「stop to do と stop -ing の違い」",
+   "page_a5": 603,
+   "question_count": 23
+  },
+  {
+   "no": 123,
+   "part": 3,
+   "title": "present と gift の違い",
+   "subtitle": "present は「目の前に存在する」、gift は「与えられたモノ」",
+   "source": "対応記事：英語イメージリンク「present と gift の違い」",
+   "page_a5": 605,
+   "question_count": 15
+  },
+  {
+   "no": 124,
+   "part": 3,
+   "title": "know・know about・know of の違い",
+   "subtitle": "about は「まわり」、of は「存在を取り出す」",
+   "source": "対応記事：英語イメージリンク「know と know of と know about の違い」",
+   "page_a5": 607,
+   "question_count": 27
+  },
+  {
+   "no": 125,
+   "part": 4,
+   "title": "現在形",
+   "subtitle": "コアイメージは「目の前に存在する」＝ 時間の区切りがない線",
+   "source": "対応記事：英語イメージリンク「現在形」",
+   "page_a5": 611,
+   "question_count": 30
+  },
+  {
+   "no": 126,
+   "part": 4,
+   "title": "現在進行形",
+   "subtitle": "コアイメージは「進行・ライブ感」＝ 区切られた線分",
+   "source": "対応記事：英語イメージリンク「現在進行形」",
+   "page_a5": 614,
+   "question_count": 50
+  },
+  {
+   "no": 127,
+   "part": 4,
+   "title": "過去形",
+   "subtitle": "コアイメージは「遠くに離れている」",
+   "source": "対応記事：英語イメージリンク「過去形」",
+   "page_a5": 618,
+   "question_count": 36
+  },
+  {
+   "no": 128,
+   "part": 4,
+   "title": "現在完了形",
+   "subtitle": "コアイメージは「過去の行為の結果の状態を、今も持っている」",
+   "source": "対応記事：英語イメージリンク「現在完了形」",
+   "page_a5": 621,
+   "question_count": 111
+  },
+  {
+   "no": 129,
+   "part": 4,
+   "title": "現在完了進行形",
+   "subtitle": "コアイメージは「いまもまだ～している状態をもっている」",
+   "source": "対応記事：英語イメージリンク「現在完了進行形」",
+   "page_a5": 626,
+   "question_count": 39
+  },
+  {
+   "no": 130,
+   "part": 4,
+   "title": "未来を表す表現",
+   "subtitle": "will・be going to・現在進行形・未来進行形の使い分け",
+   "source": "対応記事：英語イメージリンク「未来を表す表現」",
+   "page_a5": 629,
+   "question_count": 27
+  },
+  {
+   "no": 131,
+   "part": 4,
+   "title": "未来進行形",
+   "subtitle": "コアイメージは「進行している行為を思い描く」",
+   "source": "対応記事：英語イメージリンク「未来進行形」",
+   "page_a5": 632,
+   "question_count": 47
+  },
+  {
+   "no": 132,
+   "part": 4,
+   "title": "受動態",
+   "subtitle": "形は「be＋過去分詞」。意味は「～される」と「～された状態である」",
+   "source": "対応記事：英語イメージリンク「受動態の文型ごとの例文解説と受動態の作り方」「日本語の受動態との違い」",
+   "page_a5": 635,
+   "question_count": 65
+  },
+  {
+   "no": 133,
+   "part": 4,
+   "title": "助動詞とは",
+   "subtitle": "助動詞は話し手の心理・判断を表す「モード」",
+   "source": "対応記事：英語イメージリンク「助動詞のイメージと意味・用法まとめ」",
+   "page_a5": 640,
+   "question_count": 35
+  },
+  {
+   "no": 134,
+   "part": 4,
+   "title": "will",
+   "subtitle": "コアイメージは「確信度の高い思い」",
+   "source": "対応記事：英語イメージリンク「will」",
+   "page_a5": 643,
+   "question_count": 48
+  },
+  {
+   "no": 135,
+   "part": 4,
+   "title": "will と be going to の違い",
+   "subtitle": "will は「確信度の高い思い」、be going to は「すでに始まっていて do に向かっている状態」",
+   "source": "対応記事：英語イメージリンク「will と be going to の違い」",
+   "page_a5": 647,
+   "question_count": 53
+  },
+  {
+   "no": 136,
+   "part": 4,
+   "title": "can",
+   "subtitle": "コアイメージは「根拠に基づいた可能性」",
+   "source": "対応記事：英語イメージリンク「can」",
+   "page_a5": 650,
+   "question_count": 33
+  },
+  {
+   "no": 137,
+   "part": 4,
+   "title": "can と be able to の違い",
+   "subtitle": "ふつうは置き換えられる。過去の一度きりの出来事だけは別",
+   "source": "対応記事：英語イメージリンク「can と be able to の違い」",
+   "page_a5": 653,
+   "question_count": 34
+  },
+  {
+   "no": 138,
+   "part": 4,
+   "title": "依頼を表す Will you と Can you の違い",
+   "subtitle": "Will / Can / Would / Could と please の使い分け",
+   "source": "対応記事：英語イメージリンク「依頼を表す Will you と Can you の違い」",
+   "page_a5": 656,
+   "question_count": 25
+  },
+  {
+   "no": 139,
+   "part": 4,
+   "title": "must",
+   "subtitle": "コアイメージは「これしかないモノが迫ってくる」",
+   "source": "対応記事：英語イメージリンク「must」",
+   "page_a5": 658,
+   "question_count": 34
+  },
+  {
+   "no": 140,
+   "part": 4,
+   "title": "must と have to の違い",
+   "subtitle": "must は話し手の気持ち（内的）、have to は状況・他者（外的）",
+   "source": "対応記事：英語イメージリンク「must と have to の違い」",
+   "page_a5": 660,
+   "question_count": 48
+  },
+  {
+   "no": 141,
+   "part": 4,
+   "title": "have to と have got to の違い",
+   "subtitle": "have got to は「そうしなければならない状況に至った」",
+   "source": "対応記事：英語イメージリンク「have to と have got to の違い」",
+   "page_a5": 664,
+   "question_count": 14
+  },
+  {
+   "no": 142,
+   "part": 4,
+   "title": "may",
+   "subtitle": "コアイメージは「上から下への許容」",
+   "source": "対応記事：英語イメージリンク「may」",
+   "page_a5": 666,
+   "question_count": 37
+  },
+  {
+   "no": 143,
+   "part": 4,
+   "title": "may と can の違い",
+   "subtitle": "May I と Can I、推量の may と可能性の can",
+   "source": "対応記事：英語イメージリンク「may と can の違い」",
+   "page_a5": 669,
+   "question_count": 45
+  },
+  {
+   "no": 144,
+   "part": 4,
+   "title": "should",
+   "subtitle": "コアイメージは「話し手の中で自然に導かれる先にあるもの」",
+   "source": "対応記事：英語イメージリンク「should」",
+   "page_a5": 672,
+   "question_count": 33
+  },
+  {
+   "no": 145,
+   "part": 4,
+   "title": "must・have to・should の違い",
+   "subtitle": "義務の発生源と、選択の余地で整理する",
+   "source": "対応記事：英語イメージリンク「must と have to と should の違い」",
+   "page_a5": 675,
+   "question_count": 18
+  },
+  {
+   "no": 146,
+   "part": 4,
+   "title": "shall",
+   "subtitle": "コアイメージは「話し手の中で疑いなく導かれる先にあるもの」",
+   "source": "対応記事：英語イメージリンク「shall」",
+   "page_a5": 677,
+   "question_count": 44
+  },
+  {
+   "no": 147,
+   "part": 4,
+   "title": "be to do の用法",
+   "subtitle": "コアイメージは「～することになっている」",
+   "source": "対応記事：英語イメージリンク「be to do の用法」",
+   "page_a5": 680,
+   "question_count": 34
+  },
+  {
+   "no": 148,
+   "part": 4,
+   "title": "to不定詞",
+   "subtitle": "to のコアイメージは「矢印と到達点」",
+   "source": "対応記事：英語イメージリンク「to不定詞の基本の意味・3用法まとめ」",
+   "page_a5": 683,
+   "question_count": 70
+  },
+  {
+   "no": 149,
+   "part": 4,
+   "title": "動名詞",
+   "subtitle": "コアイメージは「まさにその動き」。to不定詞との違い",
+   "source": "対応記事：英語イメージリンク「動名詞の意味・用法まとめ」",
+   "page_a5": 687,
+   "question_count": 62
+  },
+  {
+   "no": 150,
+   "part": 4,
+   "title": "分詞とは",
+   "subtitle": "コアイメージは「合わせ持つ」＝ 動詞と形容詞の性質",
+   "source": "対応記事：英語イメージリンク「分詞とは」",
+   "page_a5": 691,
+   "question_count": 8
+  },
+  {
+   "no": 151,
+   "part": 4,
+   "title": "現在分詞",
+   "subtitle": "コアイメージは「進行、ライブ感」",
+   "source": "対応記事：英語イメージリンク「現在分詞」",
+   "page_a5": 693,
+   "question_count": 44
+  },
+  {
+   "no": 152,
+   "part": 4,
+   "title": "現在分詞と動名詞の違い",
+   "subtitle": "現在分詞は「動画」、動名詞は「写真」",
+   "source": "対応記事：英語イメージリンク「現在分詞と動名詞の違い」",
+   "page_a5": 696,
+   "question_count": 16
+  },
+  {
+   "no": 153,
+   "part": 4,
+   "title": "過去分詞",
+   "subtitle": "コアイメージは「過去の行為による結果の状態」",
+   "source": "対応記事：英語イメージリンク「過去分詞」",
+   "page_a5": 698,
+   "question_count": 75
+  },
+  {
+   "no": 154,
+   "part": 4,
+   "title": "to不定詞・現在分詞・過去分詞の違い",
+   "subtitle": "close（エレベーターのドア）で3つの形をつかむ",
+   "source": "対応記事：英語イメージリンク「to不定詞と現在分詞と過去分詞の違い」",
+   "page_a5": 702,
+   "question_count": 9
+  },
+  {
+   "no": 155,
+   "part": 4,
+   "title": "分詞構文",
+   "subtitle": "前提となる句に、主節の情景を「重ねる」",
+   "source": "対応記事：英語イメージリンク「分詞構文」",
+   "page_a5": 705,
+   "question_count": 42
+  },
+  {
+   "no": 156,
+   "part": 4,
+   "title": "付帯状況を表す with＋O＋C",
+   "subtitle": "基本の文に「O が C の状態である」を付け足す",
+   "source": "対応記事：英語イメージリンク「付帯状況を表す with」",
+   "page_a5": 708,
+   "question_count": 30
+  },
+  {
+   "no": 157,
+   "part": 4,
+   "title": "What about と How about の違い",
+   "subtitle": "What about は「意見を聞く」、How about は「感触を聞く」",
+   "source": "対応記事：英語イメージリンク「What about と How about の違い」",
+   "page_a5": 711,
+   "question_count": 30
+  },
+  {
+   "no": 158,
+   "part": 4,
+   "title": "I don't think ～ と I think ～ not の違い",
+   "subtitle": "think は「考えた末の結論」、don't think は「そうは考えていない」",
+   "source": "対応記事：英語イメージリンク「\"I don't think ~\" と \"I think ~ not\" の違い」",
+   "page_a5": 713,
+   "question_count": 29
+  },
+  {
+   "no": 159,
+   "part": 4,
+   "title": "前置詞とは",
+   "subtitle": "前置詞は「状態」ではなく「動き」。A 前置詞 B で、中心から周辺へ",
+   "source": "対応記事：英語イメージリンク「前置詞のイメージと意味・用法まとめ」",
+   "page_a5": 716,
+   "question_count": 34
+  },
+  {
+   "no": 160,
+   "part": 4,
+   "title": "at",
+   "subtitle": "コアイメージは「点に向かう」",
+   "source": "対応記事：英語イメージリンク「at」",
+   "page_a5": 720,
+   "question_count": 87
+  },
+  {
+   "no": 161,
+   "part": 4,
+   "title": "in",
+   "subtitle": "コアイメージは「何かの中にある」",
+   "source": "対応記事：英語イメージリンク「in」",
+   "page_a5": 723,
+   "question_count": 76
+  },
+  {
+   "no": 162,
+   "part": 4,
+   "title": "場所を表す at と in の違い",
+   "subtitle": "at school / in the school / at the school / in school",
+   "source": "対応記事：英語イメージリンク「場所を表す at, in の違い」",
+   "page_a5": 726,
+   "question_count": 33
+  },
+  {
+   "no": 163,
+   "part": 4,
+   "title": "on",
+   "subtitle": "コアイメージは「～に触れている」",
+   "source": "対応記事：英語イメージリンク「on」",
+   "page_a5": 729,
+   "question_count": 117
+  },
+  {
+   "no": 164,
+   "part": 4,
+   "title": "in time と on time の違い",
+   "subtitle": "in time は「時間内に」、on time は「予定通りに」",
+   "source": "対応記事：英語イメージリンク「in time と on time の違い」",
+   "page_a5": 733,
+   "question_count": 33
+  },
+  {
+   "no": 165,
+   "part": 4,
+   "title": "日時を表す at, in, on の違い",
+   "subtitle": "in は範囲、on は固まり、at はピンポイント",
+   "source": "対応記事：英語イメージリンク「日時を表す at, in, on の違い」",
+   "page_a5": 736,
+   "question_count": 52
+  },
+  {
+   "no": 166,
+   "part": 4,
+   "title": "to",
+   "subtitle": "コアイメージは「別の場所へ向かう動きと、向かう先の対象（矢印と到達点）」",
+   "source": "対応記事：英語イメージリンク「to」",
+   "page_a5": 739,
+   "question_count": 64
+  },
+  {
+   "no": 167,
+   "part": 4,
+   "title": "for",
+   "subtitle": "コアイメージは「（目の）前の方向」＝ 両腕を広げた領域",
+   "source": "対応記事：英語イメージリンク「for」",
+   "page_a5": 742,
+   "question_count": 116
+  },
+  {
+   "no": 168,
+   "part": 4,
+   "title": "for と during の違い",
+   "subtitle": "for は数値で長さ、during は名称で「続いている時」",
+   "source": "対応記事：英語イメージリンク「for と during の違い」",
+   "page_a5": 746,
+   "question_count": 25
+  },
+  {
+   "no": 169,
+   "part": 4,
+   "title": "from",
+   "subtitle": "コアイメージは「起点」",
+   "source": "対応記事：英語イメージリンク「from」",
+   "page_a5": 749,
+   "question_count": 103
+  },
+  {
+   "no": 170,
+   "part": 4,
+   "title": "from と since の違い",
+   "subtitle": "from は起点だけ、since は起点から現在までの継続",
+   "source": "対応記事：英語イメージリンク「from と since の違い」",
+   "page_a5": 753,
+   "question_count": 22
+  },
+  {
+   "no": 171,
+   "part": 4,
+   "title": "result in と result from の違い",
+   "subtitle": "result from は「～から発生する」、result in は「～という結果になる」",
+   "source": "対応記事：英語イメージリンク「result in と result from の違い」",
+   "page_a5": 755,
+   "question_count": 29
+  },
+  {
+   "no": 172,
+   "part": 4,
+   "title": "交通手段の by・in・on と by bus の冠詞",
+   "subtitle": "by bus / by the bus / in his car / on the bus",
+   "source": "まとめた内容：第172章「by, in, on の違い」・第172章「by bus と by the bus」",
+   "page_a5": 758,
+   "question_count": 38
+  },
+  {
+   "no": 173,
+   "part": 4,
+   "title": "of",
+   "subtitle": "コアイメージは「背景を作り、その支配下に置く」",
+   "source": "対応記事：英語イメージリンク「of」",
+   "page_a5": 761,
+   "question_count": 110
+  },
+  {
+   "no": 174,
+   "part": 4,
+   "title": "think of と think about の違い",
+   "subtitle": "of は「存在を取り出す」、about は「まわり」",
+   "source": "対応記事：英語イメージリンク「think of と think about の違い」",
+   "page_a5": 765,
+   "question_count": 35
+  },
+  {
+   "no": 175,
+   "part": 4,
+   "title": "made of と made from の違い",
+   "subtitle": "of は直接的な素材、from は間接的な素材（原材料）",
+   "source": "対応記事：英語イメージリンク「made of と made from の違い」",
+   "page_a5": 768,
+   "question_count": 24
+  },
+  {
+   "no": 176,
+   "part": 4,
+   "title": "a friend from school と a friend of school の違い",
+   "subtitle": "from は「出会いの起点」、of は「所有・支配」",
+   "source": "対応記事：英語イメージリンク「a friend of school と a friend from school の違い」",
+   "page_a5": 770,
+   "question_count": 28
+  },
+  {
+   "no": 177,
+   "part": 4,
+   "title": "a friend of mine と one of my friends の違い",
+   "subtitle": "関係性を先に言うか、話題を先に出すか",
+   "source": "対応記事：英語イメージリンク「a friend of mine と one of my friends の違い」",
+   "page_a5": 772,
+   "question_count": 12
+  },
+  {
+   "no": 178,
+   "part": 4,
+   "title": "by",
+   "subtitle": "コアイメージは「～に寄って」",
+   "source": "対応記事：英語イメージリンク「by」",
+   "page_a5": 774,
+   "question_count": 90
+  },
+  {
+   "no": 179,
+   "part": 4,
+   "title": "by と until / till の違い",
+   "subtitle": "by は「～までに（期限）」、until は「～までずっと（継続）」",
+   "source": "対応記事：英語イメージリンク「by と until / till の違い」",
+   "page_a5": 778,
+   "question_count": 26
+  },
+  {
+   "no": 180,
+   "part": 4,
+   "title": "by と through の違い",
+   "subtitle": "by は受動的（働きを受ける）、through は能動的（主語が進める）",
+   "source": "対応記事：英語イメージリンク「by と through の違い」",
+   "page_a5": 780,
+   "question_count": 39
+  },
+  {
+   "no": 181,
+   "part": 4,
+   "title": "by・near・beside の違い",
+   "subtitle": "near は範囲内、by は手が届く近さ、beside は側面に接する",
+   "source": "対応記事：英語イメージリンク「by と near と beside の違い」",
+   "page_a5": 783,
+   "question_count": 18
+  },
+  {
+   "no": 182,
+   "part": 4,
+   "title": "alone・by oneself・on one's own の違い",
+   "subtitle": "範囲にひとり／中心にはひとり／自分のリソースに頼る",
+   "source": "対応記事：英語イメージリンク「by myself と on my own の違い」",
+   "page_a5": 785,
+   "question_count": 58
+  },
+  {
+   "no": 183,
+   "part": 4,
+   "title": "catch＋人＋by the arm（人の腕をつかむ）",
+   "subtitle": "by the arm の the arm は「つかまれる相手の腕」",
+   "source": "対応記事：英語イメージリンク「catch＋人＋by the arm の解説」",
+   "page_a5": 788,
+   "question_count": 23
+  },
+  {
+   "no": 184,
+   "part": 4,
+   "title": "with",
+   "subtitle": "コアイメージは「付随するものと一緒に存在する」",
+   "source": "対応記事：英語イメージリンク「with」",
+   "page_a5": 790,
+   "question_count": 83
+  },
+  {
+   "no": 185,
+   "part": 4,
+   "title": "手段を表す by と with の違い",
+   "subtitle": "by は手段の働きを受ける、with は主従関係で道具を使う",
+   "source": "対応記事：英語イメージリンク「手段を表す by と with の違い」",
+   "page_a5": 794,
+   "question_count": 18
+  },
+  {
+   "no": 186,
+   "part": 4,
+   "title": "「take＋物＋with＋人」で with＋人 が必要な理由",
+   "subtitle": "with 人 は「身につけて（携帯）」を表す",
+   "source": "対応記事：英語イメージリンク「「take＋物＋with＋人」で “with＋人” が必要な理由」",
+   "page_a5": 796,
+   "question_count": 28
+  },
+  {
+   "no": 187,
+   "part": 4,
+   "title": "about と around の違い",
+   "subtitle": "about は「まわり」、around は「円周上に」",
+   "source": "対応記事：英語イメージリンク「about と around の違い」",
+   "page_a5": 798,
+   "question_count": 56
+  }
+ ]
+}
