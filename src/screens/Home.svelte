@@ -27,7 +27,7 @@
     }
     return n;
   });
-  const summary = $derived(`${store.settings.count}問 · ${mode.summary(modeSettings(mode))}`);
+  const summary = $derived(mode.hideCount ? mode.summary(modeSettings(mode)) : `${store.settings.count}問 · ${mode.summary(modeSettings(mode))}`);
 
   // 大見出し: \n で改行、*語* をアクセント色に
   const hero = $derived(
@@ -65,7 +65,7 @@
   <p class="mode-line" data-intro><span class="eyebrow-en">Mode</span><span class="mname">{mode.title}</span>{#if mode.stat()}<span class="stat">{mode.stat()}</span>{/if}</p>
   <button class="start press" data-intro onclick={() => start('normal')} aria-label="スタート（{mode.title}）">
     <span class="start-en display">Start</span>
-    <span class="start-ja">スタート</span>
+    <span class="start-ja">{mode.startLabel?.() ?? 'スタート'}</span>
     <span class="start-sum">{summary}</span>
     <span class="arrow"><Icon name="chevron" size={30} stroke={3} /></span>
   </button>
