@@ -1,0 +1,602 @@
+[
+ {
+  "id": "r_f57f5096d",
+  "word": "work",
+  "image": "機能する・機能させる",
+  "group": "基本動詞",
+  "chapter": 60,
+  "part": 2,
+  "chapter_title": "基本動詞 work",
+  "ref_page_a5": 255
+ },
+ {
+  "id": "r_f742361ac",
+  "word": "find",
+  "image": "過程を経て見つける",
+  "group": "基本動詞",
+  "chapter": 61,
+  "part": 2,
+  "chapter_title": "基本動詞 find【前編】",
+  "ref_page_a5": 261
+ },
+ {
+  "id": "r_d0235f878",
+  "word": "see",
+  "image": "視界に入ってくる",
+  "group": "基本動詞",
+  "chapter": 63,
+  "part": 2,
+  "chapter_title": "基本動詞 see",
+  "ref_page_a5": 274
+ },
+ {
+  "id": "r_d5ed6f478",
+  "word": "give",
+  "image": "相手に差し出して持たせる",
+  "group": "基本動詞",
+  "chapter": 65,
+  "part": 2,
+  "chapter_title": "基本動詞 give【前編】",
+  "ref_page_a5": 286
+ },
+ {
+  "id": "r_5b8ae6e57",
+  "word": "think",
+  "image": "考える",
+  "group": "基本動詞",
+  "chapter": 67,
+  "part": 2,
+  "chapter_title": "基本動詞 think【前編】",
+  "ref_page_a5": 303
+ },
+ {
+  "id": "r_8cd4a6dd5",
+  "word": "do",
+  "image": "行動する・実行する",
+  "group": "基本動詞",
+  "chapter": 69,
+  "part": 2,
+  "chapter_title": "基本動詞 do",
+  "ref_page_a5": 317
+ },
+ {
+  "id": "r_efe68a599",
+  "word": "come",
+  "image": "場の中心に近づいていってたどり着く",
+  "group": "基本動詞",
+  "chapter": 71,
+  "part": 2,
+  "chapter_title": "基本動詞 come",
+  "ref_page_a5": 330
+ },
+ {
+  "id": "r_b5f173efd",
+  "word": "go",
+  "image": "場の中心から他のところへ動く",
+  "group": "基本動詞",
+  "chapter": 72,
+  "part": 2,
+  "chapter_title": "基本動詞 go【前編】",
+  "ref_page_a5": 339
+ },
+ {
+  "id": "r_d40682bfb",
+  "word": "make",
+  "image": "こねて形作って固定する",
+  "group": "基本動詞",
+  "chapter": 74,
+  "part": 2,
+  "chapter_title": "基本動詞 make",
+  "ref_page_a5": 350
+ },
+ {
+  "id": "r_59babbabd",
+  "word": "take",
+  "image": "手を出して取る",
+  "group": "基本動詞",
+  "chapter": 75,
+  "part": 2,
+  "chapter_title": "基本動詞 take",
+  "ref_page_a5": 357
+ },
+ {
+  "id": "r_dceaa6733",
+  "word": "have",
+  "image": "手に入れて範囲内にある",
+  "group": "基本動詞",
+  "chapter": 76,
+  "part": 2,
+  "chapter_title": "基本動詞 have【前編】",
+  "ref_page_a5": 364
+ },
+ {
+  "id": "r_8d02fafff",
+  "word": "get",
+  "image": "何かのアクションによって自分のものにする",
+  "group": "基本動詞",
+  "chapter": 84,
+  "part": 2,
+  "chapter_title": "基本動詞 get #01",
+  "ref_page_a5": 411
+ },
+ {
+  "id": "r_5208d12b6",
+  "word": "be",
+  "image": "存在する",
+  "group": "基本動詞",
+  "chapter": 91,
+  "part": 2,
+  "chapter_title": "be のコアイメージ解説",
+  "ref_page_a5": 478
+ },
+ {
+  "id": "r_c92cff2a9",
+  "word": "need",
+  "image": "必要とする",
+  "group": "基本動詞",
+  "chapter": 93,
+  "part": 2,
+  "chapter_title": "need のコアイメージ解説",
+  "ref_page_a5": 483
+ },
+ {
+  "id": "r_c8096d8c6",
+  "word": "want",
+  "image": "欠けているものが欲しい",
+  "group": "基本動詞",
+  "chapter": 94,
+  "part": 2,
+  "chapter_title": "want のコアイメージ解説",
+  "ref_page_a5": 487
+ },
+ {
+  "id": "r_6d7935bc6",
+  "word": "put",
+  "image": "移して位置づける",
+  "group": "基本動詞",
+  "chapter": 95,
+  "part": 2,
+  "chapter_title": "put のコアイメージ解説",
+  "ref_page_a5": 491
+ },
+ {
+  "id": "r_46bd99f69",
+  "word": "turn",
+  "image": "ろくろを回す",
+  "group": "基本動詞",
+  "chapter": 96,
+  "part": 2,
+  "chapter_title": "turn のコアイメージ解説",
+  "ref_page_a5": 500
+ },
+ {
+  "id": "r_b753ea671",
+  "word": "tell",
+  "image": "相手にまとめた内容を伝える",
+  "group": "基本動詞",
+  "chapter": 97,
+  "part": 2,
+  "chapter_title": "tell のコアイメージ解説",
+  "ref_page_a5": 506
+ },
+ {
+  "id": "r_f7fe34875",
+  "word": "call",
+  "image": "遠くへ声をかける",
+  "group": "基本動詞",
+  "chapter": 98,
+  "part": 2,
+  "chapter_title": "call のコアイメージ解説",
+  "ref_page_a5": 509
+ },
+ {
+  "id": "r_e783a759a",
+  "word": "catch",
+  "image": "動いているものをつかまえる",
+  "group": "基本動詞",
+  "chapter": 99,
+  "part": 2,
+  "chapter_title": "catch のコアイメージ解説",
+  "ref_page_a5": 512
+ },
+ {
+  "id": "r_c631b3781",
+  "word": "close",
+  "image": "閉じる",
+  "group": "基本動詞",
+  "chapter": 100,
+  "part": 2,
+  "chapter_title": "close のコアイメージ解説",
+  "ref_page_a5": 517
+ },
+ {
+  "id": "r_a6220d519",
+  "word": "feel",
+  "image": "触れて感じる",
+  "group": "基本動詞",
+  "chapter": 101,
+  "part": 2,
+  "chapter_title": "feel のコアイメージ解説",
+  "ref_page_a5": 522
+ },
+ {
+  "id": "r_3891fc0a2",
+  "word": "leave",
+  "image": "ものを残したまま、その場から離れる",
+  "group": "基本動詞",
+  "chapter": 102,
+  "part": 2,
+  "chapter_title": "leave のコアイメージ解説",
+  "ref_page_a5": 528
+ },
+ {
+  "id": "r_cbea02fdb",
+  "word": "look",
+  "image": "視線を向ける",
+  "group": "基本動詞",
+  "chapter": 103,
+  "part": 2,
+  "chapter_title": "look のコアイメージ解説",
+  "ref_page_a5": 533
+ },
+ {
+  "id": "r_e5b9debdc",
+  "word": "so",
+  "image": "引き継いでゴールへ",
+  "group": "副詞・接続",
+  "chapter": 105,
+  "part": 3,
+  "chapter_title": "so のコアイメージ解説",
+  "ref_page_a5": 545
+ },
+ {
+  "id": "r_5d659b04f",
+  "word": "but",
+  "image": "それまでの流れから外す",
+  "group": "副詞・接続",
+  "chapter": 106,
+  "part": 3,
+  "chapter_title": "but のコアイメージ解説",
+  "ref_page_a5": 551
+ },
+ {
+  "id": "r_314631141",
+  "word": "just",
+  "image": "ぴったりと収まっている",
+  "group": "副詞・接続",
+  "chapter": 107,
+  "part": 3,
+  "chapter_title": "just のコアイメージ解説",
+  "ref_page_a5": 555
+ },
+ {
+  "id": "r_43dbb5c91",
+  "word": "still",
+  "image": "変わらない",
+  "group": "副詞・接続",
+  "chapter": 108,
+  "part": 3,
+  "chapter_title": "still のコアイメージ解説",
+  "ref_page_a5": 560
+ },
+ {
+  "id": "r_1d7c902ad",
+  "word": "yet",
+  "image": "流れを予期したうえで、今までのところ",
+  "group": "副詞・接続",
+  "chapter": 109,
+  "part": 3,
+  "chapter_title": "yet のコアイメージ解説",
+  "ref_page_a5": 564
+ },
+ {
+  "id": "r_04a9d41b3",
+  "word": "even",
+  "image": "差に注目して、上乗せして、平らにする",
+  "group": "副詞・接続",
+  "chapter": 110,
+  "part": 3,
+  "chapter_title": "even のコアイメージ解説",
+  "ref_page_a5": 569
+ },
+ {
+  "id": "r_93f508c17",
+  "word": "please",
+  "image": "受け入れてもらう、喜ばせる",
+  "group": "副詞・接続",
+  "chapter": 111,
+  "part": 3,
+  "chapter_title": "please の意味と使い方",
+  "ref_page_a5": 572
+ },
+ {
+  "id": "r_626a97205",
+  "word": "figure",
+  "image": "描いて表す",
+  "group": "副詞・接続",
+  "chapter": 114,
+  "part": 3,
+  "chapter_title": "figure のコアイメージ解説",
+  "ref_page_a5": 580
+ },
+ {
+  "id": "r_94f9427ec",
+  "word": "out",
+  "image": "内側から外側へ",
+  "group": "副詞・接続",
+  "chapter": 115,
+  "part": 3,
+  "chapter_title": "out のコアイメージ解説",
+  "ref_page_a5": 582
+ },
+ {
+  "id": "r_c3918b084",
+  "word": "現在形",
+  "image": "目の前に存在する",
+  "group": "時制・準動詞",
+  "chapter": 125,
+  "part": 4,
+  "chapter_title": "現在形",
+  "ref_page_a5": 611
+ },
+ {
+  "id": "r_caae9582c",
+  "word": "現在進行形",
+  "image": "進行・ライブ感",
+  "group": "時制・準動詞",
+  "chapter": 126,
+  "part": 4,
+  "chapter_title": "現在進行形",
+  "ref_page_a5": 614
+ },
+ {
+  "id": "r_fc088c810",
+  "word": "過去形",
+  "image": "遠くに離れている",
+  "group": "時制・準動詞",
+  "chapter": 127,
+  "part": 4,
+  "chapter_title": "過去形",
+  "ref_page_a5": 618
+ },
+ {
+  "id": "r_947c21468",
+  "word": "現在完了形",
+  "image": "過去の結果を今も持っている",
+  "group": "時制・準動詞",
+  "chapter": 128,
+  "part": 4,
+  "chapter_title": "現在完了形",
+  "ref_page_a5": 621
+ },
+ {
+  "id": "r_7e6dedf47",
+  "word": "現在完了進行形",
+  "image": "今もまだ～している",
+  "group": "時制・準動詞",
+  "chapter": 129,
+  "part": 4,
+  "chapter_title": "現在完了進行形",
+  "ref_page_a5": 626
+ },
+ {
+  "id": "r_4b06aba74",
+  "word": "未来進行形",
+  "image": "進行中の行為を思い描く",
+  "group": "時制・準動詞",
+  "chapter": 131,
+  "part": 4,
+  "chapter_title": "未来進行形",
+  "ref_page_a5": 632
+ },
+ {
+  "id": "r_1fa735ca4",
+  "word": "will",
+  "image": "確信度の高い思い",
+  "group": "助動詞",
+  "chapter": 134,
+  "part": 4,
+  "chapter_title": "will",
+  "ref_page_a5": 643
+ },
+ {
+  "id": "r_a12073197",
+  "word": "can",
+  "image": "根拠に基づいた可能性",
+  "group": "助動詞",
+  "chapter": 136,
+  "part": 4,
+  "chapter_title": "can",
+  "ref_page_a5": 650
+ },
+ {
+  "id": "r_ff17903bd",
+  "word": "must",
+  "image": "これしかないモノが迫ってくる",
+  "group": "助動詞",
+  "chapter": 139,
+  "part": 4,
+  "chapter_title": "must",
+  "ref_page_a5": 658
+ },
+ {
+  "id": "r_73253d17d",
+  "word": "may",
+  "image": "上から下への許容",
+  "group": "助動詞",
+  "chapter": 142,
+  "part": 4,
+  "chapter_title": "may",
+  "ref_page_a5": 666
+ },
+ {
+  "id": "r_6feb1d8c2",
+  "word": "should",
+  "image": "話し手の中で自然に導かれる先にあるもの",
+  "group": "助動詞",
+  "chapter": 144,
+  "part": 4,
+  "chapter_title": "should",
+  "ref_page_a5": 672
+ },
+ {
+  "id": "r_3352181ca",
+  "word": "shall",
+  "image": "話し手の中で疑いなく導かれる先にあるもの",
+  "group": "助動詞",
+  "chapter": 146,
+  "part": 4,
+  "chapter_title": "shall",
+  "ref_page_a5": 677
+ },
+ {
+  "id": "r_18ba00cfd",
+  "word": "to不定詞",
+  "image": "矢印と到達点",
+  "group": "時制・準動詞",
+  "chapter": 148,
+  "part": 4,
+  "chapter_title": "to不定詞",
+  "ref_page_a5": 683
+ },
+ {
+  "id": "r_566cef478",
+  "word": "動名詞",
+  "image": "まさにその動き",
+  "group": "時制・準動詞",
+  "chapter": 149,
+  "part": 4,
+  "chapter_title": "動名詞",
+  "ref_page_a5": 687
+ },
+ {
+  "id": "r_8fa6b9195",
+  "word": "分詞とは",
+  "image": "合わせ持つ",
+  "group": "時制・準動詞",
+  "chapter": 150,
+  "part": 4,
+  "chapter_title": "分詞とは",
+  "ref_page_a5": 691
+ },
+ {
+  "id": "r_9c26ed0b3",
+  "word": "現在分詞",
+  "image": "進行・ライブ感",
+  "group": "時制・準動詞",
+  "chapter": 151,
+  "part": 4,
+  "chapter_title": "現在分詞",
+  "ref_page_a5": 693
+ },
+ {
+  "id": "r_e4b9ac34f",
+  "word": "過去分詞",
+  "image": "過去の行為の結果の状態",
+  "group": "時制・準動詞",
+  "chapter": 153,
+  "part": 4,
+  "chapter_title": "過去分詞",
+  "ref_page_a5": 698
+ },
+ {
+  "id": "r_ea6b9e263",
+  "word": "at",
+  "image": "点",
+  "group": "前置詞",
+  "chapter": 160,
+  "part": 4,
+  "chapter_title": "at",
+  "ref_page_a5": 720
+ },
+ {
+  "id": "r_7d60e648e",
+  "word": "in",
+  "image": "空間の中",
+  "group": "前置詞",
+  "chapter": 161,
+  "part": 4,
+  "chapter_title": "in",
+  "ref_page_a5": 723
+ },
+ {
+  "id": "r_7f5eca970",
+  "word": "on",
+  "image": "接触",
+  "group": "前置詞",
+  "chapter": 163,
+  "part": 4,
+  "chapter_title": "on",
+  "ref_page_a5": 729
+ },
+ {
+  "id": "r_d15c4e3a5",
+  "word": "to",
+  "image": "到達点",
+  "group": "前置詞",
+  "chapter": 166,
+  "part": 4,
+  "chapter_title": "to",
+  "ref_page_a5": 739
+ },
+ {
+  "id": "r_5b7321177",
+  "word": "for",
+  "image": "方向・目的",
+  "group": "前置詞",
+  "chapter": 167,
+  "part": 4,
+  "chapter_title": "for",
+  "ref_page_a5": 742
+ },
+ {
+  "id": "r_f51c7b15c",
+  "word": "from",
+  "image": "起点",
+  "group": "前置詞",
+  "chapter": 169,
+  "part": 4,
+  "chapter_title": "from",
+  "ref_page_a5": 749
+ },
+ {
+  "id": "r_152020493",
+  "word": "of",
+  "image": "全体の一部・所属",
+  "group": "前置詞",
+  "chapter": 173,
+  "part": 4,
+  "chapter_title": "of",
+  "ref_page_a5": 761
+ },
+ {
+  "id": "r_3cc6f5b3d",
+  "word": "by",
+  "image": "そば・経由・期限",
+  "group": "前置詞",
+  "chapter": 178,
+  "part": 4,
+  "chapter_title": "by",
+  "ref_page_a5": 774
+ },
+ {
+  "id": "r_cdb7afb16",
+  "word": "with",
+  "image": "一緒に",
+  "group": "前置詞",
+  "chapter": 184,
+  "part": 4,
+  "chapter_title": "with",
+  "ref_page_a5": 790
+ },
+ {
+  "id": "r_22857d358",
+  "word": "about",
+  "image": "周辺",
+  "group": "前置詞",
+  "chapter": 187,
+  "part": 4,
+  "chapter_title": "about と around の違い",
+  "ref_page_a5": 798
+ }
+]

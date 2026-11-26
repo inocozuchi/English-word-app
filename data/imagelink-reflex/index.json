@@ -1,0 +1,25 @@
+{
+ "name": "イメージリンク 反射版",
+ "version": 1,
+ "question_file": "questions/reflex.json",
+ "cards_file": "cards.json",
+ "count": 238,
+ "types": {
+  "r_fig2word": 46,
+  "r_word2fig": 46,
+  "r_word2image": 64,
+  "r_image2word": 62,
+  "r_prep_icon": 10,
+  "r_prep_word2icon": 10
+ },
+ "default_time_limit_sec": 4,
+ "groups": [
+  "使役",
+  "前置詞",
+  "副詞・接続",
+  "助動詞",
+  "基本動詞",
+  "文法",
+  "時制・準動詞"
+ ]
+}

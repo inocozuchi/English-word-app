@@ -1,0 +1,6076 @@
+[
+ {
+  "id": "r_03add84a7",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_017.svg",
+  "answer": "冠詞（無冠詞・a・the）",
+  "distractors": [
+   "能動態と受動態",
+   "可算・不可算",
+   "比較級・最上級",
+   "仮定法",
+   "使役：make/have/get/let"
+  ],
+  "time_limit_sec": 4,
+  "part": 1,
+  "chapter": 7,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "名詞",
+  "ref_page_a5": 32
+ },
+ {
+  "id": "r_7405da4a2",
+  "type": "r_word2fig",
+  "question": "「冠詞（無冠詞・a・the）」の図はどれ？",
+  "prompt_ja": "冠詞（無冠詞・a・the）",
+  "answer_figure": "figures/fig_017.svg",
+  "distractor_figures": [
+   "figures/fig_044.svg",
+   "figures/fig_043.svg",
+   "figures/fig_008.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 1,
+  "chapter": 7,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "名詞",
+  "ref_page_a5": 32
+ },
+ {
+  "id": "r_2182f8db8",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_018.svg",
+  "answer": "可算・不可算",
+  "distractors": [
+   "使役：make/have/get/let",
+   "There 構文",
+   "this/that/these/those",
+   "五文型",
+   "比較級・最上級"
+  ],
+  "time_limit_sec": 4,
+  "part": 1,
+  "chapter": 9,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "名詞の複数形",
+  "ref_page_a5": 42
+ },
+ {
+  "id": "r_82ace15aa",
+  "type": "r_word2fig",
+  "question": "「可算・不可算」の図はどれ？",
+  "prompt_ja": "可算・不可算",
+  "answer_figure": "figures/fig_018.svg",
+  "distractor_figures": [
+   "figures/fig_045.svg",
+   "figures/fig_046.svg",
+   "figures/fig_008.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 1,
+  "chapter": 9,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "名詞の複数形",
+  "ref_page_a5": 42
+ },
+ {
+  "id": "r_8b105d460",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_019.svg",
+  "answer": "some と any",
+  "distractors": [
+   "五文型",
+   "可算・不可算",
+   "There 構文",
+   "使役：make/have/get/let",
+   "冠詞（無冠詞・a・the）"
+  ],
+  "time_limit_sec": 4,
+  "part": 1,
+  "chapter": 11,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "some と any の違い",
+  "ref_page_a5": 47
+ },
+ {
+  "id": "r_d28000a7d",
+  "type": "r_word2fig",
+  "question": "「some と any」の図はどれ？",
+  "prompt_ja": "some と any",
+  "answer_figure": "figures/fig_019.svg",
+  "distractor_figures": [
+   "figures/fig_008.svg",
+   "figures/fig_044.svg",
+   "figures/fig_046.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 1,
+  "chapter": 11,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "some と any の違い",
+  "ref_page_a5": 47
+ },
+ {
+  "id": "r_1202f2f00",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_045.svg",
+  "answer": "this/that/these/those",
+  "distractors": [
+   "比較級・最上級",
+   "使役：make/have/get/let",
+   "There 構文",
+   "可算・不可算",
+   "冠詞（無冠詞・a・the）"
+  ],
+  "time_limit_sec": 4,
+  "part": 1,
+  "chapter": 24,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "指示代名詞（this・that・these・those）",
+  "ref_page_a5": 96
+ },
+ {
+  "id": "r_5f3b22b3b",
+  "type": "r_word2fig",
+  "question": "「this/that/these/those」の図はどれ？",
+  "prompt_ja": "this/that/these/those",
+  "answer_figure": "figures/fig_045.svg",
+  "distractor_figures": [
+   "figures/fig_019.svg",
+   "figures/fig_044.svg",
+   "figures/fig_018.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 1,
+  "chapter": 24,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "指示代名詞（this・that・these・those）",
+  "ref_page_a5": 96
+ },
+ {
+  "id": "r_401f6439f",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_044.svg",
+  "answer": "There 構文",
+  "distractors": [
+   "能動態と受動態",
+   "仮定法",
+   "使役：make/have/get/let",
+   "比較級・最上級",
+   "some と any"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 31,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "There構文",
+  "ref_page_a5": 123
+ },
+ {
+  "id": "r_871fa0168",
+  "type": "r_word2fig",
+  "question": "「There 構文」の図はどれ？",
+  "prompt_ja": "There 構文",
+  "answer_figure": "figures/fig_044.svg",
+  "distractor_figures": [
+   "figures/fig_017.svg",
+   "figures/fig_018.svg",
+   "figures/fig_019.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 31,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "There構文",
+  "ref_page_a5": 123
+ },
+ {
+  "id": "r_a0fba2354",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_009.svg",
+  "answer": "助動詞の強さ",
+  "distractors": [
+   "must・have to・should",
+   "think",
+   "比較級・最上級",
+   "現在進行形",
+   "put"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 35,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "助動詞まとめ",
+  "ref_page_a5": 137
+ },
+ {
+  "id": "r_54aa772dd",
+  "type": "r_word2fig",
+  "question": "「助動詞の強さ」の図はどれ？",
+  "prompt_ja": "助動詞の強さ",
+  "answer_figure": "figures/fig_009.svg",
+  "distractor_figures": [
+   "figures/fig_010.svg",
+   "figures/fig_006.svg",
+   "figures/fig_018.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 35,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "助動詞まとめ",
+  "ref_page_a5": 137
+ },
+ {
+  "id": "r_fc6abbe4a",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_010.svg",
+  "answer": "must・have to・should",
+  "distractors": [
+   "助動詞の強さ",
+   "some と any",
+   "能動態と受動態",
+   "過去形",
+   "find"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 37,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "助動詞（must・have to・should・may）",
+  "ref_page_a5": 145
+ },
+ {
+  "id": "r_943a1c3b9",
+  "type": "r_word2fig",
+  "question": "「must・have to・should」の図はどれ？",
+  "prompt_ja": "must・have to・should",
+  "answer_figure": "figures/fig_010.svg",
+  "distractor_figures": [
+   "figures/fig_009.svg",
+   "figures/fig_072.svg",
+   "figures/fig_063.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 37,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "助動詞（must・have to・should・may）",
+  "ref_page_a5": 145
+ },
+ {
+  "id": "r_41726c7a4",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_015.svg",
+  "answer": "五文型",
+  "distractors": [
+   "可算・不可算",
+   "There 構文",
+   "仮定法",
+   "this/that/these/those",
+   "能動態と受動態"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 43,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "文型より大事なこと",
+  "ref_page_a5": 165
+ },
+ {
+  "id": "r_756776f06",
+  "type": "r_word2fig",
+  "question": "「五文型」の図はどれ？",
+  "prompt_ja": "五文型",
+  "answer_figure": "figures/fig_015.svg",
+  "distractor_figures": [
+   "figures/fig_047.svg",
+   "figures/fig_043.svg",
+   "figures/fig_019.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 43,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "文型より大事なこと",
+  "ref_page_a5": 165
+ },
+ {
+  "id": "r_984bc3a0c",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_046.svg",
+  "answer": "比較級・最上級",
+  "distractors": [
+   "可算・不可算",
+   "能動態と受動態",
+   "使役：make/have/get/let",
+   "There 構文",
+   "五文型"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 45,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "比較級・最上級・原級比較",
+  "ref_page_a5": 177
+ },
+ {
+  "id": "r_7166a34b9",
+  "type": "r_word2fig",
+  "question": "「比較級・最上級」の図はどれ？",
+  "prompt_ja": "比較級・最上級",
+  "answer_figure": "figures/fig_046.svg",
+  "distractor_figures": [
+   "figures/fig_015.svg",
+   "figures/fig_008.svg",
+   "figures/fig_047.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 45,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "比較級・最上級・原級比較",
+  "ref_page_a5": 177
+ },
+ {
+  "id": "r_582791742",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_008.svg",
+  "answer": "能動態と受動態",
+  "distractors": [
+   "仮定法",
+   "使役：make/have/get/let",
+   "some と any",
+   "比較級・最上級",
+   "There 構文"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 47,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "受け身",
+  "ref_page_a5": 185
+ },
+ {
+  "id": "r_7f2b496c3",
+  "type": "r_word2fig",
+  "question": "「能動態と受動態」の図はどれ？",
+  "prompt_ja": "能動態と受動態",
+  "answer_figure": "figures/fig_008.svg",
+  "distractor_figures": [
+   "figures/fig_045.svg",
+   "figures/fig_017.svg",
+   "figures/fig_047.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 47,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "受け身",
+  "ref_page_a5": 185
+ },
+ {
+  "id": "r_bde754a9a",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_043.svg",
+  "answer": "仮定法",
+  "distractors": [
+   "比較級・最上級",
+   "some と any",
+   "五文型",
+   "可算・不可算",
+   "能動態と受動態"
+  ],
+  "time_limit_sec": 4,
+  "part": 2,
+  "chapter": 56,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "仮定法",
+  "ref_page_a5": 228
+ },
+ {
+  "id": "r_7cc100346",
+  "type": "r_word2fig",
+  "question": "「仮定法」の図はどれ？",
+  "prompt_ja": "仮定法",
+  "answer_figure": "figures/fig_043.svg",
+  "distractor_figures": [
+   "figures/fig_044.svg",
+   "figures/fig_018.svg",
+   "figures/fig_008.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 2,
+  "chapter": 56,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "仮定法",
+  "ref_page_a5": 228
+ },
+ {
+  "id": "r_97a81d77f",
+  "type": "r_word2image",
+  "question": "「work」のコアイメージは？",
+  "prompt_en": "work",
+  "answer": "機能する・機能させる",
+  "distractors": [
+   "欠けているものが欲しい",
+   "手を出して取る",
+   "遠くへ声をかける",
+   "閉じる",
+   "行動する・実行する"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 60,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 work",
+  "ref_page_a5": 255
+ },
+ {
+  "id": "r_20f822896",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "機能する・機能させる",
+  "answer": "work",
+  "distractors": [
+   "do",
+   "take",
+   "need",
+   "look",
+   "catch"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 60,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 work",
+  "ref_page_a5": 255
+ },
+ {
+  "id": "r_69fff5daa",
+  "type": "r_word2image",
+  "question": "「find」のコアイメージは？",
+  "prompt_en": "find",
+  "answer": "過程を経て見つける",
+  "distractors": [
+   "場の中心に近づいていってたどり着く",
+   "閉じる",
+   "ものを残したまま、その場から離れる",
+   "触れて感じる",
+   "移して位置づける"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 61,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 find【前編】",
+  "ref_page_a5": 261
+ },
+ {
+  "id": "r_f17aa3e3b",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "過程を経て見つける",
+  "answer": "find",
+  "distractors": [
+   "put",
+   "feel",
+   "give",
+   "go",
+   "turn"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 61,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 find【前編】",
+  "ref_page_a5": 261
+ },
+ {
+  "id": "r_34f7aae77",
+  "type": "r_word2image",
+  "question": "「see」のコアイメージは？",
+  "prompt_en": "see",
+  "answer": "視界に入ってくる",
+  "distractors": [
+   "行動する・実行する",
+   "手を出して取る",
+   "動いているものをつかまえる",
+   "手に入れて範囲内にある",
+   "場の中心に近づいていってたどり着く"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 63,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 see",
+  "ref_page_a5": 274
+ },
+ {
+  "id": "r_53be381f3",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "視界に入ってくる",
+  "answer": "see",
+  "distractors": [
+   "look",
+   "make",
+   "put",
+   "be",
+   "feel"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 63,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 see",
+  "ref_page_a5": 274
+ },
+ {
+  "id": "r_a4d6a917d",
+  "type": "r_word2image",
+  "question": "「give」のコアイメージは？",
+  "prompt_en": "give",
+  "answer": "相手に差し出して持たせる",
+  "distractors": [
+   "考える",
+   "欠けているものが欲しい",
+   "手に入れて範囲内にある",
+   "存在する",
+   "行動する・実行する"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 65,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 give【前編】",
+  "ref_page_a5": 286
+ },
+ {
+  "id": "r_a3f48d5f5",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "相手に差し出して持たせる",
+  "answer": "give",
+  "distractors": [
+   "take",
+   "work",
+   "do",
+   "be",
+   "find"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 65,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 give【前編】",
+  "ref_page_a5": 286
+ },
+ {
+  "id": "r_7059aa71e",
+  "type": "r_word2image",
+  "question": "「think」のコアイメージは？",
+  "prompt_en": "think",
+  "answer": "考える",
+  "distractors": [
+   "相手に差し出して持たせる",
+   "ものを残したまま、その場から離れる",
+   "過程を経て見つける",
+   "ろくろを回す",
+   "相手にまとめた内容を伝える"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 67,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 think【前編】",
+  "ref_page_a5": 303
+ },
+ {
+  "id": "r_af79fe63e",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "考える",
+  "answer": "think",
+  "distractors": [
+   "tell",
+   "look",
+   "be",
+   "get",
+   "work"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 67,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 think【前編】",
+  "ref_page_a5": 303
+ },
+ {
+  "id": "r_76824aa1b",
+  "type": "r_word2image",
+  "question": "「do」のコアイメージは？",
+  "prompt_en": "do",
+  "answer": "行動する・実行する",
+  "distractors": [
+   "機能する・機能させる",
+   "触れて感じる",
+   "場の中心から他のところへ動く",
+   "過程を経て見つける",
+   "視界に入ってくる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 69,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 do",
+  "ref_page_a5": 317
+ },
+ {
+  "id": "r_1b984f140",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "行動する・実行する",
+  "answer": "do",
+  "distractors": [
+   "have",
+   "get",
+   "be",
+   "feel",
+   "leave"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 69,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 do",
+  "ref_page_a5": 317
+ },
+ {
+  "id": "r_7b859e407",
+  "type": "r_word2image",
+  "question": "「come」のコアイメージは？",
+  "prompt_en": "come",
+  "answer": "場の中心に近づいていってたどり着く",
+  "distractors": [
+   "手を出して取る",
+   "ものを残したまま、その場から離れる",
+   "視線を向ける",
+   "遠くへ声をかける",
+   "欠けているものが欲しい"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 71,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 come",
+  "ref_page_a5": 330
+ },
+ {
+  "id": "r_1945fee45",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "場の中心に近づいていってたどり着く",
+  "answer": "come",
+  "distractors": [
+   "see",
+   "catch",
+   "make",
+   "feel",
+   "do"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 71,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 come",
+  "ref_page_a5": 330
+ },
+ {
+  "id": "r_f6aae4106",
+  "type": "r_word2image",
+  "question": "「go」のコアイメージは？",
+  "prompt_en": "go",
+  "answer": "場の中心から他のところへ動く",
+  "distractors": [
+   "閉じる",
+   "考える",
+   "行動する・実行する",
+   "ものを残したまま、その場から離れる",
+   "触れて感じる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 72,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 go【前編】",
+  "ref_page_a5": 339
+ },
+ {
+  "id": "r_377939bb0",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "場の中心から他のところへ動く",
+  "answer": "go",
+  "distractors": [
+   "give",
+   "have",
+   "take",
+   "feel",
+   "close"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 72,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 go【前編】",
+  "ref_page_a5": 339
+ },
+ {
+  "id": "r_6143c2f2f",
+  "type": "r_word2image",
+  "question": "「make」のコアイメージは？",
+  "prompt_en": "make",
+  "answer": "こねて形作って固定する",
+  "distractors": [
+   "過程を経て見つける",
+   "ろくろを回す",
+   "移して位置づける",
+   "考える",
+   "場の中心に近づいていってたどり着く"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 74,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 make",
+  "ref_page_a5": 350
+ },
+ {
+  "id": "r_1107d4ee4",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "こねて形作って固定する",
+  "answer": "make",
+  "distractors": [
+   "do",
+   "be",
+   "feel",
+   "think",
+   "take"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 74,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 make",
+  "ref_page_a5": 350
+ },
+ {
+  "id": "r_6865afc05",
+  "type": "r_word2image",
+  "question": "「take」のコアイメージは？",
+  "prompt_en": "take",
+  "answer": "手を出して取る",
+  "distractors": [
+   "遠くへ声をかける",
+   "場の中心に近づいていってたどり着く",
+   "触れて感じる",
+   "移して位置づける",
+   "動いているものをつかまえる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 75,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 take",
+  "ref_page_a5": 357
+ },
+ {
+  "id": "r_8638a1b8d",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "手を出して取る",
+  "answer": "take",
+  "distractors": [
+   "be",
+   "go",
+   "come",
+   "call",
+   "turn"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 75,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 take",
+  "ref_page_a5": 357
+ },
+ {
+  "id": "r_9a683f655",
+  "type": "r_word2image",
+  "question": "「have」のコアイメージは？",
+  "prompt_en": "have",
+  "answer": "手に入れて範囲内にある",
+  "distractors": [
+   "欠けているものが欲しい",
+   "こねて形作って固定する",
+   "ろくろを回す",
+   "場の中心から他のところへ動く",
+   "何かのアクションによって自分のものにする"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 76,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 have【前編】",
+  "ref_page_a5": 364
+ },
+ {
+  "id": "r_59d0f170e",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "手に入れて範囲内にある",
+  "answer": "have",
+  "distractors": [
+   "make",
+   "want",
+   "give",
+   "take",
+   "think"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 76,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 have【前編】",
+  "ref_page_a5": 364
+ },
+ {
+  "id": "r_3f147bfd0",
+  "type": "r_word2image",
+  "question": "「get」のコアイメージは？",
+  "prompt_en": "get",
+  "answer": "何かのアクションによって自分のものにする",
+  "distractors": [
+   "視線を向ける",
+   "機能する・機能させる",
+   "動いているものをつかまえる",
+   "閉じる",
+   "過程を経て見つける"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 84,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 get #01",
+  "ref_page_a5": 411
+ },
+ {
+  "id": "r_3d27c5f37",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "何かのアクションによって自分のものにする",
+  "answer": "get",
+  "distractors": [
+   "work",
+   "take",
+   "find",
+   "feel",
+   "give"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 84,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "基本動詞 get #01",
+  "ref_page_a5": 411
+ },
+ {
+  "id": "r_852601af8",
+  "type": "r_word2image",
+  "question": "「be」のコアイメージは？",
+  "prompt_en": "be",
+  "answer": "存在する",
+  "distractors": [
+   "欠けているものが欲しい",
+   "視界に入ってくる",
+   "相手に差し出して持たせる",
+   "触れて感じる",
+   "遠くへ声をかける"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 91,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "be のコアイメージ解説",
+  "ref_page_a5": 478
+ },
+ {
+  "id": "r_cd41e69ef",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "存在する",
+  "answer": "be",
+  "distractors": [
+   "need",
+   "take",
+   "give",
+   "find",
+   "go"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 91,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "be のコアイメージ解説",
+  "ref_page_a5": 478
+ },
+ {
+  "id": "r_60c016fc6",
+  "type": "r_word2image",
+  "question": "「need」のコアイメージは？",
+  "prompt_en": "need",
+  "answer": "必要とする",
+  "distractors": [
+   "ものを残したまま、その場から離れる",
+   "行動する・実行する",
+   "欠けているものが欲しい",
+   "視線を向ける",
+   "動いているものをつかまえる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 93,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "need のコアイメージ解説",
+  "ref_page_a5": 483
+ },
+ {
+  "id": "r_c6a6a62c9",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "必要とする",
+  "answer": "need",
+  "distractors": [
+   "make",
+   "catch",
+   "call",
+   "give",
+   "want"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 93,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "need のコアイメージ解説",
+  "ref_page_a5": 483
+ },
+ {
+  "id": "r_1c1d31d39",
+  "type": "r_word2image",
+  "question": "「want」のコアイメージは？",
+  "prompt_en": "want",
+  "answer": "欠けているものが欲しい",
+  "distractors": [
+   "手を出して取る",
+   "存在する",
+   "必要とする",
+   "ものを残したまま、その場から離れる",
+   "相手に差し出して持たせる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 94,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "want のコアイメージ解説",
+  "ref_page_a5": 487
+ },
+ {
+  "id": "r_6066ffdde",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "欠けているものが欲しい",
+  "answer": "want",
+  "distractors": [
+   "make",
+   "tell",
+   "give",
+   "look",
+   "have"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 94,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "want のコアイメージ解説",
+  "ref_page_a5": 487
+ },
+ {
+  "id": "r_dbbefa142",
+  "type": "r_word2image",
+  "question": "「put」のコアイメージは？",
+  "prompt_en": "put",
+  "answer": "移して位置づける",
+  "distractors": [
+   "遠くへ声をかける",
+   "閉じる",
+   "手に入れて範囲内にある",
+   "場の中心に近づいていってたどり着く",
+   "何かのアクションによって自分のものにする"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 95,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "put のコアイメージ解説",
+  "ref_page_a5": 491
+ },
+ {
+  "id": "r_0027ee493",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "移して位置づける",
+  "answer": "put",
+  "distractors": [
+   "have",
+   "feel",
+   "come",
+   "go",
+   "give"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 95,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "put のコアイメージ解説",
+  "ref_page_a5": 491
+ },
+ {
+  "id": "r_786cc587a",
+  "type": "r_word2image",
+  "question": "「turn」のコアイメージは？",
+  "prompt_en": "turn",
+  "answer": "ろくろを回す",
+  "distractors": [
+   "触れて感じる",
+   "機能する・機能させる",
+   "必要とする",
+   "こねて形作って固定する",
+   "存在する"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 96,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "turn のコアイメージ解説",
+  "ref_page_a5": 500
+ },
+ {
+  "id": "r_aab1ef586",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "ろくろを回す",
+  "answer": "turn",
+  "distractors": [
+   "take",
+   "close",
+   "tell",
+   "work",
+   "come"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 96,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "turn のコアイメージ解説",
+  "ref_page_a5": 500
+ },
+ {
+  "id": "r_d1848eb19",
+  "type": "r_word2image",
+  "question": "「tell」のコアイメージは？",
+  "prompt_en": "tell",
+  "answer": "相手にまとめた内容を伝える",
+  "distractors": [
+   "欠けているものが欲しい",
+   "手を出して取る",
+   "閉じる",
+   "必要とする",
+   "こねて形作って固定する"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 97,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "tell のコアイメージ解説",
+  "ref_page_a5": 506
+ },
+ {
+  "id": "r_af0b5d01e",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "相手にまとめた内容を伝える",
+  "answer": "tell",
+  "distractors": [
+   "call",
+   "put",
+   "catch",
+   "feel",
+   "come"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 97,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "tell のコアイメージ解説",
+  "ref_page_a5": 506
+ },
+ {
+  "id": "r_f073daa15",
+  "type": "r_word2image",
+  "question": "「call」のコアイメージは？",
+  "prompt_en": "call",
+  "answer": "遠くへ声をかける",
+  "distractors": [
+   "過程を経て見つける",
+   "動いているものをつかまえる",
+   "視線を向ける",
+   "触れて感じる",
+   "ろくろを回す"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 98,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "call のコアイメージ解説",
+  "ref_page_a5": 509
+ },
+ {
+  "id": "r_c7b737207",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "遠くへ声をかける",
+  "answer": "call",
+  "distractors": [
+   "take",
+   "catch",
+   "put",
+   "feel",
+   "close"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 98,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "call のコアイメージ解説",
+  "ref_page_a5": 509
+ },
+ {
+  "id": "r_3d3f9c6ac",
+  "type": "r_word2image",
+  "question": "「catch」のコアイメージは？",
+  "prompt_en": "catch",
+  "answer": "動いているものをつかまえる",
+  "distractors": [
+   "相手にまとめた内容を伝える",
+   "遠くへ声をかける",
+   "ろくろを回す",
+   "過程を経て見つける",
+   "視界に入ってくる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 99,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "catch のコアイメージ解説",
+  "ref_page_a5": 512
+ },
+ {
+  "id": "r_970a2aca9",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "動いているものをつかまえる",
+  "answer": "catch",
+  "distractors": [
+   "see",
+   "call",
+   "give",
+   "get",
+   "need"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 99,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "catch のコアイメージ解説",
+  "ref_page_a5": 512
+ },
+ {
+  "id": "r_97303e2f9",
+  "type": "r_word2image",
+  "question": "「close」のコアイメージは？",
+  "prompt_en": "close",
+  "answer": "閉じる",
+  "distractors": [
+   "手に入れて範囲内にある",
+   "存在する",
+   "遠くへ声をかける",
+   "場の中心から他のところへ動く",
+   "何かのアクションによって自分のものにする"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 100,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "close のコアイメージ解説",
+  "ref_page_a5": 517
+ },
+ {
+  "id": "r_e9a6ec2fd",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "閉じる",
+  "answer": "close",
+  "distractors": [
+   "call",
+   "think",
+   "give",
+   "be",
+   "catch"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 100,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "close のコアイメージ解説",
+  "ref_page_a5": 517
+ },
+ {
+  "id": "r_9dea9798e",
+  "type": "r_word2image",
+  "question": "「feel」のコアイメージは？",
+  "prompt_en": "feel",
+  "answer": "触れて感じる",
+  "distractors": [
+   "機能する・機能させる",
+   "必要とする",
+   "視線を向ける",
+   "ものを残したまま、その場から離れる",
+   "場の中心に近づいていってたどり着く"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 101,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "feel のコアイメージ解説",
+  "ref_page_a5": 522
+ },
+ {
+  "id": "r_d65d6d524",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "触れて感じる",
+  "answer": "feel",
+  "distractors": [
+   "give",
+   "tell",
+   "work",
+   "make",
+   "need"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 101,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "feel のコアイメージ解説",
+  "ref_page_a5": 522
+ },
+ {
+  "id": "r_383a43b86",
+  "type": "r_word2image",
+  "question": "「leave」のコアイメージは？",
+  "prompt_en": "leave",
+  "answer": "ものを残したまま、その場から離れる",
+  "distractors": [
+   "考える",
+   "存在する",
+   "相手に差し出して持たせる",
+   "過程を経て見つける",
+   "触れて感じる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 102,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "leave のコアイメージ解説",
+  "ref_page_a5": 528
+ },
+ {
+  "id": "r_ab5a60a42",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "ものを残したまま、その場から離れる",
+  "answer": "leave",
+  "distractors": [
+   "make",
+   "find",
+   "have",
+   "want",
+   "go"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 102,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "leave のコアイメージ解説",
+  "ref_page_a5": 528
+ },
+ {
+  "id": "r_8885c87af",
+  "type": "r_word2image",
+  "question": "「look」のコアイメージは？",
+  "prompt_en": "look",
+  "answer": "視線を向ける",
+  "distractors": [
+   "欠けているものが欲しい",
+   "視界に入ってくる",
+   "場の中心に近づいていってたどり着く",
+   "遠くへ声をかける",
+   "触れて感じる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 103,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "look のコアイメージ解説",
+  "ref_page_a5": 533
+ },
+ {
+  "id": "r_c0cfdf012",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "視線を向ける",
+  "answer": "look",
+  "distractors": [
+   "turn",
+   "put",
+   "need",
+   "take",
+   "come"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 2,
+  "chapter": 103,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "look のコアイメージ解説",
+  "ref_page_a5": 533
+ },
+ {
+  "id": "r_ec90b82c8",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_070.svg",
+  "answer": "work",
+  "distractors": [
+   "call",
+   "hear と listen",
+   "go と come",
+   "leave",
+   "have"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 60,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 work",
+  "ref_page_a5": 255
+ },
+ {
+  "id": "r_f15c9a2f2",
+  "type": "r_word2fig",
+  "question": "「work」の図はどれ？",
+  "prompt_ja": "work",
+  "answer_figure": "figures/fig_070.svg",
+  "distractor_figures": [
+   "figures/fig_074.svg",
+   "figures/fig_051.svg",
+   "figures/fig_077.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 60,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 work",
+  "ref_page_a5": 255
+ },
+ {
+  "id": "r_f902dae87",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_071.svg",
+  "answer": "find",
+  "distractors": [
+   "put",
+   "see・look・watch",
+   "go と come",
+   "close",
+   "make"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 61,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 find【前編】",
+  "ref_page_a5": 261
+ },
+ {
+  "id": "r_144a1df61",
+  "type": "r_word2fig",
+  "question": "「find」の図はどれ？",
+  "prompt_ja": "find",
+  "answer_figure": "figures/fig_071.svg",
+  "distractor_figures": [
+   "figures/fig_077.svg",
+   "figures/fig_053.svg",
+   "figures/fig_074.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 61,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 find【前編】",
+  "ref_page_a5": 261
+ },
+ {
+  "id": "r_903e55016",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_055.svg",
+  "answer": "see・look・watch",
+  "distractors": [
+   "think",
+   "catch",
+   "go と come",
+   "keep と hold",
+   "work"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 63,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 see",
+  "ref_page_a5": 274
+ },
+ {
+  "id": "r_16c907bc7",
+  "type": "r_word2fig",
+  "question": "「see・look・watch」の図はどれ？",
+  "prompt_ja": "see・look・watch",
+  "answer_figure": "figures/fig_055.svg",
+  "distractor_figures": [
+   "figures/fig_067.svg",
+   "figures/fig_075.svg",
+   "figures/fig_054.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 63,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 see",
+  "ref_page_a5": 274
+ },
+ {
+  "id": "r_3b479a12f",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_053.svg",
+  "answer": "give",
+  "distractors": [
+   "put",
+   "have",
+   "find",
+   "work",
+   "call"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 65,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 give【前編】",
+  "ref_page_a5": 286
+ },
+ {
+  "id": "r_851787ce6",
+  "type": "r_word2fig",
+  "question": "「give」の図はどれ？",
+  "prompt_ja": "give",
+  "answer_figure": "figures/fig_053.svg",
+  "distractor_figures": [
+   "figures/fig_072.svg",
+   "figures/fig_056.svg",
+   "figures/fig_071.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 65,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 give【前編】",
+  "ref_page_a5": 286
+ },
+ {
+  "id": "r_6ec18e4c4",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_072.svg",
+  "answer": "think",
+  "distractors": [
+   "leave",
+   "hear と listen",
+   "get",
+   "find",
+   "take"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 67,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 think【前編】",
+  "ref_page_a5": 303
+ },
+ {
+  "id": "r_a163056c8",
+  "type": "r_word2fig",
+  "question": "「think」の図はどれ？",
+  "prompt_ja": "think",
+  "answer_figure": "figures/fig_072.svg",
+  "distractor_figures": [
+   "figures/fig_069.svg",
+   "figures/fig_071.svg",
+   "figures/fig_074.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 67,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 think【前編】",
+  "ref_page_a5": 303
+ },
+ {
+  "id": "r_b12936b41",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_054.svg",
+  "answer": "go と come",
+  "distractors": [
+   "leave",
+   "turn",
+   "have",
+   "see・look・watch",
+   "keep と hold"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 72,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 go【前編】",
+  "ref_page_a5": 339
+ },
+ {
+  "id": "r_445cf463a",
+  "type": "r_word2fig",
+  "question": "「go と come」の図はどれ？",
+  "prompt_ja": "go と come",
+  "answer_figure": "figures/fig_054.svg",
+  "distractor_figures": [
+   "figures/fig_051.svg",
+   "figures/fig_055.svg",
+   "figures/fig_070.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 72,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 go【前編】",
+  "ref_page_a5": 339
+ },
+ {
+  "id": "r_435481a17",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_052.svg",
+  "answer": "make",
+  "distractors": [
+   "think",
+   "work",
+   "get",
+   "turn",
+   "keep と hold"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 74,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 make",
+  "ref_page_a5": 350
+ },
+ {
+  "id": "r_5575ec5d2",
+  "type": "r_word2fig",
+  "question": "「make」の図はどれ？",
+  "prompt_ja": "make",
+  "answer_figure": "figures/fig_052.svg",
+  "distractor_figures": [
+   "figures/fig_073.svg",
+   "figures/fig_050.svg",
+   "figures/fig_077.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 74,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 make",
+  "ref_page_a5": 350
+ },
+ {
+  "id": "r_b1346c697",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_050.svg",
+  "answer": "take",
+  "distractors": [
+   "catch",
+   "leave",
+   "work",
+   "find",
+   "call"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 75,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 take",
+  "ref_page_a5": 357
+ },
+ {
+  "id": "r_3ddf79aef",
+  "type": "r_word2fig",
+  "question": "「take」の図はどれ？",
+  "prompt_ja": "take",
+  "answer_figure": "figures/fig_050.svg",
+  "distractor_figures": [
+   "figures/fig_069.svg",
+   "figures/fig_053.svg",
+   "figures/fig_071.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 75,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 take",
+  "ref_page_a5": 357
+ },
+ {
+  "id": "r_c2d2e7a70",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_051.svg",
+  "answer": "have",
+  "distractors": [
+   "put",
+   "find",
+   "give",
+   "take",
+   "turn"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 76,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 have【前編】",
+  "ref_page_a5": 364
+ },
+ {
+  "id": "r_aa2dce07e",
+  "type": "r_word2fig",
+  "question": "「have」の図はどれ？",
+  "prompt_ja": "have",
+  "answer_figure": "figures/fig_051.svg",
+  "distractor_figures": [
+   "figures/fig_067.svg",
+   "figures/fig_050.svg",
+   "figures/fig_052.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 76,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 have【前編】",
+  "ref_page_a5": 364
+ },
+ {
+  "id": "r_272e25c2f",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_047.svg",
+  "answer": "使役：make/have/get/let",
+  "distractors": [
+   "this/that/these/those",
+   "比較級・最上級",
+   "仮定法",
+   "some と any",
+   "冠詞（無冠詞・a・the）"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_008113f17",
+  "type": "r_word2fig",
+  "question": "「使役：make/have/get/let」の図はどれ？",
+  "prompt_ja": "使役：make/have/get/let",
+  "answer_figure": "figures/fig_047.svg",
+  "distractor_figures": [
+   "figures/fig_045.svg",
+   "figures/fig_043.svg",
+   "figures/fig_017.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "文法",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_bf6ea747c",
+  "type": "r_word2image",
+  "question": "使役の make ＋人＋… のイメージは？",
+  "prompt_en": "make",
+  "answer": "強制（粘土をこねて固定）",
+  "distractors": [
+   "当然・対価（自分の支配範囲）",
+   "説得・過程（to do）",
+   "許可（そのままに任せる）",
+   "進行・ライブ感",
+   "起点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_6fc37971f",
+  "type": "r_image2word",
+  "question": "この使役のイメージは？",
+  "prompt_ja": "強制（粘土をこねて固定）",
+  "answer": "make",
+  "distractors": [
+   "have",
+   "get",
+   "let",
+   "do",
+   "take"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_db47a9425",
+  "type": "r_word2image",
+  "question": "使役の have ＋人＋… のイメージは？",
+  "prompt_en": "have",
+  "answer": "当然・対価（自分の支配範囲）",
+  "distractors": [
+   "強制（粘土をこねて固定）",
+   "説得・過程（to do）",
+   "許可（そのままに任せる）",
+   "進行・ライブ感",
+   "起点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_6283de36a",
+  "type": "r_image2word",
+  "question": "この使役のイメージは？",
+  "prompt_ja": "当然・対価（自分の支配範囲）",
+  "answer": "have",
+  "distractors": [
+   "make",
+   "get",
+   "let",
+   "do",
+   "take"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_de6e9585c",
+  "type": "r_word2image",
+  "question": "使役の get ＋人＋… のイメージは？",
+  "prompt_en": "get",
+  "answer": "説得・過程（to do）",
+  "distractors": [
+   "強制（粘土をこねて固定）",
+   "当然・対価（自分の支配範囲）",
+   "許可（そのままに任せる）",
+   "進行・ライブ感",
+   "起点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_3f401a4a7",
+  "type": "r_image2word",
+  "question": "この使役のイメージは？",
+  "prompt_ja": "説得・過程（to do）",
+  "answer": "get",
+  "distractors": [
+   "make",
+   "have",
+   "let",
+   "do",
+   "take"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_4424622c2",
+  "type": "r_word2image",
+  "question": "使役の let ＋人＋… のイメージは？",
+  "prompt_en": "let",
+  "answer": "許可（そのままに任せる）",
+  "distractors": [
+   "強制（粘土をこねて固定）",
+   "当然・対価（自分の支配範囲）",
+   "説得・過程（to do）",
+   "進行・ライブ感",
+   "起点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_de29274c5",
+  "type": "r_image2word",
+  "question": "この使役のイメージは？",
+  "prompt_ja": "許可（そのままに任せる）",
+  "answer": "let",
+  "distractors": [
+   "make",
+   "have",
+   "get",
+   "do",
+   "take"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 81,
+  "reflex": true,
+  "group": "使役",
+  "tags": [
+   "反射",
+   "使役"
+  ],
+  "chapter_title": "使役構文（make・have・get・let）",
+  "ref_page_a5": 396
+ },
+ {
+  "id": "r_8733909e6",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_049.svg",
+  "answer": "get",
+  "distractors": [
+   "hear と listen",
+   "go と come",
+   "catch",
+   "keep と hold",
+   "have"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 84,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 get #01",
+  "ref_page_a5": 411
+ },
+ {
+  "id": "r_19bc51402",
+  "type": "r_word2fig",
+  "question": "「get」の図はどれ？",
+  "prompt_ja": "get",
+  "answer_figure": "figures/fig_049.svg",
+  "distractor_figures": [
+   "figures/fig_075.svg",
+   "figures/fig_052.svg",
+   "figures/fig_068.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 84,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "基本動詞 get #01",
+  "ref_page_a5": 411
+ },
+ {
+  "id": "r_b20ada06d",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_067.svg",
+  "answer": "put",
+  "distractors": [
+   "have",
+   "get",
+   "turn",
+   "make",
+   "feel"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 95,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "put のコアイメージ解説",
+  "ref_page_a5": 491
+ },
+ {
+  "id": "r_41faccd99",
+  "type": "r_word2fig",
+  "question": "「put」の図はどれ？",
+  "prompt_ja": "put",
+  "answer_figure": "figures/fig_067.svg",
+  "distractor_figures": [
+   "figures/fig_056.svg",
+   "figures/fig_054.svg",
+   "figures/fig_068.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 95,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "put のコアイメージ解説",
+  "ref_page_a5": 491
+ },
+ {
+  "id": "r_4d4a714ad",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_068.svg",
+  "answer": "turn",
+  "distractors": [
+   "work",
+   "feel",
+   "get",
+   "leave",
+   "think"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 96,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "turn のコアイメージ解説",
+  "ref_page_a5": 500
+ },
+ {
+  "id": "r_f1eb5e2df",
+  "type": "r_word2fig",
+  "question": "「turn」の図はどれ？",
+  "prompt_ja": "turn",
+  "answer_figure": "figures/fig_068.svg",
+  "distractor_figures": [
+   "figures/fig_075.svg",
+   "figures/fig_053.svg",
+   "figures/fig_073.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 96,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "turn のコアイメージ解説",
+  "ref_page_a5": 500
+ },
+ {
+  "id": "r_04f4b2397",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_075.svg",
+  "answer": "call",
+  "distractors": [
+   "keep と hold",
+   "think",
+   "leave",
+   "catch",
+   "turn"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 98,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "call のコアイメージ解説",
+  "ref_page_a5": 509
+ },
+ {
+  "id": "r_3d697477c",
+  "type": "r_word2fig",
+  "question": "「call」の図はどれ？",
+  "prompt_ja": "call",
+  "answer_figure": "figures/fig_075.svg",
+  "distractor_figures": [
+   "figures/fig_053.svg",
+   "figures/fig_077.svg",
+   "figures/fig_056.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 98,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "call のコアイメージ解説",
+  "ref_page_a5": 509
+ },
+ {
+  "id": "r_52dd70397",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_073.svg",
+  "answer": "catch",
+  "distractors": [
+   "see・look・watch",
+   "feel",
+   "keep と hold",
+   "make",
+   "work"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 99,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "catch のコアイメージ解説",
+  "ref_page_a5": 512
+ },
+ {
+  "id": "r_e1e18f8c4",
+  "type": "r_word2fig",
+  "question": "「catch」の図はどれ？",
+  "prompt_ja": "catch",
+  "answer_figure": "figures/fig_073.svg",
+  "distractor_figures": [
+   "figures/fig_054.svg",
+   "figures/fig_077.svg",
+   "figures/fig_055.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 99,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "catch のコアイメージ解説",
+  "ref_page_a5": 512
+ },
+ {
+  "id": "r_3a9af06fa",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_074.svg",
+  "answer": "close",
+  "distractors": [
+   "put",
+   "catch",
+   "turn",
+   "take",
+   "work"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 100,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "close のコアイメージ解説",
+  "ref_page_a5": 517
+ },
+ {
+  "id": "r_e0666672a",
+  "type": "r_word2fig",
+  "question": "「close」の図はどれ？",
+  "prompt_ja": "close",
+  "answer_figure": "figures/fig_074.svg",
+  "distractor_figures": [
+   "figures/fig_068.svg",
+   "figures/fig_053.svg",
+   "figures/fig_070.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 100,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "close のコアイメージ解説",
+  "ref_page_a5": 517
+ },
+ {
+  "id": "r_6ea80d7d5",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_077.svg",
+  "answer": "feel",
+  "distractors": [
+   "take",
+   "work",
+   "get",
+   "give",
+   "go と come"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 101,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "feel のコアイメージ解説",
+  "ref_page_a5": 522
+ },
+ {
+  "id": "r_0b5a9d43d",
+  "type": "r_word2fig",
+  "question": "「feel」の図はどれ？",
+  "prompt_ja": "feel",
+  "answer_figure": "figures/fig_077.svg",
+  "distractor_figures": [
+   "figures/fig_074.svg",
+   "figures/fig_068.svg",
+   "figures/fig_057.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 101,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "feel のコアイメージ解説",
+  "ref_page_a5": 522
+ },
+ {
+  "id": "r_032ad412f",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_069.svg",
+  "answer": "leave",
+  "distractors": [
+   "call",
+   "feel",
+   "see・look・watch",
+   "catch",
+   "get"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 102,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "leave のコアイメージ解説",
+  "ref_page_a5": 528
+ },
+ {
+  "id": "r_6eedd3b8e",
+  "type": "r_word2fig",
+  "question": "「leave」の図はどれ？",
+  "prompt_ja": "leave",
+  "answer_figure": "figures/fig_069.svg",
+  "distractor_figures": [
+   "figures/fig_072.svg",
+   "figures/fig_068.svg",
+   "figures/fig_054.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 102,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "leave のコアイメージ解説",
+  "ref_page_a5": 528
+ },
+ {
+  "id": "r_387cb4215",
+  "type": "r_word2image",
+  "question": "「so」のコアイメージは？",
+  "prompt_en": "so",
+  "answer": "引き継いでゴールへ",
+  "distractors": [
+   "受け入れてもらう、喜ばせる",
+   "ぴったりと収まっている",
+   "描いて表す",
+   "内側から外側へ",
+   "差に注目して、上乗せして、平らにする"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 105,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "so のコアイメージ解説",
+  "ref_page_a5": 545
+ },
+ {
+  "id": "r_86d460a84",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "引き継いでゴールへ",
+  "answer": "so",
+  "distractors": [
+   "but",
+   "yet",
+   "just",
+   "out",
+   "still"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 105,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "so のコアイメージ解説",
+  "ref_page_a5": 545
+ },
+ {
+  "id": "r_6f79bd891",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_061.svg",
+  "answer": "so",
+  "distractors": [
+   "just",
+   "still と yet",
+   "even",
+   "out",
+   "but"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 105,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "so のコアイメージ解説",
+  "ref_page_a5": 545
+ },
+ {
+  "id": "r_b17540d4c",
+  "type": "r_word2fig",
+  "question": "「so」の図はどれ？",
+  "prompt_ja": "so",
+  "answer_figure": "figures/fig_061.svg",
+  "distractor_figures": [
+   "figures/fig_064.svg",
+   "figures/fig_062.svg",
+   "figures/fig_060.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 105,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "so のコアイメージ解説",
+  "ref_page_a5": 545
+ },
+ {
+  "id": "r_202b5aed6",
+  "type": "r_word2image",
+  "question": "「but」のコアイメージは？",
+  "prompt_en": "but",
+  "answer": "それまでの流れから外す",
+  "distractors": [
+   "差に注目して、上乗せして、平らにする",
+   "描いて表す",
+   "ぴったりと収まっている",
+   "引き継いでゴールへ",
+   "受け入れてもらう、喜ばせる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 106,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "but のコアイメージ解説",
+  "ref_page_a5": 551
+ },
+ {
+  "id": "r_be66234a9",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "それまでの流れから外す",
+  "answer": "but",
+  "distractors": [
+   "still",
+   "just",
+   "so",
+   "out",
+   "figure"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 106,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "but のコアイメージ解説",
+  "ref_page_a5": 551
+ },
+ {
+  "id": "r_8f1b1220d",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_062.svg",
+  "answer": "but",
+  "distractors": [
+   "out",
+   "even",
+   "so",
+   "still と yet",
+   "just"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 106,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "but のコアイメージ解説",
+  "ref_page_a5": 551
+ },
+ {
+  "id": "r_5df02af41",
+  "type": "r_word2fig",
+  "question": "「but」の図はどれ？",
+  "prompt_ja": "but",
+  "answer_figure": "figures/fig_062.svg",
+  "distractor_figures": [
+   "figures/fig_063.svg",
+   "figures/fig_060.svg",
+   "figures/fig_066.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 106,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "but のコアイメージ解説",
+  "ref_page_a5": 551
+ },
+ {
+  "id": "r_6b2c333a2",
+  "type": "r_word2image",
+  "question": "「just」のコアイメージは？",
+  "prompt_en": "just",
+  "answer": "ぴったりと収まっている",
+  "distractors": [
+   "描いて表す",
+   "変わらない",
+   "流れを予期したうえで、今までのところ",
+   "それまでの流れから外す",
+   "受け入れてもらう、喜ばせる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 107,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "just のコアイメージ解説",
+  "ref_page_a5": 555
+ },
+ {
+  "id": "r_92032125e",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "ぴったりと収まっている",
+  "answer": "just",
+  "distractors": [
+   "even",
+   "figure",
+   "yet",
+   "still",
+   "so"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 107,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "just のコアイメージ解説",
+  "ref_page_a5": 555
+ },
+ {
+  "id": "r_f6f87c250",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_063.svg",
+  "answer": "just",
+  "distractors": [
+   "still と yet",
+   "but",
+   "even",
+   "so",
+   "out"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 107,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "just のコアイメージ解説",
+  "ref_page_a5": 555
+ },
+ {
+  "id": "r_530a89e37",
+  "type": "r_word2fig",
+  "question": "「just」の図はどれ？",
+  "prompt_ja": "just",
+  "answer_figure": "figures/fig_063.svg",
+  "distractor_figures": [
+   "figures/fig_066.svg",
+   "figures/fig_062.svg",
+   "figures/fig_060.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 107,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "just のコアイメージ解説",
+  "ref_page_a5": 555
+ },
+ {
+  "id": "r_59c3d9ccd",
+  "type": "r_word2image",
+  "question": "「still」のコアイメージは？",
+  "prompt_en": "still",
+  "answer": "変わらない",
+  "distractors": [
+   "それまでの流れから外す",
+   "差に注目して、上乗せして、平らにする",
+   "ぴったりと収まっている",
+   "引き継いでゴールへ",
+   "描いて表す"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 108,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "still のコアイメージ解説",
+  "ref_page_a5": 560
+ },
+ {
+  "id": "r_74f09d5c8",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "変わらない",
+  "answer": "still",
+  "distractors": [
+   "but",
+   "please",
+   "even",
+   "yet",
+   "just"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 108,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "still のコアイメージ解説",
+  "ref_page_a5": 560
+ },
+ {
+  "id": "r_40adde46d",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_060.svg",
+  "answer": "still と yet",
+  "distractors": [
+   "even",
+   "but",
+   "out",
+   "just",
+   "so"
+  ],
+  "time_limit_sec": 4,
+  "part": 3,
+  "chapter": 108,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "still のコアイメージ解説",
+  "ref_page_a5": 560
+ },
+ {
+  "id": "r_f1c6b8a03",
+  "type": "r_word2fig",
+  "question": "「still と yet」の図はどれ？",
+  "prompt_ja": "still と yet",
+  "answer_figure": "figures/fig_060.svg",
+  "distractor_figures": [
+   "figures/fig_062.svg",
+   "figures/fig_064.svg",
+   "figures/fig_063.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 3,
+  "chapter": 108,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "still のコアイメージ解説",
+  "ref_page_a5": 560
+ },
+ {
+  "id": "r_0a29c7662",
+  "type": "r_word2image",
+  "question": "「yet」のコアイメージは？",
+  "prompt_en": "yet",
+  "answer": "流れを予期したうえで、今までのところ",
+  "distractors": [
+   "それまでの流れから外す",
+   "差に注目して、上乗せして、平らにする",
+   "内側から外側へ",
+   "ぴったりと収まっている",
+   "引き継いでゴールへ"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 109,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "yet のコアイメージ解説",
+  "ref_page_a5": 564
+ },
+ {
+  "id": "r_ef8709170",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "流れを予期したうえで、今までのところ",
+  "answer": "yet",
+  "distractors": [
+   "figure",
+   "but",
+   "so",
+   "just",
+   "please"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 109,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "yet のコアイメージ解説",
+  "ref_page_a5": 564
+ },
+ {
+  "id": "r_37c377515",
+  "type": "r_word2image",
+  "question": "「even」のコアイメージは？",
+  "prompt_en": "even",
+  "answer": "差に注目して、上乗せして、平らにする",
+  "distractors": [
+   "ぴったりと収まっている",
+   "受け入れてもらう、喜ばせる",
+   "描いて表す",
+   "それまでの流れから外す",
+   "内側から外側へ"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 110,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "even のコアイメージ解説",
+  "ref_page_a5": 569
+ },
+ {
+  "id": "r_2129577a3",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "差に注目して、上乗せして、平らにする",
+  "answer": "even",
+  "distractors": [
+   "so",
+   "just",
+   "yet",
+   "please",
+   "still"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 110,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "even のコアイメージ解説",
+  "ref_page_a5": 569
+ },
+ {
+  "id": "r_ff2679da9",
+  "type": "r_word2image",
+  "question": "「please」のコアイメージは？",
+  "prompt_en": "please",
+  "answer": "受け入れてもらう、喜ばせる",
+  "distractors": [
+   "差に注目して、上乗せして、平らにする",
+   "それまでの流れから外す",
+   "変わらない",
+   "描いて表す",
+   "引き継いでゴールへ"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 111,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "please の意味と使い方",
+  "ref_page_a5": 572
+ },
+ {
+  "id": "r_b49f2c930",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "受け入れてもらう、喜ばせる",
+  "answer": "please",
+  "distractors": [
+   "figure",
+   "out",
+   "still",
+   "just",
+   "but"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 111,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "please の意味と使い方",
+  "ref_page_a5": 572
+ },
+ {
+  "id": "r_af0fd2350",
+  "type": "r_word2image",
+  "question": "「figure」のコアイメージは？",
+  "prompt_en": "figure",
+  "answer": "描いて表す",
+  "distractors": [
+   "引き継いでゴールへ",
+   "流れを予期したうえで、今までのところ",
+   "変わらない",
+   "差に注目して、上乗せして、平らにする",
+   "ぴったりと収まっている"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 114,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "figure のコアイメージ解説",
+  "ref_page_a5": 580
+ },
+ {
+  "id": "r_36d72a2e0",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "描いて表す",
+  "answer": "figure",
+  "distractors": [
+   "so",
+   "but",
+   "even",
+   "please",
+   "still"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 114,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "figure のコアイメージ解説",
+  "ref_page_a5": 580
+ },
+ {
+  "id": "r_c7b9cd49e",
+  "type": "r_word2image",
+  "question": "「out」のコアイメージは？",
+  "prompt_en": "out",
+  "answer": "内側から外側へ",
+  "distractors": [
+   "差に注目して、上乗せして、平らにする",
+   "変わらない",
+   "流れを予期したうえで、今までのところ",
+   "引き継いでゴールへ",
+   "描いて表す"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 115,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "out のコアイメージ解説",
+  "ref_page_a5": 582
+ },
+ {
+  "id": "r_f3ad2c9d9",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "内側から外側へ",
+  "answer": "out",
+  "distractors": [
+   "please",
+   "but",
+   "still",
+   "figure",
+   "just"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 3,
+  "chapter": 115,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "out のコアイメージ解説",
+  "ref_page_a5": 582
+ },
+ {
+  "id": "r_30f1dd3d8",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_064.svg",
+  "answer": "even",
+  "distractors": [
+   "still と yet",
+   "out",
+   "but",
+   "so",
+   "just"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 110,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "even のコアイメージ解説",
+  "ref_page_a5": 569
+ },
+ {
+  "id": "r_755f34534",
+  "type": "r_word2fig",
+  "question": "「even」の図はどれ？",
+  "prompt_ja": "even",
+  "answer_figure": "figures/fig_064.svg",
+  "distractor_figures": [
+   "figures/fig_063.svg",
+   "figures/fig_061.svg",
+   "figures/fig_066.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 110,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "even のコアイメージ解説",
+  "ref_page_a5": 569
+ },
+ {
+  "id": "r_51a7a2127",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_066.svg",
+  "answer": "out",
+  "distractors": [
+   "even",
+   "just",
+   "so",
+   "still と yet",
+   "but"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 115,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "out のコアイメージ解説",
+  "ref_page_a5": 582
+ },
+ {
+  "id": "r_d4f0abfbd",
+  "type": "r_word2fig",
+  "question": "「out」の図はどれ？",
+  "prompt_ja": "out",
+  "answer_figure": "figures/fig_066.svg",
+  "distractor_figures": [
+   "figures/fig_060.svg",
+   "figures/fig_062.svg",
+   "figures/fig_063.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 115,
+  "reflex": true,
+  "group": "副詞・接続",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "out のコアイメージ解説",
+  "ref_page_a5": 582
+ },
+ {
+  "id": "r_f9202b05c",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_056.svg",
+  "answer": "hear と listen",
+  "distractors": [
+   "have",
+   "make",
+   "see・look・watch",
+   "get",
+   "find"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 116,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "hear と listen の違い",
+  "ref_page_a5": 587
+ },
+ {
+  "id": "r_2e70dd938",
+  "type": "r_word2fig",
+  "question": "「hear と listen」の図はどれ？",
+  "prompt_ja": "hear と listen",
+  "answer_figure": "figures/fig_056.svg",
+  "distractor_figures": [
+   "figures/fig_074.svg",
+   "figures/fig_051.svg",
+   "figures/fig_054.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 116,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "hear と listen の違い",
+  "ref_page_a5": 587
+ },
+ {
+  "id": "r_f3de3bec8",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_057.svg",
+  "answer": "keep と hold",
+  "distractors": [
+   "call",
+   "turn",
+   "catch",
+   "think",
+   "put"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 117,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "keep と hold の違い",
+  "ref_page_a5": 590
+ },
+ {
+  "id": "r_3f2afa5a3",
+  "type": "r_word2fig",
+  "question": "「keep と hold」の図はどれ？",
+  "prompt_ja": "keep と hold",
+  "answer_figure": "figures/fig_057.svg",
+  "distractor_figures": [
+   "figures/fig_052.svg",
+   "figures/fig_070.svg",
+   "figures/fig_051.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 117,
+  "reflex": true,
+  "group": "基本動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "keep と hold の違い",
+  "ref_page_a5": 590
+ },
+ {
+  "id": "r_7b461b656",
+  "type": "r_word2image",
+  "question": "「現在形」のコアイメージは？",
+  "prompt_en": "現在形",
+  "answer": "目の前に存在する",
+  "distractors": [
+   "進行・ライブ感",
+   "今もまだ～している",
+   "過去の行為の結果の状態",
+   "合わせ持つ",
+   "遠くに離れている"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 125,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在形",
+  "ref_page_a5": 611
+ },
+ {
+  "id": "r_ab8e0f233",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "目の前に存在する",
+  "answer": "現在形",
+  "distractors": [
+   "現在完了進行形",
+   "分詞とは",
+   "過去分詞",
+   "to不定詞",
+   "過去形"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 125,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在形",
+  "ref_page_a5": 611
+ },
+ {
+  "id": "r_3a52bff80",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_001.svg",
+  "answer": "現在形",
+  "distractors": [
+   "will と be going to",
+   "to不定詞と動名詞",
+   "現在完了形",
+   "分詞（-ing／過去分詞）",
+   "現在進行形"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 125,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在形",
+  "ref_page_a5": 611
+ },
+ {
+  "id": "r_eb0c777fa",
+  "type": "r_word2fig",
+  "question": "「現在形」の図はどれ？",
+  "prompt_ja": "現在形",
+  "answer_figure": "figures/fig_001.svg",
+  "distractor_figures": [
+   "figures/fig_005.svg",
+   "figures/fig_007.svg",
+   "figures/fig_004.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 125,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在形",
+  "ref_page_a5": 611
+ },
+ {
+  "id": "r_e6d9203b6",
+  "type": "r_word2image",
+  "question": "「現在進行形」のコアイメージは？",
+  "prompt_en": "現在進行形",
+  "answer": "進行・ライブ感",
+  "distractors": [
+   "今もまだ～している",
+   "目の前に存在する",
+   "遠くに離れている",
+   "進行中の行為を思い描く",
+   "過去の結果を今も持っている"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 126,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在進行形",
+  "ref_page_a5": 614
+ },
+ {
+  "id": "r_c8b983201",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_002.svg",
+  "answer": "現在進行形",
+  "distractors": [
+   "will と be going to",
+   "現在形",
+   "to不定詞と動名詞",
+   "現在完了進行形",
+   "分詞（-ing／過去分詞）"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 126,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在進行形",
+  "ref_page_a5": 614
+ },
+ {
+  "id": "r_401005766",
+  "type": "r_word2fig",
+  "question": "「現在進行形」の図はどれ？",
+  "prompt_ja": "現在進行形",
+  "answer_figure": "figures/fig_002.svg",
+  "distractor_figures": [
+   "figures/fig_005.svg",
+   "figures/fig_001.svg",
+   "figures/fig_004.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 126,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在進行形",
+  "ref_page_a5": 614
+ },
+ {
+  "id": "r_113b25258",
+  "type": "r_word2image",
+  "question": "「過去形」のコアイメージは？",
+  "prompt_en": "過去形",
+  "answer": "遠くに離れている",
+  "distractors": [
+   "過去の行為の結果の状態",
+   "進行・ライブ感",
+   "まさにその動き",
+   "目の前に存在する",
+   "合わせ持つ"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 127,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "過去形",
+  "ref_page_a5": 618
+ },
+ {
+  "id": "r_7c48ea1ae",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "遠くに離れている",
+  "answer": "過去形",
+  "distractors": [
+   "未来進行形",
+   "現在完了形",
+   "現在分詞",
+   "to不定詞",
+   "過去分詞"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 127,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "過去形",
+  "ref_page_a5": 618
+ },
+ {
+  "id": "r_c5e95a023",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_003.svg",
+  "answer": "過去形",
+  "distractors": [
+   "未来進行形",
+   "to不定詞と動名詞",
+   "現在進行形",
+   "現在形",
+   "分詞（-ing／過去分詞）"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 127,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "過去形",
+  "ref_page_a5": 618
+ },
+ {
+  "id": "r_51cab0da4",
+  "type": "r_word2fig",
+  "question": "「過去形」の図はどれ？",
+  "prompt_ja": "過去形",
+  "answer_figure": "figures/fig_003.svg",
+  "distractor_figures": [
+   "figures/fig_004.svg",
+   "figures/fig_013.svg",
+   "figures/fig_007.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 127,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "過去形",
+  "ref_page_a5": 618
+ },
+ {
+  "id": "r_ae5e0712b",
+  "type": "r_word2image",
+  "question": "「現在完了形」のコアイメージは？",
+  "prompt_en": "現在完了形",
+  "answer": "過去の結果を今も持っている",
+  "distractors": [
+   "遠くに離れている",
+   "進行中の行為を思い描く",
+   "合わせ持つ",
+   "今もまだ～している",
+   "矢印と到達点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 128,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在完了形",
+  "ref_page_a5": 621
+ },
+ {
+  "id": "r_67c1a53cd",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "過去の結果を今も持っている",
+  "answer": "現在完了形",
+  "distractors": [
+   "過去分詞",
+   "現在進行形",
+   "to不定詞",
+   "現在分詞",
+   "分詞とは"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 128,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在完了形",
+  "ref_page_a5": 621
+ },
+ {
+  "id": "r_a34539967",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_004.svg",
+  "answer": "現在完了形",
+  "distractors": [
+   "will と be going to",
+   "現在形",
+   "to不定詞と動名詞",
+   "過去形",
+   "現在完了進行形"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 128,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在完了形",
+  "ref_page_a5": 621
+ },
+ {
+  "id": "r_b59c9e24e",
+  "type": "r_word2fig",
+  "question": "「現在完了形」の図はどれ？",
+  "prompt_ja": "現在完了形",
+  "answer_figure": "figures/fig_004.svg",
+  "distractor_figures": [
+   "figures/fig_006.svg",
+   "figures/fig_007.svg",
+   "figures/fig_005.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 128,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在完了形",
+  "ref_page_a5": 621
+ },
+ {
+  "id": "r_a401d01d4",
+  "type": "r_word2image",
+  "question": "「現在完了進行形」のコアイメージは？",
+  "prompt_en": "現在完了進行形",
+  "answer": "今もまだ～している",
+  "distractors": [
+   "過去の行為の結果の状態",
+   "進行中の行為を思い描く",
+   "まさにその動き",
+   "矢印と到達点",
+   "合わせ持つ"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 129,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在完了進行形",
+  "ref_page_a5": 626
+ },
+ {
+  "id": "r_9805fdb01",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "今もまだ～している",
+  "answer": "現在完了進行形",
+  "distractors": [
+   "動名詞",
+   "現在分詞",
+   "現在進行形",
+   "分詞とは",
+   "現在形"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 129,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在完了進行形",
+  "ref_page_a5": 626
+ },
+ {
+  "id": "r_3660b8716",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_005.svg",
+  "answer": "現在完了進行形",
+  "distractors": [
+   "to不定詞と動名詞",
+   "will と be going to",
+   "未来進行形",
+   "過去形",
+   "分詞（-ing／過去分詞）"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 129,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在完了進行形",
+  "ref_page_a5": 626
+ },
+ {
+  "id": "r_6c26b5661",
+  "type": "r_word2fig",
+  "question": "「現在完了進行形」の図はどれ？",
+  "prompt_ja": "現在完了進行形",
+  "answer_figure": "figures/fig_005.svg",
+  "distractor_figures": [
+   "figures/fig_004.svg",
+   "figures/fig_003.svg",
+   "figures/fig_006.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 129,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "現在完了進行形",
+  "ref_page_a5": 626
+ },
+ {
+  "id": "r_c651ae6ee",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_006.svg",
+  "answer": "will と be going to",
+  "distractors": [
+   "過去形",
+   "to不定詞と動名詞",
+   "現在形",
+   "現在完了進行形",
+   "未来進行形"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 130,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "未来を表す表現",
+  "ref_page_a5": 629
+ },
+ {
+  "id": "r_14ab87870",
+  "type": "r_word2fig",
+  "question": "「will と be going to」の図はどれ？",
+  "prompt_ja": "will と be going to",
+  "answer_figure": "figures/fig_006.svg",
+  "distractor_figures": [
+   "figures/fig_012.svg",
+   "figures/fig_001.svg",
+   "figures/fig_004.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 130,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "未来を表す表現",
+  "ref_page_a5": 629
+ },
+ {
+  "id": "r_e7b392467",
+  "type": "r_word2image",
+  "question": "「未来進行形」のコアイメージは？",
+  "prompt_en": "未来進行形",
+  "answer": "進行中の行為を思い描く",
+  "distractors": [
+   "過去の結果を今も持っている",
+   "進行・ライブ感",
+   "今もまだ～している",
+   "過去の行為の結果の状態"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 131,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "未来進行形",
+  "ref_page_a5": 632
+ },
+ {
+  "id": "r_1638281a0",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "進行中の行為を思い描く",
+  "answer": "未来進行形",
+  "distractors": [
+   "to不定詞",
+   "過去形",
+   "動名詞",
+   "現在分詞",
+   "現在完了進行形"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 131,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "未来進行形",
+  "ref_page_a5": 632
+ },
+ {
+  "id": "r_830222cc6",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_007.svg",
+  "answer": "未来進行形",
+  "distractors": [
+   "to不定詞と動名詞",
+   "分詞（-ing／過去分詞）",
+   "過去形",
+   "現在完了形",
+   "will と be going to"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 131,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "未来進行形",
+  "ref_page_a5": 632
+ },
+ {
+  "id": "r_625927359",
+  "type": "r_word2fig",
+  "question": "「未来進行形」の図はどれ？",
+  "prompt_ja": "未来進行形",
+  "answer_figure": "figures/fig_007.svg",
+  "distractor_figures": [
+   "figures/fig_013.svg",
+   "figures/fig_004.svg",
+   "figures/fig_003.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 131,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "未来進行形",
+  "ref_page_a5": 632
+ },
+ {
+  "id": "r_4d137e24e",
+  "type": "r_word2image",
+  "question": "「will」のコアイメージは？",
+  "prompt_en": "will",
+  "answer": "確信度の高い思い",
+  "distractors": [
+   "話し手の中で自然に導かれる先にあるもの",
+   "話し手の中で疑いなく導かれる先にあるもの",
+   "これしかないモノが迫ってくる",
+   "上から下への許容",
+   "根拠に基づいた可能性"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 134,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "will",
+  "ref_page_a5": 643
+ },
+ {
+  "id": "r_95eb10638",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "確信度の高い思い",
+  "answer": "will",
+  "distractors": [
+   "must",
+   "shall",
+   "can",
+   "should",
+   "may"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 134,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "will",
+  "ref_page_a5": 643
+ },
+ {
+  "id": "r_92006f0b4",
+  "type": "r_word2image",
+  "question": "「can」のコアイメージは？",
+  "prompt_en": "can",
+  "answer": "根拠に基づいた可能性",
+  "distractors": [
+   "話し手の中で疑いなく導かれる先にあるもの",
+   "話し手の中で自然に導かれる先にあるもの",
+   "上から下への許容",
+   "確信度の高い思い",
+   "これしかないモノが迫ってくる"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 136,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "can",
+  "ref_page_a5": 650
+ },
+ {
+  "id": "r_3f3f45415",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "根拠に基づいた可能性",
+  "answer": "can",
+  "distractors": [
+   "should",
+   "must",
+   "shall",
+   "will",
+   "may"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 136,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "can",
+  "ref_page_a5": 650
+ },
+ {
+  "id": "r_0f63a406c",
+  "type": "r_word2image",
+  "question": "「must」のコアイメージは？",
+  "prompt_en": "must",
+  "answer": "これしかないモノが迫ってくる",
+  "distractors": [
+   "話し手の中で自然に導かれる先にあるもの",
+   "確信度の高い思い",
+   "根拠に基づいた可能性",
+   "上から下への許容",
+   "話し手の中で疑いなく導かれる先にあるもの"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 139,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "must",
+  "ref_page_a5": 658
+ },
+ {
+  "id": "r_6463f9537",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "これしかないモノが迫ってくる",
+  "answer": "must",
+  "distractors": [
+   "may",
+   "should",
+   "shall",
+   "can",
+   "will"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 139,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "must",
+  "ref_page_a5": 658
+ },
+ {
+  "id": "r_73c650d5c",
+  "type": "r_word2image",
+  "question": "「may」のコアイメージは？",
+  "prompt_en": "may",
+  "answer": "上から下への許容",
+  "distractors": [
+   "確信度の高い思い",
+   "これしかないモノが迫ってくる",
+   "話し手の中で自然に導かれる先にあるもの",
+   "話し手の中で疑いなく導かれる先にあるもの",
+   "根拠に基づいた可能性"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 142,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "may",
+  "ref_page_a5": 666
+ },
+ {
+  "id": "r_3f6462aa2",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "上から下への許容",
+  "answer": "may",
+  "distractors": [
+   "will",
+   "must",
+   "should",
+   "shall",
+   "can"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 142,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "may",
+  "ref_page_a5": 666
+ },
+ {
+  "id": "r_51e62117e",
+  "type": "r_word2image",
+  "question": "「should」のコアイメージは？",
+  "prompt_en": "should",
+  "answer": "話し手の中で自然に導かれる先にあるもの",
+  "distractors": [
+   "上から下への許容",
+   "確信度の高い思い",
+   "これしかないモノが迫ってくる",
+   "根拠に基づいた可能性",
+   "話し手の中で疑いなく導かれる先にあるもの"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 144,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "should",
+  "ref_page_a5": 672
+ },
+ {
+  "id": "r_e4da2d984",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "話し手の中で自然に導かれる先にあるもの",
+  "answer": "should",
+  "distractors": [
+   "can",
+   "will",
+   "must",
+   "may",
+   "shall"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 144,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "should",
+  "ref_page_a5": 672
+ },
+ {
+  "id": "r_fee1d75f9",
+  "type": "r_word2image",
+  "question": "「shall」のコアイメージは？",
+  "prompt_en": "shall",
+  "answer": "話し手の中で疑いなく導かれる先にあるもの",
+  "distractors": [
+   "話し手の中で自然に導かれる先にあるもの",
+   "これしかないモノが迫ってくる",
+   "上から下への許容",
+   "確信度の高い思い",
+   "根拠に基づいた可能性"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 146,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "shall",
+  "ref_page_a5": 677
+ },
+ {
+  "id": "r_3929b71df",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "話し手の中で疑いなく導かれる先にあるもの",
+  "answer": "shall",
+  "distractors": [
+   "will",
+   "may",
+   "can",
+   "must",
+   "should"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 146,
+  "reflex": true,
+  "group": "助動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "shall",
+  "ref_page_a5": 677
+ },
+ {
+  "id": "r_dea8f3bc1",
+  "type": "r_word2image",
+  "question": "「to不定詞」のコアイメージは？",
+  "prompt_en": "to不定詞",
+  "answer": "矢印と到達点",
+  "distractors": [
+   "過去の行為の結果の状態",
+   "今もまだ～している",
+   "目の前に存在する",
+   "進行・ライブ感",
+   "まさにその動き"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 148,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "to不定詞",
+  "ref_page_a5": 683
+ },
+ {
+  "id": "r_2fa8d7755",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "矢印と到達点",
+  "answer": "to不定詞",
+  "distractors": [
+   "動名詞",
+   "現在進行形",
+   "未来進行形",
+   "過去分詞",
+   "現在分詞"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 148,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "to不定詞",
+  "ref_page_a5": 683
+ },
+ {
+  "id": "r_4fc5076e3",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_012.svg",
+  "answer": "to不定詞と動名詞",
+  "distractors": [
+   "未来進行形",
+   "will と be going to",
+   "現在形",
+   "現在進行形",
+   "分詞（-ing／過去分詞）"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 148,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "to不定詞",
+  "ref_page_a5": 683
+ },
+ {
+  "id": "r_bcce0d0c0",
+  "type": "r_word2fig",
+  "question": "「to不定詞と動名詞」の図はどれ？",
+  "prompt_ja": "to不定詞と動名詞",
+  "answer_figure": "figures/fig_012.svg",
+  "distractor_figures": [
+   "figures/fig_005.svg",
+   "figures/fig_004.svg",
+   "figures/fig_013.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 148,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "to不定詞",
+  "ref_page_a5": 683
+ },
+ {
+  "id": "r_4f9e008fa",
+  "type": "r_word2image",
+  "question": "「動名詞」のコアイメージは？",
+  "prompt_en": "動名詞",
+  "answer": "まさにその動き",
+  "distractors": [
+   "進行・ライブ感",
+   "過去の結果を今も持っている",
+   "進行中の行為を思い描く",
+   "合わせ持つ",
+   "矢印と到達点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 149,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "動名詞",
+  "ref_page_a5": 687
+ },
+ {
+  "id": "r_35645d474",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "まさにその動き",
+  "answer": "動名詞",
+  "distractors": [
+   "to不定詞",
+   "現在分詞",
+   "分詞とは",
+   "現在完了形",
+   "未来進行形"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 149,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "動名詞",
+  "ref_page_a5": 687
+ },
+ {
+  "id": "r_b56ab5602",
+  "type": "r_word2image",
+  "question": "「分詞とは」のコアイメージは？",
+  "prompt_en": "分詞とは",
+  "answer": "合わせ持つ",
+  "distractors": [
+   "進行・ライブ感",
+   "矢印と到達点",
+   "過去の結果を今も持っている",
+   "まさにその動き"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 150,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "分詞とは",
+  "ref_page_a5": 691
+ },
+ {
+  "id": "r_3aa23160b",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "合わせ持つ",
+  "answer": "分詞とは",
+  "distractors": [
+   "現在進行形",
+   "過去分詞",
+   "現在分詞",
+   "to不定詞",
+   "現在形"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 150,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "分詞とは",
+  "ref_page_a5": 691
+ },
+ {
+  "id": "r_aeffb3ead",
+  "type": "r_fig2word",
+  "question": "この図は？",
+  "figure": "figures/fig_013.svg",
+  "answer": "分詞（-ing／過去分詞）",
+  "distractors": [
+   "現在進行形",
+   "現在形",
+   "will と be going to",
+   "to不定詞と動名詞",
+   "現在完了進行形"
+  ],
+  "time_limit_sec": 4,
+  "part": 4,
+  "chapter": 150,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "分詞とは",
+  "ref_page_a5": 691
+ },
+ {
+  "id": "r_cee0dd4ca",
+  "type": "r_word2fig",
+  "question": "「分詞（-ing／過去分詞）」の図はどれ？",
+  "prompt_ja": "分詞（-ing／過去分詞）",
+  "answer_figure": "figures/fig_013.svg",
+  "distractor_figures": [
+   "figures/fig_004.svg",
+   "figures/fig_007.svg",
+   "figures/fig_003.svg"
+  ],
+  "time_limit_sec": 5,
+  "part": 4,
+  "chapter": 150,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "イメージ図"
+  ],
+  "difficulty": "reflex",
+  "chapter_title": "分詞とは",
+  "ref_page_a5": 691
+ },
+ {
+  "id": "r_6b42b2aee",
+  "type": "r_word2image",
+  "question": "「現在分詞」のコアイメージは？",
+  "prompt_en": "現在分詞",
+  "answer": "進行・ライブ感",
+  "distractors": [
+   "過去の行為の結果の状態",
+   "過去の結果を今も持っている",
+   "目の前に存在する",
+   "まさにその動き",
+   "進行中の行為を思い描く"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 151,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "現在分詞",
+  "ref_page_a5": 693
+ },
+ {
+  "id": "r_49d973084",
+  "type": "r_word2image",
+  "question": "「過去分詞」のコアイメージは？",
+  "prompt_en": "過去分詞",
+  "answer": "過去の行為の結果の状態",
+  "distractors": [
+   "矢印と到達点",
+   "まさにその動き",
+   "合わせ持つ",
+   "今もまだ～している",
+   "目の前に存在する"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 153,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "過去分詞",
+  "ref_page_a5": 698
+ },
+ {
+  "id": "r_090596958",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "過去の行為の結果の状態",
+  "answer": "過去分詞",
+  "distractors": [
+   "現在完了形",
+   "未来進行形",
+   "現在分詞",
+   "to不定詞",
+   "現在完了進行形"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 153,
+  "reflex": true,
+  "group": "時制・準動詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "過去分詞",
+  "ref_page_a5": 698
+ },
+ {
+  "id": "r_3cdf78f42",
+  "type": "r_word2image",
+  "question": "「at」のコアイメージは？",
+  "prompt_en": "at",
+  "answer": "点",
+  "distractors": [
+   "周辺",
+   "方向・目的",
+   "起点",
+   "空間の中",
+   "接触"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 160,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "at",
+  "ref_page_a5": 720
+ },
+ {
+  "id": "r_e9e72fbe0",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "点",
+  "answer": "at",
+  "distractors": [
+   "to",
+   "of",
+   "with",
+   "about",
+   "in"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 160,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "at",
+  "ref_page_a5": 720
+ },
+ {
+  "id": "r_49f63af2f",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_at.svg",
+  "answer": "at",
+  "distractors": [
+   "on",
+   "of",
+   "by",
+   "in",
+   "with"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 160,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "at",
+  "ref_page_a5": 720
+ },
+ {
+  "id": "r_99f827909",
+  "type": "r_prep_word2icon",
+  "question": "「at」のアイコンはどれ？",
+  "prompt_en": "at",
+  "answer_figure": "figures/prep_at.svg",
+  "distractor_figures": [
+   "figures/prep_on.svg",
+   "figures/prep_of.svg",
+   "figures/prep_by.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 160,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "at",
+  "ref_page_a5": 720
+ },
+ {
+  "id": "r_0374559b2",
+  "type": "r_word2image",
+  "question": "「in」のコアイメージは？",
+  "prompt_en": "in",
+  "answer": "空間の中",
+  "distractors": [
+   "接触",
+   "そば・経由・期限",
+   "点",
+   "全体の一部・所属",
+   "周辺"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 161,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "in",
+  "ref_page_a5": 723
+ },
+ {
+  "id": "r_ccd6e81bc",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "空間の中",
+  "answer": "in",
+  "distractors": [
+   "of",
+   "about",
+   "for",
+   "by",
+   "with"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 161,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "in",
+  "ref_page_a5": 723
+ },
+ {
+  "id": "r_c4111617f",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_in.svg",
+  "answer": "in",
+  "distractors": [
+   "for",
+   "on",
+   "from",
+   "to",
+   "by"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 161,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "in",
+  "ref_page_a5": 723
+ },
+ {
+  "id": "r_84a35e096",
+  "type": "r_prep_word2icon",
+  "question": "「in」のアイコンはどれ？",
+  "prompt_en": "in",
+  "answer_figure": "figures/prep_in.svg",
+  "distractor_figures": [
+   "figures/prep_for.svg",
+   "figures/prep_on.svg",
+   "figures/prep_from.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 161,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "in",
+  "ref_page_a5": 723
+ },
+ {
+  "id": "r_58ddfb09c",
+  "type": "r_word2image",
+  "question": "「on」のコアイメージは？",
+  "prompt_en": "on",
+  "answer": "接触",
+  "distractors": [
+   "空間の中",
+   "周辺",
+   "起点",
+   "全体の一部・所属",
+   "点"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 163,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "on",
+  "ref_page_a5": 729
+ },
+ {
+  "id": "r_582020fbe",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "接触",
+  "answer": "on",
+  "distractors": [
+   "at",
+   "in",
+   "by",
+   "with",
+   "from"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 163,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "on",
+  "ref_page_a5": 729
+ },
+ {
+  "id": "r_c32423d11",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_on.svg",
+  "answer": "on",
+  "distractors": [
+   "of",
+   "in",
+   "from",
+   "with",
+   "to"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 163,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "on",
+  "ref_page_a5": 729
+ },
+ {
+  "id": "r_be6510fdc",
+  "type": "r_prep_word2icon",
+  "question": "「on」のアイコンはどれ？",
+  "prompt_en": "on",
+  "answer_figure": "figures/prep_on.svg",
+  "distractor_figures": [
+   "figures/prep_of.svg",
+   "figures/prep_in.svg",
+   "figures/prep_from.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 163,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "on",
+  "ref_page_a5": 729
+ },
+ {
+  "id": "r_594c67c60",
+  "type": "r_word2image",
+  "question": "「to」のコアイメージは？",
+  "prompt_en": "to",
+  "answer": "到達点",
+  "distractors": [
+   "全体の一部・所属",
+   "接触",
+   "空間の中",
+   "一緒に",
+   "方向・目的"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 166,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "to",
+  "ref_page_a5": 739
+ },
+ {
+  "id": "r_4d669ffbe",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "到達点",
+  "answer": "to",
+  "distractors": [
+   "on",
+   "in",
+   "with",
+   "by",
+   "from"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 166,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "to",
+  "ref_page_a5": 739
+ },
+ {
+  "id": "r_428eae379",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_to.svg",
+  "answer": "to",
+  "distractors": [
+   "of",
+   "in",
+   "on",
+   "by",
+   "from"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 166,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "to",
+  "ref_page_a5": 739
+ },
+ {
+  "id": "r_e53504988",
+  "type": "r_prep_word2icon",
+  "question": "「to」のアイコンはどれ？",
+  "prompt_en": "to",
+  "answer_figure": "figures/prep_to.svg",
+  "distractor_figures": [
+   "figures/prep_of.svg",
+   "figures/prep_in.svg",
+   "figures/prep_on.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 166,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "to",
+  "ref_page_a5": 739
+ },
+ {
+  "id": "r_8b499aefc",
+  "type": "r_word2image",
+  "question": "「for」のコアイメージは？",
+  "prompt_en": "for",
+  "answer": "方向・目的",
+  "distractors": [
+   "起点",
+   "点",
+   "そば・経由・期限",
+   "空間の中",
+   "周辺"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 167,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "for",
+  "ref_page_a5": 742
+ },
+ {
+  "id": "r_73d62c56b",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "方向・目的",
+  "answer": "for",
+  "distractors": [
+   "in",
+   "on",
+   "with",
+   "of",
+   "about"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 167,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "for",
+  "ref_page_a5": 742
+ },
+ {
+  "id": "r_6f16ac0ca",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_for.svg",
+  "answer": "for",
+  "distractors": [
+   "at",
+   "on",
+   "in",
+   "about",
+   "of"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 167,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "for",
+  "ref_page_a5": 742
+ },
+ {
+  "id": "r_cc070dd19",
+  "type": "r_prep_word2icon",
+  "question": "「for」のアイコンはどれ？",
+  "prompt_en": "for",
+  "answer_figure": "figures/prep_for.svg",
+  "distractor_figures": [
+   "figures/prep_at.svg",
+   "figures/prep_on.svg",
+   "figures/prep_in.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 167,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "for",
+  "ref_page_a5": 742
+ },
+ {
+  "id": "r_b6d12dc19",
+  "type": "r_word2image",
+  "question": "「from」のコアイメージは？",
+  "prompt_en": "from",
+  "answer": "起点",
+  "distractors": [
+   "点",
+   "到達点",
+   "方向・目的",
+   "周辺",
+   "接触"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 169,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "from",
+  "ref_page_a5": 749
+ },
+ {
+  "id": "r_206d08659",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "起点",
+  "answer": "from",
+  "distractors": [
+   "of",
+   "to",
+   "by",
+   "for",
+   "on"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 169,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "from",
+  "ref_page_a5": 749
+ },
+ {
+  "id": "r_a7cc91604",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_from.svg",
+  "answer": "from",
+  "distractors": [
+   "with",
+   "about",
+   "by",
+   "on",
+   "to"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 169,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "from",
+  "ref_page_a5": 749
+ },
+ {
+  "id": "r_431e86e26",
+  "type": "r_prep_word2icon",
+  "question": "「from」のアイコンはどれ？",
+  "prompt_en": "from",
+  "answer_figure": "figures/prep_from.svg",
+  "distractor_figures": [
+   "figures/prep_with.svg",
+   "figures/prep_about.svg",
+   "figures/prep_by.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 169,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "from",
+  "ref_page_a5": 749
+ },
+ {
+  "id": "r_668e39091",
+  "type": "r_word2image",
+  "question": "「of」のコアイメージは？",
+  "prompt_en": "of",
+  "answer": "全体の一部・所属",
+  "distractors": [
+   "方向・目的",
+   "空間の中",
+   "そば・経由・期限",
+   "起点",
+   "一緒に"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 173,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "of",
+  "ref_page_a5": 761
+ },
+ {
+  "id": "r_266430a12",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "全体の一部・所属",
+  "answer": "of",
+  "distractors": [
+   "on",
+   "for",
+   "by",
+   "to",
+   "with"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 173,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "of",
+  "ref_page_a5": 761
+ },
+ {
+  "id": "r_3f94f428e",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_of.svg",
+  "answer": "of",
+  "distractors": [
+   "at",
+   "for",
+   "in",
+   "from",
+   "to"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 173,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "of",
+  "ref_page_a5": 761
+ },
+ {
+  "id": "r_c40ca09b9",
+  "type": "r_prep_word2icon",
+  "question": "「of」のアイコンはどれ？",
+  "prompt_en": "of",
+  "answer_figure": "figures/prep_of.svg",
+  "distractor_figures": [
+   "figures/prep_at.svg",
+   "figures/prep_for.svg",
+   "figures/prep_in.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 173,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "of",
+  "ref_page_a5": 761
+ },
+ {
+  "id": "r_34132835f",
+  "type": "r_word2image",
+  "question": "「by」のコアイメージは？",
+  "prompt_en": "by",
+  "answer": "そば・経由・期限",
+  "distractors": [
+   "全体の一部・所属",
+   "空間の中",
+   "方向・目的",
+   "一緒に",
+   "接触"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 178,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "by",
+  "ref_page_a5": 774
+ },
+ {
+  "id": "r_4d650e62a",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "そば・経由・期限",
+  "answer": "by",
+  "distractors": [
+   "of",
+   "at",
+   "for",
+   "with",
+   "to"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 178,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "by",
+  "ref_page_a5": 774
+ },
+ {
+  "id": "r_2d4c40965",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_by.svg",
+  "answer": "by",
+  "distractors": [
+   "with",
+   "to",
+   "from",
+   "of",
+   "about"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 178,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "by",
+  "ref_page_a5": 774
+ },
+ {
+  "id": "r_bbc2d3ac6",
+  "type": "r_prep_word2icon",
+  "question": "「by」のアイコンはどれ？",
+  "prompt_en": "by",
+  "answer_figure": "figures/prep_by.svg",
+  "distractor_figures": [
+   "figures/prep_with.svg",
+   "figures/prep_to.svg",
+   "figures/prep_from.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 178,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "by",
+  "ref_page_a5": 774
+ },
+ {
+  "id": "r_95041d2a5",
+  "type": "r_word2image",
+  "question": "「with」のコアイメージは？",
+  "prompt_en": "with",
+  "answer": "一緒に",
+  "distractors": [
+   "到達点",
+   "接触",
+   "起点",
+   "全体の一部・所属",
+   "方向・目的"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 184,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "with",
+  "ref_page_a5": 790
+ },
+ {
+  "id": "r_253235c04",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "一緒に",
+  "answer": "with",
+  "distractors": [
+   "from",
+   "about",
+   "on",
+   "by",
+   "for"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 184,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "with",
+  "ref_page_a5": 790
+ },
+ {
+  "id": "r_8d1e537e8",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_with.svg",
+  "answer": "with",
+  "distractors": [
+   "in",
+   "at",
+   "for",
+   "by",
+   "of"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 184,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "with",
+  "ref_page_a5": 790
+ },
+ {
+  "id": "r_ce3075e46",
+  "type": "r_prep_word2icon",
+  "question": "「with」のアイコンはどれ？",
+  "prompt_en": "with",
+  "answer_figure": "figures/prep_with.svg",
+  "distractor_figures": [
+   "figures/prep_in.svg",
+   "figures/prep_at.svg",
+   "figures/prep_for.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 184,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "with",
+  "ref_page_a5": 790
+ },
+ {
+  "id": "r_bcedc9bf2",
+  "type": "r_word2image",
+  "question": "「about」のコアイメージは？",
+  "prompt_en": "about",
+  "answer": "周辺",
+  "distractors": [
+   "そば・経由・期限",
+   "点",
+   "起点",
+   "一緒に",
+   "方向・目的"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 187,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "about と around の違い",
+  "ref_page_a5": 798
+ },
+ {
+  "id": "r_0c1ed16f3",
+  "type": "r_image2word",
+  "question": "このイメージに当てはまる語は？",
+  "prompt_ja": "周辺",
+  "answer": "about",
+  "distractors": [
+   "with",
+   "in",
+   "to",
+   "on",
+   "of"
+  ],
+  "time_limit_sec": 4,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 187,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "コアイメージ"
+  ],
+  "chapter_title": "about と around の違い",
+  "ref_page_a5": 798
+ },
+ {
+  "id": "r_57750c2b7",
+  "type": "r_prep_icon",
+  "question": "このアイコンの前置詞は？",
+  "figure": "figures/prep_about.svg",
+  "answer": "about",
+  "distractors": [
+   "to",
+   "in",
+   "with",
+   "for",
+   "of"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 187,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "about と around の違い",
+  "ref_page_a5": 798
+ },
+ {
+  "id": "r_7ef660354",
+  "type": "r_prep_word2icon",
+  "question": "「about」のアイコンはどれ？",
+  "prompt_en": "about",
+  "answer_figure": "figures/prep_about.svg",
+  "distractor_figures": [
+   "figures/prep_to.svg",
+   "figures/prep_in.svg",
+   "figures/prep_with.svg"
+  ],
+  "time_limit_sec": 3,
+  "difficulty": "reflex",
+  "part": 4,
+  "chapter": 187,
+  "reflex": true,
+  "group": "前置詞",
+  "tags": [
+   "反射",
+   "前置詞"
+  ],
+  "chapter_title": "about と around の違い",
+  "ref_page_a5": 798
+ }
+]
