@@ -560,6 +560,7 @@
   }
   .sub-row {
     position: relative;
+    z-index: 2;
     flex: none;
     height: 22px;
     margin: 5px var(--pad-x-r) 0 var(--pad-x);
@@ -572,9 +573,12 @@
     left: 0;
     top: 0;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 3px;
-    padding: 1px 9px 1px 8px;
+    /* 行の高さ（22px）に収める。はみ出すと下の問題のカードに隠れて下が欠ける */
+    height: 22px;
+    line-height: 1;
+    padding: 0 9px 0 8px;
     border-radius: 999px;
     background: var(--accent);
     color: var(--on-accent);
