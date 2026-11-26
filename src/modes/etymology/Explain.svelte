@@ -1,7 +1,9 @@
 <script lang="ts">
   // 語源デッキの解説（回答後、問題のエリアに出る）
   import Kana from './components/Kana.svelte';
-  import Breakdown from './components/Breakdown.svelte';
+  import Morph from './components/Morph.svelte';
+  import Related from './components/Related.svelte';
+  import ColorWord from './components/ColorWord.svelte';
   import Example from '../../components/Example.svelte';
   import { ety } from './state.svelte.ts';
   import type { Question } from './quiz.ts';
@@ -12,14 +14,15 @@
 {#if s.kind === 'word'}
   {@const w = s.word}
   <div class="head">
-    <span class="hw en" class:long={w.w.length > 12}>{w.w}</span>
+    <span class="hw en" class:long={w.w.length > 12}><ColorWord word={w.w} parts={w.breakdown} /></span>
     <Kana kana={w.kana} />
   </div>
   <ul class="defs">
     {#each w.defs as d}<li><span class="pos">{d.pos}</span>{d.ja}</li>{/each}
   </ul>
-  <Breakdown parts={w.breakdown} core={w.core} animate />
+  <Morph word={w.w} parts={w.breakdown} core={w.core} animate showWord={false} />
   {#if w.examples[0]}<Example ex={w.examples[0]} word={w.w} />{/if}
+  <Related word={w} limit={4} tappable={false} compact />
 {:else if s.kind === 'root'}
   {@const r = s.root}
   <div class="head">
@@ -30,7 +33,7 @@
   <ul class="mini">
     {#each r.words.filter((id) => !r.refs.includes(id)).slice(0, 4) as id}
       {@const w = ety.index!.ds.words[id]}
-      <li><span class="en">{w.w}</span><span class="mj">{w.defs[0]?.ja}</span></li>
+      <li><span class="en"><ColorWord word={w.w} parts={w.breakdown} /></span><span class="mj">{w.defs[0]?.ja}</span></li>
     {/each}
   </ul>
 {:else}

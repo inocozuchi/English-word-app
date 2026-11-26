@@ -51,6 +51,13 @@
   --radius: 16px;
   /* イメージリンクの部の色をどれだけそのまま使うか（ダークでは白と混ぜて明るく） */
   --part-mix: 100%;
+  /* 語源の分解の色（接頭辞＝青・語根＝黄・接尾辞＝緑。意味のある色として例外） */
+  --m-pre: #2f5bd3;
+  --m-pre-bg: #e6edff;
+  --m-root: #8f5c00;
+  --m-root-bg: #fff2c9;
+  --m-suf: #1f7a45;
+  --m-suf-bg: #e1f5e7;
   --radius-lg: 22px;
 }
 
@@ -71,6 +78,12 @@
     --on-accent: #ffffff;
     --shadow: none;
     --part-mix: 70%;
+    --m-pre: #9ab6ff;
+    --m-pre-bg: #18233f;
+    --m-root: #f2c75e;
+    --m-root-bg: #33280f;
+    --m-suf: #80d7a2;
+    --m-suf-bg: #13301e;
     color-scheme: dark;
   }
 }
@@ -90,6 +103,12 @@
   --on-accent: #ffffff;
   --shadow: none;
   --part-mix: 70%;
+  --m-pre: #9ab6ff;
+  --m-pre-bg: #18233f;
+  --m-root: #f2c75e;
+  --m-root-bg: #33280f;
+  --m-suf: #80d7a2;
+  --m-suf-bg: #13301e;
   color-scheme: dark;
 }
 

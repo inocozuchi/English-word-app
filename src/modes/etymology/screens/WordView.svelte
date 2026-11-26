@@ -2,7 +2,9 @@
   import { ety } from '../state.svelte.ts';
   import Page from '../../../components/Page.svelte';
   import Kana from '../components/Kana.svelte';
-  import Breakdown from '../components/Breakdown.svelte';
+  import Morph from '../components/Morph.svelte';
+  import Related from '../components/Related.svelte';
+  import ColorWord from '../components/ColorWord.svelte';
   import Example from '../../../components/Example.svelte';
   import Icon from '../../../components/Icon.svelte';
   import { router } from '../../../core/router.svelte.ts';
@@ -24,7 +26,7 @@
 <Page title={w.w}>
   <p class="eyebrow-en">Word</p>
   <div class="top">
-    <h1 class="en w">{w.w}</h1>
+    <h1 class="en w"><ColorWord word={w.w} parts={w.breakdown} /></h1>
     <span class="badge {st}">{STATUS_LABEL[st]}</span>
   </div>
   <p class="kana"><Kana kana={w.kana} /></p>
@@ -34,8 +36,10 @@
   </ul>
 
   {#if w.breakdown.length}
-    <h2>語源の分解</h2>
-    <Breakdown parts={w.breakdown} core={w.core} />
+    <h2>語の成り立ち</h2>
+    <div class="morph-card"><Morph word={w.w} parts={w.breakdown} core={w.core} animate showWord={false} /></div>
+    <h2>同じ語根を持つ関連語</h2>
+    <Related word={w} />
   {/if}
 
   {#if w.examples.length}
@@ -79,6 +83,11 @@
 </Page>
 
 <style>
+  .morph-card {
+    padding: 14px;
+    border: var(--card-border);
+    border-radius: 20px;
+  }
   .top {
     display: flex;
     align-items: center;
