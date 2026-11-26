@@ -1014,7 +1014,8 @@ try {
     // 画面が入ってくる途中に「戻る」を押しても効く
     await page.getByRole('button', { name: '設定' }).tap();
     await sleep(120);
-    await top().locator('.back').tap({ force: true });
+    // 動いている最中のボタンを座標で押すと外れることがあるので、要素を直接押す（遷移中に押す、という条件は同じ）
+    await top().locator('.back').evaluate((el) => el.click());
     await sleep(1400);
     ok((await depth()) === 1, '画面が開く途中の「戻る」も効く（遷移のあとに戻る）');
 
