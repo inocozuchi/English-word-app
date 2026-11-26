@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PageHero from '../components/PageHero.svelte';
   import Page from '../components/Page.svelte';
   import Toggle from '../components/Toggle.svelte';
   import Segmented from '../components/Segmented.svelte';
@@ -80,8 +81,7 @@
 </script>
 
 <Page title="設定">
-  <p class="eyebrow-en">Settings</p>
-  <h1 class="ui-title">設定</h1>
+  <PageHero ja="設定" en="My *settings*" />
 
   <h2 class="ui-h2">モード</h2>
   <div class="ui-group" role="radiogroup" aria-label="クイズのモード">

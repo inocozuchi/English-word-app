@@ -35,7 +35,7 @@
   );
 </script>
 
-<h2 in:rise={{ delay: 60 }}>ルール別の正答率</h2>
+<h2 class="ui-h2 r" in:rise={{ delay: 60 }}>ルール別の正答率</h2>
 <div class="card" in:rise={{ delay: 80 }}>
   <RuleBars stats={session} delay={500} />
   {#if weakest}
@@ -46,7 +46,7 @@
 </div>
 
 {#if missed.length}
-  <h2 in:rise={{ delay: 100 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
+  <h2 class="ui-h2 r" in:rise={{ delay: 100 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
   <div class="missed" in:rise={{ delay: 120 }}>
     {#each missed as q}
       {@const s = q.data}
@@ -67,11 +67,8 @@
 {/if}
 
 <style>
-  h2 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text2);
-    margin: 0 4px 10px;
+  h2.r {
+    margin-top: 4px;
   }
   .n {
     color: var(--text3);
@@ -79,7 +76,8 @@
   .card {
     padding: 6px 16px 14px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     margin-bottom: 22px;
   }
   .go {
@@ -102,7 +100,8 @@
     gap: 2px;
     padding: 12px 16px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--card-border);
     text-align: left;
   }
   .tag {

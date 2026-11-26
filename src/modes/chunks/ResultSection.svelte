@@ -16,14 +16,14 @@
   const weak = $derived(chk.index ? weakSections(chk.index, store.progress.tags) : []);
 </script>
 
-<h2 in:rise={{ delay: 60 }}>優先度ごとの進み具合</h2>
+<h2 class="ui-h2 r" in:rise={{ delay: 60 }}>優先度ごとの進み具合</h2>
 <div class="card" in:rise={{ delay: 80 }}>
   <PriorityBars delay={500} />
   <p class="hint">習得済み = 3回続けて正解（次の復習まで7日以上）</p>
 </div>
 
 {#if weak.length}
-  <h2 in:rise={{ delay: 90 }}>苦手な章</h2>
+  <h2 class="ui-h2 r" in:rise={{ delay: 90 }}>苦手な章</h2>
   <ol class="weak" in:rise={{ delay: 100 }}>
     {#each weak as w, k}
       <li>
@@ -38,7 +38,7 @@
 {/if}
 
 {#if missed.length}
-  <h2 in:rise={{ delay: 100 }}>まちがえた表現 <span class="n">{missed.length}</span></h2>
+  <h2 class="ui-h2 r" in:rise={{ delay: 100 }}>まちがえた表現 <span class="n">{missed.length}</span></h2>
   <ul class="missed" in:rise={{ delay: 120 }}>
     {#each missed as q}
       {@const s = q.data}
@@ -62,11 +62,8 @@
 {/if}
 
 <style>
-  h2 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text2);
-    margin: 0 4px 10px;
+  h2.r {
+    margin-top: 4px;
   }
   .n {
     color: var(--text3);
@@ -74,7 +71,8 @@
   .card {
     padding: 16px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     margin-bottom: 22px;
   }
   .hint {
@@ -87,7 +85,8 @@
     margin: 0 0 22px;
     padding: 0;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     overflow: hidden;
   }
   .weak li + li {
@@ -138,7 +137,8 @@
     gap: 2px;
     padding: 12px 16px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--card-border);
     text-align: left;
   }
   .chunk {

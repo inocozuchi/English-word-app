@@ -31,7 +31,8 @@
   .card {
     padding: 16px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
   }
   .chs {
     list-style: none;

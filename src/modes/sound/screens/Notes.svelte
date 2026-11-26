@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PageHero from '../../../components/PageHero.svelte';
   // 復習ノート（音声変化モードの単語帳に当たる画面）: 講ごと・ルールごとに見る
   import Page from '../../../components/Page.svelte';
   import Icon from '../../../components/Icon.svelte';
@@ -14,8 +15,7 @@
 </script>
 
 <Page title="復習ノート">
-  <p class="eyebrow-en">Notes</p>
-  <h1 class="ui-title">復習ノート</h1>
+  <PageHero ja="復習ノート" en="Sound *notes*" />
   <div class="seg">
     <Segmented options={[{ value: 'lecture', label: '講ごと' }, { value: 'rule', label: 'ルールごと' }]} value={tab} onchange={(v) => (tab = v)} />
   </div>

@@ -79,7 +79,7 @@
       <!-- モード独自の結果（音声変化: ルール別の正答率・まちがえた項目） -->
       <mode.ResultSection {logs} />
     {:else if missed.length}
-      <h2 in:rise={{ delay: 60 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
+      <h2 class="ui-h2 r" in:rise={{ delay: 60 }}>まちがえた問題 <span class="n">{missed.length}</span></h2>
       <ul class="list" in:rise={{ delay: 100 }}>
         {#each missed as l}
           {@const lb = label(l.q)}
@@ -193,11 +193,8 @@
   .review small {
     color: var(--text3);
   }
-  h2 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text2);
-    margin: 0 4px 10px;
+  h2.r {
+    margin-top: 4px;
   }
   .n {
     color: var(--text3);
@@ -207,7 +204,8 @@
     margin: 0;
     padding: 0;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     overflow: hidden;
   }
   .list li + li {

@@ -27,7 +27,8 @@
   .card {
     padding: 8px 16px 14px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
   }
   .go {
     margin-top: 6px;

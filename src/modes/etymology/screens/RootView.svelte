@@ -216,7 +216,8 @@
     gap: 1px;
     padding: 10px 14px;
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--card-border);
   }
   .bw {
     display: flex;
@@ -303,7 +304,8 @@
   .phrases li {
     padding: 14px 16px;
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--card-border);
   }
   .pen {
     font-size: 17px;

@@ -37,7 +37,8 @@
     gap: 10px;
     padding: 14px 16px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--card-border);
   }
   .card.compact {
     gap: 6px;

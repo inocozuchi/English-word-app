@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PageHero from '../components/PageHero.svelte';
   // 復習リスト: まちがえた問題の一覧。連続正解の進み具合を点で示し、手動で外すこともできる
   import Page from '../components/Page.svelte';
   import Icon from '../components/Icon.svelte';
@@ -7,11 +8,34 @@
   import { reviewOrder } from '../core/review.ts';
   import { createRng } from '../core/rng.ts';
   import { haptic } from '../core/haptics.ts';
+  import { flip } from 'svelte/animate';
+  import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
 
   loadData();
   const mode = $derived(activeMode());
   const goal = $derived(store.settings.reviewGoal);
-  const entries = $derived(mode.ready() ? reviewOrder(store.progress.review, createRng(1)) : []);
+  // 並び順は開いた時点で固定（外したときに他の行が入れ替わらないように）
+  // svelte-ignore state_referenced_locally
+  const order = new Map((mode.ready() ? reviewOrder(store.progress.review, createRng(1)) : []).map((e, k) => [e.key, k]));
+  const entries = $derived(
+    (mode.ready() ? reviewOrder(store.progress.review, createRng(1)) : [])
+      .map((e) => ({ e, lb: mode.label(e.key) }))
+      .filter((x) => !!x.lb)
+      .sort((a, b) => (order.get(a.e.key) ?? 1e9) - (order.get(b.e.key) ?? 1e9)),
+  );
+  const flipOpts = () => {
+    const s = spring(SPRINGS.card);
+    return { duration: reducedMotion() ? 0 : s.duration, easing: s.ease };
+  };
+  /** 外した行は左へ抜ける */
+  function leave(_n: Element) {
+    if (reducedMotion()) return { duration: 120, css: (t: number) => `opacity:${t}` };
+    return { duration: 240, css: (t: number, u: number) => `transform:translate3d(${-u * 40}px,0,0);opacity:${t}` };
+  }
+  function remove(key: string) {
+    haptic('light');
+    removeFromReview(key);
+  }
 
   function start() {
     haptic('light');
@@ -24,28 +48,25 @@
 </script>
 
 <Page title="復習リスト">
-  <p class="eyebrow-en">Review</p>
-  <h1 class="ui-title">復習リスト</h1>
+  <PageHero ja="復習リスト" en="Review *list*" />
   <p class="lead">まちがえた問題が自動で入ります。<b>{goal}回続けて正解</b>するとリストから外れます。</p>
 
   {#if entries.length}
     <ul class="ui-group list">
-      {#each entries as e (e.key)}
-        {@const lb = mode.label(e.key)}
-        {#if lb}
-          <li>
-            <button class="row" onclick={() => open(e.key)}>
-              <span class="main">
-                <span class="t"><span class:en={lb.latin}>{lb.title}</span>{#if lb.tag}<span class="tag">{lb.tag}</span>{/if}</span>
-                <span class="s">{lb.sub}</span>
-              </span>
-              <span class="dots" aria-label="連続正解 {e.streak}/{goal}">
-                {#each Array(goal) as _, k}<span class="dot" class:on={k < e.streak}></span>{/each}
-              </span>
-            </button>
-            <button class="remove press" onclick={() => removeFromReview(e.key)} aria-label="{lb.title} をリストから外す">外す</button>
-          </li>
-        {/if}
+      {#each entries as { e, lb } (e.key)}
+        <li animate:flip={flipOpts()} out:leave>
+          <button class="row" onclick={() => open(e.key)}>
+            <span class="main">
+              {#if lb!.tag}<span class="tag">{lb!.tag}</span>{/if}
+              <span class="t" class:en={lb!.latin}>{lb!.title}</span>
+              <span class="s">{lb!.sub}</span>
+            </span>
+            <span class="dots" aria-label="連続正解 {e.streak}/{goal}">
+              {#each Array(goal) as _, k}<span class="dot" class:on={k < e.streak}></span>{/each}
+            </span>
+          </button>
+          <button class="remove press" onclick={() => remove(e.key)} aria-label="{lb!.title} をリストから外す">外す</button>
+        </li>
       {/each}
     </ul>
   {:else}
@@ -83,7 +104,10 @@
     align-items: center;
   }
   .list li + li {
-    border-top: 0.5px solid var(--line);
+    border-top: 1.5px solid var(--line);
+  }
+  .list li {
+    background: var(--bg);
   }
   .row {
     flex: 1;
@@ -105,14 +129,15 @@
     font-weight: 650;
   }
   .tag {
-    margin-left: 8px;
+    align-self: flex-start;
+    margin-bottom: 2px;
     font-size: 10px;
     font-weight: 700;
     color: var(--text2);
     border: 1px solid var(--line-strong);
     border-radius: 5px;
     padding: 0 5px;
-    vertical-align: 0.2em;
+    white-space: nowrap;
   }
   .s {
     font-size: 13px;

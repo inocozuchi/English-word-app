@@ -182,7 +182,8 @@
     margin: 0;
     padding: 0;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     overflow: hidden;
   }
   .group li + li {

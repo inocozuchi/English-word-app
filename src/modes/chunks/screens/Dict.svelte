@@ -1,4 +1,6 @@
 <script lang="ts">
+  import SearchField from '../../../components/SearchField.svelte';
+  import PageHero from '../../../components/PageHero.svelte';
   // チャンク辞典: 章ごと・優先度ごとの一覧、検索（英語・日本語）、使い分け（pairs）の比較
   import Page from '../../../components/Page.svelte';
   import Icon from '../../../components/Icon.svelte';
@@ -33,12 +35,8 @@
 </script>
 
 <Page title="チャンク辞典">
-  <p class="eyebrow-en">Chunks</p>
-  <h1 class="ui-title">チャンク辞典</h1>
-  <label class="search">
-    <Icon name="search" size={18} />
-    <input type="search" placeholder="英語・日本語で検索" bind:value={q} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" />
-  </label>
+  <PageHero ja="チャンク辞典" en="Chunk *book*" />
+  <SearchField bind:value={q} placeholder="英語・日本語で検索" />
 
   {#if !ix}
     <p class="none">読み込み中…</p>
@@ -103,28 +101,6 @@
 </Page>
 
 <style>
-  .search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 44px;
-    padding: 0 14px;
-    border-radius: 12px;
-    background: var(--fill);
-    color: var(--text3);
-    margin: 10px 0 14px;
-  }
-  .search input {
-    flex: 1;
-    border: 0;
-    outline: 0;
-    background: none;
-    font-size: 16px;
-    color: var(--text);
-    min-width: 0;
-    -webkit-appearance: none;
-    appearance: none;
-  }
   .seg {
     margin-bottom: 16px;
   }
@@ -215,14 +191,16 @@
     gap: 8px;
     padding: 10px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
   }
   .side {
     position: relative;
     padding: 10px 12px 10px;
-    border-radius: var(--radius);
-    background: var(--bg);
     min-width: 0;
+  }
+  .side + .side {
+    border-left: 1.5px solid var(--line);
   }
   .lab {
     font-size: 10px;

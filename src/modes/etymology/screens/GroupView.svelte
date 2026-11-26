@@ -47,7 +47,8 @@
   .list li {
     padding: 16px 18px;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
   }
   .w {
     font-size: 22px;

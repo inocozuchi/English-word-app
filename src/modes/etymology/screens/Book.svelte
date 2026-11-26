@@ -1,4 +1,6 @@
 <script lang="ts">
+  import SearchField from '../../../components/SearchField.svelte';
+  import PageHero from '../../../components/PageHero.svelte';
   import { ety, loadEty } from '../state.svelte.ts';
   import Page from '../../../components/Page.svelte';
   import Icon from '../../../components/Icon.svelte';
@@ -37,12 +39,8 @@
 </script>
 
 <Page title="単語帳">
-  <p class="eyebrow-en">Wordbook</p>
-  <h1 class="title">単語帳</h1>
-  <label class="search">
-    <Icon name="search" size={18} />
-    <input type="search" placeholder="単語・意味・語源で検索" bind:value={q} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" />
-  </label>
+  <PageHero ja="単語帳" en="Word*book*" />
+  <SearchField bind:value={q} placeholder="単語・意味・語源で検索" />
 
   {#if !ix}
     <p class="loading">読み込み中…</p>
@@ -94,37 +92,6 @@
 </Page>
 
 <style>
-  .title {
-    font-size: 32px;
-    font-weight: 750;
-    letter-spacing: 0.01em;
-    margin: 4px 0 14px;
-  }
-  .search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 44px;
-    padding: 0 14px;
-    border-radius: 12px;
-    background: var(--fill);
-    color: var(--text3);
-    margin-bottom: 20px;
-  }
-  .search input {
-    flex: 1;
-    border: 0;
-    outline: 0;
-    background: none;
-    font-size: 16px; /* 16px 未満だと iOS がフォーカス時に拡大する */
-    color: var(--text);
-    min-width: 0;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  .search input::placeholder {
-    color: var(--text3);
-  }
   h2 {
     font-size: 13px;
     font-weight: 600;
@@ -139,7 +106,8 @@
     margin: 0;
     padding: 0;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     overflow: hidden;
   }
   .group li + li {

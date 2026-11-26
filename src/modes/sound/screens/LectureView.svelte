@@ -157,7 +157,8 @@
     gap: 4px;
     padding: 8px 12px;
     border-radius: 999px;
-    background: var(--surface);
+    background: var(--panel-bg);
+    border: var(--panel-border);
     font-size: 13px;
     font-weight: 600;
   }
