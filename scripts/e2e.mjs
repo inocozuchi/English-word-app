@@ -617,7 +617,7 @@ try {
     // 設定でモードを切り替える
     await page.getByRole('button', { name: '設定' }).tap();
     await settle();
-    await top().locator('.mode-row', { hasText: 'イメージリンク' }).tap();
+    await top().locator('.mode-row', { hasText: 'コアイメージで、語と文法' }).tap();
     await sleep(300);
     ok((await settingsOf(page)).activeMode === 'imagelink', 'イメージリンクモードに切り替えられる');
     ok((await top().locator('.ui-h2', { hasText: '出題方法' }).count()) === 1, '出題方法の設定が出る');
@@ -756,6 +756,106 @@ try {
     await top().locator('.close').tap();
     await settle();
     ok((await depth()) === 2, 'ミニテストを閉じると章の一覧に戻る');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+  // ---------- イメージリンク 反射版 ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    const rxSettings = (rs) => page.evaluate((rs) => {
+      const s = JSON.parse(localStorage.getItem('eq.settings.v2') || '{}');
+      localStorage.setItem('eq.settings.v2', JSON.stringify({ ...s, activeMode: 'imagelink-reflex', modes: { ...(s.modes ?? {}), 'imagelink-reflex': rs } }));
+    }, rs);
+    const rxProgress = () => page.evaluate(() => JSON.parse(localStorage.getItem('eq.progress.imagelink-reflex.v1') || '{}'));
+    await page.goto(URL);
+    await page.waitForSelector('button.start');
+    await page.getByRole('button', { name: '設定' }).tap();
+    await settle();
+    await top().locator('.mode-row', { hasText: 'イメージリンク 反射' }).tap();
+    await sleep(300);
+    ok((await settingsOf(page)).activeMode === 'imagelink-reflex', '反射版のモードに切り替えられる');
+    ok((await top().locator('.ui-h2', { hasText: '出題方法' }).count()) === 1 && (await top().getByText('回答の制限時間').count()) === 0, '反射版の設定（出題方法）が出て、共通の秒数の設定は出ない');
+    await top().locator('.back').tap();
+    await settle();
+
+    // ウォームアップ: 正解は0.4秒で次へ・反応時間を記録
+    await rxSettings({ method: 'warmup' });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    ok((await top().locator('.ch').count()) === 4, '4択（2×2）が出る');
+    ok((await top().locator('.left').textContent()).includes('10'), 'ウォームアップは10問');
+    await page.keyboard.press('1');
+    await sleep(100);
+    const okFirst = (await top().locator('.okl').count()) === 1;
+    ok((await top().locator('.fb').textContent()).trim().length > 0, 'キー 1 で回答し、すぐに正誤が出る');
+    await sleep(okFirst ? 600 : 1800);
+    ok((await top().locator('.left').textContent()).includes('残り'), '自動で次の問題へ（ボタンを押さない）');
+    const pr = await rxProgress();
+    const k0 = Object.keys(pr.items ?? {})[0];
+    ok(/^r_/.test(k0) && pr.items[k0].recent?.length === 1 && pr.items[k0].recent[0].ms > 0, '反応時間を記録（キーは問題の id）');
+
+    // 時間切れ: 待つと不正解として正解を表示し、同じセッションで出し直す
+    const timedOut = await page.waitForSelector('.ngl:has-text("時間切れ")', { timeout: 6000 }).then(() => true, () => false);
+    ok(timedOut && (await top().locator('.ch.correct').count()) === 1, '時間切れは不正解として正解を表示');
+    await page.waitForFunction(() => document.querySelector('.ngl') === null, null, { timeout: 3000 }).catch(() => {});
+    const pr2 = await rxProgress();
+    ok(Object.values(pr2.items).some((x) => !x.lastOk && x.recent?.[0]?.ms >= 3000), '時間切れの反応時間は制限時間で記録');
+    // 残りを答えきる（不正解の表示はタップで早送り）
+    for (let k = 0; k < 150 && (await top().locator('.rq').count()); k++) {
+      await page.keyboard.press('2');
+      await sleep(80);
+      await page.keyboard.press('Enter');
+      await sleep(80);
+    }
+    await page.waitForSelector('.rr', { timeout: 8000 }).catch(() => {});
+    ok((await top().locator('.rr .score').count()) === 1, '最後まで解くと結果画面');
+    ok((await top().getByText('平均反応時間').count()) === 1, '結果に平均反応時間');
+    const again = await top().locator('.rr .row').count();
+    ok(again > 0, '結果に「詳しく読む」（まちがえた・遅かった問題）がまとまっている');
+    await top().locator('.rr .row').first().tap();
+    await settle();
+    ok((await top().locator('.ref').textContent()).includes('教科書 p.'), '詳しく読む: 教科書のページ');
+    await top().locator('.back').tap();
+    await settle();
+    await top().getByRole('button', { name: 'ホーム' }).tap();
+    await settle();
+
+    // 弱点モード: まちがえた問題だけ
+    await rxSettings({ method: 'weak' });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    const weakN = Object.values(await rxProgress()).length && Object.values((await rxProgress()).items).filter((x) => !x.lastOk || x.conf === 'low').length;
+    ok((await top().locator('.left').textContent()).includes(String(Math.min(20, weakN))), `弱点モードは弱点の問題だけ（${weakN}問）`);
+    await top().locator('.close').tap();
+    await settle();
+
+    // 暗記カード
+    await rxSettings({ method: 'cards' });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    await page.keyboard.press(' ');
+    await sleep(150);
+    ok((await top().locator('.ci').count()) === 1, '暗記カード: めくるとコアイメージ');
+    await top().getByRole('button', { name: /あやしい/ }).tap();
+    await sleep(300);
+    const cardSt = Object.entries((await rxProgress()).items).find(([, x]) => x.conf === 'low' && x.lastOk);
+    ok(!!cardSt, '暗記カード: 自己判定を同じ成績データに保存（あやしい = 自信なし）');
+    await top().locator('.close').tap();
+    await settle();
+
+    // 反射率の画面と、完全版の章一覧
+    await page.getByRole('button', { name: '反射率' }).tap();
+    await settle();
+    ok((await top().locator('.rb .r').count()) === 7, '反射率: 7グループ');
+    await top().locator('.back').tap();
+    await settle();
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }

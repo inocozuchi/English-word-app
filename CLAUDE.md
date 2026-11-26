@@ -1,17 +1,17 @@
 # EIGO LOOP（英語ループ・PWA）
 
 iPhone 向けの英語クイズ PWA。個人利用。大学生が通学中に「片手で・負担なく」回せることを最優先する。
-複数のクイズ「モード」を設定で切り替える。今あるモード: **語源英単語**（etymology）/ **音声変化（聞こえ方）**（sound）/ **会話チャンク**（chunks）/ **イメージリンク**（imagelink）。
+複数のクイズ「モード」を設定で切り替える。今あるモード: **語源英単語**（etymology）/ **音声変化（聞こえ方）**（sound）/ **会話チャンク**（chunks）/ **イメージリンク**（imagelink）/ **イメージリンク 反射**（imagelink-reflex）。
 
 ## コマンド
 
 - `npm run dev` — データ変換（語源・音声変化・会話チャンク）→ 開発サーバー
 - `npm run build` — データ変換 → `dist/` に静的ファイル出力（Service Worker も生成）
 - `npm run preview` — ビルド結果の確認
-- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・保存形式の移行・音声変化の①〜⑨・マーキング・会話チャンクの①〜④と段階解放・イメージリンクの採点・出題方法・全10,695問のスモークテスト・カナ解析・日付・例文の強調）
-- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・スワイプで次へ・復習リスト・検索・スワイプバック・設定・バックアップ・モード切替・音声変化・会話チャンク・イメージリンク・旧データの移行・オフライン）
+- `npm test` — 単体テスト（Vitest。出題ロジック・間隔反復・保存形式の移行・音声変化の①〜⑨・マーキング・会話チャンクの①〜④と段階解放・イメージリンクの採点・出題方法・全10,695問のスモークテスト・反射版のタイマー・再出題・反射の判定・カナ解析・日付・例文の強調）
+- `npm run e2e` — 実際にアプリを操作する総合テスト（要 `npm run build`。クイズの流れ・時間切れ・スワイプで次へ・復習リスト・検索・スワイプバック・設定・バックアップ・モード切替・音声変化・会話チャンク・イメージリンク・反射版・旧データの移行・オフライン）
 - `npm run check` — svelte-check による型チェック
-- `npm run validate:imagelink` — イメージリンクの問題データの整合性チェック（`validate.py`。`npm test` のスモークテストでも実行）
+- `npm run validate:imagelink` — イメージリンク（完全版・反射版）の問題データの整合性チェック（各 `validate.py`。`npm test` のスモークテストでも実行）
 - `npm run icons` — `scripts/icon.svg` からアイコン PNG と起動画面（端末サイズ×ライト/ダーク）を生成（Playwright）。
   起動画面の `<link>` は `scripts/splash-tags.html` に出力されるので、端末を追加したら index.html に貼り直す
 - `npm run shots` — iPhone 15 サイズのスクリーンショットを `screenshots/` に保存（要 `npm run build`。`node scripts/screenshot.mjs light|dark` で片方だけ）
@@ -67,6 +67,19 @@ iPhone 向けの英語クイズ PWA。個人利用。大学生が通学中に「
 - 「章と達成度」画面（部ごとの進み具合・章ごとの正答率と習得数。章をタップでその章のミニテスト = クイズの `override`）。
 - 英文の 🔊（`core/speech.ts`、en-US）。設定で「答え合わせのあとに英文を読む」。部の色 1青 / 2緑 / 3オレンジ / 4紫（ダークでは `--part-mix` で明るく）。
 
+### イメージリンク 反射（imagelink-reflex）
+
+- `public/data/imagelink-reflex/`（静的アセット。編集しない）: `questions/reflex.json` 238問・`cards.json` 60枚・`figures/`（完全版と同じ SVG）。小さいので一度に読む。
+- 完全版とは別のモード・別の記録（`eq.progress.imagelink-reflex.v1`）。キーは `r_` の id（問題とカードは重ならない）。箱は完全版と同じ5箱。
+- **専用のクイズ画面**（`modes/reflex/screens/ReflexQuiz.svelte`。`QuizMode.quizRoute` でホームのスタート・復習から開く）:
+  問題ごとの制限時間 `time_limit_sec`（3〜5秒、細いバー）、選んだ瞬間に採点、正解0.4秒・不正解1.5秒・時間切れ1秒で自動で次へ（タップ・Enter で早送り）。
+  解説は出さず、正解と教科書のページだけ。「詳しく読む」は結果画面にまとめる。2×2 の大きな選択肢、キー 1〜4。遷移は 120ms のフェードだけ。
+- 仕組みは `modes/reflex/engine.ts`（時刻を引数で渡す。tests/reflex.test.ts）: `QuestionTimer`（一時停止）、`grade`（時間切れ・遅い正解＝制限時間の70%超は「あやしい」= conf low）、
+  `ReflexRun`（まちがえた問題を 3〜6 問後に出し直し、2回続けて正解で終わり。上限4回。成績は初回の回答だけ記録）、
+  `isReflexive`（直近3回すべて正解かつ50%以内 =「反射できる」。`ItemState.recent` に直近5回の反応時間）。グループ別の反射率が主な指標。
+- 出題方法: ウォームアップ（全グループから10問）/ グループ集中・図→語・語→イメージ（20問）/ 弱点（新しい順に20問）/ 暗記カード（すぐ出た／あやしい／出ない）/ タイムアタック（全問・再出題なし、ベストは `Progress.extra.attackBest`）。
+- 完全版の「章と達成度」に、その章の反射版の「反射できる」数を出す。
+
 ### 会話チャンク（chunks）
 
 - `data/chunks.json` → `scripts/build-chunks.ts` → `src/generated/chunks.json`（番号の参照・穴埋めの ＿＿＿＿ を検査して警告）。
@@ -95,6 +108,7 @@ src/
     sound/         音声変化（mode.ts, quiz.ts, marks.ts, Prompt, components/Marked など, screens/ 復習ノート）
     chunks/        会話チャンク（mode.ts, quiz.ts, sections.ts, Prompt, components/EntryDetail など, screens/ チャンク辞典）
     imagelink/     イメージリンク（mode.ts, quiz.ts, state.svelte.ts, Prompt/Explain/Interact, screens/ 章と達成度・章の絞り込み・問題の詳細）
+    reflex/        イメージリンク 反射（mode.ts, engine.ts, state.svelte.ts, screens/ 専用クイズ・結果・反射率・詳細）
 ```
 
 ### モードの追加方法
@@ -117,6 +131,7 @@ src/
    - 任意: `srs`（箱の決まり。既定は 0〜5 箱）、`sessionCount`（1回の問題数）、`reportable`（クイズに「この問題を報告」）
    - 4択以外の回答: `Question.interactive` のとき `Interact` がカード全体を描き、`onanswer({ ok, given, conf })` で知らせる。
      `untimed`（制限時間なし）・`advanceSec`（自己採点のあとは短く）。画像の選択肢は `Choice.image`（すべて画像なら 2×2）
+   - `quizRoute`（専用のクイズ画面）・`hideTiming`（設定の秒数を出さない）・`Progress.extra`（モード固有の記録）・`recordAnswer` の反応時間
    - クイズの route に `override`（モードの設定に重ねる。章のミニテストなど）を渡せる。`load(s)` はその範囲のデータも読む
 4. 記録・復習リスト・タイマー・結果・連続日数は共通部分が自動で扱う（モードごとに別保存）。
 
