@@ -127,6 +127,54 @@ export function recordAnswer(
   return r.event;
 }
 
+/** 1つの回答を複数の記録の単位（語彙の項目など）にまとめて記録し、1回だけ保存する（総合英語モード） */
+export interface RecordEntry {
+  key: string;
+  ok: boolean;
+  conf?: 'low' | 'high';
+  rtMs?: number;
+}
+export function recordMany(
+  entries: RecordEntry[],
+  tags: string[],
+  extraPatch?: (extra: Record<string, unknown>) => Record<string, unknown>,
+  /** false なら間隔反復・復習リストは更新しない（音声が使えなかった等） */
+  srs = true,
+): void {
+  const now = Date.now();
+  const today = dayNumber(now);
+  const p = store.progress;
+  const dk = dayKey(today);
+  const d = p.days[dk] ?? { a: 0, c: 0 };
+  const items = { ...p.items };
+  let reviewList = p.review;
+  const ok = entries.length ? entries.every((e) => e.ok) : false;
+  if (srs)
+    for (const e of entries) {
+      const st = review(items[e.key], e.ok, now, today, activeMode().srs, e.conf);
+      if (e.rtMs !== undefined) st.recent = [...(items[e.key]?.recent ?? []), { ms: Math.round(e.rtMs), ok: e.ok }].slice(-5);
+      items[e.key] = st;
+      reviewList = updateReview(reviewList, e.key, e.ok, now, store.settings.reviewGoal).list;
+    }
+  const t = { ...p.tags };
+  if (entries.length)
+    for (const tag of tags) {
+      const cur = t[tag] ?? { seen: 0, correct: 0 };
+      t[tag] = { seen: cur.seen + 1, correct: cur.correct + (ok ? 1 : 0) };
+    }
+  const next: Progress = {
+    ...p,
+    items,
+    days: entries.length ? { ...p.days, [dk]: { a: d.a + 1, c: d.c + (ok ? 1 : 0) } } : p.days,
+    review: reviewList,
+    tags: t,
+    extra: extraPatch ? extraPatch({ ...(p.extra ?? {}) }) : p.extra,
+  };
+  store.progress = next;
+  store.today = today;
+  saveProgress(store.settings.activeMode, next);
+}
+
 /** モード固有の記録を更新する（今のモード） */
 export function updateExtra(patch: Record<string, unknown>) {
   const next = { ...store.progress, extra: { ...(store.progress.extra ?? {}), ...patch } };
