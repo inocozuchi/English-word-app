@@ -860,6 +860,79 @@ try {
     await page.context().close();
   }
 
+  // ---------- 連打・遷移中のタップ ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify(toV2({ advanceSec: 2, answerSec: 15, count: 5, formats: ['ej'] }))));
+    await page.reload();
+    await page.waitForSelector('button.start');
+
+    // 画面が入ってくる途中に「戻る」を押しても効く
+    await page.getByRole('button', { name: '設定' }).tap();
+    await sleep(120);
+    await top().locator('.back').tap({ force: true });
+    await sleep(1400);
+    ok((await depth()) === 1, '画面が開く途中の「戻る」も効く（遷移のあとに戻る）');
+
+    // 「戻る」の連打で2画面戻らない
+    await page.getByRole('button', { name: '単語帳' }).tap();
+    await settle();
+    await top().locator('.row').first().tap();
+    await settle();
+    const d0 = await depth();
+    await top().locator('.back').tap();
+    await sleep(60);
+    await top().locator('.back').tap({ force: true }).catch(() => {});
+    await sleep(1300);
+    ok(d0 >= 3 && (await depth()) === d0 - 1, `「戻る」を連打しても1画面だけ戻る（${d0}→${await depth()}）`);
+    while ((await depth()) > 1) {
+      await top().locator('.back').tap();
+      await settle();
+    }
+
+    // クイズ: 次の問題へめくっている途中に選択肢を押しても回答になる
+    await page.locator('button.start').tap();
+    await settle();
+    await top().locator('.choice').first().tap();
+    await page.waitForFunction(() => document.querySelectorAll('.stage .card').length === 2, null, { timeout: 4000 });
+    await sleep(80);
+    await page.locator('.stage .card').nth(1).locator('.choice').nth(1).tap({ force: true });
+    await sleep(900);
+    ok((await page.locator('.stage .card').first().locator('.choice.correct').count()) === 1, 'めくっている途中に押した選択肢も回答になる');
+    await top().locator('.close').tap();
+    await settle();
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+  // ---------- 反射版: 正誤の表示中のタップで次へ ----------
+  {
+    const { page, errors, top, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify({ activeMode: 'imagelink-reflex', modes: { 'imagelink-reflex': { method: 'warmup' } } })));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    // 1回目で回答、80ms 後に（同じ場所を）もう一度 → 正誤の表示を飛ばして次の問題が出ている
+    const r = await page.evaluate(async () => {
+      const chs = () => document.querySelectorAll('.rq .ch');
+      chs()[0].click();
+      await new Promise((res) => setTimeout(res, 30));
+      const fb1 = !!document.querySelector('.fb .fbin');
+      await new Promise((res) => setTimeout(res, 50));
+      chs()[1].click();
+      await new Promise((res) => setTimeout(res, 60));
+      return { fb1, fb2: !!document.querySelector('.fb .fbin') };
+    });
+    ok(r.fb1 && !r.fb2, '反射版: 正誤の表示中にもう一度押すと、すぐ次の問題へ');
+    await top().locator('.close').tap();
+    await settle();
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
   // ---------- 動きを減らす設定 ----------
   {
     const { page, errors, top, depth, settle } = await newPage(browser, { reducedMotion: 'reduce' });
