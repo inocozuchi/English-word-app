@@ -20,24 +20,46 @@ export interface ItemState {
   /** 最後に答えた時刻(ms) */
   last: number;
   lastOk: boolean;
+  /** 自己申告の自信（自己採点の問題だけ。low = 自信なし） */
+  conf?: 'low' | 'high';
 }
 
-export function review(prev: ItemState | undefined, ok: boolean, now: number, today: number): ItemState {
+/** モードごとの箱の決まり。intervals[箱] = 次に出すまでの日数 */
+export interface SrsConfig {
+  intervals: readonly number[];
+  /** 初めての問題が入っている箱（正解で +1） */
+  startBox: number;
+  /** まちがえたときに戻る箱 */
+  resetBox: number;
+}
+export const DEFAULT_SRS: SrsConfig = { intervals: INTERVALS, startBox: 0, resetBox: 0 };
+
+export function review(
+  prev: ItemState | undefined,
+  ok: boolean,
+  now: number,
+  today: number,
+  cfg: SrsConfig = DEFAULT_SRS,
+  conf?: 'low' | 'high',
+): ItemState {
   const s: ItemState = prev
     ? { ...prev }
-    : { box: 0, due: today, seen: 0, correct: 0, wrong: 0, last: 0, lastOk: false };
+    : { box: cfg.startBox, due: today, seen: 0, correct: 0, wrong: 0, last: 0, lastOk: false };
+  const max = cfg.intervals.length - 1;
   s.seen++;
   s.last = now;
   s.lastOk = ok;
   if (ok) {
     s.correct++;
     // 初見で正解した語は箱1から（翌日に確認）
-    s.box = Math.min(s.box + 1, MAX_BOX);
+    s.box = Math.min(s.box + 1, max);
   } else {
     s.wrong++;
-    s.box = 0;
+    s.box = cfg.resetBox;
   }
-  s.due = today + INTERVALS[s.box];
+  if (conf) s.conf = conf;
+  else delete s.conf;
+  s.due = today + cfg.intervals[s.box];
   return s;
 }
 

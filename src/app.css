@@ -49,6 +49,8 @@
   /* 読み物のカードが続く所（ツリー・ノート・まちがえた一覧）は一段細い枠で、重くしない */
   --card-border: 2px solid var(--line-strong);
   --radius: 16px;
+  /* イメージリンクの部の色をどれだけそのまま使うか（ダークでは白と混ぜて明るく） */
+  --part-mix: 100%;
   --radius-lg: 22px;
 }
 
@@ -68,6 +70,7 @@
     --accent-soft: rgba(112, 136, 255, 0.16);
     --on-accent: #ffffff;
     --shadow: none;
+    --part-mix: 70%;
     color-scheme: dark;
   }
 }
@@ -86,6 +89,7 @@
   --accent-soft: rgba(112, 136, 255, 0.16);
   --on-accent: #ffffff;
   --shadow: none;
+  --part-mix: 70%;
   color-scheme: dark;
 }
 

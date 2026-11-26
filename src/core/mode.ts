@@ -4,8 +4,8 @@
 //   - 問題文と解説の表示（Prompt / Explain コンポーネント）
 //   - 一覧などモード固有の画面（screens）と、設定・記録・結果の追加セクション
 // 進捗はモードごとに別に保存される（core/storage.ts）。キーはモードの中で一意であればよい。
-import type { Component } from 'svelte';
-import type { Candidate, ItemState } from './srs.ts';
+import type { Component, Snippet } from 'svelte';
+import type { Candidate, ItemState, SrsConfig } from './srs.ts';
 import type { Rng } from './rng.ts';
 
 export interface Route {
@@ -21,6 +21,8 @@ export interface Choice {
   latin?: boolean;
   /** 左に小さな色の印を付ける（音声変化のルール色など） */
   color?: string;
+  /** 画像の選択肢（すべての選択肢が画像なら 2×2 に並べる）。text は読み上げ用の代替テキスト */
+  image?: string;
 }
 
 export interface Question<D = unknown> {
@@ -40,6 +42,24 @@ export interface Question<D = unknown> {
   tags?: string[];
   /** モード固有の中身（Prompt / Explain が使う） */
   data: D;
+  /**
+   * 4択ではなく、モードの Interact が回答の操作（並べ替え・入力・自己採点など）を描く。
+   * そのとき choices は空でよく、正誤は Interact が onanswer で知らせる
+   */
+  interactive?: boolean;
+  /** 回答の制限時間を使わない（入力・自己採点など） */
+  untimed?: boolean;
+  /** 回答後に自動で次へ進むまでの秒数（モードの設定より優先。自己採点のあとなど） */
+  advanceSec?: number;
+}
+
+/** Interact からの回答 */
+export interface InteractResult {
+  ok: boolean;
+  /** 自分の答え（結果画面の表示用） */
+  given?: string;
+  /** 自己申告の自信 */
+  conf?: 'low' | 'high';
 }
 
 export interface ModePattern {
@@ -86,7 +106,13 @@ export interface AnswerRecord {
   q: Question;
   chosen: number | null;
   review: 'added' | 'missed' | 'progress' | 'cleared' | null;
+  /** Interact で答えた問題の正誤と自分の答え */
+  ok?: boolean;
+  given?: string;
 }
+
+/** 1問の記録が正解か（4択は選んだ番号、Interact は ok） */
+export const isCorrect = (l: { q: Question; chosen: number | null; ok?: boolean }) => l.ok ?? l.chosen === l.q.answer;
 
 export interface QuizMode<S = any> {
   id: string;
@@ -99,8 +125,8 @@ export interface QuizMode<S = any> {
   /** 秒数の初期値 */
   timing: Timing;
   normalizeSettings(raw: unknown): S;
-  /** データの読み込み（別チャンク） */
-  load(): Promise<void>;
+  /** データの読み込み（別チャンク）。s を渡すと、その出題範囲に要るデータも読む */
+  load(s?: S): Promise<void>;
   /** 読み込み済みか（リアクティブに読めること） */
   ready(): boolean;
   /** 出題範囲の候補 */
@@ -108,6 +134,14 @@ export interface QuizMode<S = any> {
   /** 出題の選び方を上書きする（省略時は間隔反復の優先順: core/srs.ts の selectItems） */
   pick?(input: PickInput, s: S): Candidate[];
   question(key: string, rng: Rng): Question | null;
+  /** 1セッションの問題数（共通設定の問題数より優先。null なら共通設定） */
+  sessionCount?(s: S): number | null;
+  /** 間隔反復の箱の決まり（省略時は core/srs.ts の DEFAULT_SRS） */
+  srs?: SrsConfig;
+  /** 4択以外の回答の操作（Question.interactive のとき、カード全体を描く。status は正誤の行） */
+  Interact?: Component<{ q: Question<any>; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet }>;
+  /** クイズ画面に「この問題を報告」ボタンを出す（core/reports.ts に保存） */
+  reportable?: boolean;
   label(key: string): ItemLabel | null;
   /** 詳細画面（なければ null） */
   detailRoute(key: string): Route | null;

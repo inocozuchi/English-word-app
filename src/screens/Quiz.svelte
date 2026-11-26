@@ -5,19 +5,31 @@
   import { onMount, tick } from 'svelte';
   import Icon from '../components/Icon.svelte';
   import QuizCard from './QuizCard.svelte';
+  import ReportSheet from '../components/ReportSheet.svelte';
+  import { loadReports, saveReports, addReport, type ReportReason } from '../core/reports.ts';
   import { router } from '../core/router.svelte.ts';
   import type { AnswerLog } from '../core/router.svelte.ts';
   import { store, activeMode, modeSettings, timingOf, answeredCount, loadData, recordAnswer, today } from '../core/store.svelte.ts';
   import { buildSession } from '../core/session.ts';
   import type { SessionKind } from '../core/session.ts';
-  import type { Question } from '../core/mode.ts';
+  import type { Question, InteractResult } from '../core/mode.ts';
   import type { ReviewEvent } from '../core/review.ts';
   import { createRng } from '../core/rng.ts';
   import { haptic } from '../core/haptics.ts';
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
   import { bump } from '../core/transitions.ts';
+  import { overlay } from '../core/overlay.svelte.ts';
 
-  let { seed, kind = 'normal' }: { seed: number; kind?: SessionKind } = $props();
+  let {
+    seed,
+    kind = 'normal',
+    override,
+  }: {
+    seed: number;
+    kind?: SessionKind;
+    /** このセッションだけ出題範囲を変える（イメージリンクの章別ミニテストなど。モードの設定に重ねる） */
+    override?: Record<string, unknown>;
+  } = $props();
 
   const mode = activeMode();
   const timing = timingOf(mode);
@@ -30,7 +42,12 @@
   let held = $state(false);
   let hidden = $state(false);
   let dragging = $state(false);
-  const paused = $derived(held || hidden || dragging);
+  /** 報告のシートを開いている */
+  let reporting = $state(false);
+  let reportedMsg = $state('');
+  const paused = $derived(held || hidden || dragging || reporting || overlay.count > 0);
+  /** Interact で答えた問題の正誤 */
+  let result = $state<boolean | null>(null);
   const logs: AnswerLog[] = [];
   /** 各問の結果（ヘッダーの点） */
   let marks = $state<('ok' | 'ng')[]>([]);
@@ -46,13 +63,15 @@
 
   onMount(() => {
     (async () => {
+      const ms = override ? { ...modeSettings(mode), ...override } : modeSettings(mode);
       await loadData();
+      if (override) await mode.load(ms);
       const s = store.settings;
       qs = buildSession({
         mode,
-        modeSettings: modeSettings(mode),
+        modeSettings: ms,
         kind,
-        count: s.count,
+        count: (kind === 'normal' && mode.sessionCount?.(ms)) || s.count,
         items: store.progress.items,
         review: store.progress.review,
         tags: store.progress.tags,
@@ -62,14 +81,16 @@
         lastBase: store.progress.lastBase,
       });
       ready = true;
-      if (qs.length) requestAnimationFrame(() => startTimer(timing.answerSec, timeout));
+      if (qs.length) requestAnimationFrame(startAsk);
     })();
     const vis = () => (hidden = document.visibilityState === 'hidden');
     document.addEventListener('visibilitychange', vis);
+    window.addEventListener('keydown', onKey);
     return () => {
       done = true;
       timer?.cancel();
       document.removeEventListener('visibilitychange', vis);
+      window.removeEventListener('keydown', onKey);
     };
   });
 
@@ -111,19 +132,65 @@
     else if (timer.playState === 'paused') timer.play();
   });
 
+  /** 問題を出す: 制限時間のある問題はタイマーを回し、ない問題（入力・自己採点）はバーを満タンで止める */
+  function startAsk() {
+    if (!q || done) return;
+    if (q.untimed) {
+      timer?.cancel();
+      timer = null;
+      bar?.animate([{ transform: `scaleX(${barScale()})` }, { transform: 'scaleX(1)' }], { duration: reducedMotion() ? 1 : 320, fill: 'forwards', easing: 'cubic-bezier(.2,.8,.2,1)' });
+    } else startTimer(timing.answerSec, timeout);
+  }
+
   let dots: HTMLElement[] = $state([]);
   function answer(k: number | null) {
+    if (phase !== 'ask' || !q || sliding || q.interactive) return;
+    settle(k === q.answer, k);
+  }
+  /** Interact（並べ替え・入力・自己採点）からの回答 */
+  function interact(r: InteractResult) {
     if (phase !== 'ask' || !q || sliding) return;
+    settle(r.ok, null, r);
+  }
+  function settle(correct: boolean, k: number | null, r?: InteractResult) {
+    if (!q) return;
     chosen = k;
+    result = r ? r.ok : null;
     phase = 'reveal';
-    const correct = k === q.answer;
-    event = recordAnswer(q.key, q.base, correct, q.tags);
-    logs.push({ q, chosen: k, review: event });
+    event = recordAnswer(q.key, q.base, correct, q.tags, r?.conf);
+    logs.push(r ? { q, chosen: null, review: event, ok: r.ok, given: r.given } : { q, chosen: k, review: event });
     marks[i] = correct ? 'ok' : 'ng';
     combo = correct ? combo + 1 : 0;
     haptic(correct ? 'success' : 'error');
     tick().then(() => dots[i] && bump(dots[i], 1.6));
-    startTimer(correct ? timing.advanceOkSec : timing.advanceNgSec, next);
+    startTimer(q.advanceSec ?? (correct ? timing.advanceOkSec : timing.advanceNgSec), next);
+  }
+
+  // ---- キーボード: 1〜4 で選ぶ、Enter で次へ（入力欄の中では使わない） ----
+  function onKey(e: KeyboardEvent) {
+    if (e.defaultPrevented || reporting || overlay.count > 0 || e.metaKey || e.ctrlKey || e.altKey || !q) return;
+    const el = e.target as HTMLElement | null;
+    const typing = !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+    if (phase === 'ask' && !typing && !q.interactive && /^[1-9]$/.test(e.key)) {
+      const k = +e.key - 1;
+      if (k < q.choices.length) {
+        e.preventDefault();
+        answer(k);
+      }
+    } else if (phase === 'reveal' && (e.key === 'Enter' || e.key === 'ArrowRight') && !e.repeat) {
+      e.preventDefault();
+      next();
+    } else if (e.key === 'Escape' && !typing) close();
+  }
+
+  // ---- 報告 ----
+  function report(reason: ReportReason, comment: string) {
+    if (!q) return;
+    saveReports(mode.id, addReport(loadReports(mode.id), { key: q.key, reason, comment: comment || undefined, at: new Date().toISOString() }));
+    reporting = false;
+    haptic('success');
+    reportedMsg = '報告しました';
+    setTimeout(() => (reportedMsg = ''), 2200);
   }
 
   function timeout() {
@@ -188,7 +255,7 @@
       done = true;
       timer?.cancel();
       if (from) await slide(from, 0, 0);
-      router.replace({ name: 'result', params: { logs, kind, marks: [...marks] } });
+      router.replace({ name: 'result', params: { logs, kind, marks: [...marks], override } });
       return;
     }
     peek = true;
@@ -198,6 +265,7 @@
     // めくり終わったら、右にあったカードを今の問題にする（同じ要素のまま。差し替えのちらつきなし）
     i++;
     chosen = null;
+    result = null;
     event = null;
     phase = 'ask';
     peek = false;
@@ -206,7 +274,7 @@
     const c = els.get(i);
     if (c) c.style.transform = '';
     sliding = false;
-    startTimer(timing.answerSec, timeout);
+    startAsk();
   }
 
   // ---- タッチ: 長押しで一時停止 / 解説中に左スワイプで次へ ----
@@ -324,7 +392,10 @@
         </span>
       {:else if qs.length}{i + 1}<span class="of">&ensp;/&ensp;{qs.length}</span>{/if}
     </span>
-    <span class="fmt">{#if kind === 'review'}<span class="rv">復習</span>{/if}{q ? q.patternLabel : ''}</span>
+    <span class="fmt">
+      {#if kind === 'review'}<span class="rv">復習</span>{/if}{q ? q.patternLabel : ''}
+      {#if mode.reportable && q}<button class="flag press" onclick={() => (reporting = true)} aria-label="この問題を報告"><Icon name="flag" size={17} /></button>{/if}
+    </span>
   </header>
   <div class="track" class:reveal={phase === 'reveal'}>
     <div class="bar" bind:this={bar}></div>
@@ -334,7 +405,8 @@
       {#key combo}<span class="combo" use:comboFx><b class="en">{combo}</b>連続正解</span>{/key}
     {/if}
     <span class="pause-note" aria-live="polite"><Icon name="pause" size={14} stroke={2.4} />一時停止中</span>
-    <span class="swipe-hint" class:show={phase === 'reveal' && !paused}><Icon name="back" size={14} stroke={2.4} />スワイプで次へ</span>
+    <span class="swipe-hint" class:show={phase === 'reveal' && !paused && !reportedMsg}><Icon name="back" size={14} stroke={2.4} />スワイプで次へ</span>
+    <span class="reported" class:show={!!reportedMsg} aria-live="polite">{reportedMsg}</span>
   </div>
 
   <div class="stage" bind:this={stage}>
@@ -360,6 +432,8 @@
           phase={idx === i ? phase : 'ask'}
           chosen={idx === i ? chosen : null}
           event={idx === i ? event : null}
+          result={idx === i ? result : null}
+          oninteract={interact}
           reviewEntry={store.progress.review[qs[idx].key]}
           reviewGoal={store.settings.reviewGoal}
           onchoose={choose}
@@ -367,6 +441,9 @@
       </div>
     {/each}
   </div>
+  {#if reporting && q}
+    <ReportSheet id={q.key} onsend={report} onclose={() => (reporting = false)} />
+  {/if}
 </div>
 
 <style>
@@ -515,6 +592,26 @@
   }
   .swipe-hint {
     right: 0;
+  }
+  .reported {
+    position: absolute;
+    right: 0;
+    top: 2px;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .reported.show {
+    opacity: 1;
+  }
+  .flag {
+    width: 36px;
+    height: 36px;
+    margin: -6px -10px -6px 0;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    color: var(--text3);
   }
 
   .stage {

@@ -91,7 +91,7 @@ export function replaceAll(s: Settings, progress: Record<string, Progress>) {
 }
 
 /** 1問の結果を記録し、すぐ保存する（途中でやめても失われない）。復習リストとタグ別の正答率も更新する */
-export function recordAnswer(key: string, base: string, ok: boolean, tags: string[] = []): ReviewEvent {
+export function recordAnswer(key: string, base: string, ok: boolean, tags: string[] = [], conf?: 'low' | 'high'): ReviewEvent {
   const now = Date.now();
   const today = dayNumber(now);
   const p = store.progress;
@@ -104,7 +104,7 @@ export function recordAnswer(key: string, base: string, ok: boolean, tags: strin
     t[tag] = { seen: cur.seen + 1, correct: cur.correct + (ok ? 1 : 0) };
   }
   const next: Progress = {
-    items: { ...p.items, [key]: review(p.items[key], ok, now, today) },
+    items: { ...p.items, [key]: review(p.items[key], ok, now, today, activeMode().srs, conf) },
     days: { ...p.days, [dk]: { a: d.a + 1, c: d.c + (ok ? 1 : 0) } },
     lastBase: base,
     review: r.list,

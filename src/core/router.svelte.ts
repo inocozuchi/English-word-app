@@ -14,6 +14,9 @@ export interface AnswerLog {
   chosen: number | null;
   /** 復習リストの変化 */
   review: ReviewEvent;
+  /** Interact で答えた問題の正誤と自分の答え */
+  ok?: boolean;
+  given?: string;
 }
 
 export type Kind = 'push' | 'modal';

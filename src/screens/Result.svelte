@@ -10,17 +10,23 @@
   import { rise, burst, stagger } from '../core/transitions.ts';
   import Icon from '../components/Icon.svelte';
   import type { Question } from '../core/mode.ts';
+  import { isCorrect } from '../core/mode.ts';
 
-  let { logs, kind = 'normal', marks = [] }: { logs: AnswerLog[]; kind?: SessionKind; marks?: ('ok' | 'ng')[] } = $props();
+  let {
+    logs,
+    kind = 'normal',
+    marks = [],
+    override,
+  }: { logs: AnswerLog[]; kind?: SessionKind; marks?: ('ok' | 'ng')[]; override?: Record<string, unknown> } = $props();
   const mode = activeMode();
   // 結果画面は表示中に logs が変わらないので、最初の値だけ使う
   // svelte-ignore state_referenced_locally
-  const correct = logs.filter((l) => l.chosen === l.q.answer).length;
+  const correct = logs.filter(isCorrect).length;
   // svelte-ignore state_referenced_locally
   const total = logs.length;
   const rate = total ? Math.round((correct / total) * 100) : 0;
   // svelte-ignore state_referenced_locally
-  const missed = logs.filter((l) => l.chosen !== l.q.answer);
+  const missed = logs.filter((l) => !isCorrect(l));
   // svelte-ignore state_referenced_locally
   const added = logs.filter((l) => l.review === 'added').length;
   // svelte-ignore state_referenced_locally
@@ -88,7 +94,7 @@
               <span class="main">
                 <span class="w" class:en={lb.latin}>{lb.title}</span>
                 <span class="m">{lb.sub}</span>
-                <span class="yours">{l.chosen === null ? '時間切れ' : `あなたの答え: ${l.q.choices[l.chosen].text}`}</span>
+                <span class="yours">{l.given !== undefined ? `あなたの答え: ${l.given || '（空欄）'}` : l.chosen === null ? '時間切れ' : `あなたの答え: ${l.q.choices[l.chosen].text}`}</span>
               </span>
               <span class="chev"><Icon name="chevron" size={18} /></span>
             </button>
@@ -98,7 +104,7 @@
     {/if}
   </div>
   <div class="actions">
-    <button class="primary press" onclick={() => router.replace({ name: 'quiz', params: { seed: Date.now(), kind: kind === 'review' && left === 0 ? 'normal' : kind } })}>
+    <button class="primary press" onclick={() => router.replace({ name: 'quiz', params: { seed: Date.now(), kind: kind === 'review' && left === 0 ? 'normal' : kind, override } })}>
       {kind === 'review' && left > 0 ? '続けて復習' : 'もう一度'}
     </button>
     <button class="secondary press" onclick={() => router.pop()}>ホーム</button>

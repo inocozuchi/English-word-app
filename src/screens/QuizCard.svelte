@@ -1,7 +1,7 @@
 <script lang="ts">
   // クイズの1枚分（問題文 or 解説 ＋ 4択）。クイズ画面はこれを横に並べてめくる。
   import Icon from '../components/Icon.svelte';
-  import type { QuizMode, Question } from '../core/mode.ts';
+  import type { QuizMode, Question, InteractResult } from '../core/mode.ts';
   import type { ReviewEvent, ReviewEntry } from '../core/review.ts';
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
   import { promptOut, popScale, shake, stagger } from '../core/transitions.ts';
@@ -15,6 +15,8 @@
     reviewEntry,
     reviewGoal,
     onchoose,
+    result = null,
+    oninteract,
   }: {
     mode: QuizMode;
     q: Question;
@@ -24,9 +26,15 @@
     reviewEntry?: ReviewEntry;
     reviewGoal: number;
     onchoose: (k: number) => void;
+    /** Interact で答えた問題の正誤 */
+    result?: boolean | null;
+    oninteract?: (r: InteractResult) => void;
   } = $props();
 
-  const ok = $derived(phase === 'reveal' && chosen === q.answer);
+  const ok = $derived(phase === 'reveal' && (result ?? chosen === q.answer));
+  const interactive = $derived(!!(q.interactive && mode.Interact));
+  /** 画像の選択肢は 2×2 に並べる */
+  const grid = $derived(q.choices.length > 0 && q.choices.every((c) => c.image));
   const note = $derived(typeof mode.note === 'function' ? mode.note(q) : (mode.note ?? null));
 
   const REVIEW_NOTE: Record<Exclude<ReviewEvent, null>, string> = {
@@ -63,7 +71,7 @@
     {#if ok}
       <span class="badge ring" use:badgeFx={true}></span>正解
     {:else}
-      <span class="badge cross" use:badgeFx={false}><Icon name="x" size={15} stroke={3.2} /></span>{chosen === null ? '時間切れ' : '不正解'}
+      <span class="badge cross" use:badgeFx={false}><Icon name="x" size={15} stroke={3.2} /></span>{result === false ? '不正解' : chosen === null ? '時間切れ' : '不正解'}
     {/if}
     {#if event && REVIEW_NOTE[event]}
       <span class="rnote" class:cleared={event === 'cleared'}>{REVIEW_NOTE[event]}</span>
@@ -73,6 +81,10 @@
   </div>
 {/snippet}
 
+{#if interactive && mode.Interact}
+  <!-- 4択以外（並べ替え・入力・自己採点・カード）: カード全体をモードが描く -->
+  <div class="interact"><mode.Interact {q} {phase} onanswer={(r) => oninteract?.(r)} {status} /></div>
+{:else}
 <!-- 上半分 -->
 <div class="upper">
   {#if mode.inlineExplain}
@@ -95,7 +107,7 @@
   {/if}
 </div>
 
-<div class="choices">
+<div class="choices" class:grid>
   {#each q.choices as c, k}
     {@const isAns = phase === 'reveal' && k === q.answer}
     {@const isMine = phase === 'reveal' && k === chosen && k !== q.answer}
@@ -109,16 +121,28 @@
       onclick={() => onchoose(k)}
       use:choiceFx={k}
     >
+      {#if c.image}
+        <img class="cimg" src={c.image} alt={c.text} draggable="false" />
+        <span class="cnum en">{k + 1}</span>
+      {:else}
       {#if c.color}<span class="cdot" style:--c={c.color}></span>{/if}
       {#if c.tag}<span class="tag">{c.tag}</span>{/if}
       <span class="ct">{c.text}</span>
+      {/if}
       {#if isAns}<span class="mark"><span class="mini-ring"></span></span>
       {:else if isMine}<span class="mine">あなたの答え</span><span class="mark"><Icon name="x" size={18} stroke={2.8} /></span>{/if}
     </button>
   {/each}
 </div>
+{/if}
 
 <style>
+  .interact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
   .upper {
     flex: 1;
     position: relative;
@@ -298,6 +322,64 @@
     top: 50%;
     translate: 0 -50%;
     display: grid;
+  }
+  /* 画像の選択肢（2×2）。図は白地のまま見せる（ダークモードでも図の線が読める） */
+  .choices.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid .choice {
+    padding: 6px;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    justify-content: center;
+    background: #fff;
+  }
+  .grid .choice:active {
+    background: #f2f2f4;
+  }
+  .grid .choice.correct {
+    background: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  .grid .choice.wrong {
+    background: #fff;
+    padding-top: 6px;
+  }
+  .cimg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+  .cnum {
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #6b6b73;
+  }
+  .grid .mark,
+  .grid .mine {
+    color: var(--accent);
+  }
+  .grid .choice.wrong .mark,
+  .grid .choice.wrong .mine {
+    color: #111114;
+  }
+  .grid .mine {
+    top: auto;
+    bottom: 5px;
+    left: 8px;
+    background: #fff;
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+  .grid .mark {
+    top: 18px;
+    right: 8px;
   }
   .mini-ring {
     width: 20px;
