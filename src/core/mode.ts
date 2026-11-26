@@ -140,6 +140,10 @@ export interface QuizMode<S = any> {
   srs?: SrsConfig;
   /** 4択以外の回答の操作（Question.interactive のとき、カード全体を描く。status は正誤の行） */
   Interact?: Component<{ q: Question<any>; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet }>;
+  /** スタート・復習で開く画面（省略時は共通のクイズ画面 { name: 'quiz' }） */
+  quizRoute?(kind: 'normal' | 'review'): Route;
+  /** 設定画面の秒数（自動で次へ・制限時間）を出さない（問題ごとに秒数が決まっているモード） */
+  hideTiming?: boolean;
   /** クイズ画面に「この問題を報告」ボタンを出す（core/reports.ts に保存） */
   reportable?: boolean;
   label(key: string): ItemLabel | null;

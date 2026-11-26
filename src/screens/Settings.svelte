@@ -93,6 +93,7 @@
     {/each}
   </div>
 
+  {#if !mode.hideTiming}
   <h2 class="ui-h2">{mode.title}</h2>
   <div class="ui-group">
     <SliderRow
@@ -116,6 +117,7 @@
       onchange={(v) => updateTiming(mode, { answerSec: v })}
     />
   </div>
+  {/if}
   {#if mode.SettingsSection}<mode.SettingsSection />{/if}
 
   <h2 class="ui-h2">クイズ（共通）</h2>

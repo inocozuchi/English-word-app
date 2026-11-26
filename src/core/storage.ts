@@ -56,6 +56,8 @@ export interface Progress {
   review: ReviewList;
   /** タグ（音声変化のルールなど）ごとの正答数 */
   tags: TagStats;
+  /** モード固有の記録（反射版のベスト記録など）。書き出し・読み込みにも含まれる */
+  extra?: Record<string, unknown>;
 }
 
 const K_SETTINGS = 'eq.settings.v2';
@@ -150,6 +152,7 @@ export function normalizeProgress(p: any): Progress {
     lastBase: typeof p?.lastBase === 'string' ? p.lastBase : null,
     review,
     tags: isObj(p?.tags) ? p.tags : {},
+    ...(isObj(p?.extra) ? { extra: p.extra } : {}),
   };
 }
 

@@ -22,6 +22,8 @@ export interface ItemState {
   lastOk: boolean;
   /** 自己申告の自信（自己採点の問題だけ。low = 自信なし） */
   conf?: 'low' | 'high';
+  /** 直近の回答（反応時間 ms と正誤。新しいものが最後、最大5件。反射版だけが使う） */
+  recent?: { ms: number; ok: boolean }[];
 }
 
 /** モードごとの箱の決まり。intervals[箱] = 次に出すまでの日数 */

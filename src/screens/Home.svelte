@@ -43,7 +43,8 @@
   async function start(kind: 'normal' | 'review') {
     haptic('light');
     await loadData();
-    router.push({ name: 'quiz', params: { seed: Date.now(), kind } }, 'modal');
+    const r = mode.quizRoute?.(kind) ?? { name: 'quiz', params: { seed: Date.now(), kind } };
+    router.push({ ...r, params: { seed: Date.now(), kind, ...(r.params ?? {}) } }, 'modal');
   }
 </script>
 

@@ -91,7 +91,15 @@ export function replaceAll(s: Settings, progress: Record<string, Progress>) {
 }
 
 /** 1問の結果を記録し、すぐ保存する（途中でやめても失われない）。復習リストとタグ別の正答率も更新する */
-export function recordAnswer(key: string, base: string, ok: boolean, tags: string[] = [], conf?: 'low' | 'high'): ReviewEvent {
+export function recordAnswer(
+  key: string,
+  base: string,
+  ok: boolean,
+  tags: string[] = [],
+  conf?: 'low' | 'high',
+  /** 回答までの時間（ms）。渡すと直近5回を記録する */
+  rtMs?: number,
+): ReviewEvent {
   const now = Date.now();
   const today = dayNumber(now);
   const p = store.progress;
@@ -103,8 +111,11 @@ export function recordAnswer(key: string, base: string, ok: boolean, tags: strin
     const cur = t[tag] ?? { seen: 0, correct: 0 };
     t[tag] = { seen: cur.seen + 1, correct: cur.correct + (ok ? 1 : 0) };
   }
+  const item = review(p.items[key], ok, now, today, activeMode().srs, conf);
+  if (rtMs !== undefined) item.recent = [...(p.items[key]?.recent ?? []), { ms: Math.round(rtMs), ok }].slice(-5);
   const next: Progress = {
-    items: { ...p.items, [key]: review(p.items[key], ok, now, today, activeMode().srs, conf) },
+    ...p,
+    items: { ...p.items, [key]: item },
     days: { ...p.days, [dk]: { a: d.a + 1, c: d.c + (ok ? 1 : 0) } },
     lastBase: base,
     review: r.list,
@@ -114,6 +125,13 @@ export function recordAnswer(key: string, base: string, ok: boolean, tags: strin
   store.today = today;
   saveProgress(store.settings.activeMode, next);
   return r.event;
+}
+
+/** モード固有の記録を更新する（今のモード） */
+export function updateExtra(patch: Record<string, unknown>) {
+  const next = { ...store.progress, extra: { ...(store.progress.extra ?? {}), ...patch } };
+  store.progress = next;
+  saveProgress(store.settings.activeMode, next);
 }
 
 /** 復習リストから手動で外す */
