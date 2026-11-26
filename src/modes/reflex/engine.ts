@@ -256,6 +256,8 @@ function prioritize(list: Candidate[], items: Record<string, ItemState>, today: 
 export interface RChoice {
   text: string;
   image?: string;
+  /** 図のパス（data/imagelink-reflex/ からの相対。画面では答えの文字を伏せた図にする） */
+  figure?: string;
   latin?: boolean;
 }
 export interface Built {
@@ -275,7 +277,7 @@ export function buildChoices(q: RQuestion, rng: Rng): Built | null {
     const ds = [...new Set(q.distractor_figures ?? [])].filter((f) => f !== q.answer_figure);
     if (ds.length < 3) return null;
     const figs = shuffle([q.answer_figure, ...shuffle(ds, rng).slice(0, 3)], rng);
-    return { q, choices: figs.map((f, k) => ({ text: `図${k + 1}`, image: figureUrl(f) })), answer: figs.indexOf(q.answer_figure), limitMs };
+    return { q, choices: figs.map((f, k) => ({ text: `図${k + 1}`, image: figureUrl(f), figure: f })), answer: figs.indexOf(q.answer_figure), limitMs };
   }
   if (!q.answer) return null;
   const ds = [...new Set((q.distractors ?? []).map((d) => d.trim()))].filter((d) => d && d !== q.answer!.trim());

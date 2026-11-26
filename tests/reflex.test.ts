@@ -257,3 +257,45 @@ describe('スモークテスト（全データ）', () => {
     expect(execFileSync('python3', [join(ROOT, 'validate.py')], { encoding: 'utf8' })).toContain('problems 0');
   });
 });
+
+// ---- 図の中の答えを伏せる ----
+import { figureTerms, hasTerm, maskSvg, figureLabels, svgAspect } from '../src/modes/reflex/figmask.ts';
+
+describe('図の答えを伏せる', () => {
+  it('語のラベルを伏せる単位に分ける', () => {
+    expect(figureTerms('冠詞（無冠詞・a・the）')).toEqual(expect.arrayContaining(['冠詞', '無冠詞', 'a', 'the']));
+    expect(figureTerms('some と any')).toEqual(['some', 'any']);
+    expect(figureTerms('五文型')).toContain('文型');
+    expect(figureTerms('to不定詞と動名詞')).toEqual(expect.arrayContaining(['to不定詞', '不定詞', '動名詞']));
+  });
+  it('英語は単語として、日本語は部分一致（空白は無視）', () => {
+    expect(hasTerm('a fish（1匹）', ['a'])).toBe(true);
+    expect(hasTerm('fish（魚肉）', ['a'])).toBe(false);
+    expect(hasTerm('There is 〜', ['there'])).toBe(true);
+    expect(hasTerm('to 不定詞：これから', ['to不定詞'])).toBe(true);
+    expect(hasTerm('第一文型 SV', ['文型'])).toBe(true);
+  });
+  it('答えを含む <text> だけを「？」にする', () => {
+    const svg = '<svg viewBox="0 0 300 100"><text x="1">無冠詞：中身だけ</text><text x="2"><tspan>the</tspan>：特定</text><text x="3">fish（魚肉）</text></svg>';
+    const r = maskSvg(svg, figureTerms('冠詞（無冠詞・a・the）'));
+    expect(r.masked).toBe(2);
+    expect(r.svg).toContain('<text x="1">？</text>');
+    expect(r.svg).toContain('<text x="2">？</text>');
+    expect(r.svg).toContain('fish（魚肉）');
+    expect(svgAspect(svg)).toBe(3);
+  });
+  it('全データ: 図→語・語→図で、答えの語が図に残らない', () => {
+    const labels = figureLabels(QS);
+    const leaks: string[] = [];
+    for (const q of QS) {
+      const f = q.type === 'r_fig2word' ? q.figure : q.type === 'r_word2fig' ? q.answer_figure : null;
+      if (!f) continue;
+      const raw = readFileSync(join(ROOT, f), 'utf8');
+      const { svg } = maskSvg(raw, (labels.get(f) ?? []).flatMap(figureTerms));
+      const label = q.type === 'r_fig2word' ? q.answer! : q.prompt_ja!;
+      const texts = [...svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)].map((m) => m[1].replace(/<[^>]+>/g, ''));
+      if (texts.some((t) => hasTerm(t, figureTerms(label)))) leaks.push(`${q.id} ${label}`);
+    }
+    expect(leaks).toEqual([]);
+  });
+});
