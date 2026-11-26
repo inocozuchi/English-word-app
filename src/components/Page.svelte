@@ -14,7 +14,12 @@
 
   /** 開いたとき、中身が上から少しずつ浮かび上がる（画面のスライドと一緒に。控えめに） */
   function intro(node: HTMLElement) {
-    stagger([...node.children].slice(0, 10), { step: 28, distance: 12, delay: 60 });
+    // 下から「ヌルッ」と: 見出し・パネル・一覧が順に浮かび、パネルや一覧の中の行もさらに1行ずつ遅れて出る
+    const kids = [...node.children].slice(0, 14) as HTMLElement[];
+    stagger(kids, { step: 45, distance: 34, delay: 40 });
+    kids.forEach((el, k) => {
+      if (el.matches('.ui-group, ul, ol')) stagger([...el.children].slice(0, 12), { step: 35, distance: 18, delay: 140 + k * 45 });
+    });
   }
 </script>
 

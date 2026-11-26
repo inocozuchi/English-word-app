@@ -62,9 +62,9 @@
       <p class="eyebrow-en">Reflex · {title}</p>
       <p class="score en" bind:this={scoreEl}><Num value={score} duration={500} /><span class="sl">/</span><span class="tt">{sum.firstTotal}</span></p>
       <div class="kpi" use:kpiIn>
-        <div><span class="v en">{rate}<small>%</small></span><span class="c">正答率</span></div>
+        <div><span class="v en"><Num value={rate} delay={300} /><small>%</small></span><span class="c">正答率</span></div>
         <div><span class="v en">{sum.avgMs ? sec(sum.avgMs) : '—'}<small>秒</small></span><span class="c">平均反応時間</span></div>
-        <div><span class="v en">{bestStreak}</span><span class="c">最高の連続正解</span></div>
+        <div><span class="v en"><Num value={bestStreak} delay={420} /></span><span class="c">最高の連続正解</span></div>
       </div>
       {#if isAttack}
         <p class="best">

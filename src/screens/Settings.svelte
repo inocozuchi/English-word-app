@@ -7,6 +7,7 @@
   import { store, updateSettings, replaceAll, activeMode, modes, switchMode, timingOf, updateTiming, allProgress } from '../core/store.svelte.ts';
   import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS, emptyProgress } from '../core/storage.ts';
   import { haptic } from '../core/haptics.ts';
+  import { stagger } from '../core/transitions.ts';
 
   const s = $derived(store.settings);
   const mode = $derived(activeMode());
@@ -78,6 +79,18 @@
   const counts = [5, 10, 15, 20].map((n) => ({ value: n, label: `${n}問` }));
   const goals = [2, 3, 4, 5].map((n) => ({ value: n, label: `${n}回` }));
   const p = (v: number, [lo, hi]: readonly [number, number]) => (v - lo) / (hi - lo);
+  /** モードを切り替えたとき: そのモードの設定が下から浮かび、中の行も順に出る */
+  function modeIn(node: HTMLElement) {
+    if (!booted) return;
+    const kids = [...node.children] as HTMLElement[];
+    stagger(kids, { step: 40, distance: 26, delay: 0 });
+  }
+  // 最初に開いたときは Page の動きに任せる（二重に動かさない）
+  let booted = false;
+  $effect(() => {
+    void mode.id;
+    queueMicrotask(() => (booted = true));
+  });
 </script>
 
 <Page title="設定">
@@ -93,6 +106,8 @@
     {/each}
   </div>
 
+  {#key mode.id}
+  <div class="mode-part" use:modeIn>
   {#if !mode.hideTiming}
   <h2 class="ui-h2">{mode.title}</h2>
   <div class="ui-group">
@@ -119,6 +134,8 @@
   </div>
   {/if}
   {#if mode.SettingsSection}<mode.SettingsSection />{/if}
+  </div>
+  {/key}
 
   <h2 class="ui-h2">クイズ（共通）</h2>
   <div class="ui-group">

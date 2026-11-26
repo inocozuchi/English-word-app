@@ -11,6 +11,7 @@
   import { canSpeak, englishVoices, speak, onVoicesChanged } from '../../../core/speech.ts';
   import { modeSettings, updateModeSettings } from '../../../core/store.svelte.ts';
   import { haptic } from '../../../core/haptics.ts';
+  import { stagger } from '../../../core/transitions.ts';
   import { compMode } from '../mode.ts';
   import { RATES, VOICE_LANGS } from '../settings.ts';
   import Speak from './Speak.svelte';
@@ -152,6 +153,10 @@
     'audio-unavailable': '音声なし（文字で確認）',
   };
   const good = $derived(result && (result.v === 'correct' || result.v === 'self-correct'));
+  /** 答え合わせの中身が上から順に浮かぶ */
+  function fbIn(node: HTMLElement) {
+    stagger([...node.children], { step: 50, distance: 14, delay: 30 });
+  }
   function setRate(r: number) {
     updateModeSettings(compMode, { rate: r });
   }
@@ -183,7 +188,7 @@
     {#if hints && phase === 'ask'}<p class="hint en" aria-live="polite">ヒント：{hintFor(q.acceptedAnswers[0])}</p>{/if}
 
     {#if phase !== 'ask'}
-      <div class="fb">
+      <div class="fb" use:fbIn>
         {#if result}
           <p class="verdict" class:good class:bad={result.v === 'wrong' || result.v === 'skipped'}>
             <span class="vm" aria-hidden="true">{good ? '◯' : result.v === 'self-partial' ? '△' : result.v === 'audio-unavailable' ? '—' : '×'}</span>{VERDICT[result.v]}

@@ -354,3 +354,35 @@ input[type='range']::-moz-range-thumb {
   background: #fff;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* ---------- 出てくるときの動き（全画面共通） ---------- */
+/* 進み具合の棒（style で scaleX を指定しているもの）は、表示されたとき 0 から伸び、値が変わるとなめらかに動く */
+[style*='scaleX'] {
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@starting-style {
+  [style*='scaleX'] {
+    transform: scaleX(0) !important;
+  }
+}
+/* 一覧の行（検索で増えた行など、あとから出る行）は下から少し浮かぶ */
+.list > li,
+.rows > li {
+  transition:
+    opacity 0.35s ease-out,
+    transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.1);
+}
+@starting-style {
+  .list > li,
+  .rows > li {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*='scaleX'],
+  .list > li,
+  .rows > li {
+    transition: none;
+  }
+}
