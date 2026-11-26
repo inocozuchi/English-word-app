@@ -1,0 +1,1 @@
+Phase 11-A: 37 new items, 216 new questions, 9 groups; 72 expression occurrences including reused IDs. Topic vocabulary groups are not morphological families. All additions recommended, not mandatory. Free translation requires self-marking for unlisted valid answers. Existing records preserved. Schema and reference checks passed; linguistic review and runtime testing pending.

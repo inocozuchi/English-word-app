@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "release": "0.11f",
+  "items": 1064,
+  "practiceQuestions": 5010,
+  "diagnosticQuestions": 60,
+  "visualGroups": 344,
+  "exampleTranslationsAdded": 124,
+  "exactDuplicateQuestionAliases": {
+    "q-32-0050": "q-32-0048",
+    "q-33-0055": "q-33-0039",
+    "q-33-0057": "q-33-0036",
+    "q-34-0054": "q-34-0015",
+    "q-34-0056": "q-34-0030",
+    "q-34-0058": "q-34-0042",
+    "q-10b-0119": "q-33-0054",
+    "q-10c-0002": "q-04-0242",
+    "q-10d-0084": "q-55-0027",
+    "q-10e-0158": "q-31-0049",
+    "q-10e-0161": "q-31-0051",
+    "q-10e-0167": "q-32-0049",
+    "q-10e-0194": "q-51-0011",
+    "q-11a-0005": "q-10a-0528",
+    "q-11a-0023": "q-10a-0529",
+    "q-11a-0044": "q-10b-0068",
+    "q-11a-0071": "q-10b-0035",
+    "q-11a-0077": "q-34-0057",
+    "q-11c-0098": "q-10e-0164",
+    "q-11d-0019": "q-11a-0113"
+  },
+  "sameEnglishItemGroups": [
+    [
+      {
+        "id": "vocabulary-17-003",
+        "day": 17,
+        "kind": "vocabulary",
+        "english": "agree",
+        "kana": "アグリー",
+        "japanese": "同意する",
+        "example": "I agree with you.",
+        "exampleJapanese": "あなたに同意します。",
+        "priority": "core"
+      },
+      {
+        "id": "vocabulary-26-008",
+        "day": 26,
+        "kind": "vocabulary",
+        "english": "agree",
+        "kana": "アグリー",
+        "japanese": "賛成する",
+        "example": "I agree with you.",
+        "exampleJapanese": "あなたに賛成です。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-18-015",
+        "day": 18,
+        "kind": "vocabulary",
+        "english": "beach",
+        "kana": "ビーチ",
+        "japanese": "浜辺",
+        "example": "Let's go to the beach.",
+        "exampleJapanese": "浜辺に行きましょう。",
+        "priority": "core"
+      },
+      {
+        "id": "vocabulary-22-009",
+        "day": 22,
+        "kind": "vocabulary",
+        "english": "beach",
+        "kana": "ビーチ",
+        "japanese": "海岸",
+        "example": "Have you been to this beach?",
+        "exampleJapanese": "この海岸に行ったことがありますか？",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-12-014",
+        "day": 12,
+        "kind": "vocabulary",
+        "english": "book",
+        "kana": "ブック",
+        "japanese": "本",
+        "example": "This book is his.",
+        "priority": "core",
+        "exampleJapanese": "この本は彼のです。"
+      },
+      {
+        "id": "vocabulary-24-008",
+        "day": 24,
+        "kind": "vocabulary",
+        "english": "book",
+        "kana": "ブック",
+        "japanese": "予約する",
+        "example": "We have booked a room.",
+        "exampleJapanese": "部屋を予約しました。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-05-018",
+        "day": 5,
+        "kind": "vocabulary",
+        "english": "call",
+        "kana": "コール",
+        "japanese": "電話する・呼ぶ",
+        "example": "I called my friend.",
+        "priority": "core",
+        "exampleJapanese": "友達に電話しました。"
+      },
+      {
+        "id": "vocabulary-25-002",
+        "day": 25,
+        "kind": "vocabulary",
+        "english": "call",
+        "kana": "コール",
+        "japanese": "呼ぶ",
+        "example": "It is called a kettle.",
+        "exampleJapanese": "それはケトルと呼ばれます。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-06-007",
+        "day": 6,
+        "kind": "vocabulary",
+        "english": "change",
+        "kana": "チェインジ",
+        "japanese": "変える",
+        "example": "I will change my plan.",
+        "priority": "core",
+        "exampleJapanese": "計画を変えます。"
+      },
+      {
+        "id": "vocabulary-25-009",
+        "day": 25,
+        "kind": "vocabulary",
+        "english": "change",
+        "kana": "チェインジ",
+        "japanese": "変更する",
+        "example": "The time was changed.",
+        "exampleJapanese": "時間が変更されました。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "idiom-09-001",
+        "day": 9,
+        "kind": "idiom",
+        "english": "find out",
+        "kana": "ファインド アウト",
+        "japanese": "調べて分かる",
+        "example": "Can you find out the price?",
+        "priority": "core",
+        "exampleJapanese": "値段を調べてもらえますか？"
+      },
+      {
+        "id": "idiom-24-011",
+        "day": 24,
+        "kind": "idiom",
+        "english": "find out",
+        "kana": "ファインド アウト",
+        "japanese": "調べて知る",
+        "example": "I have found out the price.",
+        "exampleJapanese": "値段が分かりました。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-16-006",
+        "day": 16,
+        "kind": "vocabulary",
+        "english": "for",
+        "kana": "フォー",
+        "japanese": "〜の間（期間）",
+        "example": "I waited for an hour.",
+        "exampleJapanese": "1時間待ちました。",
+        "priority": "core"
+      },
+      {
+        "id": "vocabulary-23-001",
+        "day": 23,
+        "kind": "vocabulary",
+        "english": "for",
+        "kana": "フォー",
+        "japanese": "〜の間",
+        "example": "I have studied for two hours.",
+        "exampleJapanese": "2時間勉強しています。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "idiom-10-004",
+        "day": 10,
+        "kind": "idiom",
+        "english": "hand in",
+        "kana": "ハンド イン",
+        "japanese": "提出する",
+        "example": "I have to hand in my homework.",
+        "priority": "core",
+        "exampleJapanese": "宿題を提出しなければなりません。"
+      },
+      {
+        "id": "chunk-10c-0023",
+        "day": 41,
+        "kind": "chunk",
+        "english": "Hand in",
+        "kana": "ハンド イン",
+        "japanese": "提出する指示",
+        "example": "Hand in your work by Friday.",
+        "priority": "recommended",
+        "exampleJapanese": "金曜日までに課題を提出してください。"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-04-020",
+        "day": 4,
+        "kind": "vocabulary",
+        "english": "never",
+        "kana": "ネヴァー",
+        "japanese": "決して～ない",
+        "example": "I never drive.",
+        "priority": "core",
+        "exampleJapanese": "運転はしません。"
+      },
+      {
+        "id": "vocabulary-22-004",
+        "day": 22,
+        "kind": "vocabulary",
+        "english": "never",
+        "kana": "ネヴァー",
+        "japanese": "一度も〜ない",
+        "example": "I have never seen snow.",
+        "exampleJapanese": "雪を見たことがありません。",
+        "priority": "core"
+      }
+    ],
+    [
+      {
+        "id": "vocabulary-04-003",
+        "day": 4,
+        "kind": "vocabulary",
+        "english": "when",
+        "kana": "ウェン",
+        "japanese": "いつ",
+        "example": "When is lunch?",
+        "priority": "core",
+        "exampleJapanese": "昼食はいつですか？"
+      },
+      {
+        "id": "vocabulary-26-004",
+        "day": 26,
+        "kind": "vocabulary",
+        "english": "when",
+        "kana": "ウェン",
+        "japanese": "〜するとき",
+        "example": "Call me when you arrive.",
+        "exampleJapanese": "着いたら電話してください。",
+        "priority": "core"
+      }
+    ]
+  ],
+  "questionsWithoutItemLinks": 1408,
+  "referenceChecks": {
+    "questionIds": 7901,
+    "itemId": 792,
+    "itemIds": 5409
+  },
+  "schemasValidated": [
+    "pronunciation_reference.json",
+    "grammar_reference.json",
+    "learning_policy.json",
+    "comprehensive_course.json",
+    "assessment_reference.json",
+    "visual_reference.json"
+  ],
+  "limitations": [
+    "英文全件の人手校閲は未実施",
+    "同一表記の語彙は意味・用法が異なる可能性があるため保持",
+    "itemIdsなしの問題は文法・読解等の独立問題として扱い、個別確認は未実施",
+    "実機・採点・TTS未検証"
+  ]
+}

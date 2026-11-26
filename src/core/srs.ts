@@ -33,6 +33,8 @@ export interface SrsConfig {
   startBox: number;
   /** まちがえたときに戻る箱 */
   resetBox: number;
+  /** 自信なし（ヒントを使った・自己採点で「あやしい」）の正解では箱を進めない（間隔は最低1日） */
+  holdOnLow?: boolean;
 }
 export const DEFAULT_SRS: SrsConfig = { intervals: INTERVALS, startBox: 0, resetBox: 0 };
 
@@ -54,14 +56,14 @@ export function review(
   if (ok) {
     s.correct++;
     // 初見で正解した語は箱1から（翌日に確認）
-    s.box = Math.min(s.box + 1, max);
+    if (!(cfg.holdOnLow && conf === 'low')) s.box = Math.min(s.box + 1, max);
   } else {
     s.wrong++;
     s.box = cfg.resetBox;
   }
   if (conf) s.conf = conf;
   else delete s.conf;
-  s.due = today + cfg.intervals[s.box];
+  s.due = today + (ok && cfg.holdOnLow && conf === 'low' ? Math.max(1, cfg.intervals[s.box]) : cfg.intervals[s.box]);
   return s;
 }
 

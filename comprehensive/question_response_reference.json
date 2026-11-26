@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "pairs": [
+    {
+      "itemId": "chunk-04-001",
+      "day": 4,
+      "question": "How often do you cook?",
+      "intent": "頻度",
+      "response": "Every day.",
+      "responseJapanese": "毎日。"
+    },
+    {
+      "itemId": "chunk-04-002",
+      "day": 4,
+      "question": "How long have you lived here?",
+      "intent": "期間",
+      "response": "For two years.",
+      "responseJapanese": "2年間です。"
+    },
+    {
+      "itemId": "chunk-10c-0001",
+      "day": 4,
+      "question": "How far is the library?",
+      "intent": "距離",
+      "response": "About two kilometres.",
+      "responseJapanese": "約2キロです。"
+    },
+    {
+      "itemId": "chunk-10c-0002",
+      "day": 4,
+      "question": "How soon can you come?",
+      "intent": "あとどのくらいで",
+      "response": "In ten minutes.",
+      "responseJapanese": "10分後です。"
+    },
+    {
+      "itemId": "chunk-10c-0003",
+      "day": 4,
+      "question": "How many times did you call?",
+      "intent": "回数",
+      "response": "Three times.",
+      "responseJapanese": "3回です。"
+    },
+    {
+      "itemId": "chunk-04-006",
+      "day": 4,
+      "question": "What kind of music do you like?",
+      "intent": "種類",
+      "response": "I like jazz.",
+      "responseJapanese": "ジャズが好きです。"
+    },
+    {
+      "itemId": "chunk-44-003",
+      "day": 4,
+      "question": "What is it like?",
+      "intent": "特徴・様子",
+      "response": "It's quiet and friendly.",
+      "responseJapanese": "静かで親しみやすいです。"
+    },
+    {
+      "itemId": "chunk-10c-0004",
+      "day": 4,
+      "question": "How come you're late?",
+      "intent": "理由（口語）",
+      "response": "I missed the bus.",
+      "responseJapanese": "バスに乗り遅れました。"
+    },
+    {
+      "itemId": "chunk-10c-0005",
+      "day": 4,
+      "question": "What for?",
+      "intent": "目的",
+      "response": "To practise English.",
+      "responseJapanese": "英語を練習するためです。"
+    },
+    {
+      "itemId": "chunk-10c-0006",
+      "day": 4,
+      "question": "Which one would you prefer?",
+      "intent": "選択",
+      "response": "The blue one, please.",
+      "responseJapanese": "青い方をお願いします。"
+    },
+    {
+      "itemId": "chunk-10c-0007",
+      "day": 43,
+      "question": "Would you mind closing the window?",
+      "intent": "依頼",
+      "response": "Not at all.",
+      "responseJapanese": "もちろん構いません。"
+    },
+    {
+      "itemId": "chunk-10c-0008",
+      "day": 43,
+      "question": "Could you possibly speak more slowly?",
+      "intent": "控えめな依頼",
+      "response": "Of course.",
+      "responseJapanese": "もちろんです。"
+    },
+    {
+      "itemId": "chunk-10c-0009",
+      "day": 43,
+      "question": "Do you happen to know where the office is?",
+      "intent": "知っているか丁寧に尋ねる",
+      "response": "It's upstairs.",
+      "responseJapanese": "上の階です。"
+    },
+    {
+      "itemId": "chunk-10c-0010",
+      "day": 43,
+      "question": "Would it be possible to change my appointment?",
+      "intent": "可能か丁寧に尋ねる",
+      "response": "Yes, that's possible.",
+      "responseJapanese": "はい、可能です。"
+    },
+    {
+      "itemId": "chunk-10c-0011",
+      "day": 43,
+      "question": "Is it all right if I use the kitchen?",
+      "intent": "許可",
+      "response": "Sure, go ahead.",
+      "responseJapanese": "もちろん、どうぞ。"
+    },
+    {
+      "itemId": "chunk-10c-0012",
+      "day": 44,
+      "question": "What do you mean by \"due\"?",
+      "intent": "意味の確認",
+      "response": "It means you must submit it by then.",
+      "responseJapanese": "その時までに提出するという意味です。"
+    },
+    {
+      "itemId": "chunk-41-011",
+      "day": 44,
+      "question": "Could you say that again?",
+      "intent": "繰り返しの依頼",
+      "response": "Sure.",
+      "responseJapanese": "もちろん。"
+    },
+    {
+      "itemId": "chunk-10c-0013",
+      "day": 44,
+      "question": "Did you say fifteen?",
+      "intent": "聞き取った内容の確認",
+      "response": "No, fifty.",
+      "responseJapanese": "いいえ、50です。"
+    },
+    {
+      "itemId": "chunk-10c-0014",
+      "day": 44,
+      "question": "Do you mean next Friday?",
+      "intent": "解釈の確認",
+      "response": "Yes, exactly.",
+      "responseJapanese": "はい、その通りです。"
+    },
+    {
+      "itemId": "chunk-10c-0015",
+      "day": 44,
+      "question": "Could you give me an example?",
+      "intent": "具体例の依頼",
+      "response": "Sure, here's one.",
+      "responseJapanese": "もちろん、これが一例です。"
+    },
+    {
+      "itemId": "chunk-16-006",
+      "day": 37,
+      "question": "What time works for you?",
+      "intent": "都合のよい時刻",
+      "response": "Six would be great.",
+      "responseJapanese": "6時だとありがたいです。"
+    },
+    {
+      "itemId": "chunk-10c-0016",
+      "day": 37,
+      "question": "Are you up for a walk?",
+      "intent": "誘い",
+      "response": "Yes, I'd love to.",
+      "responseJapanese": "はい、ぜひ。"
+    },
+    {
+      "itemId": "chunk-10c-0017",
+      "day": 37,
+      "question": "Would you rather eat now or later?",
+      "intent": "好みの選択",
+      "response": "Later, please.",
+      "responseJapanese": "後でお願いします。"
+    },
+    {
+      "itemId": "chunk-10c-0018",
+      "day": 37,
+      "question": "How did it go?",
+      "intent": "結果・感想",
+      "response": "It went well.",
+      "responseJapanese": "うまくいきました。"
+    },
+    {
+      "itemId": "chunk-10c-0019",
+      "day": 37,
+      "question": "What have you been up to?",
+      "intent": "最近の活動",
+      "response": "I've been studying English.",
+      "responseJapanese": "英語を勉強しています。"
+    },
+    {
+      "itemId": "chunk-10c-0020",
+      "day": 41,
+      "question": "Work in pairs.",
+      "intent": "二人組で作業する指示",
+      "response": "Okay, let's work together.",
+      "responseJapanese": "分かりました、一緒にやりましょう。"
+    },
+    {
+      "itemId": "chunk-10c-0021",
+      "day": 41,
+      "question": "Take turns.",
+      "intent": "交代する指示",
+      "response": "I'll go first.",
+      "responseJapanese": "私が先にやります。"
+    },
+    {
+      "itemId": "chunk-10c-0022",
+      "day": 41,
+      "question": "Explain it in your own words.",
+      "intent": "自分の言葉で",
+      "response": "I'll try.",
+      "responseJapanese": "やってみます。"
+    },
+    {
+      "itemId": "chunk-10c-0023",
+      "day": 41,
+      "question": "Hand in your work by Friday.",
+      "intent": "提出する指示",
+      "response": "Okay, by Friday.",
+      "responseJapanese": "分かりました、金曜日までですね。"
+    },
+    {
+      "itemId": "chunk-10c-0024",
+      "day": 41,
+      "question": "Support your opinion with an example.",
+      "intent": "意見を根拠で支える指示",
+      "response": "I'll give an example.",
+      "responseJapanese": "例を挙げます。"
+    },
+    {
+      "itemId": "chunk-10c-0025",
+      "day": 51,
+      "question": "What makes you think that?",
+      "intent": "判断の根拠",
+      "response": "The data supports it.",
+      "responseJapanese": "データがそれを裏付けています。"
+    },
+    {
+      "itemId": "chunk-10c-0026",
+      "day": 51,
+      "question": "To what extent do you agree?",
+      "intent": "程度",
+      "response": "I partly agree.",
+      "responseJapanese": "部分的に賛成です。"
+    },
+    {
+      "itemId": "chunk-10c-0027",
+      "day": 51,
+      "question": "What if it rains?",
+      "intent": "仮定",
+      "response": "We can stay inside.",
+      "responseJapanese": "屋内にいられます。"
+    },
+    {
+      "itemId": "chunk-04-007",
+      "day": 51,
+      "question": "How about meeting at noon?",
+      "intent": "提案",
+      "response": "That sounds good.",
+      "responseJapanese": "いいですね。"
+    },
+    {
+      "itemId": "chunk-10c-0028",
+      "day": 51,
+      "question": "What's the difference between these two words?",
+      "intent": "違い",
+      "response": "They have different meanings.",
+      "responseJapanese": "意味が異なります。"
+    }
+  ]
+}

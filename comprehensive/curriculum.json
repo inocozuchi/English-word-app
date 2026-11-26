@@ -1,0 +1,333 @@
+{
+  "courseId": "comprehensive",
+  "durationDays": 60,
+  "route": [
+    "review",
+    "vocabulary",
+    "idiom",
+    "chunk",
+    "grammar",
+    "translation",
+    "paraphrase",
+    "listening",
+    "scenario",
+    "reading",
+    "mixed",
+    "retry"
+  ],
+  "reviewOffsets": [
+    1,
+    3,
+    7,
+    14,
+    30
+  ],
+  "dailyMinutes": [
+    20,
+    60,
+    90,
+    120
+  ],
+  "days": [
+    {
+      "day": 1,
+      "topic": "英語の語順・be動詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 2,
+      "topic": "一般動詞・現在形",
+      "kind": "lesson"
+    },
+    {
+      "day": 3,
+      "topic": "否定文・疑問文",
+      "kind": "lesson"
+    },
+    {
+      "day": 4,
+      "topic": "疑問詞・頻出質問",
+      "kind": "lesson"
+    },
+    {
+      "day": 5,
+      "topic": "過去形",
+      "kind": "lesson"
+    },
+    {
+      "day": 6,
+      "topic": "未来表現",
+      "kind": "lesson"
+    },
+    {
+      "day": 7,
+      "topic": "第1回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 8,
+      "topic": "現在進行形",
+      "kind": "lesson"
+    },
+    {
+      "day": 9,
+      "topic": "can・could",
+      "kind": "lesson"
+    },
+    {
+      "day": 10,
+      "topic": "must・have to・should",
+      "kind": "lesson"
+    },
+    {
+      "day": 11,
+      "topic": "名詞・冠詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 12,
+      "topic": "代名詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 13,
+      "topic": "There is / are",
+      "kind": "lesson"
+    },
+    {
+      "day": 14,
+      "topic": "第2回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 15,
+      "topic": "場所の前置詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 16,
+      "topic": "時間の前置詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 17,
+      "topic": "to不定詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 18,
+      "topic": "動名詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 19,
+      "topic": "比較級・最上級",
+      "kind": "lesson"
+    },
+    {
+      "day": 20,
+      "topic": "数量表現",
+      "kind": "lesson"
+    },
+    {
+      "day": 21,
+      "topic": "第3回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 22,
+      "topic": "現在完了・経験",
+      "kind": "lesson"
+    },
+    {
+      "day": 23,
+      "topic": "現在完了・継続",
+      "kind": "lesson"
+    },
+    {
+      "day": 24,
+      "topic": "現在完了・完了",
+      "kind": "lesson"
+    },
+    {
+      "day": 25,
+      "topic": "受動態",
+      "kind": "lesson"
+    },
+    {
+      "day": 26,
+      "topic": "接続詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 27,
+      "topic": "関係代名詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 28,
+      "topic": "第4回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 29,
+      "topic": "分詞・名詞の修飾",
+      "kind": "lesson"
+    },
+    {
+      "day": 30,
+      "topic": "間接疑問文",
+      "kind": "lesson"
+    },
+    {
+      "day": 31,
+      "topic": "条件文・if",
+      "kind": "lesson"
+    },
+    {
+      "day": 32,
+      "topic": "仮定法の基礎",
+      "kind": "lesson"
+    },
+    {
+      "day": 33,
+      "topic": "頻出句動詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 34,
+      "topic": "多義語・基本動詞",
+      "kind": "lesson"
+    },
+    {
+      "day": 35,
+      "topic": "第5回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 36,
+      "topic": "自己紹介・人物説明",
+      "kind": "lesson"
+    },
+    {
+      "day": 37,
+      "topic": "ホームステイ",
+      "kind": "lesson"
+    },
+    {
+      "day": 38,
+      "topic": "食事・アレルギー",
+      "kind": "lesson"
+    },
+    {
+      "day": 39,
+      "topic": "買い物・支払い",
+      "kind": "lesson"
+    },
+    {
+      "day": 40,
+      "topic": "交通・道案内",
+      "kind": "lesson"
+    },
+    {
+      "day": 41,
+      "topic": "大学生活・授業",
+      "kind": "lesson"
+    },
+    {
+      "day": 42,
+      "topic": "第6回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 43,
+      "topic": "依頼・許可・提案",
+      "kind": "lesson"
+    },
+    {
+      "day": 44,
+      "topic": "質問・聞き返し",
+      "kind": "lesson"
+    },
+    {
+      "day": 45,
+      "topic": "感情・意見",
+      "kind": "lesson"
+    },
+    {
+      "day": 46,
+      "topic": "体調・トラブル",
+      "kind": "lesson"
+    },
+    {
+      "day": 47,
+      "topic": "NZ英語",
+      "kind": "lesson"
+    },
+    {
+      "day": 48,
+      "topic": "日常会話総合",
+      "kind": "lesson"
+    },
+    {
+      "day": 49,
+      "topic": "第7回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 50,
+      "topic": "アカデミック英語基礎",
+      "kind": "lesson"
+    },
+    {
+      "day": 51,
+      "topic": "意見と理由",
+      "kind": "lesson"
+    },
+    {
+      "day": 52,
+      "topic": "原因と結果",
+      "kind": "lesson"
+    },
+    {
+      "day": 53,
+      "topic": "比較と対照",
+      "kind": "lesson"
+    },
+    {
+      "day": 54,
+      "topic": "具体例・根拠",
+      "kind": "lesson"
+    },
+    {
+      "day": 55,
+      "topic": "段落構成・要旨",
+      "kind": "lesson"
+    },
+    {
+      "day": 56,
+      "topic": "第8回総合復習",
+      "kind": "review"
+    },
+    {
+      "day": 57,
+      "topic": "日常英語総合テスト",
+      "kind": "test"
+    },
+    {
+      "day": 58,
+      "topic": "英文法総合テスト",
+      "kind": "test"
+    },
+    {
+      "day": 59,
+      "topic": "アカデミック総合テスト",
+      "kind": "test"
+    },
+    {
+      "day": 60,
+      "topic": "留学直前確認",
+      "kind": "test"
+    }
+  ]
+}

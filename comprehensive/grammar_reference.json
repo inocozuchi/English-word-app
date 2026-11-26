@@ -1,0 +1,1410 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "grammar-10e-001",
+      "day": 1,
+      "title": "be動詞と一般動詞",
+      "rule": "状態を表す形容詞にはbe動詞が必要。",
+      "diagram": "subject → be → state",
+      "examples": [
+        {
+          "english": "I am tired.",
+          "japanese": "疲れています。",
+          "incorrect": "I tired."
+        },
+        {
+          "english": "She is busy.",
+          "japanese": "彼女は忙しい。",
+          "incorrect": "She busy."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0001",
+        "q-10e-0002",
+        "q-10e-0003",
+        "q-10e-0004",
+        "q-10e-0005",
+        "q-10e-0006"
+      ]
+    },
+    {
+      "id": "grammar-10e-002",
+      "day": 2,
+      "title": "三単現",
+      "rule": "現在形で主語が三人称単数なら一般動詞に原則s。",
+      "diagram": "he/she → verb + s",
+      "examples": [
+        {
+          "english": "He works here.",
+          "japanese": "彼はここで働いています。",
+          "incorrect": "He work here."
+        },
+        {
+          "english": "My sister likes music.",
+          "japanese": "姉は音楽が好きです。",
+          "incorrect": "My sister like music."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0007",
+        "q-10e-0008",
+        "q-10e-0009",
+        "q-10e-0010",
+        "q-10e-0011",
+        "q-10e-0012"
+      ]
+    },
+    {
+      "id": "grammar-10e-003",
+      "day": 3,
+      "title": "疑問文と否定文",
+      "rule": "doesの後は動詞の原形。",
+      "diagram": "do/does → subject → base verb",
+      "examples": [
+        {
+          "english": "Does she live here?",
+          "japanese": "彼女はここに住んでいますか？",
+          "incorrect": "Does she lives here?"
+        },
+        {
+          "english": "He doesn't eat meat.",
+          "japanese": "彼は肉を食べません。",
+          "incorrect": "He doesn't eats meat."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0013",
+        "q-10e-0014",
+        "q-10e-0015",
+        "q-10e-0016",
+        "q-10e-0017",
+        "q-10e-0018"
+      ]
+    },
+    {
+      "id": "grammar-10e-004",
+      "day": 4,
+      "title": "疑問詞",
+      "rule": "一般動詞の直接疑問文にはdoなどを使う。",
+      "diagram": "question word → auxiliary → subject",
+      "examples": [
+        {
+          "english": "Where do you live?",
+          "japanese": "どこに住んでいますか？",
+          "incorrect": "Where you live?"
+        },
+        {
+          "english": "What did you buy?",
+          "japanese": "何を買いましたか？",
+          "incorrect": "What did you bought?"
+        }
+      ],
+      "questionIds": [
+        "q-10e-0019",
+        "q-10e-0020",
+        "q-10e-0021",
+        "q-10e-0022",
+        "q-10e-0023",
+        "q-10e-0024"
+      ]
+    },
+    {
+      "id": "grammar-10e-005",
+      "day": 5,
+      "title": "過去形",
+      "rule": "終了した過去の時点の出来事は過去形。",
+      "diagram": "past event → finished time",
+      "examples": [
+        {
+          "english": "I saw him yesterday.",
+          "japanese": "昨日彼に会いました。",
+          "incorrect": "I see him yesterday."
+        },
+        {
+          "english": "We went home last night.",
+          "japanese": "昨夜帰宅しました。",
+          "incorrect": "We go home last night."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0025",
+        "q-10e-0026",
+        "q-10e-0027",
+        "q-10e-0028",
+        "q-10e-0029",
+        "q-10e-0030"
+      ]
+    },
+    {
+      "id": "grammar-10e-006",
+      "day": 6,
+      "title": "未来表現",
+      "rule": "be going toの後は原形。",
+      "diagram": "plan → be going to → base verb",
+      "examples": [
+        {
+          "english": "I'm going to study tonight.",
+          "japanese": "今夜勉強する予定です。",
+          "incorrect": "I'm going to studying tonight."
+        },
+        {
+          "english": "I'll call you tomorrow.",
+          "japanese": "明日電話します。",
+          "incorrect": "I'll calling you tomorrow."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0031",
+        "q-10e-0032",
+        "q-10e-0033",
+        "q-10e-0034",
+        "q-10e-0035",
+        "q-10e-0036"
+      ]
+    },
+    {
+      "id": "grammar-10e-007",
+      "day": 8,
+      "title": "進行形",
+      "rule": "進行形はbeとing形の組み合わせ。",
+      "diagram": "be → verb-ing",
+      "examples": [
+        {
+          "english": "She's cooking now.",
+          "japanese": "彼女は今料理しています。",
+          "incorrect": "She cooking now."
+        },
+        {
+          "english": "They're waiting outside.",
+          "japanese": "彼らは外で待っています。",
+          "incorrect": "They are wait outside."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0037",
+        "q-10e-0038",
+        "q-10e-0039",
+        "q-10e-0040",
+        "q-10e-0041",
+        "q-10e-0042"
+      ]
+    },
+    {
+      "id": "grammar-10e-008",
+      "day": 9,
+      "title": "助動詞",
+      "rule": "canの後は原形。",
+      "diagram": "can → base verb",
+      "examples": [
+        {
+          "english": "I can swim.",
+          "japanese": "泳げます。",
+          "incorrect": "I can to swim."
+        },
+        {
+          "english": "She can speak English.",
+          "japanese": "彼女は英語を話せます。",
+          "incorrect": "She can speaks English."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0043",
+        "q-10e-0044",
+        "q-10e-0045",
+        "q-10e-0046",
+        "q-10e-0047",
+        "q-10e-0048"
+      ]
+    },
+    {
+      "id": "grammar-10e-009",
+      "day": 10,
+      "title": "義務と禁止",
+      "rule": "must notは禁止、don't have toは不要。",
+      "diagram": "must not ≠ don't have to",
+      "examples": [
+        {
+          "english": "You must not enter.",
+          "japanese": "入ってはいけません。",
+          "incorrect": "You don't have to enter."
+        },
+        {
+          "english": "You don't have to come.",
+          "japanese": "来なくてもいいです。",
+          "incorrect": "You must not come."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0049",
+        "q-10e-0050",
+        "q-10e-0051",
+        "q-10e-0052",
+        "q-10e-0053",
+        "q-10e-0054"
+      ]
+    },
+    {
+      "id": "grammar-10e-010",
+      "day": 11,
+      "title": "冠詞と不可算名詞",
+      "rule": "adviceは不可算名詞。",
+      "diagram": "countable / uncountable",
+      "examples": [
+        {
+          "english": "I need some advice.",
+          "japanese": "助言が必要です。",
+          "incorrect": "I need an advice."
+        },
+        {
+          "english": "I bought a notebook.",
+          "japanese": "ノートを一冊買いました。",
+          "incorrect": "I bought notebook."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0055",
+        "q-10e-0056",
+        "q-10e-0057",
+        "q-10e-0058",
+        "q-10e-0059",
+        "q-10e-0060"
+      ]
+    },
+    {
+      "id": "grammar-10e-011",
+      "day": 12,
+      "title": "代名詞",
+      "rule": "目的語にはmeを使う。",
+      "diagram": "subject / object / possessive",
+      "examples": [
+        {
+          "english": "She gave me a book.",
+          "japanese": "彼女は私に本をくれました。",
+          "incorrect": "She gave I a book."
+        },
+        {
+          "english": "This is my bag.",
+          "japanese": "これは私のかばんです。",
+          "incorrect": "This is me bag."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0061",
+        "q-10e-0062",
+        "q-10e-0063",
+        "q-10e-0064",
+        "q-10e-0065",
+        "q-10e-0066"
+      ]
+    },
+    {
+      "id": "grammar-10e-012",
+      "day": 13,
+      "title": "存在文",
+      "rule": "標準的な書き言葉では複数名詞にare。",
+      "diagram": "there + be → noun",
+      "examples": [
+        {
+          "english": "There are two chairs.",
+          "japanese": "椅子が二脚あります。",
+          "incorrect": "There is two chairs."
+        },
+        {
+          "english": "There is a bus stop nearby.",
+          "japanese": "近くにバス停があります。",
+          "incorrect": "There are a bus stop nearby."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0067",
+        "q-10e-0068",
+        "q-10e-0069",
+        "q-10e-0070",
+        "q-10e-0071",
+        "q-10e-0072"
+      ]
+    },
+    {
+      "id": "grammar-10e-013",
+      "day": 15,
+      "title": "場所の前置詞",
+      "rule": "待ち合わせ地点にはatが自然。",
+      "diagram": "at point / in area / on surface",
+      "examples": [
+        {
+          "english": "I'll meet you at the station.",
+          "japanese": "駅で会いましょう。",
+          "incorrect": "I'll meet you on the station."
+        },
+        {
+          "english": "The keys are on the table.",
+          "japanese": "鍵は机の上にあります。",
+          "incorrect": "The keys are at the table."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0073",
+        "q-10e-0074",
+        "q-10e-0075",
+        "q-10e-0076",
+        "q-10e-0077",
+        "q-10e-0078"
+      ]
+    },
+    {
+      "id": "grammar-10e-014",
+      "day": 16,
+      "title": "時間の前置詞",
+      "rule": "時刻にはat。",
+      "diagram": "at clock / on day / in month",
+      "examples": [
+        {
+          "english": "The class starts at nine.",
+          "japanese": "授業は9時に始まります。",
+          "incorrect": "The class starts in nine."
+        },
+        {
+          "english": "We leave on Monday.",
+          "japanese": "月曜日に出発します。",
+          "incorrect": "We leave in Monday."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0079",
+        "q-10e-0080",
+        "q-10e-0081",
+        "q-10e-0082",
+        "q-10e-0083",
+        "q-10e-0084"
+      ]
+    },
+    {
+      "id": "grammar-10e-015",
+      "day": 17,
+      "title": "不定詞",
+      "rule": "wantの後に行為を置く基本形はto不定詞。",
+      "diagram": "want → to + verb",
+      "examples": [
+        {
+          "english": "I want to learn English.",
+          "japanese": "英語を学びたいです。",
+          "incorrect": "I want learning English."
+        },
+        {
+          "english": "I decided to stay.",
+          "japanese": "残ることに決めました。",
+          "incorrect": "I decided staying."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0085",
+        "q-10e-0086",
+        "q-10e-0087",
+        "q-10e-0088",
+        "q-10e-0089",
+        "q-10e-0090"
+      ]
+    },
+    {
+      "id": "grammar-10e-016",
+      "day": 18,
+      "title": "動名詞",
+      "rule": "enjoyの後の動詞はing形。",
+      "diagram": "enjoy → verb-ing",
+      "examples": [
+        {
+          "english": "I enjoy cooking.",
+          "japanese": "料理をするのが好きです。",
+          "incorrect": "I enjoy to cook."
+        },
+        {
+          "english": "She finished writing.",
+          "japanese": "彼女は書き終えました。",
+          "incorrect": "She finished to write."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0091",
+        "q-10e-0092",
+        "q-10e-0093",
+        "q-10e-0094",
+        "q-10e-0095",
+        "q-10e-0096"
+      ]
+    },
+    {
+      "id": "grammar-10e-017",
+      "day": 19,
+      "title": "比較",
+      "rule": "cheaperにmoreは不要。",
+      "diagram": "comparative → than",
+      "examples": [
+        {
+          "english": "This bus is cheaper than that one.",
+          "japanese": "このバスはあのバスより安いです。",
+          "incorrect": "This bus is more cheaper than that one."
+        },
+        {
+          "english": "This is the best option.",
+          "japanese": "これが最善の選択肢です。",
+          "incorrect": "This is the most best option."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0097",
+        "q-10e-0098",
+        "q-10e-0099",
+        "q-10e-0100",
+        "q-10e-0101",
+        "q-10e-0102"
+      ]
+    },
+    {
+      "id": "grammar-10e-018",
+      "day": 20,
+      "title": "数量",
+      "rule": "waterは不可算なのでmuch。",
+      "diagram": "many countable / much uncountable",
+      "examples": [
+        {
+          "english": "How much water do you need?",
+          "japanese": "水はどれくらい必要ですか？",
+          "incorrect": "How many water do you need?"
+        },
+        {
+          "english": "How many books do you have?",
+          "japanese": "本を何冊持っていますか？",
+          "incorrect": "How much books do you have?"
+        }
+      ],
+      "questionIds": [
+        "q-10e-0103",
+        "q-10e-0104",
+        "q-10e-0105",
+        "q-10e-0106",
+        "q-10e-0107",
+        "q-10e-0108"
+      ]
+    },
+    {
+      "id": "grammar-10e-019",
+      "day": 22,
+      "title": "現在完了・経験",
+      "rule": "haveの後は過去分詞。",
+      "diagram": "past experience → now",
+      "examples": [
+        {
+          "english": "I've been to Auckland before.",
+          "japanese": "以前オークランドに行ったことがあります。",
+          "incorrect": "I've went to Auckland before."
+        },
+        {
+          "english": "Have you ever tried this?",
+          "japanese": "これを試したことがありますか？",
+          "incorrect": "Have you ever try this?"
+        }
+      ],
+      "questionIds": [
+        "q-10e-0109",
+        "q-10e-0110",
+        "q-10e-0111",
+        "q-10e-0112",
+        "q-10e-0113",
+        "q-10e-0114"
+      ]
+    },
+    {
+      "id": "grammar-10e-020",
+      "day": 23,
+      "title": "現在完了・継続",
+      "rule": "期間はfor、起点はsince。",
+      "diagram": "since start / for duration",
+      "examples": [
+        {
+          "english": "I've lived here for two months.",
+          "japanese": "ここに2か月住んでいます。",
+          "incorrect": "I've lived here since two months."
+        },
+        {
+          "english": "I've known her since May.",
+          "japanese": "5月から彼女を知っています。",
+          "incorrect": "I've known her for May."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0115",
+        "q-10e-0116",
+        "q-10e-0117",
+        "q-10e-0118",
+        "q-10e-0119",
+        "q-10e-0120"
+      ]
+    },
+    {
+      "id": "grammar-10e-021",
+      "day": 24,
+      "title": "現在完了・完了",
+      "rule": "haveの後は過去分詞。",
+      "diagram": "past action → present result",
+      "examples": [
+        {
+          "english": "I've just finished my homework.",
+          "japanese": "ちょうど宿題を終えたところです。",
+          "incorrect": "I've just finish my homework."
+        },
+        {
+          "english": "She has already left.",
+          "japanese": "彼女はもう出発しました。",
+          "incorrect": "She has already leave."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0121",
+        "q-10e-0122",
+        "q-10e-0123",
+        "q-10e-0124",
+        "q-10e-0125",
+        "q-10e-0126"
+      ]
+    },
+    {
+      "id": "grammar-10e-022",
+      "day": 25,
+      "title": "受動態",
+      "rule": "動作の受動態はbe＋過去分詞。",
+      "diagram": "receiver → be + past participle",
+      "examples": [
+        {
+          "english": "The room is cleaned every day.",
+          "japanese": "部屋は毎日掃除されます。",
+          "incorrect": "The room is clean every day by staff."
+        },
+        {
+          "english": "The email was sent yesterday.",
+          "japanese": "メールは昨日送られました。",
+          "incorrect": "The email was send yesterday."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0127",
+        "q-10e-0128",
+        "q-10e-0129",
+        "q-10e-0130",
+        "q-10e-0131",
+        "q-10e-0132"
+      ]
+    },
+    {
+      "id": "grammar-10e-023",
+      "day": 26,
+      "title": "接続詞",
+      "rule": "because ofの後は名詞句。",
+      "diagram": "because + clause / because of + noun",
+      "examples": [
+        {
+          "english": "We stayed home because it rained.",
+          "japanese": "雨が降ったので家にいました。",
+          "incorrect": "We stayed home because of it rained."
+        },
+        {
+          "english": "We stayed home because of the rain.",
+          "japanese": "雨のため家にいました。",
+          "incorrect": "We stayed home because the rain."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0133",
+        "q-10e-0134",
+        "q-10e-0135",
+        "q-10e-0136",
+        "q-10e-0137",
+        "q-10e-0138"
+      ]
+    },
+    {
+      "id": "grammar-10e-024",
+      "day": 27,
+      "title": "関係代名詞",
+      "rule": "人を修飾する主格にはwhoまたはthat。",
+      "diagram": "noun → who/that → clause",
+      "examples": [
+        {
+          "english": "I know a person who speaks Japanese.",
+          "japanese": "日本語を話す人を知っています。",
+          "incorrect": "I know a person which speaks Japanese."
+        },
+        {
+          "english": "This is the book that I bought.",
+          "japanese": "これが私が買った本です。",
+          "incorrect": "This is the book what I bought."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0139",
+        "q-10e-0140",
+        "q-10e-0141",
+        "q-10e-0142",
+        "q-10e-0143",
+        "q-10e-0144"
+      ]
+    },
+    {
+      "id": "grammar-10e-025",
+      "day": 29,
+      "title": "分詞修飾",
+      "rule": "壊れた結果を表すならbroken。",
+      "diagram": "doing → active / done → passive",
+      "examples": [
+        {
+          "english": "The broken window needs repair.",
+          "japanese": "壊れた窓は修理が必要です。",
+          "incorrect": "The breaking window needs repair."
+        },
+        {
+          "english": "Look at the sleeping baby.",
+          "japanese": "眠っている赤ちゃんを見て。",
+          "incorrect": "Look at the slept baby."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0145",
+        "q-10e-0146",
+        "q-10e-0147",
+        "q-10e-0148",
+        "q-10e-0149",
+        "q-10e-0150"
+      ]
+    },
+    {
+      "id": "grammar-10e-026",
+      "day": 30,
+      "title": "間接疑問文",
+      "rule": "間接疑問は主語＋動詞の語順。",
+      "diagram": "question frame → subject → verb",
+      "examples": [
+        {
+          "english": "Do you know where the bus stop is?",
+          "japanese": "バス停がどこか知っていますか？",
+          "incorrect": "Do you know where is the bus stop?"
+        },
+        {
+          "english": "Tell me what you need.",
+          "japanese": "何が必要か教えてください。",
+          "incorrect": "Tell me what do you need."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0151",
+        "q-10e-0152",
+        "q-10e-0153",
+        "q-10e-0154",
+        "q-10e-0155",
+        "q-10e-0156"
+      ]
+    },
+    {
+      "id": "grammar-10e-027",
+      "day": 31,
+      "title": "条件文",
+      "rule": "通常の未来条件のif節は現在形。",
+      "diagram": "if present → will",
+      "examples": [
+        {
+          "english": "If it rains, I'll stay home.",
+          "japanese": "雨が降ったら家にいます。",
+          "incorrect": "If it will rain, I'll stay home."
+        },
+        {
+          "english": "If I have time, I'll call you.",
+          "japanese": "時間があれば電話します。",
+          "incorrect": "If I will have time, I'll call you."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0157",
+        "q-10e-0158",
+        "q-10e-0159",
+        "q-10e-0160",
+        "q-10e-0161",
+        "q-10e-0162"
+      ]
+    },
+    {
+      "id": "grammar-10e-028",
+      "day": 32,
+      "title": "仮定法",
+      "rule": "現実と異なる仮定にはwouldが基本。",
+      "diagram": "if past → would",
+      "examples": [
+        {
+          "english": "If I had more time, I would travel.",
+          "japanese": "もっと時間があれば旅行するのに。",
+          "incorrect": "If I had more time, I will travel."
+        },
+        {
+          "english": "If I were you, I'd ask the teacher.",
+          "japanese": "私なら先生に聞きます。",
+          "incorrect": "If I were you, I will ask the teacher."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0163",
+        "q-10e-0164",
+        "q-10e-0165",
+        "q-10e-0166",
+        "q-10e-0167",
+        "q-10e-0168"
+      ]
+    },
+    {
+      "id": "grammar-10e-029",
+      "day": 33,
+      "title": "句動詞と代名詞",
+      "rule": "分離可能な句動詞の代名詞目的語は間に置く。",
+      "diagram": "verb → pronoun → particle",
+      "examples": [
+        {
+          "english": "Please turn it off.",
+          "japanese": "それを消してください。",
+          "incorrect": "Please turn off it."
+        },
+        {
+          "english": "Pick it up, please.",
+          "japanese": "それを拾ってください。",
+          "incorrect": "Pick up it, please."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0169",
+        "q-10e-0170",
+        "q-10e-0171",
+        "q-10e-0172",
+        "q-10e-0173",
+        "q-10e-0174"
+      ]
+    },
+    {
+      "id": "grammar-10e-030",
+      "day": 34,
+      "title": "自動詞・他動詞",
+      "rule": "arriveは自動詞。reachは直接目的語を取る。",
+      "diagram": "arrive + at / reach + object",
+      "examples": [
+        {
+          "english": "We arrived at the station.",
+          "japanese": "駅に到着しました。",
+          "incorrect": "We arrived the station."
+        },
+        {
+          "english": "We reached the station.",
+          "japanese": "駅に到着しました。",
+          "incorrect": "We reached at the station."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0175",
+        "q-10e-0176",
+        "q-10e-0177",
+        "q-10e-0178",
+        "q-10e-0179",
+        "q-10e-0180"
+      ]
+    },
+    {
+      "id": "grammar-10e-031",
+      "day": 34,
+      "title": "語法：stop",
+      "rule": "stop doingは行為をやめる、stop to doは別の行為のために立ち止まる。",
+      "diagram": "stop doing / stop to do",
+      "examples": [
+        {
+          "english": "I stopped talking.",
+          "japanese": "話すのをやめました。",
+          "incorrect": "I stopped to talk."
+        },
+        {
+          "english": "I stopped to rest.",
+          "japanese": "休むために立ち止まりました。",
+          "incorrect": "I stopped resting."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0181",
+        "q-10e-0182",
+        "q-10e-0183",
+        "q-10e-0184",
+        "q-10e-0185",
+        "q-10e-0186"
+      ]
+    },
+    {
+      "id": "grammar-10e-032",
+      "day": 50,
+      "title": "品詞",
+      "rule": "標準的な英文では動詞speaksを副詞clearlyで修飾。",
+      "diagram": "adjective → noun / adverb → verb",
+      "examples": [
+        {
+          "english": "She speaks clearly.",
+          "japanese": "彼女は明瞭に話します。",
+          "incorrect": "She speaks clear."
+        },
+        {
+          "english": "It was a clear explanation.",
+          "japanese": "明瞭な説明でした。",
+          "incorrect": "It was a clearly explanation."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0187",
+        "q-10e-0188",
+        "q-10e-0189",
+        "q-10e-0190",
+        "q-10e-0191",
+        "q-10e-0192"
+      ]
+    },
+    {
+      "id": "grammar-10e-033",
+      "day": 51,
+      "title": "語法：意見",
+      "rule": "人への同意はagree with。",
+      "diagram": "agree with + person",
+      "examples": [
+        {
+          "english": "I agree with you.",
+          "japanese": "あなたに賛成です。",
+          "incorrect": "I agree you."
+        },
+        {
+          "english": "I agree with that idea.",
+          "japanese": "その考えに賛成です。",
+          "incorrect": "I am agree with that idea."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0193",
+        "q-10e-0194",
+        "q-10e-0195",
+        "q-10e-0196",
+        "q-10e-0197",
+        "q-10e-0198"
+      ]
+    },
+    {
+      "id": "grammar-10e-034",
+      "day": 53,
+      "title": "比較と対照",
+      "rule": "similar toが基本の組み合わせ。",
+      "diagram": "similar to / different from",
+      "examples": [
+        {
+          "english": "This is similar to mine.",
+          "japanese": "これは私のものと似ています。",
+          "incorrect": "This is similar with mine."
+        },
+        {
+          "english": "This is different from mine.",
+          "japanese": "これは私のものとは違います。",
+          "incorrect": "This is different with mine."
+        }
+      ],
+      "questionIds": [
+        "q-10e-0199",
+        "q-10e-0200",
+        "q-10e-0201",
+        "q-10e-0202",
+        "q-10e-0203",
+        "q-10e-0204"
+      ]
+    },
+    {
+      "id": "grammar-11c-001",
+      "day": 1,
+      "title": "骨組みと追加情報",
+      "rule": "主語と動詞を先に見つけ、時・場所の情報を分ける。",
+      "diagram": "S + V | time/place",
+      "examples": [
+        {
+          "english": "We study in the library.",
+          "japanese": "私たちは図書館で勉強します。",
+          "incorrect": "We in the library study."
+        },
+        {
+          "english": "The bus arrived at noon.",
+          "japanese": "バスは正午に到着しました。",
+          "incorrect": "The bus arrive at noon."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0001",
+        "q-11c-0002",
+        "q-11c-0003",
+        "q-11c-0004",
+        "q-11c-0005",
+        "q-11c-0006"
+      ]
+    },
+    {
+      "id": "grammar-11c-002",
+      "day": 2,
+      "title": "目的語と補語",
+      "rule": "目的語は動作の対象、補語は主語や目的語の性質・状態を説明する。",
+      "diagram": "S V O / S V C",
+      "examples": [
+        {
+          "english": "She likes music.",
+          "japanese": "彼女は音楽が好きです。",
+          "incorrect": "She likes musical."
+        },
+        {
+          "english": "The soup tastes good.",
+          "japanese": "スープはおいしいです。",
+          "incorrect": "The soup tastes well."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0007",
+        "q-11c-0008",
+        "q-11c-0009",
+        "q-11c-0010",
+        "q-11c-0011",
+        "q-11c-0012"
+      ]
+    },
+    {
+      "id": "grammar-11c-003",
+      "day": 2,
+      "title": "二つの目的語",
+      "rule": "giveやshowなどは人と物を続けられる。すべての動詞で可能ではない。",
+      "diagram": "S V person thing",
+      "examples": [
+        {
+          "english": "She gave me a map.",
+          "japanese": "彼女は私に地図をくれました。",
+          "incorrect": "She gave to me a map."
+        },
+        {
+          "english": "He showed us his room.",
+          "japanese": "彼は私たちに自分の部屋を見せました。",
+          "incorrect": "He showed we his room."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0013",
+        "q-11c-0014",
+        "q-11c-0015",
+        "q-11c-0016",
+        "q-11c-0017",
+        "q-11c-0018"
+      ]
+    },
+    {
+      "id": "grammar-11c-004",
+      "day": 2,
+      "title": "目的語の状態",
+      "rule": "make + O + 形容詞はOの状態を変える。",
+      "diagram": "S V O C",
+      "examples": [
+        {
+          "english": "The news made me happy.",
+          "japanese": "その知らせで私はうれしくなりました。",
+          "incorrect": "The news made I happy."
+        },
+        {
+          "english": "Please keep the door open.",
+          "japanese": "ドアを開けたままにしてください。",
+          "incorrect": "Please keep the door openly."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0019",
+        "q-11c-0020",
+        "q-11c-0021",
+        "q-11c-0022",
+        "q-11c-0023",
+        "q-11c-0024"
+      ]
+    },
+    {
+      "id": "grammar-11c-005",
+      "day": 8,
+      "title": "beと動詞の形",
+      "rule": "進行形はbe + ing、受動態はbe + 過去分詞。形容詞の補語とは区別する。",
+      "diagram": "be + adjective / ing / past participle",
+      "examples": [
+        {
+          "english": "They are cooking dinner.",
+          "japanese": "彼らは夕食を作っています。",
+          "incorrect": "They are cook dinner."
+        },
+        {
+          "english": "The room is cleaned every day.",
+          "japanese": "その部屋は毎日掃除されます。",
+          "incorrect": "The room is clean every day by staff."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0025",
+        "q-11c-0026",
+        "q-11c-0027",
+        "q-11c-0028",
+        "q-11c-0029",
+        "q-11c-0030"
+      ]
+    },
+    {
+      "id": "grammar-11c-006",
+      "day": 17,
+      "title": "rememberの二つの形",
+      "rule": "remember doingは行ったことの記憶、remember to doは忘れずに行うこと。",
+      "diagram": "memory ← doing | remember → to do",
+      "examples": [
+        {
+          "english": "I remember meeting her.",
+          "japanese": "彼女に会ったことを覚えています。",
+          "incorrect": "I remember to meet her."
+        },
+        {
+          "english": "Remember to bring your ID.",
+          "japanese": "忘れずに身分証を持ってきてください。",
+          "incorrect": "Remember bringing your ID."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0031",
+        "q-11c-0032",
+        "q-11c-0033",
+        "q-11c-0034",
+        "q-11c-0035",
+        "q-11c-0036"
+      ]
+    },
+    {
+      "id": "grammar-11c-007",
+      "day": 18,
+      "title": "tryの二つの形",
+      "rule": "try doingは方法を試す、try to doは実行しようとする。",
+      "diagram": "experiment: doing | attempt: to do",
+      "examples": [
+        {
+          "english": "Try restarting the computer.",
+          "japanese": "試しにパソコンを再起動してみてください。",
+          "incorrect": "Try restart the computer."
+        },
+        {
+          "english": "I tried to contact him.",
+          "japanese": "彼に連絡しようとしました。",
+          "incorrect": "I tried contact him."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0037",
+        "q-11c-0038",
+        "q-11c-0039",
+        "q-11c-0040",
+        "q-11c-0041",
+        "q-11c-0042"
+      ]
+    },
+    {
+      "id": "grammar-11c-008",
+      "day": 18,
+      "title": "forgetの二つの形",
+      "rule": "forget to doはし忘れる、forget doingはしたことを忘れる。",
+      "diagram": "past event / intended action",
+      "examples": [
+        {
+          "english": "I forgot to send the email.",
+          "japanese": "メールを送るのを忘れました。",
+          "incorrect": "I forgot sending the email."
+        },
+        {
+          "english": "I will never forget visiting Auckland.",
+          "japanese": "オークランドを訪れたことは決して忘れません。",
+          "incorrect": "I will never forget to visit Auckland."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0043",
+        "q-11c-0044",
+        "q-11c-0045",
+        "q-11c-0046",
+        "q-11c-0047",
+        "q-11c-0048"
+      ]
+    },
+    {
+      "id": "grammar-11c-009",
+      "day": 27,
+      "title": "関係代名詞と関係副詞",
+      "rule": "関係代名詞は節内で名詞相当の役割、whereは場所の副詞相当の役割を持つ。",
+      "diagram": "place + which ... gap / place + where ...",
+      "examples": [
+        {
+          "english": "This is the cafe that I like.",
+          "japanese": "ここは私が好きなカフェです。",
+          "incorrect": "This is the cafe where I like."
+        },
+        {
+          "english": "This is the cafe where we met.",
+          "japanese": "ここは私たちが会ったカフェです。",
+          "incorrect": "This is the cafe which we met."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0049",
+        "q-11c-0050",
+        "q-11c-0051",
+        "q-11c-0052",
+        "q-11c-0053",
+        "q-11c-0054"
+      ]
+    },
+    {
+      "id": "grammar-11c-010",
+      "day": 29,
+      "title": "分詞による名詞修飾",
+      "rule": "ingは能動的な関係、過去分詞は受動・結果の関係を表すことが多い。",
+      "diagram": "noun ← participle",
+      "examples": [
+        {
+          "english": "The woman sitting there is my teacher.",
+          "japanese": "そこに座っている女性は私の先生です。",
+          "incorrect": "The woman sat there is my teacher."
+        },
+        {
+          "english": "The book written in English is mine.",
+          "japanese": "英語で書かれた本は私のものです。",
+          "incorrect": "The book writing in English is mine."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0055",
+        "q-11c-0056",
+        "q-11c-0057",
+        "q-11c-0058",
+        "q-11c-0059",
+        "q-11c-0060"
+      ]
+    },
+    {
+      "id": "grammar-11c-011",
+      "day": 29,
+      "title": "分詞構文の主語",
+      "rule": "通常、分詞構文の意味上の主語は主節の主語と一致する。",
+      "diagram": "When S V, S V → Doing, S V",
+      "examples": [
+        {
+          "english": "Walking home, I saw a rainbow.",
+          "japanese": "家に歩いて帰る途中、虹を見ました。",
+          "incorrect": "Walking home, a rainbow appeared."
+        },
+        {
+          "english": "Feeling tired, I went to bed early.",
+          "japanese": "疲れていたので早く寝ました。",
+          "incorrect": "Feeling tired, the bed was comfortable."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0061",
+        "q-11c-0062",
+        "q-11c-0063",
+        "q-11c-0064",
+        "q-11c-0065",
+        "q-11c-0066"
+      ]
+    },
+    {
+      "id": "grammar-11c-012",
+      "day": 22,
+      "title": "過去と現在のつながり",
+      "rule": "現在完了は過去の出来事を現在の基準点と関連づける。継続だけを表すわけではない。",
+      "diagram": "past event → now",
+      "examples": [
+        {
+          "english": "I have visited that museum twice.",
+          "japanese": "その博物館に二度行ったことがあります。",
+          "incorrect": "I have visit that museum twice."
+        },
+        {
+          "english": "I visited it last Monday.",
+          "japanese": "先週の月曜日にそこを訪れました。",
+          "incorrect": "I have visited it last Monday."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0067",
+        "q-11c-0068",
+        "q-11c-0069",
+        "q-11c-0070",
+        "q-11c-0071",
+        "q-11c-0072"
+      ]
+    },
+    {
+      "id": "grammar-11c-013",
+      "day": 23,
+      "title": "継続と開始点",
+      "rule": "forは期間、sinceは開始点。",
+      "diagram": "since point / for duration",
+      "examples": [
+        {
+          "english": "I have known her since April.",
+          "japanese": "4月から彼女を知っています。",
+          "incorrect": "I have known her for April."
+        },
+        {
+          "english": "We have lived here for two months.",
+          "japanese": "私たちはここに2か月住んでいます。",
+          "incorrect": "We have lived here since two months."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0073",
+        "q-11c-0074",
+        "q-11c-0075",
+        "q-11c-0076",
+        "q-11c-0077",
+        "q-11c-0078"
+      ]
+    },
+    {
+      "id": "grammar-11c-014",
+      "day": 24,
+      "title": "完了形の基準点",
+      "rule": "過去完了は過去の基準点より前、未来完了は未来の基準点までの完了などを表す。",
+      "diagram": "earlier → past | now → future",
+      "examples": [
+        {
+          "english": "The bus had left before I arrived.",
+          "japanese": "私が着く前にバスは出発していました。",
+          "incorrect": "The bus had leave before I arrived."
+        },
+        {
+          "english": "I will have finished by Friday.",
+          "japanese": "金曜日までには終えているでしょう。",
+          "incorrect": "I will have finish by Friday."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0079",
+        "q-11c-0080",
+        "q-11c-0081",
+        "q-11c-0082",
+        "q-11c-0083",
+        "q-11c-0084"
+      ]
+    },
+    {
+      "id": "grammar-11c-015",
+      "day": 10,
+      "title": "助動詞の義務と推量",
+      "rule": "mustは義務や強い推量を表す。推量の確率は固定されない。",
+      "diagram": "must + base verb",
+      "examples": [
+        {
+          "english": "You must show your ID.",
+          "japanese": "身分証を提示しなければなりません。",
+          "incorrect": "You must to show your ID."
+        },
+        {
+          "english": "She must be busy.",
+          "japanese": "彼女は忙しいに違いありません。",
+          "incorrect": "She must is busy."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0085",
+        "q-11c-0086",
+        "q-11c-0087",
+        "q-11c-0088",
+        "q-11c-0089",
+        "q-11c-0090"
+      ]
+    },
+    {
+      "id": "grammar-11c-016",
+      "day": 9,
+      "title": "依頼と心理的距離",
+      "rule": "couldは丁寧な依頼に使える。過去の能力を表す場合もある。",
+      "diagram": "Can you ...? / Could you ...?",
+      "examples": [
+        {
+          "english": "Could you speak more slowly?",
+          "japanese": "もう少しゆっくり話していただけますか。",
+          "incorrect": "Could you to speak more slowly?"
+        },
+        {
+          "english": "I could swim when I was six.",
+          "japanese": "6歳のとき泳げました。",
+          "incorrect": "I could swam when I was six."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0091",
+        "q-11c-0092",
+        "q-11c-0093",
+        "q-11c-0094",
+        "q-11c-0095",
+        "q-11c-0096"
+      ]
+    },
+    {
+      "id": "grammar-11c-017",
+      "day": 32,
+      "title": "仮定と現実の距離",
+      "rule": "if + 過去形は現実と距離のある仮定を表せる。",
+      "diagram": "If + past, would + base",
+      "examples": [
+        {
+          "english": "If I had more time, I would travel.",
+          "japanese": "もっと時間があれば旅行するのに。",
+          "incorrect": "If I had more time, I would travelled."
+        },
+        {
+          "english": "If I knew the answer, I would tell you.",
+          "japanese": "答えを知っていれば教えるのに。",
+          "incorrect": "If I knew the answer, I would told you."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0097",
+        "q-11c-0098",
+        "q-11c-0099",
+        "q-11c-0100",
+        "q-11c-0101",
+        "q-11c-0102"
+      ]
+    },
+    {
+      "id": "grammar-11c-018",
+      "day": 32,
+      "title": "過去の反実仮想",
+      "rule": "if + had + 過去分詞とwould have + 過去分詞で過去の別の可能性を表す。",
+      "diagram": "If had done → would have done",
+      "examples": [
+        {
+          "english": "If I had left earlier, I would have caught the bus.",
+          "japanese": "もっと早く出ていればバスに間に合ったのに。",
+          "incorrect": "If I had left earlier, I would have catch the bus."
+        },
+        {
+          "english": "If I had known, I would have helped.",
+          "japanese": "知っていたら手伝ったのに。",
+          "incorrect": "If I had knew, I would have helped."
+        }
+      ],
+      "questionIds": [
+        "q-11c-0103",
+        "q-11c-0104",
+        "q-11c-0105",
+        "q-11c-0106",
+        "q-11c-0107",
+        "q-11c-0108"
+      ]
+    }
+  ],
+  "grading": "Correction prompts may contain grammatical sentences with a different meaning. Grade against Japanese meaning; allow self-assessment for valid alternatives."
+}

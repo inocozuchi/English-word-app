@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "templates": [
+    {
+      "itemId": "chunk-11b-001",
+      "day": 44,
+      "template": "Could you tell me",
+      "kana": "クッジュ テル ミー",
+      "japanese": "教えていただけますか",
+      "examples": [
+        {
+          "english": "Could you tell me where the station is?",
+          "japanese": "駅がどこにあるか教えていただけますか？",
+          "itemId": "chunk-11b-001"
+        },
+        {
+          "english": "Could you tell me when class starts?",
+          "japanese": "授業がいつ始まるか教えていただけますか？",
+          "itemId": "chunk-11b-001"
+        },
+        {
+          "english": "Could you tell me how to use this?",
+          "japanese": "これの使い方を教えていただけますか？",
+          "itemId": "chunk-11b-001"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0001",
+        "q-11b-0002",
+        "q-11b-0003",
+        "q-11b-0004",
+        "q-11b-0005",
+        "q-11b-0006"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-002",
+      "day": 44,
+      "template": "I don't know",
+      "kana": "アイ ドント ノウ",
+      "japanese": "分かりません",
+      "examples": [
+        {
+          "english": "I don't know what to say.",
+          "japanese": "何と言えばいいか分かりません。",
+          "itemId": "chunk-11b-002"
+        },
+        {
+          "english": "I don't know how to explain it.",
+          "japanese": "どう説明すればいいか分かりません。",
+          "itemId": "chunk-11b-002"
+        },
+        {
+          "english": "I don't know where to go.",
+          "japanese": "どこへ行けばいいか分かりません。",
+          "itemId": "chunk-11b-002"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0007",
+        "q-11b-0008",
+        "q-11b-0009",
+        "q-11b-0010",
+        "q-11b-0011",
+        "q-11b-0012"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-003",
+      "day": 43,
+      "template": "Is it OK if",
+      "kana": "イズ イット オーケイ イフ",
+      "japanese": "〜してもいいですか",
+      "examples": [
+        {
+          "english": "Is it OK if I use the washing machine?",
+          "japanese": "洗濯機を使ってもいいですか？",
+          "itemId": "chunk-11b-003"
+        },
+        {
+          "english": "Is it OK if I open the window?",
+          "japanese": "窓を開けてもいいですか？",
+          "itemId": "chunk-11b-003"
+        },
+        {
+          "english": "Is it OK if I sit here?",
+          "japanese": "ここに座ってもいいですか？",
+          "itemId": "chunk-11b-003"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0013",
+        "q-11b-0014",
+        "q-11b-0015",
+        "q-11b-0016",
+        "q-11b-0017",
+        "q-11b-0018"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-004",
+      "day": 44,
+      "template": "Could you",
+      "kana": "クッジュ",
+      "japanese": "〜していただけますか",
+      "examples": [
+        {
+          "english": "Could you say that again?",
+          "japanese": "もう一度言っていただけますか？",
+          "itemId": "chunk-11b-004"
+        },
+        {
+          "english": "Could you speak more slowly?",
+          "japanese": "もっとゆっくり話していただけますか？",
+          "itemId": "chunk-11b-004"
+        },
+        {
+          "english": "Could you write it down?",
+          "japanese": "書いていただけますか？",
+          "itemId": "chunk-11b-004"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0019",
+        "q-11b-0020",
+        "q-11b-0021",
+        "q-11b-0022",
+        "q-11b-0023",
+        "q-11b-0024"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-005",
+      "day": 45,
+      "template": "I'm not sure if",
+      "kana": "アイム ノット シュア イフ",
+      "japanese": "〜か確信がありません",
+      "examples": [
+        {
+          "english": "I'm not sure if this is correct.",
+          "japanese": "これが正しいか自信がありません。",
+          "itemId": "chunk-11b-005"
+        },
+        {
+          "english": "I'm not sure if I can come tomorrow.",
+          "japanese": "明日来られるか分かりません。",
+          "itemId": "chunk-11b-005"
+        },
+        {
+          "english": "I'm not sure if the shop is open.",
+          "japanese": "店が開いているか分かりません。",
+          "itemId": "chunk-11b-005"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0025",
+        "q-11b-0026",
+        "q-11b-0027",
+        "q-11b-0028",
+        "q-11b-0029",
+        "q-11b-0030"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-006",
+      "day": 43,
+      "template": "I was wondering if",
+      "kana": "アイ ワズ ワンダリング イフ",
+      "japanese": "〜できないかと思いまして",
+      "examples": [
+        {
+          "english": "I was wondering if I could borrow your pen.",
+          "japanese": "ペンをお借りできないかと思いまして。",
+          "itemId": "chunk-11b-006"
+        },
+        {
+          "english": "I was wondering if you could help me.",
+          "japanese": "手伝っていただけないかと思いまして。",
+          "itemId": "chunk-11b-006"
+        },
+        {
+          "english": "I was wondering if we could meet later.",
+          "japanese": "後で会えないかと思いまして。",
+          "itemId": "chunk-11b-006"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0031",
+        "q-11b-0032",
+        "q-11b-0033",
+        "q-11b-0034",
+        "q-11b-0035",
+        "q-11b-0036"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-007",
+      "day": 45,
+      "template": "It depends on",
+      "kana": "イット ディペンズ オン",
+      "japanese": "〜次第です",
+      "examples": [
+        {
+          "english": "It depends on the weather.",
+          "japanese": "天気次第です。",
+          "itemId": "chunk-11b-007"
+        },
+        {
+          "english": "It depends on the price.",
+          "japanese": "値段次第です。",
+          "itemId": "chunk-11b-007"
+        },
+        {
+          "english": "It depends on how much time we have.",
+          "japanese": "どれだけ時間があるか次第です。",
+          "itemId": "chunk-11b-007"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0037",
+        "q-11b-0038",
+        "q-11b-0039",
+        "q-11b-0040",
+        "q-11b-0041",
+        "q-11b-0042"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-008",
+      "day": 45,
+      "template": "The thing is",
+      "kana": "ザ シング イズ",
+      "japanese": "実は〜なのです",
+      "examples": [
+        {
+          "english": "The thing is I have another class.",
+          "japanese": "実は別の授業があります。",
+          "itemId": "chunk-11b-008"
+        },
+        {
+          "english": "The thing is I missed the bus.",
+          "japanese": "実はバスに乗り遅れました。",
+          "itemId": "chunk-11b-008"
+        },
+        {
+          "english": "The thing is I need more time.",
+          "japanese": "実はもっと時間が必要です。",
+          "itemId": "chunk-11b-008"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0043",
+        "q-11b-0044",
+        "q-11b-0045",
+        "q-11b-0046",
+        "q-11b-0047",
+        "q-11b-0048"
+      ]
+    },
+    {
+      "itemId": "chunk-10d-011",
+      "day": 44,
+      "template": "What I mean is",
+      "kana": "ワット アイ ミーン イズ",
+      "japanese": "つまり私が言いたいのは",
+      "examples": [
+        {
+          "english": "What I mean is we need more practice.",
+          "japanese": "つまりもっと練習が必要ということです。",
+          "itemId": "chunk-10d-011"
+        },
+        {
+          "english": "What I mean is I want to try again.",
+          "japanese": "つまりもう一度試したいのです。",
+          "itemId": "chunk-10d-011"
+        },
+        {
+          "english": "What I mean is it's not the same.",
+          "japanese": "つまり同じではないということです。",
+          "itemId": "chunk-10d-011"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0049",
+        "q-11b-0050",
+        "q-11b-0051",
+        "q-11b-0052",
+        "q-11b-0053",
+        "q-11b-0054"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-010",
+      "day": 45,
+      "template": "I find it difficult to",
+      "kana": "アイ ファインド イット ディフィカルト トゥ",
+      "japanese": "〜するのが難しいと感じます",
+      "examples": [
+        {
+          "english": "I find it difficult to understand fast speech.",
+          "japanese": "速い会話を理解するのが難しいです。",
+          "itemId": "chunk-11b-010"
+        },
+        {
+          "english": "I find it difficult to remember names.",
+          "japanese": "名前を覚えるのが難しいです。",
+          "itemId": "chunk-11b-010"
+        },
+        {
+          "english": "I find it difficult to speak in front of people.",
+          "japanese": "人前で話すのが難しいです。",
+          "itemId": "chunk-11b-010"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0055",
+        "q-11b-0056",
+        "q-11b-0057",
+        "q-11b-0058",
+        "q-11b-0059",
+        "q-11b-0060"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-011",
+      "day": 51,
+      "template": "The reason is that",
+      "kana": "ザ リーズン イズ ザット",
+      "japanese": "理由は〜です",
+      "examples": [
+        {
+          "english": "The reason is that it costs less.",
+          "japanese": "理由は費用が少ないことです。",
+          "itemId": "chunk-11b-011"
+        },
+        {
+          "english": "The reason is that it saves time.",
+          "japanese": "理由は時間を節約できることです。",
+          "itemId": "chunk-11b-011"
+        },
+        {
+          "english": "The reason is that we have limited space.",
+          "japanese": "理由は場所が限られていることです。",
+          "itemId": "chunk-11b-011"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0061",
+        "q-11b-0062",
+        "q-11b-0063",
+        "q-11b-0064",
+        "q-11b-0065",
+        "q-11b-0066"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-012",
+      "day": 45,
+      "template": "As far as I know",
+      "kana": "アズ ファー アズ アイ ノウ",
+      "japanese": "私の知る限り",
+      "examples": [
+        {
+          "english": "As far as I know, the library is open.",
+          "japanese": "私の知る限り図書館は開いています。",
+          "itemId": "chunk-11b-012"
+        },
+        {
+          "english": "As far as I know, the class starts at ten.",
+          "japanese": "私の知る限り授業は10時に始まります。",
+          "itemId": "chunk-11b-012"
+        },
+        {
+          "english": "As far as I know, there is no fee.",
+          "japanese": "私の知る限り料金はありません。",
+          "itemId": "chunk-11b-012"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0067",
+        "q-11b-0068",
+        "q-11b-0069",
+        "q-11b-0070",
+        "q-11b-0071",
+        "q-11b-0072"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-013",
+      "day": 45,
+      "template": "It seems like",
+      "kana": "イット シームズ ライク",
+      "japanese": "〜のようです",
+      "examples": [
+        {
+          "english": "It seems like a good idea.",
+          "japanese": "良い考えのようです。",
+          "itemId": "chunk-11b-013"
+        },
+        {
+          "english": "It seems like we are early.",
+          "japanese": "私たちは早く着いたようです。",
+          "itemId": "chunk-11b-013"
+        },
+        {
+          "english": "It seems like the bus is late.",
+          "japanese": "バスは遅れているようです。",
+          "itemId": "chunk-11b-013"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0073",
+        "q-11b-0074",
+        "q-11b-0075",
+        "q-11b-0076",
+        "q-11b-0077",
+        "q-11b-0078"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-014",
+      "day": 44,
+      "template": "Let me make sure",
+      "kana": "レット ミー メイク シュア",
+      "japanese": "確認させてください",
+      "examples": [
+        {
+          "english": "Let me make sure I understand.",
+          "japanese": "理解できているか確認させてください。",
+          "itemId": "chunk-11b-014"
+        },
+        {
+          "english": "Let me make sure I have the right address.",
+          "japanese": "住所が合っているか確認させてください。",
+          "itemId": "chunk-11b-014"
+        },
+        {
+          "english": "Let me make sure I wrote it correctly.",
+          "japanese": "正しく書いたか確認させてください。",
+          "itemId": "chunk-11b-014"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0079",
+        "q-11b-0080",
+        "q-11b-0081",
+        "q-11b-0082",
+        "q-11b-0083",
+        "q-11b-0084"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-015",
+      "day": 43,
+      "template": "Is there any way to",
+      "kana": "イズ ゼア エニー ウェイ トゥ",
+      "japanese": "〜する方法はありますか",
+      "examples": [
+        {
+          "english": "Is there any way to change the booking?",
+          "japanese": "予約を変更する方法はありますか？",
+          "itemId": "chunk-11b-015"
+        },
+        {
+          "english": "Is there any way to get there by bus?",
+          "japanese": "バスでそこへ行く方法はありますか？",
+          "itemId": "chunk-11b-015"
+        },
+        {
+          "english": "Is there any way to contact the teacher?",
+          "japanese": "先生に連絡する方法はありますか？",
+          "itemId": "chunk-11b-015"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0085",
+        "q-11b-0086",
+        "q-11b-0087",
+        "q-11b-0088",
+        "q-11b-0089",
+        "q-11b-0090"
+      ]
+    },
+    {
+      "itemId": "chunk-11b-016",
+      "day": 36,
+      "template": "I'm looking forward to",
+      "kana": "アイム ルッキング フォーワード トゥ",
+      "japanese": "〜を楽しみにしています",
+      "examples": [
+        {
+          "english": "I'm looking forward to meeting everyone.",
+          "japanese": "皆さんに会うのを楽しみにしています。",
+          "itemId": "chunk-11b-016"
+        },
+        {
+          "english": "I'm looking forward to the trip.",
+          "japanese": "旅行を楽しみにしています。",
+          "itemId": "chunk-11b-016"
+        },
+        {
+          "english": "I'm looking forward to learning more.",
+          "japanese": "もっと学ぶのを楽しみにしています。",
+          "itemId": "chunk-11b-016"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0091",
+        "q-11b-0092",
+        "q-11b-0093",
+        "q-11b-0094",
+        "q-11b-0095",
+        "q-11b-0096"
+      ]
+    },
+    {
+      "itemId": "idiom-26-014",
+      "day": 54,
+      "template": "For example",
+      "kana": "フォー イグザンプル",
+      "japanese": "例えば",
+      "examples": [
+        {
+          "english": "For example, we could walk to school.",
+          "japanese": "例えば歩いて学校に行けます。",
+          "itemId": "idiom-26-014"
+        },
+        {
+          "english": "For example, buses are cheaper than taxis.",
+          "japanese": "例えばバスはタクシーより安いです。",
+          "itemId": "idiom-26-014"
+        },
+        {
+          "english": "For example, some students work part-time.",
+          "japanese": "例えばアルバイトをする学生もいます。",
+          "itemId": "idiom-26-014"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0097",
+        "q-11b-0098",
+        "q-11b-0099",
+        "q-11b-0100",
+        "q-11b-0101",
+        "q-11b-0102"
+      ]
+    },
+    {
+      "itemId": "idiom-19-005",
+      "day": 53,
+      "template": "Compared with",
+      "kana": "コンペアド ウィズ",
+      "japanese": "〜と比較すると",
+      "examples": [
+        {
+          "english": "Compared with last year, prices are higher.",
+          "japanese": "昨年と比較すると価格は高いです。",
+          "itemId": "idiom-19-005"
+        },
+        {
+          "english": "Compared with the bus, the train is faster.",
+          "japanese": "バスと比較すると電車は速いです。",
+          "itemId": "idiom-19-005"
+        },
+        {
+          "english": "Compared with my old room, this room is bigger.",
+          "japanese": "以前の部屋と比較するとこの部屋は広いです。",
+          "itemId": "idiom-19-005"
+        }
+      ],
+      "questionIds": [
+        "q-11b-0103",
+        "q-11b-0104",
+        "q-11b-0105",
+        "q-11b-0106",
+        "q-11b-0107",
+        "q-11b-0108"
+      ]
+    }
+  ]
+}

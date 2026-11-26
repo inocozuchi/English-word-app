@@ -1,0 +1,764 @@
+{
+  "schemaVersion": 1,
+  "forms": [
+    {
+      "id": "baseline",
+      "day": 0,
+      "questions": [
+        {
+          "id": "diag-10h-1-001",
+          "domain": "vocabulary",
+          "prompt": "借りる（本など）",
+          "acceptedAnswers": [
+            "borrow"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-001",
+          "explanation": "解答例：borrow"
+        },
+        {
+          "id": "diag-10h-1-002",
+          "domain": "vocabulary",
+          "prompt": "到着する",
+          "acceptedAnswers": [
+            "arrive"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-002",
+          "explanation": "解答例：arrive"
+        },
+        {
+          "id": "diag-10h-1-003",
+          "domain": "vocabulary",
+          "prompt": "必要な",
+          "acceptedAnswers": [
+            "necessary"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-003",
+          "explanation": "解答例：necessary"
+        },
+        {
+          "id": "diag-10h-1-004",
+          "domain": "vocabulary",
+          "prompt": "理由",
+          "acceptedAnswers": [
+            "reason"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-004",
+          "explanation": "解答例：reason"
+        },
+        {
+          "id": "diag-10h-1-005",
+          "domain": "vocabulary",
+          "prompt": "改善する",
+          "acceptedAnswers": [
+            "improve"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-005",
+          "explanation": "解答例：improve"
+        },
+        {
+          "id": "diag-10h-1-006",
+          "domain": "vocabulary",
+          "prompt": "選ぶ",
+          "acceptedAnswers": [
+            "choose"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-006",
+          "explanation": "解答例：choose"
+        },
+        {
+          "id": "diag-10h-1-007",
+          "domain": "grammar",
+          "prompt": "彼女は毎日歩きます。",
+          "acceptedAnswers": [
+            "She walks every day."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-007",
+          "explanation": "解答例：She walks every day."
+        },
+        {
+          "id": "diag-10h-1-008",
+          "domain": "grammar",
+          "prompt": "昨日は雨が降りました。",
+          "acceptedAnswers": [
+            "It rained yesterday."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-008",
+          "explanation": "解答例：It rained yesterday."
+        },
+        {
+          "id": "diag-10h-1-009",
+          "domain": "grammar",
+          "prompt": "私は今勉強しています。",
+          "acceptedAnswers": [
+            "I am studying now.",
+            "I'm studying now."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-009",
+          "explanation": "解答例：I am studying now."
+        },
+        {
+          "id": "diag-10h-1-010",
+          "domain": "grammar",
+          "prompt": "彼はここに2年間住んでいます。",
+          "acceptedAnswers": [
+            "He has lived here for two years.",
+            "He's lived here for two years."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-010",
+          "explanation": "解答例：He has lived here for two years."
+        },
+        {
+          "id": "diag-10h-1-011",
+          "domain": "grammar",
+          "prompt": "私は泳ぐことが好きです。",
+          "acceptedAnswers": [
+            "I enjoy swimming.",
+            "I like swimming."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-011",
+          "explanation": "解答例：I enjoy swimming."
+        },
+        {
+          "id": "diag-10h-1-012",
+          "domain": "grammar",
+          "prompt": "駅がどこか知っていますか？",
+          "acceptedAnswers": [
+            "Do you know where the station is?"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-012",
+          "explanation": "解答例：Do you know where the station is?"
+        },
+        {
+          "id": "diag-10h-1-013",
+          "domain": "chunks",
+          "prompt": "How often do you exercise? は何を尋ねていますか？",
+          "acceptedAnswers": [
+            "頻度",
+            "運動の頻度"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-013",
+          "explanation": "解答例：頻度"
+        },
+        {
+          "id": "diag-10h-1-014",
+          "domain": "chunks",
+          "prompt": "What is your town like? は何を尋ねていますか？",
+          "acceptedAnswers": [
+            "町の特徴",
+            "町の様子"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-014",
+          "explanation": "解答例：町の特徴"
+        },
+        {
+          "id": "diag-10h-1-015",
+          "domain": "chunks",
+          "prompt": "How did it go? の意味は？",
+          "acceptedAnswers": [
+            "どうだった？",
+            "どうだった"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-015",
+          "explanation": "解答例：どうだった？"
+        },
+        {
+          "id": "diag-10h-1-016",
+          "domain": "chunks",
+          "prompt": "もう一度言っていただけますか？",
+          "acceptedAnswers": [
+            "Could you say that again?",
+            "Could you repeat that?"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-016",
+          "explanation": "解答例：Could you say that again?"
+        },
+        {
+          "id": "diag-10h-1-017",
+          "domain": "listening",
+          "prompt": "出発時刻を数字で入力",
+          "acceptedAnswers": [
+            "8:13",
+            "08:13"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-017",
+          "explanation": "解答例：8:13",
+          "audioText": "The bus leaves at thirteen minutes past eight."
+        },
+        {
+          "id": "diag-10h-1-018",
+          "domain": "listening",
+          "prompt": "金額を数字で入力",
+          "acceptedAnswers": [
+            "15.50",
+            "$15.50"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-018",
+          "explanation": "解答例：15.50",
+          "audioText": "That comes to fifteen dollars fifty."
+        },
+        {
+          "id": "diag-10h-1-019",
+          "domain": "listening",
+          "prompt": "提出曜日は？",
+          "acceptedAnswers": [
+            "Tuesday",
+            "火曜日"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-019",
+          "explanation": "解答例：Tuesday",
+          "audioText": "Please hand in your work on Tuesday."
+        },
+        {
+          "id": "diag-10h-1-020",
+          "domain": "listening",
+          "prompt": "部屋番号は？",
+          "acceptedAnswers": [
+            "B12",
+            "B 12"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-020",
+          "explanation": "解答例：B12",
+          "audioText": "The meeting is in room B twelve."
+        },
+        {
+          "id": "diag-10h-1-021",
+          "domain": "listening",
+          "prompt": "何を頼まれていますか？",
+          "acceptedAnswers": [
+            "窓を開ける",
+            "窓を開けてほしい"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-021",
+          "explanation": "解答例：窓を開ける",
+          "audioText": "Could you open the window?"
+        },
+        {
+          "id": "diag-10h-1-022",
+          "domain": "listening",
+          "prompt": "今日の移動手段は？",
+          "acceptedAnswers": [
+            "bus",
+            "バス"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-022",
+          "explanation": "解答例：bus",
+          "audioText": "I usually walk to school, but today I took the bus."
+        },
+        {
+          "id": "diag-10h-1-023",
+          "domain": "paraphrase",
+          "prompt": "傘を umbrella を使わず説明してください。",
+          "acceptedAnswers": [
+            "It's something you use when it rains."
+          ],
+          "scoring": "self",
+          "pairId": "pair-023",
+          "explanation": "解答例：It's something you use when it rains."
+        },
+        {
+          "id": "diag-10h-1-024",
+          "domain": "paraphrase",
+          "prompt": "図書館を library を使わず説明してください。",
+          "acceptedAnswers": [
+            "It's a place where you can borrow books."
+          ],
+          "scoring": "self",
+          "pairId": "pair-024",
+          "explanation": "解答例：It's a place where you can borrow books."
+        },
+        {
+          "id": "diag-10h-1-025",
+          "domain": "paraphrase",
+          "prompt": "代替手段はありますか？を簡単な英語で。",
+          "acceptedAnswers": [
+            "Is there another way?"
+          ],
+          "scoring": "self",
+          "pairId": "pair-025",
+          "explanation": "解答例：Is there another way?"
+        },
+        {
+          "id": "diag-10h-1-026",
+          "domain": "reading",
+          "prompt": "Library: Open 9 am–5 pm. Closed on Sunday. 日曜は開いていますか？",
+          "acceptedAnswers": [
+            "No",
+            "いいえ",
+            "休館"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-026",
+          "explanation": "解答例：No"
+        },
+        {
+          "id": "diag-10h-1-027",
+          "domain": "reading",
+          "prompt": "Class starts at 10 instead of 9. 新しい開始時刻は？",
+          "acceptedAnswers": [
+            "10",
+            "10 am",
+            "10:00"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-027",
+          "explanation": "解答例：10"
+        },
+        {
+          "id": "diag-10h-1-028",
+          "domain": "reading",
+          "prompt": "Bring your workbook, but leave your textbook at home. 持参するものは？",
+          "acceptedAnswers": [
+            "workbook",
+            "ワークブック"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-028",
+          "explanation": "解答例：workbook"
+        },
+        {
+          "id": "diag-10h-1-029",
+          "domain": "academic",
+          "prompt": "「なぜなら」を使って I walk to school. It is cheap. をつなぐ。",
+          "acceptedAnswers": [
+            "I walk to school because it is cheap.",
+            "I walk to school because it's cheap."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-029",
+          "explanation": "解答例：I walk to school because it is cheap."
+        },
+        {
+          "id": "diag-10h-1-030",
+          "domain": "academic",
+          "prompt": "Some students walk. Others take the bus. 共通の話題は？",
+          "acceptedAnswers": [
+            "transport",
+            "通学方法",
+            "ways of travelling to school"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-030",
+          "explanation": "解答例：transport"
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "day": 60,
+      "questions": [
+        {
+          "id": "diag-10h-2-001",
+          "domain": "vocabulary",
+          "prompt": "返す（借りた物）",
+          "acceptedAnswers": [
+            "return"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-001",
+          "explanation": "解答例：return"
+        },
+        {
+          "id": "diag-10h-2-002",
+          "domain": "vocabulary",
+          "prompt": "出発する",
+          "acceptedAnswers": [
+            "leave",
+            "depart"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-002",
+          "explanation": "解答例：leave"
+        },
+        {
+          "id": "diag-10h-2-003",
+          "domain": "vocabulary",
+          "prompt": "利用できる",
+          "acceptedAnswers": [
+            "available"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-003",
+          "explanation": "解答例：available"
+        },
+        {
+          "id": "diag-10h-2-004",
+          "domain": "vocabulary",
+          "prompt": "結果",
+          "acceptedAnswers": [
+            "result"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-004",
+          "explanation": "解答例：result"
+        },
+        {
+          "id": "diag-10h-2-005",
+          "domain": "vocabulary",
+          "prompt": "減らす",
+          "acceptedAnswers": [
+            "reduce"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-005",
+          "explanation": "解答例：reduce"
+        },
+        {
+          "id": "diag-10h-2-006",
+          "domain": "vocabulary",
+          "prompt": "決める",
+          "acceptedAnswers": [
+            "decide"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-006",
+          "explanation": "解答例：decide"
+        },
+        {
+          "id": "diag-10h-2-007",
+          "domain": "grammar",
+          "prompt": "彼は毎日料理します。",
+          "acceptedAnswers": [
+            "He cooks every day."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-007",
+          "explanation": "解答例：He cooks every day."
+        },
+        {
+          "id": "diag-10h-2-008",
+          "domain": "grammar",
+          "prompt": "昨日は雪が降りました。",
+          "acceptedAnswers": [
+            "It snowed yesterday."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-008",
+          "explanation": "解答例：It snowed yesterday."
+        },
+        {
+          "id": "diag-10h-2-009",
+          "domain": "grammar",
+          "prompt": "私は今料理しています。",
+          "acceptedAnswers": [
+            "I am cooking now.",
+            "I'm cooking now."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-009",
+          "explanation": "解答例：I am cooking now."
+        },
+        {
+          "id": "diag-10h-2-010",
+          "domain": "grammar",
+          "prompt": "彼女はここに3年間住んでいます。",
+          "acceptedAnswers": [
+            "She has lived here for three years.",
+            "She's lived here for three years."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-010",
+          "explanation": "解答例：She has lived here for three years."
+        },
+        {
+          "id": "diag-10h-2-011",
+          "domain": "grammar",
+          "prompt": "私は料理することが好きです。",
+          "acceptedAnswers": [
+            "I enjoy cooking.",
+            "I like cooking."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-011",
+          "explanation": "解答例：I enjoy cooking."
+        },
+        {
+          "id": "diag-10h-2-012",
+          "domain": "grammar",
+          "prompt": "図書館がどこか知っていますか？",
+          "acceptedAnswers": [
+            "Do you know where the library is?"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-012",
+          "explanation": "解答例：Do you know where the library is?"
+        },
+        {
+          "id": "diag-10h-2-013",
+          "domain": "chunks",
+          "prompt": "How often do you cook? は何を尋ねていますか？",
+          "acceptedAnswers": [
+            "頻度",
+            "料理の頻度"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-013",
+          "explanation": "解答例：頻度"
+        },
+        {
+          "id": "diag-10h-2-014",
+          "domain": "chunks",
+          "prompt": "What is your school like? は何を尋ねていますか？",
+          "acceptedAnswers": [
+            "学校の特徴",
+            "学校の様子"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-014",
+          "explanation": "解答例：学校の特徴"
+        },
+        {
+          "id": "diag-10h-2-015",
+          "domain": "chunks",
+          "prompt": "How was it? の意味は？",
+          "acceptedAnswers": [
+            "どうだった？",
+            "どうだった"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-015",
+          "explanation": "解答例：どうだった？"
+        },
+        {
+          "id": "diag-10h-2-016",
+          "domain": "chunks",
+          "prompt": "もう少しゆっくり話していただけますか？",
+          "acceptedAnswers": [
+            "Could you speak more slowly?",
+            "Could you speak a little more slowly?"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-016",
+          "explanation": "解答例：Could you speak more slowly?"
+        },
+        {
+          "id": "diag-10h-2-017",
+          "domain": "listening",
+          "prompt": "出発時刻を数字で入力",
+          "acceptedAnswers": [
+            "9:14",
+            "09:14"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-017",
+          "explanation": "解答例：9:14",
+          "audioText": "The bus leaves at fourteen minutes past nine."
+        },
+        {
+          "id": "diag-10h-2-018",
+          "domain": "listening",
+          "prompt": "金額を数字で入力",
+          "acceptedAnswers": [
+            "16.50",
+            "$16.50"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-018",
+          "explanation": "解答例：16.50",
+          "audioText": "That comes to sixteen dollars fifty."
+        },
+        {
+          "id": "diag-10h-2-019",
+          "domain": "listening",
+          "prompt": "提出曜日は？",
+          "acceptedAnswers": [
+            "Thursday",
+            "木曜日"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-019",
+          "explanation": "解答例：Thursday",
+          "audioText": "Please hand in your work on Thursday."
+        },
+        {
+          "id": "diag-10h-2-020",
+          "domain": "listening",
+          "prompt": "部屋番号は？",
+          "acceptedAnswers": [
+            "C14",
+            "C 14"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-020",
+          "explanation": "解答例：C14",
+          "audioText": "The meeting is in room C fourteen."
+        },
+        {
+          "id": "diag-10h-2-021",
+          "domain": "listening",
+          "prompt": "何を頼まれていますか？",
+          "acceptedAnswers": [
+            "ドアを閉める",
+            "ドアを閉めてほしい"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-021",
+          "explanation": "解答例：ドアを閉める",
+          "audioText": "Could you close the door?"
+        },
+        {
+          "id": "diag-10h-2-022",
+          "domain": "listening",
+          "prompt": "今日の移動手段は？",
+          "acceptedAnswers": [
+            "walk",
+            "徒歩",
+            "歩いた"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-022",
+          "explanation": "解答例：walk",
+          "audioText": "I usually take the bus, but today I walked."
+        },
+        {
+          "id": "diag-10h-2-023",
+          "domain": "paraphrase",
+          "prompt": "冷蔵庫を fridge を使わず説明してください。",
+          "acceptedAnswers": [
+            "It's something that keeps food cold."
+          ],
+          "scoring": "self",
+          "pairId": "pair-023",
+          "explanation": "解答例：It's something that keeps food cold."
+        },
+        {
+          "id": "diag-10h-2-024",
+          "domain": "paraphrase",
+          "prompt": "病院を hospital を使わず説明してください。",
+          "acceptedAnswers": [
+            "It's a place where sick people get medical care."
+          ],
+          "scoring": "self",
+          "pairId": "pair-024",
+          "explanation": "解答例：It's a place where sick people get medical care."
+        },
+        {
+          "id": "diag-10h-2-025",
+          "domain": "paraphrase",
+          "prompt": "再検討しましょう。を簡単な英語で。",
+          "acceptedAnswers": [
+            "Let's think about it again."
+          ],
+          "scoring": "self",
+          "pairId": "pair-025",
+          "explanation": "解答例：Let's think about it again."
+        },
+        {
+          "id": "diag-10h-2-026",
+          "domain": "reading",
+          "prompt": "Cafe: Open 8 am–4 pm. Closed on Monday. 月曜は開いていますか？",
+          "acceptedAnswers": [
+            "No",
+            "いいえ",
+            "休業"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-026",
+          "explanation": "解答例：No"
+        },
+        {
+          "id": "diag-10h-2-027",
+          "domain": "reading",
+          "prompt": "Class starts at 11 instead of 10. 新しい開始時刻は？",
+          "acceptedAnswers": [
+            "11",
+            "11 am",
+            "11:00"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-027",
+          "explanation": "解答例：11"
+        },
+        {
+          "id": "diag-10h-2-028",
+          "domain": "reading",
+          "prompt": "Bring your notebook, but leave your dictionary at home. 持参するものは？",
+          "acceptedAnswers": [
+            "notebook",
+            "ノート"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-028",
+          "explanation": "解答例：notebook"
+        },
+        {
+          "id": "diag-10h-2-029",
+          "domain": "academic",
+          "prompt": "「なぜなら」を使って I take the bus. It is convenient. をつなぐ。",
+          "acceptedAnswers": [
+            "I take the bus because it is convenient.",
+            "I take the bus because it's convenient."
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-029",
+          "explanation": "解答例：I take the bus because it is convenient."
+        },
+        {
+          "id": "diag-10h-2-030",
+          "domain": "academic",
+          "prompt": "Some students cook. Others buy meals. 共通の話題は？",
+          "acceptedAnswers": [
+            "food",
+            "食事",
+            "ways of getting meals"
+          ],
+          "scoring": "exact_or_self",
+          "pairId": "pair-030",
+          "explanation": "解答例：food"
+        }
+      ]
+    }
+  ],
+  "domainCounts": {
+    "vocabulary": 6,
+    "grammar": 6,
+    "chunks": 4,
+    "listening": 6,
+    "paraphrase": 3,
+    "reading": 3,
+    "academic": 2
+  },
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "skipped": 0,
+    "unavailableAudio": "exclude from denominator and report coverage",
+    "selfRated": "report separately",
+    "timing": "median first-attempt response time by domain; exclude paused time and audio playback",
+    "hints": "disabled in scored attempt",
+    "comparison": "compare matched domains only; forms are not psychometrically equated; no TOEIC conversion",
+    "review": "after submission only; do not add diagnostic items to regular SRS; map weak domains to existing course tags",
+    "thresholds": {
+      "priorityReviewBelow": 0.6,
+      "normalReviewBelow": 0.8
+    },
+    "masteryStages": [
+      "unlearned",
+      "recognition",
+      "recall",
+      "use",
+      "retention"
+    ]
+  }
+}

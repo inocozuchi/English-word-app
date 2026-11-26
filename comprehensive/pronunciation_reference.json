@@ -1,0 +1,1671 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "pron-10f-001",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "right / light",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "right",
+          "japanese": "右・正しい",
+          "ipa": "/raɪt/"
+        },
+        {
+          "english": "light",
+          "japanese": "光",
+          "ipa": "/laɪt/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0001",
+        "q-10f-0002"
+      ]
+    },
+    {
+      "id": "pron-10f-002",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "rice / lice",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "rice",
+          "japanese": "米",
+          "ipa": "/raɪs/"
+        },
+        {
+          "english": "lice",
+          "japanese": "シラミ",
+          "ipa": "/laɪs/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0003",
+        "q-10f-0004"
+      ]
+    },
+    {
+      "id": "pron-10f-003",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "road / load",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "road",
+          "japanese": "道路",
+          "ipa": "/rəʊd/"
+        },
+        {
+          "english": "load",
+          "japanese": "荷物",
+          "ipa": "/ləʊd/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0005",
+        "q-10f-0006"
+      ]
+    },
+    {
+      "id": "pron-10f-004",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "ship / sheep",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "ship",
+          "japanese": "船",
+          "ipa": "/ʃɪp/"
+        },
+        {
+          "english": "sheep",
+          "japanese": "羊",
+          "ipa": "/ʃiːp/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0007",
+        "q-10f-0008"
+      ]
+    },
+    {
+      "id": "pron-10f-005",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "sit / seat",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "sit",
+          "japanese": "座る",
+          "ipa": "/sɪt/"
+        },
+        {
+          "english": "seat",
+          "japanese": "座席",
+          "ipa": "/siːt/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0009",
+        "q-10f-0010"
+      ]
+    },
+    {
+      "id": "pron-10f-006",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "live / leave",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "live",
+          "japanese": "住む",
+          "ipa": "/lɪv/"
+        },
+        {
+          "english": "leave",
+          "japanese": "去る",
+          "ipa": "/liːv/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0011",
+        "q-10f-0012"
+      ]
+    },
+    {
+      "id": "pron-10f-007",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "full / fool",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "full",
+          "japanese": "満杯の",
+          "ipa": "/fʊl/"
+        },
+        {
+          "english": "fool",
+          "japanese": "愚かな人",
+          "ipa": "/fuːl/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0013",
+        "q-10f-0014"
+      ]
+    },
+    {
+      "id": "pron-10f-008",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "pull / pool",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "pull",
+          "japanese": "引く",
+          "ipa": "/pʊl/"
+        },
+        {
+          "english": "pool",
+          "japanese": "プール",
+          "ipa": "/puːl/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0015",
+        "q-10f-0016"
+      ]
+    },
+    {
+      "id": "pron-10f-009",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "fan / van",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "fan",
+          "japanese": "扇風機",
+          "ipa": "/fæn/"
+        },
+        {
+          "english": "van",
+          "japanese": "バン",
+          "ipa": "/væn/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0017",
+        "q-10f-0018"
+      ]
+    },
+    {
+      "id": "pron-10f-010",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "fine / vine",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "fine",
+          "japanese": "元気な",
+          "ipa": "/faɪn/"
+        },
+        {
+          "english": "vine",
+          "japanese": "つる植物",
+          "ipa": "/vaɪn/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0019",
+        "q-10f-0020"
+      ]
+    },
+    {
+      "id": "pron-10f-011",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "thin / sin",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "thin",
+          "japanese": "薄い",
+          "ipa": "/θɪn/"
+        },
+        {
+          "english": "sin",
+          "japanese": "罪",
+          "ipa": "/sɪn/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0021",
+        "q-10f-0022"
+      ]
+    },
+    {
+      "id": "pron-10f-012",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "think / sink",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "think",
+          "japanese": "考える",
+          "ipa": "/θɪŋk/"
+        },
+        {
+          "english": "sink",
+          "japanese": "流し台",
+          "ipa": "/sɪŋk/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0023",
+        "q-10f-0024"
+      ]
+    },
+    {
+      "id": "pron-10f-013",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "three / tree",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "three",
+          "japanese": "3",
+          "ipa": "/θriː/"
+        },
+        {
+          "english": "tree",
+          "japanese": "木",
+          "ipa": "/triː/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0025",
+        "q-10f-0026"
+      ]
+    },
+    {
+      "id": "pron-10f-014",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "then / den",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "then",
+          "japanese": "その時",
+          "ipa": "/ðen/"
+        },
+        {
+          "english": "den",
+          "japanese": "巣穴",
+          "ipa": "/den/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0027",
+        "q-10f-0028"
+      ]
+    },
+    {
+      "id": "pron-10f-015",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "vest / best",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "vest",
+          "japanese": "ベスト",
+          "ipa": "/vest/"
+        },
+        {
+          "english": "best",
+          "japanese": "最良の",
+          "ipa": "/best/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0029",
+        "q-10f-0030"
+      ]
+    },
+    {
+      "id": "pron-10f-016",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "cap / cup",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "cap",
+          "japanese": "帽子",
+          "ipa": "/kæp/"
+        },
+        {
+          "english": "cup",
+          "japanese": "カップ",
+          "ipa": "/kʌp/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0031",
+        "q-10f-0032"
+      ]
+    },
+    {
+      "id": "pron-10f-017",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "hat / hut",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "hat",
+          "japanese": "帽子",
+          "ipa": "/hæt/"
+        },
+        {
+          "english": "hut",
+          "japanese": "小屋",
+          "ipa": "/hʌt/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0033",
+        "q-10f-0034"
+      ]
+    },
+    {
+      "id": "pron-10f-018",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "bed / bad",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "bed",
+          "japanese": "ベッド",
+          "ipa": "/bed/"
+        },
+        {
+          "english": "bad",
+          "japanese": "悪い",
+          "ipa": "/bæd/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0035",
+        "q-10f-0036"
+      ]
+    },
+    {
+      "id": "pron-10f-019",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "pen / pan",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "pen",
+          "japanese": "ペン",
+          "ipa": "/pen/"
+        },
+        {
+          "english": "pan",
+          "japanese": "フライパン",
+          "ipa": "/pæn/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0037",
+        "q-10f-0038"
+      ]
+    },
+    {
+      "id": "pron-10f-020",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "coat / goat",
+      "note": "IPAは英国系の広い表記。NZ英語や話者によって母音の実現は異なる。音声で対比し、文字は解答後に確認する。",
+      "nodes": [
+        {
+          "english": "coat",
+          "japanese": "コート",
+          "ipa": "/kəʊt/"
+        },
+        {
+          "english": "goat",
+          "japanese": "ヤギ",
+          "ipa": "/ɡəʊt/"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0039",
+        "q-10f-0040"
+      ]
+    },
+    {
+      "id": "pron-10f-021",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "pick it up",
+      "note": "子音と次の母音がつながることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "pick it up",
+          "japanese": "拾って。"
+        },
+        {
+          "english": "pick‿it‿up",
+          "japanese": "ピキタップ"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0041",
+        "q-10f-0042"
+      ]
+    },
+    {
+      "id": "pron-10f-022",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "turn it off",
+      "note": "語境界をまたいで音がつながる。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "turn it off",
+          "japanese": "それを消して。"
+        },
+        {
+          "english": "turn‿it‿off",
+          "japanese": "ターニトフ"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0043",
+        "q-10f-0044"
+      ]
+    },
+    {
+      "id": "pron-10f-023",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "an apple",
+      "note": "nと次の母音がつながる。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "an apple",
+          "japanese": "りんご1個"
+        },
+        {
+          "english": "an‿apple",
+          "japanese": "アナプル"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0045",
+        "q-10f-0046"
+      ]
+    },
+    {
+      "id": "pron-10f-024",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "look at it",
+      "note": "子音と母音の連結。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "look at it",
+          "japanese": "それを見て。"
+        },
+        {
+          "english": "look‿at‿it",
+          "japanese": "ルカティット"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0047",
+        "q-10f-0048"
+      ]
+    },
+    {
+      "id": "pron-10f-025",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "Can you help me?",
+      "note": "canは弱くなることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "Can you help me?",
+          "japanese": "手伝ってくれますか？"
+        },
+        {
+          "english": "can you HELP me",
+          "japanese": "クンユ ヘルプミー"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0049",
+        "q-10f-0050"
+      ]
+    },
+    {
+      "id": "pron-10f-026",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "I can do it.",
+      "note": "canの弱形 /kən/ が現れることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "I can do it.",
+          "japanese": "できます。"
+        },
+        {
+          "english": "I can DO it",
+          "japanese": "アイ クン ドゥーイット"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0051",
+        "q-10f-0052"
+      ]
+    },
+    {
+      "id": "pron-10f-027",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "I'd like a cup of tea.",
+      "note": "aやofは弱く発音されることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "I'd like a cup of tea.",
+          "japanese": "紅茶を一杯お願いします。"
+        },
+        {
+          "english": "I'd LIKE a CUP of TEA",
+          "japanese": "アイド ライクァ カップァヴ ティー"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0053",
+        "q-10f-0054"
+      ]
+    },
+    {
+      "id": "pron-10f-028",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "What do you mean?",
+      "note": "do youは速い会話で短くなることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "What do you mean?",
+          "japanese": "どういう意味ですか？"
+        },
+        {
+          "english": "WHAT do you MEAN",
+          "japanese": "ワット ドゥユ ミーン"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0055",
+        "q-10f-0056"
+      ]
+    },
+    {
+      "id": "pron-10f-029",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "Could you repeat that?",
+      "note": "dとyの音が融合することがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "Could you repeat that?",
+          "japanese": "もう一度言っていただけますか？"
+        },
+        {
+          "english": "could you rePEAT THAT",
+          "japanese": "クッジュ リピート ザット"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0057",
+        "q-10f-0058"
+      ]
+    },
+    {
+      "id": "pron-10f-030",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "Did you get it?",
+      "note": "dとyの音が融合することがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "Did you get it?",
+          "japanese": "分かりましたか？"
+        },
+        {
+          "english": "did you GET it",
+          "japanese": "ディジュ ゲティット"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0059",
+        "q-10f-0060"
+      ]
+    },
+    {
+      "id": "pron-10f-031",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "next week",
+      "note": "子音の連続ではtが弱くなる場合がある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "next week",
+          "japanese": "来週"
+        },
+        {
+          "english": "next week",
+          "japanese": "ネクスト ウィーク"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0061",
+        "q-10f-0062"
+      ]
+    },
+    {
+      "id": "pron-10f-032",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "last night",
+      "note": "tが聞こえにくい場合がある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "last night",
+          "japanese": "昨夜"
+        },
+        {
+          "english": "last night",
+          "japanese": "ラスト ナイト"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0063",
+        "q-10f-0064"
+      ]
+    },
+    {
+      "id": "pron-10f-033",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "I want to go.",
+      "note": "toは弱形 /tə/ になることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "I want to go.",
+          "japanese": "行きたいです。"
+        },
+        {
+          "english": "I WANT to GO",
+          "japanese": "アイ ウォントゥ ゴー"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0065",
+        "q-10f-0066"
+      ]
+    },
+    {
+      "id": "pron-10f-034",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "What are you doing?",
+      "note": "areやyouが弱くなることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "What are you doing?",
+          "japanese": "何をしていますか？"
+        },
+        {
+          "english": "WHAT are you DOing",
+          "japanese": "ワット アーユ ドゥーイング"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0067",
+        "q-10f-0068"
+      ]
+    },
+    {
+      "id": "pron-10f-035",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "I'm going to study.",
+      "note": "going toはくだけた発話で短縮されることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "I'm going to study.",
+          "japanese": "勉強するつもりです。"
+        },
+        {
+          "english": "I'm GOing to STUdy",
+          "japanese": "アイム ゴーイングトゥ スタディ"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0069",
+        "q-10f-0070"
+      ]
+    },
+    {
+      "id": "pron-10f-036",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "I don't know.",
+      "note": "子音が弱くなることがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "I don't know.",
+          "japanese": "分かりません。"
+        },
+        {
+          "english": "I DON'T KNOW",
+          "japanese": "アイ ドント ノウ"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0071",
+        "q-10f-0072"
+      ]
+    },
+    {
+      "id": "pron-10f-037",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "Where is the station?",
+      "note": "theは弱く、内容語が目立つことが多い。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "Where is the station?",
+          "japanese": "駅はどこですか？"
+        },
+        {
+          "english": "WHERE is the STAtion",
+          "japanese": "ウェア イズ ザ ステイション"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0073",
+        "q-10f-0074"
+      ]
+    },
+    {
+      "id": "pron-10f-038",
+      "day": 44,
+      "type": "connectedSpeech",
+      "title": "I have to leave now.",
+      "note": "have toのvは無声化することがある。 カナは近似で、必ずこの音になるわけではない。",
+      "nodes": [
+        {
+          "english": "I have to leave now.",
+          "japanese": "もう出なければなりません。"
+        },
+        {
+          "english": "I HAVE to LEAVE NOW",
+          "japanese": "アイ ハフトゥ リーヴ ナウ"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0075",
+        "q-10f-0076"
+      ]
+    },
+    {
+      "id": "pron-10f-039",
+      "day": 40,
+      "type": "numberListening",
+      "title": "7時15分",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The bus leaves at seven fifteen.",
+          "japanese": "7時15分"
+        },
+        {
+          "english": "7:15",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0077",
+        "q-10f-0078"
+      ]
+    },
+    {
+      "id": "pron-10f-040",
+      "day": 40,
+      "type": "numberListening",
+      "title": "9時30分",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The class starts at nine thirty.",
+          "japanese": "9時30分"
+        },
+        {
+          "english": "9:30",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0079",
+        "q-10f-0080"
+      ]
+    },
+    {
+      "id": "pron-10f-041",
+      "day": 40,
+      "type": "numberListening",
+      "title": "5時30分",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The shop closes at half past five.",
+          "japanese": "5時30分"
+        },
+        {
+          "english": "5:30",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0081",
+        "q-10f-0082"
+      ]
+    },
+    {
+      "id": "pron-10f-042",
+      "day": 40,
+      "type": "numberListening",
+      "title": "3時45分",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "Meet me at a quarter to four.",
+          "japanese": "3時45分"
+        },
+        {
+          "english": "3:45",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0083",
+        "q-10f-0084"
+      ]
+    },
+    {
+      "id": "pron-10f-043",
+      "day": 40,
+      "type": "numberListening",
+      "title": "12ドル50セント",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "It costs twelve dollars fifty.",
+          "japanese": "12ドル50セント"
+        },
+        {
+          "english": "12.50",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0085",
+        "q-10f-0086"
+      ]
+    },
+    {
+      "id": "pron-10f-044",
+      "day": 40,
+      "type": "numberListening",
+      "title": "4ドル20セント",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The fare is four dollars twenty.",
+          "japanese": "4ドル20セント"
+        },
+        {
+          "english": "4.20",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0087",
+        "q-10f-0088"
+      ]
+    },
+    {
+      "id": "pron-10f-045",
+      "day": 40,
+      "type": "numberListening",
+      "title": "38ドル",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "Your total is thirty-eight dollars.",
+          "japanese": "38ドル"
+        },
+        {
+          "english": "38",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0089",
+        "q-10f-0090"
+      ]
+    },
+    {
+      "id": "pron-10f-046",
+      "day": 40,
+      "type": "numberListening",
+      "title": "15パーセント",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The discount is fifteen percent.",
+          "japanese": "15パーセント"
+        },
+        {
+          "english": "15%",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0091",
+        "q-10f-0092"
+      ]
+    },
+    {
+      "id": "pron-10f-047",
+      "day": 40,
+      "type": "numberListening",
+      "title": "206号室",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The room number is two oh six.",
+          "japanese": "206号室"
+        },
+        {
+          "english": "206",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0093",
+        "q-10f-0094"
+      ]
+    },
+    {
+      "id": "pron-10f-048",
+      "day": 40,
+      "type": "numberListening",
+      "title": "73番",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The bus number is seventy-three.",
+          "japanese": "73番"
+        },
+        {
+          "english": "73",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0095",
+        "q-10f-0096"
+      ]
+    },
+    {
+      "id": "pron-10f-049",
+      "day": 40,
+      "type": "numberListening",
+      "title": "5月21日",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The meeting is on the twenty-first of May.",
+          "japanese": "5月21日"
+        },
+        {
+          "english": "21 May",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0097",
+        "q-10f-0098"
+      ]
+    },
+    {
+      "id": "pron-10f-050",
+      "day": 40,
+      "type": "numberListening",
+      "title": "6月3日",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The deadline is the third of June.",
+          "japanese": "6月3日"
+        },
+        {
+          "english": "3 June",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0099",
+        "q-10f-0100"
+      ]
+    },
+    {
+      "id": "pron-10f-051",
+      "day": 40,
+      "type": "numberListening",
+      "title": "2.5キロ",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The distance is two point five kilometres.",
+          "japanese": "2.5キロ"
+        },
+        {
+          "english": "2.5",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0101",
+        "q-10f-0102"
+      ]
+    },
+    {
+      "id": "pron-10f-052",
+      "day": 40,
+      "type": "numberListening",
+      "title": "0842",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The code is zero eight four two.",
+          "japanese": "0842"
+        },
+        {
+          "english": "0842",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0103",
+        "q-10f-0104"
+      ]
+    },
+    {
+      "id": "pron-10f-053",
+      "day": 40,
+      "type": "numberListening",
+      "title": "LEE",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "My name is spelled L E E.",
+          "japanese": "LEE"
+        },
+        {
+          "english": "LEE",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0105",
+        "q-10f-0106"
+      ]
+    },
+    {
+      "id": "pron-10f-054",
+      "day": 40,
+      "type": "numberListening",
+      "title": "18 King Street",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The address is eighteen King Street.",
+          "japanese": "18 King Street"
+        },
+        {
+          "english": "18 King Street",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0107",
+        "q-10f-0108"
+      ]
+    },
+    {
+      "id": "pron-10f-055",
+      "day": 40,
+      "type": "numberListening",
+      "title": "13人",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "There are thirteen students.",
+          "japanese": "13人"
+        },
+        {
+          "english": "13",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0109",
+        "q-10f-0110"
+      ]
+    },
+    {
+      "id": "pron-10f-056",
+      "day": 40,
+      "type": "numberListening",
+      "title": "30人",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "There are thirty students.",
+          "japanese": "30人"
+        },
+        {
+          "english": "30",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0111",
+        "q-10f-0112"
+      ]
+    },
+    {
+      "id": "pron-10f-057",
+      "day": 40,
+      "type": "numberListening",
+      "title": "16度",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The temperature is sixteen degrees.",
+          "japanese": "16度"
+        },
+        {
+          "english": "16",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0113",
+        "q-10f-0114"
+      ]
+    },
+    {
+      "id": "pron-10f-058",
+      "day": 40,
+      "type": "numberListening",
+      "title": "華氏60度",
+      "note": "数字・日時・金額を文脈とともに聞き取る。",
+      "nodes": [
+        {
+          "english": "The temperature is sixty degrees Fahrenheit.",
+          "japanese": "華氏60度"
+        },
+        {
+          "english": "60",
+          "japanese": "聞き取る情報"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0115",
+        "q-10f-0116"
+      ]
+    },
+    {
+      "id": "pron-10f-059",
+      "day": 51,
+      "type": "listeningPassage",
+      "title": "ホームステイ",
+      "note": "最初は原稿を隠し、全体の意味を聞く。次に具体情報を聞き、最後に原稿を確認する。",
+      "nodes": [
+        {
+          "english": "ホームステイ",
+          "japanese": "場面"
+        },
+        {
+          "english": "On weekdays, breakfast is usually ready at seven. You can help yourself to cereal, toast or fruit. If you leave early, please tell us the night before. Dinner is normally at six thirty, but on Fridays we sometimes eat later. You do not need to wash the dishes every day. We take turns. If you are not sure about anything, just ask.",
+          "japanese": "聞き取り原稿"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0117",
+        "q-10f-0118"
+      ]
+    },
+    {
+      "id": "pron-10f-060",
+      "day": 51,
+      "type": "listeningPassage",
+      "title": "授業",
+      "note": "最初は原稿を隠し、全体の意味を聞く。次に具体情報を聞き、最後に原稿を確認する。",
+      "nodes": [
+        {
+          "english": "授業",
+          "japanese": "場面"
+        },
+        {
+          "english": "Today we are going to compare two ways of travelling to university. First, work in pairs and list the advantages of each option. Then choose one option and explain your reasons to the class. You have ten minutes for the discussion. Remember to give at least one example. At the end, write a short paragraph about your choice and hand it in before you leave.",
+          "japanese": "聞き取り原稿"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0119",
+        "q-10f-0120"
+      ]
+    },
+    {
+      "id": "pron-10f-061",
+      "day": 51,
+      "type": "listeningPassage",
+      "title": "交通",
+      "note": "最初は原稿を隠し、全体の意味を聞く。次に具体情報を聞き、最後に原稿を確認する。",
+      "nodes": [
+        {
+          "english": "交通",
+          "japanese": "場面"
+        },
+        {
+          "english": "The library is closed this morning because of maintenance. It will open at one in the afternoon. If you need to return a book, you can use the return box near the main entrance. The computer room is open as usual. Students who need a quiet place to study can use the room on the second floor of the student centre.",
+          "japanese": "聞き取り原稿"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0121",
+        "q-10f-0122"
+      ]
+    },
+    {
+      "id": "pron-10f-062",
+      "day": 51,
+      "type": "listeningPassage",
+      "title": "ミニ講義",
+      "note": "最初は原稿を隠し、全体の意味を聞く。次に具体情報を聞き、最後に原稿を確認する。",
+      "nodes": [
+        {
+          "english": "ミニ講義",
+          "japanese": "場面"
+        },
+        {
+          "english": "Public transport can help reduce traffic in cities. A bus can carry many people at the same time, so fewer cars may be needed on the road. However, people are more likely to use buses when services are frequent and reliable. For example, a bus that comes every ten minutes is easier to use than one that comes once an hour. Improving public transport can therefore make daily travel more convenient.",
+          "japanese": "聞き取り原稿"
+        }
+      ],
+      "questionIds": [
+        "q-10f-0123",
+        "q-10f-0124"
+      ]
+    },
+    {
+      "id": "pron-11c-001",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "seat / sit",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "seat",
+          "japanese": "座席",
+          "ipa": "/siːt/"
+        },
+        {
+          "english": "sit",
+          "japanese": "座る",
+          "ipa": "/sɪt/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0109",
+        "q-11c-0110"
+      ]
+    },
+    {
+      "id": "pron-11c-002",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "pool / pull",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "pool",
+          "japanese": "プール",
+          "ipa": "/puːl/"
+        },
+        {
+          "english": "pull",
+          "japanese": "引く",
+          "ipa": "/pʊl/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0111",
+        "q-11c-0112"
+      ]
+    },
+    {
+      "id": "pron-11c-003",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "coat / caught",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "coat",
+          "japanese": "コート",
+          "ipa": "/kəʊt/"
+        },
+        {
+          "english": "caught",
+          "japanese": "捕まえた",
+          "ipa": "/kɔːt/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0113",
+        "q-11c-0114"
+      ]
+    },
+    {
+      "id": "pron-11c-004",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "rice / rise",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "rice",
+          "japanese": "米",
+          "ipa": "/raɪs/"
+        },
+        {
+          "english": "rise",
+          "japanese": "上がる",
+          "ipa": "/raɪz/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0115",
+        "q-11c-0116"
+      ]
+    },
+    {
+      "id": "pron-11c-005",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "price / prize",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "price",
+          "japanese": "価格",
+          "ipa": "/praɪs/"
+        },
+        {
+          "english": "prize",
+          "japanese": "賞",
+          "ipa": "/praɪz/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0117",
+        "q-11c-0118"
+      ]
+    },
+    {
+      "id": "pron-11c-006",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "west / vest",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "west",
+          "japanese": "西",
+          "ipa": "/west/"
+        },
+        {
+          "english": "vest",
+          "japanese": "ベスト",
+          "ipa": "/vest/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0119",
+        "q-11c-0120"
+      ]
+    },
+    {
+      "id": "pron-11c-007",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "thin / tin",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "thin",
+          "japanese": "薄い",
+          "ipa": "/θɪn/"
+        },
+        {
+          "english": "tin",
+          "japanese": "缶",
+          "ipa": "/tɪn/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0121",
+        "q-11c-0122"
+      ]
+    },
+    {
+      "id": "pron-11c-008",
+      "day": 44,
+      "type": "soundContrast",
+      "title": "then / den",
+      "note": "英国系の参考IPA。NZ英語・話者・合成音声によって発音は異なる。",
+      "nodes": [
+        {
+          "english": "then",
+          "japanese": "その時",
+          "ipa": "/ðen/"
+        },
+        {
+          "english": "den",
+          "japanese": "巣穴",
+          "ipa": "/den/"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0123",
+        "q-11c-0124"
+      ]
+    },
+    {
+      "id": "pron-11c-m-001",
+      "day": 37,
+      "type": "listeningPassage",
+      "title": "夕食",
+      "note": "架空の実用音声。聞き取り後に全文と要点を表示する。",
+      "nodes": [
+        {
+          "english": "Dinner will be ready at half past six.",
+          "japanese": "夕食は6時半"
+        },
+        {
+          "english": "Please let me know if you will be late.",
+          "japanese": "遅れる場合は連絡"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0125",
+        "q-11c-0126"
+      ]
+    },
+    {
+      "id": "pron-11c-m-002",
+      "day": 40,
+      "type": "listeningPassage",
+      "title": "バス",
+      "note": "架空の実用音声。聞き取り後に全文と要点を表示する。",
+      "nodes": [
+        {
+          "english": "The next bus leaves from stop B at ten fifteen.",
+          "japanese": "次のバスはB停留所から10時15分"
+        },
+        {
+          "english": "You can pay by card.",
+          "japanese": "カード払い可"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0127",
+        "q-11c-0128"
+      ]
+    },
+    {
+      "id": "pron-11c-m-003",
+      "day": 41,
+      "type": "listeningPassage",
+      "title": "授業",
+      "note": "架空の実用音声。聞き取り後に全文と要点を表示する。",
+      "nodes": [
+        {
+          "english": "Please read the first two pages before class.",
+          "japanese": "授業前に最初の2ページを読み、ペアで話す質問を一つ持参"
+        },
+        {
+          "english": "Bring one question to discuss with your partner.",
+          "japanese": ""
+        }
+      ],
+      "questionIds": [
+        "q-11c-0129",
+        "q-11c-0130"
+      ]
+    },
+    {
+      "id": "pron-11c-m-004",
+      "day": 39,
+      "type": "listeningPassage",
+      "title": "店",
+      "note": "架空の実用音声。聞き取り後に全文と要点を表示する。",
+      "nodes": [
+        {
+          "english": "You can return unused items within fourteen days if you have the receipt.",
+          "japanese": "未使用品はレシートがあれば14日以内に返品可。"
+        },
+        {
+          "english": "Key information",
+          "japanese": "返品期限は？"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0131",
+        "q-11c-0132"
+      ]
+    },
+    {
+      "id": "pron-11c-m-005",
+      "day": 51,
+      "type": "listeningPassage",
+      "title": "講義",
+      "note": "架空の実用音声。聞き取り後に全文と要点を表示する。",
+      "nodes": [
+        {
+          "english": "Public transport can reduce traffic.",
+          "japanese": "公共交通は渋滞を減らせるが、利用者を増やすには信頼性と手頃な料金が必要"
+        },
+        {
+          "english": "However, it needs to be reliable and affordable to attract more passengers.",
+          "japanese": ""
+        }
+      ],
+      "questionIds": [
+        "q-11c-0133",
+        "q-11c-0134"
+      ]
+    },
+    {
+      "id": "pron-11c-m-006",
+      "day": 46,
+      "type": "listeningPassage",
+      "title": "予約",
+      "note": "架空の実用音声。聞き取り後に全文と要点を表示する。",
+      "nodes": [
+        {
+          "english": "Your appointment is on Thursday at nine forty.",
+          "japanese": "予約は木曜9時40分"
+        },
+        {
+          "english": "Please arrive ten minutes early.",
+          "japanese": "10分前に到着"
+        }
+      ],
+      "questionIds": [
+        "q-11c-0135",
+        "q-11c-0136"
+      ]
+    }
+  ],
+  "playback": {
+    "preferredLocales": [
+      "en-NZ",
+      "en-GB",
+      "en"
+    ],
+    "rates": [
+      0.75,
+      1,
+      1.25
+    ],
+    "hideTranscript": true,
+    "limitations": "端末のTTSは自然な弱形や音の対立を必ず再現するわけではない。音声が不明瞭な問題は採点対象から外せるようにする。録音や発音自動採点は行わない。"
+  }
+}

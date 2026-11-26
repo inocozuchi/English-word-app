@@ -1,0 +1,2693 @@
+{
+  "schemaVersion": 1,
+  "scenarios": [
+    {
+      "id": "conversation-10g-001",
+      "day": 37,
+      "title": "ホームステイ到着",
+      "goal": "水を頼み、部屋の案内を受ける",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Welcome! Would you like something to drink?",
+          "choices": [
+            {
+              "text": "Water would be great, thanks.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Could I have some water, please?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Welcome! Would you like something to drink?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Water would be great, thanks.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Could I have some water, please?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Of course. Would you like to see your room afterwards?",
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Of course. Would you like to see your room afterwards?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0001",
+        "q-10g-0002",
+        "q-10g-0003"
+      ]
+    },
+    {
+      "id": "conversation-10g-002",
+      "day": 37,
+      "title": "洗濯",
+      "goal": "洗濯の時間を相談する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "When would you like to do your laundry?",
+          "choices": [
+            {
+              "text": "Is Saturday morning OK?",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Could I do it on Saturday morning?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "When would you like to do your laundry?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Is Saturday morning OK?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Could I do it on Saturday morning?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Sure. I'll show you how the machine works.",
+          "choices": [
+            {
+              "text": "Thanks. That would be helpful.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Sure. I'll show you how the machine works.",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Thanks. That would be helpful.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0004",
+        "q-10g-0005",
+        "q-10g-0006"
+      ]
+    },
+    {
+      "id": "conversation-10g-003",
+      "day": 38,
+      "title": "食事",
+      "goal": "おかわりを断り、お茶を頼む",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Would you like some more rice?",
+          "choices": [
+            {
+              "text": "No, thanks. I'm full.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "I've had enough, thank you.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Would you like some more rice?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "No, thanks. I'm full.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "I've had enough, thank you.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "All right. Would you like some tea instead?",
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "All right. Would you like some tea instead?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0007",
+        "q-10g-0008",
+        "q-10g-0009"
+      ]
+    },
+    {
+      "id": "conversation-10g-004",
+      "day": 38,
+      "title": "食物アレルギー",
+      "goal": "食材を確認し、アレルギーを伝える",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Would you like to try this soup?",
+          "choices": [
+            {
+              "text": "Does it contain shellfish?",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Could you check whether it has any shellfish in it?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Would you like to try this soup?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Does it contain shellfish?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Could you check whether it has any shellfish in it?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "I'm not sure. I'll check the ingredients first.",
+          "choices": [
+            {
+              "text": "Thank you. I have a shellfish allergy.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "I'm not sure. I'll check the ingredients first.",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Thank you. I have a shellfish allergy.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0010",
+        "q-10g-0011",
+        "q-10g-0012"
+      ]
+    },
+    {
+      "id": "conversation-10g-005",
+      "day": 39,
+      "title": "買い物",
+      "goal": "ノートの場所を尋ねる",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Can I help you find anything?",
+          "choices": [
+            {
+              "text": "I'm looking for a notebook.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Where can I find notebooks?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Can I help you find anything?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "I'm looking for a notebook.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Where can I find notebooks?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "They're on the second shelf. Do you need a pen as well?",
+          "choices": [
+            {
+              "text": "No, just a notebook, thanks.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "They're on the second shelf. Do you need a pen as well?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "No, just a notebook, thanks.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0013",
+        "q-10g-0014",
+        "q-10g-0015"
+      ]
+    },
+    {
+      "id": "conversation-10g-006",
+      "day": 39,
+      "title": "会計",
+      "goal": "レシートを受け取る",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Would you like a receipt?",
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Could I have a receipt, please?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Would you like a receipt?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Could I have a receipt, please?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Here you are. Anything else?",
+          "choices": [
+            {
+              "text": "No, that's all, thanks.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Here you are. Anything else?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "No, that's all, thanks.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0016",
+        "q-10g-0017",
+        "q-10g-0018"
+      ]
+    },
+    {
+      "id": "conversation-10g-007",
+      "day": 40,
+      "title": "バス",
+      "goal": "目的地を伝え、降車場所を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Where are you heading?",
+          "choices": [
+            {
+              "text": "I'm going to the university.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "I need to get to the university.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Where are you heading?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "I'm going to the university.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "I need to get to the university.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "This bus stops near the main entrance. Is that where you want to go?",
+          "choices": [
+            {
+              "text": "Yes, that's right.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "This bus stops near the main entrance. Is that where you want to go?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, that's right.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0019",
+        "q-10g-0020",
+        "q-10g-0021"
+      ]
+    },
+    {
+      "id": "conversation-10g-008",
+      "day": 40,
+      "title": "道案内",
+      "goal": "図書館への道を聞く",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Are you looking for somewhere?",
+          "choices": [
+            {
+              "text": "I'm looking for the library.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Could you tell me how to get to the library?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Are you looking for somewhere?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "I'm looking for the library.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Could you tell me how to get to the library?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Go straight and turn left at the cafe.",
+          "choices": [
+            {
+              "text": "Thanks. Is it far from here?",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Go straight and turn left at the cafe.",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Thanks. Is it far from here?",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0022",
+        "q-10g-0023",
+        "q-10g-0024"
+      ]
+    },
+    {
+      "id": "conversation-10g-009",
+      "day": 41,
+      "title": "授業",
+      "goal": "課題の進捗を伝える",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Have you finished the worksheet?",
+          "choices": [
+            {
+              "text": "Not yet. I need a little more time.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "I'm still working on it.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Have you finished the worksheet?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Not yet. I need a little more time.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "I'm still working on it.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "That's fine. Can you finish it by the end of class?",
+          "choices": [
+            {
+              "text": "Yes, I'll try.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "That's fine. Can you finish it by the end of class?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, I'll try.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0025",
+        "q-10g-0026",
+        "q-10g-0027"
+      ]
+    },
+    {
+      "id": "conversation-10g-010",
+      "day": 41,
+      "title": "グループ活動",
+      "goal": "担当を決める",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Which part would you like to do?",
+          "choices": [
+            {
+              "text": "I can write the introduction.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "I'd like to do the introduction.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Which part would you like to do?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "I can write the introduction.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "I'd like to do the introduction.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Great. Can you share it with us tomorrow?",
+          "choices": [
+            {
+              "text": "Sure, I can do that.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Great. Can you share it with us tomorrow?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Sure, I can do that.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0028",
+        "q-10g-0029",
+        "q-10g-0030"
+      ]
+    },
+    {
+      "id": "conversation-10g-011",
+      "day": 44,
+      "title": "聞き返し",
+      "goal": "提出時刻を聞き返す",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Could you hand in your assignment by noon?",
+          "choices": [
+            {
+              "text": "Could you say that again more slowly?",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Sorry, what time is it due?",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Could you hand in your assignment by noon?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Could you say that again more slowly?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Sorry, what time is it due?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "By twelve o'clock today.",
+          "choices": [
+            {
+              "text": "Got it. Thank you.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "By twelve o'clock today.",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Got it. Thank you.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0031",
+        "q-10g-0032",
+        "q-10g-0033"
+      ]
+    },
+    {
+      "id": "conversation-10g-012",
+      "day": 45,
+      "title": "友達との予定",
+      "goal": "誘いに応じ、時刻を決める",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Are you up for a walk this afternoon?",
+          "choices": [
+            {
+              "text": "Yes, that sounds great.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Sure, I'd love to.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Are you up for a walk this afternoon?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, that sounds great.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Sure, I'd love to.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Shall we meet at three outside the library?",
+          "choices": [
+            {
+              "text": "Three works for me.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Shall we meet at three outside the library?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Three works for me.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0034",
+        "q-10g-0035",
+        "q-10g-0036"
+      ]
+    },
+    {
+      "id": "conversation-10g-013",
+      "day": 46,
+      "title": "体調相談",
+      "goal": "体調を伝えて助けを求める",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "How are you feeling today?",
+          "choices": [
+            {
+              "text": "I have a sore throat.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "My throat hurts.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "How are you feeling today?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "I have a sore throat.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "My throat hurts.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "I see. Would you like help contacting a clinic?",
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "I see. Would you like help contacting a clinic?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Yes, please.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0037",
+        "q-10g-0038",
+        "q-10g-0039"
+      ]
+    },
+    {
+      "id": "conversation-10g-014",
+      "day": 46,
+      "title": "落とし物",
+      "goal": "落とし物の特徴と場所を説明する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "What does your bag look like?",
+          "choices": [
+            {
+              "text": "It's a small black backpack.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "It's black and has two pockets.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "What does your bag look like?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "It's a small black backpack.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "It's black and has two pockets.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Where did you last see it?",
+          "choices": [
+            {
+              "text": "On the bus this morning.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Where did you last see it?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "On the bus this morning.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0040",
+        "q-10g-0041",
+        "q-10g-0042"
+      ]
+    },
+    {
+      "id": "conversation-10g-015",
+      "day": 47,
+      "title": "NZの日常表現",
+      "goal": "dairyが小規模な食料品店を指す場面を理解する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "I'm going to the dairy. Do you need anything?",
+          "choices": [
+            {
+              "text": "Could you get some milk, please?",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "Some milk would be great, thanks.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "I'm going to the dairy. Do you need anything?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "Could you get some milk, please?",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "Some milk would be great, thanks.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Sure. Anything else?",
+          "choices": [
+            {
+              "text": "No, that's all. Cheers!",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Sure. Anything else?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "No, that's all. Cheers!",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0043",
+        "q-10g-0044",
+        "q-10g-0045"
+      ]
+    },
+    {
+      "id": "conversation-10g-016",
+      "day": 51,
+      "title": "意見交換",
+      "goal": "意見と理由、具体例を述べる",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "What do you think about online classes?",
+          "choices": [
+            {
+              "text": "I think they're useful because they're flexible.",
+              "next": "follow",
+              "feedback": "目的に合う返答です。"
+            },
+            {
+              "text": "I like them because I can study at home.",
+              "next": "follow",
+              "feedback": "別の自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返すことも有効です。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "What do you think about online classes?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "I think they're useful because they're flexible.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            },
+            {
+              "text": "I like them because I can study at home.",
+              "next": "follow",
+              "feedback": "聞き直して返答できました。"
+            }
+          ]
+        },
+        {
+          "id": "follow",
+          "speaker": "Can you give an example?",
+          "choices": [
+            {
+              "text": "For example, I can review lessons after class.",
+              "next": "done",
+              "feedback": "会話の目的を達成しました。"
+            },
+            {
+              "text": "Sorry, could you repeat that?",
+              "next": "repair2",
+              "feedback": "確認してから答えましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Can you give an example?",
+          "slow": true,
+          "choices": [
+            {
+              "text": "For example, I can review lessons after class.",
+              "next": "done",
+              "feedback": "確認して会話を続けられました。"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-10g-0046",
+        "q-10g-0047",
+        "q-10g-0048"
+      ]
+    },
+    {
+      "id": "conversation-11d-001",
+      "day": 36,
+      "title": "初対面",
+      "goal": "出身と滞在期間を伝える",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Where are you from?",
+          "choices": [
+            {
+              "text": "I'm from Japan.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I come from Japan.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Where are you from?",
+          "choices": [
+            {
+              "text": "I'm from Japan.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I come from Japan.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "How long are you staying?",
+          "choices": [
+            {
+              "text": "I'm staying for five months.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "How long are you staying?",
+          "choices": [
+            {
+              "text": "I'm staying for five months.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0001",
+        "q-11d-0002",
+        "q-11d-0003"
+      ]
+    },
+    {
+      "id": "conversation-11d-002",
+      "day": 37,
+      "title": "帰宅時間",
+      "goal": "帰宅予定を伝える",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "What time will you be home?",
+          "choices": [
+            {
+              "text": "I'll be home around seven.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I think I'll be back by seven.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "What time will you be home?",
+          "choices": [
+            {
+              "text": "I'll be home around seven.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I think I'll be back by seven.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "Could you text me if you are late?",
+          "choices": [
+            {
+              "text": "Of course, I'll let you know.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Could you text me if you are late?",
+          "choices": [
+            {
+              "text": "Of course, I'll let you know.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0004",
+        "q-11d-0005",
+        "q-11d-0006"
+      ]
+    },
+    {
+      "id": "conversation-11d-003",
+      "day": 37,
+      "title": "家の設備",
+      "goal": "使い方を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Do you know how to use the heater?",
+          "choices": [
+            {
+              "text": "Not yet. Could you show me?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "No, could you explain it to me?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Do you know how to use the heater?",
+          "choices": [
+            {
+              "text": "Not yet. Could you show me?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "No, could you explain it to me?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "Would you like me to show you now?",
+          "choices": [
+            {
+              "text": "Yes, please. Thank you.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Would you like me to show you now?",
+          "choices": [
+            {
+              "text": "Yes, please. Thank you.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0007",
+        "q-11d-0008",
+        "q-11d-0009"
+      ]
+    },
+    {
+      "id": "conversation-11d-004",
+      "day": 38,
+      "title": "食材の確認",
+      "goal": "食材を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Would you like some soup?",
+          "choices": [
+            {
+              "text": "Does it contain any shellfish?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you tell me what is in it?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Would you like some soup?",
+          "choices": [
+            {
+              "text": "Does it contain any shellfish?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you tell me what is in it?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "I am not sure about the ingredients.",
+          "choices": [
+            {
+              "text": "I'll have something else, thank you.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "I am not sure about the ingredients.",
+          "choices": [
+            {
+              "text": "I'll have something else, thank you.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0010",
+        "q-11d-0011",
+        "q-11d-0012"
+      ]
+    },
+    {
+      "id": "conversation-11d-005",
+      "day": 39,
+      "title": "サイズ交換",
+      "goal": "別のサイズを尋ねる",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Can I help you?",
+          "choices": [
+            {
+              "text": "Do you have this in a larger size?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could I try a larger size?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Can I help you?",
+          "choices": [
+            {
+              "text": "Do you have this in a larger size?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could I try a larger size?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "Would you like to try it on?",
+          "choices": [
+            {
+              "text": "Yes, where is the fitting room?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Would you like to try it on?",
+          "choices": [
+            {
+              "text": "Yes, where is the fitting room?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0013",
+        "q-11d-0014",
+        "q-11d-0015"
+      ]
+    },
+    {
+      "id": "conversation-11d-006",
+      "day": 40,
+      "title": "乗り換え",
+      "goal": "乗り換え場所を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Where are you heading?",
+          "choices": [
+            {
+              "text": "I'm going to the city centre.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I need to get to the city centre.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Where are you heading?",
+          "choices": [
+            {
+              "text": "I'm going to the city centre.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I need to get to the city centre.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "You need to change buses at the next stop.",
+          "choices": [
+            {
+              "text": "Which bus should I take after that?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "You need to change buses at the next stop.",
+          "choices": [
+            {
+              "text": "Which bus should I take after that?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0016",
+        "q-11d-0017",
+        "q-11d-0018"
+      ]
+    },
+    {
+      "id": "conversation-11d-007",
+      "day": 41,
+      "title": "課題提出",
+      "goal": "提出方法を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Have you finished the assignment?",
+          "choices": [
+            {
+              "text": "Almost. How do I submit it?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Not yet. Where should I submit it?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Have you finished the assignment?",
+          "choices": [
+            {
+              "text": "Almost. How do I submit it?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Not yet. Where should I submit it?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "Upload it to the course website.",
+          "choices": [
+            {
+              "text": "When is the deadline?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Upload it to the course website.",
+          "choices": [
+            {
+              "text": "When is the deadline?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0019",
+        "q-11d-0020",
+        "q-11d-0021"
+      ]
+    },
+    {
+      "id": "conversation-11d-008",
+      "day": 41,
+      "title": "授業の欠席",
+      "goal": "欠席分を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "You missed yesterday’s class.",
+          "choices": [
+            {
+              "text": "Could you tell me what I missed?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Is there anything I need to catch up on?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "You missed yesterday’s class.",
+          "choices": [
+            {
+              "text": "Could you tell me what I missed?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Is there anything I need to catch up on?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "We read the first chapter.",
+          "choices": [
+            {
+              "text": "Should I read it before the next class?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "We read the first chapter.",
+          "choices": [
+            {
+              "text": "Should I read it before the next class?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0022",
+        "q-11d-0023",
+        "q-11d-0024"
+      ]
+    },
+    {
+      "id": "conversation-11d-009",
+      "day": 43,
+      "title": "予定の変更",
+      "goal": "別の時間を提案する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Can we meet at two?",
+          "choices": [
+            {
+              "text": "Sorry, I'm busy then.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could we meet a little later?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Can we meet at two?",
+          "choices": [
+            {
+              "text": "Sorry, I'm busy then.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could we meet a little later?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "How about four?",
+          "choices": [
+            {
+              "text": "Four works for me.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "How about four?",
+          "choices": [
+            {
+              "text": "Four works for me.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0025",
+        "q-11d-0026",
+        "q-11d-0027"
+      ]
+    },
+    {
+      "id": "conversation-11d-010",
+      "day": 44,
+      "title": "単語の意味",
+      "goal": "説明を求める",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Please submit a brief summary.",
+          "choices": [
+            {
+              "text": "What does brief mean?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you explain the word brief?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Please submit a brief summary.",
+          "choices": [
+            {
+              "text": "What does brief mean?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you explain the word brief?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "It means short, not detailed.",
+          "choices": [
+            {
+              "text": "So I only need the main points?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "It means short, not detailed.",
+          "choices": [
+            {
+              "text": "So I only need the main points?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0028",
+        "q-11d-0029",
+        "q-11d-0030"
+      ]
+    },
+    {
+      "id": "conversation-11d-011",
+      "day": 45,
+      "title": "週末の誘い",
+      "goal": "都合を伝える",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Would you like to join us on Saturday?",
+          "choices": [
+            {
+              "text": "That sounds great. What time?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I'd love to. When are you meeting?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Would you like to join us on Saturday?",
+          "choices": [
+            {
+              "text": "That sounds great. What time?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I'd love to. When are you meeting?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "We are meeting at ten.",
+          "choices": [
+            {
+              "text": "Where should we meet?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "We are meeting at ten.",
+          "choices": [
+            {
+              "text": "Where should we meet?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0031",
+        "q-11d-0032",
+        "q-11d-0033"
+      ]
+    },
+    {
+      "id": "conversation-11d-012",
+      "day": 46,
+      "title": "忘れ物",
+      "goal": "特徴を説明する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "What did you lose?",
+          "choices": [
+            {
+              "text": "I lost my backpack.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I can't find my bag.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "What did you lose?",
+          "choices": [
+            {
+              "text": "I lost my backpack.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I can't find my bag.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "What does it look like?",
+          "choices": [
+            {
+              "text": "It's a small black backpack.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "What does it look like?",
+          "choices": [
+            {
+              "text": "It's a small black backpack.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0034",
+        "q-11d-0035",
+        "q-11d-0036"
+      ]
+    },
+    {
+      "id": "conversation-11d-013",
+      "day": 47,
+      "title": "持ち帰り",
+      "goal": "注文方法を理解する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Is that for here or takeaway?",
+          "choices": [
+            {
+              "text": "Takeaway, please.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I'd like it to take away, please.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Is that for here or takeaway?",
+          "choices": [
+            {
+              "text": "Takeaway, please.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I'd like it to take away, please.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "Would you like a bag?",
+          "choices": [
+            {
+              "text": "No, thanks. I have one.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Would you like a bag?",
+          "choices": [
+            {
+              "text": "No, thanks. I have one.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0037",
+        "q-11d-0038",
+        "q-11d-0039"
+      ]
+    },
+    {
+      "id": "conversation-11d-014",
+      "day": 51,
+      "title": "意見への同意",
+      "goal": "理由を付けて同意する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Do you agree with this idea?",
+          "choices": [
+            {
+              "text": "Yes, I think it makes sense.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I agree with the main point.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Do you agree with this idea?",
+          "choices": [
+            {
+              "text": "Yes, I think it makes sense.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "I agree with the main point.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "Why do you think so?",
+          "choices": [
+            {
+              "text": "Because it could save time.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "Why do you think so?",
+          "choices": [
+            {
+              "text": "Because it could save time.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0040",
+        "q-11d-0041",
+        "q-11d-0042"
+      ]
+    },
+    {
+      "id": "conversation-11d-015",
+      "day": 54,
+      "title": "根拠を求める",
+      "goal": "情報源を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "This method is more effective.",
+          "choices": [
+            {
+              "text": "What evidence supports that?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you explain how you know that?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "This method is more effective.",
+          "choices": [
+            {
+              "text": "What evidence supports that?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you explain how you know that?",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "There is a study in the reading list.",
+          "choices": [
+            {
+              "text": "Could you tell me which study it is?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "There is a study in the reading list.",
+          "choices": [
+            {
+              "text": "Could you tell me which study it is?",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0043",
+        "q-11d-0044",
+        "q-11d-0045"
+      ]
+    },
+    {
+      "id": "conversation-11d-016",
+      "day": 55,
+      "title": "要約の確認",
+      "goal": "要点を確認する",
+      "startNode": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speaker": "Can you summarise the article?",
+          "choices": [
+            {
+              "text": "It is mainly about public transport.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "The main topic is public transport.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Sorry, could you say that again?",
+              "next": "repair",
+              "feedback": "聞き返して確認できます。"
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "speaker": "Can you summarise the article?",
+          "choices": [
+            {
+              "text": "It is mainly about public transport.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "The main topic is public transport.",
+              "next": "follow",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "follow",
+          "speaker": "What is the main argument?",
+          "choices": [
+            {
+              "text": "The author argues that buses should run more often.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            },
+            {
+              "text": "Could you repeat that, please?",
+              "next": "repair2",
+              "feedback": "聞き直しましょう。"
+            }
+          ]
+        },
+        {
+          "id": "repair2",
+          "speaker": "What is the main argument?",
+          "choices": [
+            {
+              "text": "The author argues that buses should run more often.",
+              "next": "done",
+              "feedback": "自然な返答です。"
+            }
+          ],
+          "slow": true
+        },
+        {
+          "id": "done",
+          "terminal": true
+        }
+      ],
+      "questionIds": [
+        "q-11d-0046",
+        "q-11d-0047",
+        "q-11d-0048"
+      ]
+    }
+  ]
+}

@@ -860,6 +860,149 @@ try {
     await page.context().close();
   }
 
+  // ---------- 総合英語・留学準備 ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    const prog = () => page.evaluate(() => JSON.parse(localStorage.getItem('eq.progress.comprehensive.v1') || '{}'));
+    const sess = () => page.evaluate(() => JSON.parse(localStorage.getItem('eq.comp.session.v1') || 'null'));
+    await page.goto(URL);
+    await page.evaluate(() => {
+      const s = JSON.parse(localStorage.getItem('eq.settings.v2') || '{}');
+      localStorage.setItem('eq.settings.v2', JSON.stringify({ ...s, activeMode: 'comprehensive', modes: { ...(s.modes ?? {}), comprehensive: { minutes: 20, autoPlay: false } } }));
+    });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await sleep(600);
+    ok((await page.locator('.start-ja').textContent()).includes('今日の学習を始める'), '総合英語: ホームの主ボタンは「今日の学習を始める」');
+    ok(!(await page.locator('.start-sum').textContent()).includes('10問') && (await page.locator('.start-sum').textContent()).includes('Day 1'), 'ホームの要約は Day と学習時間（共通の問題数は出さない）');
+    await page.locator('button.start').tap();
+    await settle();
+    await sleep(500);
+    ok((await top().locator('.lc').count()) === 1, '最初は新しい単語の学習カード');
+    // 学習カード → 思い出す問題（わからない → 次へ）
+    await top().getByRole('button', { name: '覚えた・次へ' }).tap();
+    await sleep(300);
+    ok((await top().locator('.qv').count()) === 1, '学習カードのあとに問題');
+    await top().locator('.qv input, .qv textarea').first().fill('zzz');
+    await top().getByRole('button', { name: '答え合わせ' }).tap();
+    await sleep(200);
+    ok((await top().getByRole('button', { name: '合っていた' }).count()) === 1, '一致しない答えはすぐ誤答にせず、模範解答と比べて自己採点');
+    await top().getByRole('button', { name: '違った' }).tap();
+    await sleep(200);
+    const s1 = await sess();
+    ok(s1 && Object.keys(s1.results).length === 2 && s1.tasks.some((t) => t.id.endsWith('#r')), '回答のたびに保存（結果）・まちがえた問題は最後の「間違い直し」へ');
+    const p1 = await prog();
+    const recN = p1.extra.rec.length;
+    // 閉じて再開 → 同じ位置から・二重に記録しない
+    await top().locator('.close').tap();
+    await settle();
+    ok((await page.locator('.start-ja').textContent()).includes('続きから再開する'), '閉じるとホームは「続きから再開する」');
+    await page.locator('button.start').tap();
+    await settle();
+    await sleep(500);
+    const s2 = await sess();
+    ok(s2.id === s1.id && (await top().locator('.lc').count()) === 1, '再開すると、答えていない次のところから（同じセッション）');
+    ok((await prog()).extra.rec.length === recN, '再開しても同じ回答を二重に記録しない');
+    // 進めて、聞き取りの問題を探す（答える前に原稿を見せない）
+    let sawListening = false, leak = false, audioNA = false;
+    for (let k = 0; k < 40 && (await top().locator('.end').count()) === 0; k++) {
+      if (await top().getByRole('button', { name: '覚えた・次へ' }).count()) {
+        await top().getByRole('button', { name: '覚えた・次へ' }).tap();
+        await sleep(150);
+        continue;
+      }
+      const kind = (await top().locator('.qv .kind').textContent().catch(() => '')) ?? '';
+      if (kind.includes('聞き取り') || kind.includes('書き取り')) {
+        sawListening = true;
+        const html = await top().locator('.qv').innerHTML();
+        const st = await sess();
+        const t = st.tasks[st.cursor];
+        const qtext = await page.evaluate(async (qid) => qid, t.qid);
+        void qtext;
+        if (await top().locator('.box .lbl', { hasText: '音声の英文' }).count()) leak = true;
+        if (html.includes('答え（') || html.includes('>答え<')) leak = true;
+        if (!audioNA) {
+          await top().getByRole('button', { name: /音声が使えない/ }).tap();
+          await sleep(200);
+          audioNA = true;
+          await top().getByRole('button', { name: '次へ' }).tap();
+          await sleep(150);
+          continue;
+        }
+      }
+      if (await top().locator('.choice').count()) await top().locator('.choice').first().tap();
+      else if (await top().getByRole('button', { name: 'わからない' }).count()) await top().getByRole('button', { name: 'わからない' }).tap();
+      else if (await top().getByRole('button', { name: '模範解答を見る' }).count()) {
+        await top().getByRole('button', { name: '模範解答を見る' }).tap();
+        await sleep(100);
+        await top().getByRole('button', { name: 'あやしい' }).tap();
+      } else if (await top().locator('.ch').count()) {
+        await top().locator('.ch').first().tap();
+        await sleep(150);
+        continue;
+      }
+      await sleep(150);
+      if (await top().locator('.sheet').count()) await top().getByRole('button', { name: '続ける' }).tap();
+      if (await top().getByRole('button', { name: '次へ' }).count()) await top().getByRole('button', { name: '次へ' }).first().tap();
+      await sleep(150);
+    }
+    ok(sawListening && !leak, '聞き取りの問題は、答える前に英文の原稿・答えを見せない');
+    const p2 = await prog();
+    ok(audioNA && p2.extra.audioNA >= 1, '音声が使えない問題は別に数え、聞き取りの正誤として記録しない');
+    ok((await top().locator('.end').count()) === 1, '最後まで進むとまとめ');
+    ok(p2.extra.cd.day === 1 && p2.extra.cd.progressed === true, '日程は学習した日ごとに進む（今日は Day1・進めた印）');
+    await top().getByRole('button', { name: 'ホームへ' }).tap();
+    await settle();
+    // 副導線
+    await page.getByRole('button', { name: '教材と記録' }).tap();
+    await settle();
+    ok((await top().locator('.mc').count()) === 5, '教材と記録: 習熟度5段階（未学習・認識・想起・活用・定着）');
+    await top().getByRole('button', { name: /教材辞典/ }).tap();
+    await settle();
+    await top().locator('input[type=search]').fill('deadline');
+    await sleep(300);
+    ok((await top().locator('.row', { hasText: 'deadline' }).count()) >= 1, '教材辞典で検索できる');
+    await top().locator('.row', { hasText: 'deadline' }).first().tap();
+    await settle();
+    await top().locator('.fav').first().tap();
+    await sleep(200);
+    ok(((await prog()).extra.fav ?? []).length === 1, 'お気に入りに追加できる');
+    await top().locator('.back').tap();
+    await settle();
+    await top().getByRole('tab', { name: '図解' }).tap();
+    await top().locator('input[type=search]').fill('');
+    await sleep(200);
+    ok((await top().locator('.cnt').textContent()).includes('344'), '図解は344グループすべて辞典にある');
+    await top().locator('.back').tap();
+    await settle();
+    await top().getByRole('button', { name: /60日ロードマップ/ }).tap();
+    await settle();
+    ok((await top().locator('.days > li').count()) === 60, 'ロードマップは60日');
+    await top().locator('.back').tap();
+    await settle();
+    // 診断: 終わるまで答えを見せない
+    await top().getByRole('button', { name: /Day0 診断/ }).tap();
+    await settle();
+    await top().getByRole('button', { name: '診断を始める' }).tap();
+    await sleep(200);
+    await top().locator('textarea').fill('wrong');
+    await top().getByRole('button', { name: '次へ' }).tap();
+    await sleep(150);
+    const html = await top().innerHTML();
+    ok(!html.includes('borrow') && (await top().locator('.prog').textContent()).startsWith('2'), '診断は終わるまで答えを表示しない');
+    const dg = (await prog()).extra.diag.baseline;
+    ok(dg.cursor === 1 && Object.keys(dg.answers).length === 1, '診断は途中で保存される');
+    const pi = await prog();
+    ok(!Object.keys(pi.items).some((k) => k.startsWith('diag-')), '診断の問題は間隔反復に入れない');
+    await top().locator('.back').tap();
+    await settle();
+    await top().getByRole('button', { name: /学習レポートをコピー/ }).tap();
+    await settle();
+    ok((await top().locator('textarea').inputValue()).includes('学習レポート'), '学習レポート（ChatGPT に貼り付ける文章）');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
   // ---------- 連打・遷移中のタップ ----------
   {
     const { page, errors, top, depth, settle } = await newPage(browser);
@@ -871,7 +1014,8 @@ try {
     // 画面が入ってくる途中に「戻る」を押しても効く
     await page.getByRole('button', { name: '設定' }).tap();
     await sleep(120);
-    await top().locator('.back').tap({ force: true });
+    // 動いている最中のボタンを座標で押すと外れることがあるので、要素を直接押す（遷移中に押す、という条件は同じ）
+    await top().locator('.back').evaluate((el) => el.click());
     await sleep(1400);
     ok((await depth()) === 1, '画面が開く途中の「戻る」も効く（遷移のあとに戻る）');
 

@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "courseId",
+    "release",
+    "availableThroughDay",
+    "items",
+    "questions",
+    "days"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "courseId": {
+      "const": "comprehensive"
+    },
+    "release": {
+      "type": "string",
+      "minLength": 1
+    },
+    "availableThroughDay": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "day",
+          "kind",
+          "english",
+          "kana",
+          "japanese",
+          "example",
+          "priority"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "day": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "kind": {
+            "enum": [
+              "vocabulary",
+              "idiom",
+              "chunk"
+            ]
+          },
+          "english": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kana": {
+            "type": "string",
+            "minLength": 1
+          },
+          "japanese": {
+            "type": "string",
+            "minLength": 1
+          },
+          "example": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exampleJapanese": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priority": {
+            "enum": [
+              "core",
+              "recommended",
+              "extra"
+            ]
+          }
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "day",
+          "kind",
+          "prompt",
+          "acceptedAnswers",
+          "explanation",
+          "itemIds",
+          "priority"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "day": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "kind": {
+            "enum": [
+              "recall",
+              "listening",
+              "translation",
+              "dictation",
+              "paraphrase",
+              "reading",
+              "correction"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "acceptedAnswers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "priority": {
+            "enum": [
+              "core",
+              "recommended",
+              "extra"
+            ]
+          },
+          "audioText": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "listening",
+                    "dictation"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "audioText"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "days": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "day",
+          "topic",
+          "status",
+          "itemIds",
+          "questionIds"
+        ],
+        "properties": {
+          "day": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "topic": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "available",
+              "planned"
+            ]
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "questionIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "grammar": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reviewDays": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 60
+            }
+          }
+        }
+      },
+      "minItems": 60,
+      "maxItems": 60
+    }
+  }
+}
