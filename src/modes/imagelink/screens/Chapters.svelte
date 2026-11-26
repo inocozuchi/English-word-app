@@ -11,6 +11,9 @@
   import { partColor } from '../partColor.ts';
   import { il, loadIndex } from '../state.svelte.ts';
   import { startChapter } from '../start.ts';
+  import { loadProgress } from '../../../core/storage.ts';
+  import { rx, loadReflex } from '../../reflex/state.svelte.ts';
+  import { chapterReflex, MODE_ID as REFLEX_ID } from '../../reflex/engine.ts';
 
   loadIndex().catch(() => {});
   const days = $derived(streak(store.progress.days, store.today));
@@ -21,6 +24,10 @@
   const groups = $derived(
     (il.index?.parts ?? []).map((p) => ({ ...p, chapters: il.index!.chapters.filter((c) => c.part === p.part) })),
   );
+  // 反射版の記録（別のモード）から、章ごとの「反射できる」問題の数
+  loadReflex().catch(() => {});
+  const reflexItems = loadProgress(REFLEX_ID).items;
+  const reflex = $derived(chapterReflex(rx.questions ?? [], reflexItems));
   let tab = $state(0);
   const shown = $derived(groups[tab]);
 </script>
@@ -51,6 +58,7 @@
       {#each shown.chapters as c (c.no)}
         {@const x = stats.get(c.no)}
         {@const rate = x && x.seen ? Math.round((x.correct / x.seen) * 100) : null}
+        {@const rf = reflex.get(c.no)}
         <li>
           <button class="row press" onclick={() => startChapter(c.no)} aria-label="第{c.no}章 {c.title} のミニテストを始める">
             <span class="no en">{c.no}</span>
@@ -61,6 +69,7 @@
                 <span>習得 <b class="en">{x?.learned ?? 0}</b> / {c.question_count}</span>
                 <span>正答率 <b class="en">{rate === null ? '—' : `${rate}%`}</b></span>
                 <span>p.{c.page_a5}</span>
+                {#if rf}<span class="rf" class:all={rf.reflex === rf.total} title="反射版で反射できる問題">反射 <b class="en">{rf.reflex}/{rf.total}</b>{rf.reflex === rf.total ? ' ✓' : ''}</span>{/if}
               </span>
             </span>
             <span class="go"><Icon name="chevron" size={18} /></span>
@@ -203,12 +212,20 @@
   }
   .meta {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 2px 12px;
     font-size: 11px;
     color: var(--text2);
   }
   .meta b {
     color: var(--text);
+  }
+  .rf.all {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .rf.all b {
+    color: var(--accent);
   }
   .go {
     flex: none;

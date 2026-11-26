@@ -1,0 +1,715 @@
+<script lang="ts">
+  // 反射版のクイズ: 問題ごとの3〜5秒の制限時間（細いバー）、選んだ瞬間に採点、
+  // 正解は0.4秒・不正解は1.5秒（時間切れは1秒）で自動で次へ（タップで早送り）。解説は出さない。
+  // まちがえた問題は 3〜6 問後に出し直し、2回続けて正解で終わり（engine.ts の ReflexRun）。
+  // 暗記カードは 表（語）→ タップで裏（コアイメージ）→ すぐ出た／あやしい／出ない。
+  import { onMount, tick } from 'svelte';
+  import Icon from '../../../components/Icon.svelte';
+  import ReportSheet from '../../../components/ReportSheet.svelte';
+  import { router } from '../../../core/router.svelte.ts';
+  import { store, modeSettings, recordAnswer, today } from '../../../core/store.svelte.ts';
+  import { reviewOrder } from '../../../core/review.ts';
+  import { createRng } from '../../../core/rng.ts';
+  import { haptic } from '../../../core/haptics.ts';
+  import { bump } from '../../../core/transitions.ts';
+  import { reducedMotion } from '../../../core/spring.ts';
+  import { loadReports, saveReports, addReport, type ReportReason } from '../../../core/reports.ts';
+  import { reflexMode } from '../mode.ts';
+  import {
+    MODE_ID,
+    QuestionTimer,
+    ReflexRun,
+    grade,
+    buildChoices,
+    reflexCandidates,
+    reflexPick,
+    ADVANCE_OK_MS,
+    ADVANCE_NG_MS,
+    ADVANCE_TIMEOUT_MS,
+    METHODS,
+    type Built,
+    type Grade,
+    type Method,
+  } from '../engine.ts';
+  import type { RCard } from '../types.ts';
+  import { rx, loadReflex, qById, cardById } from '../state.svelte.ts';
+  import RPrompt from '../RPrompt.svelte';
+  import type { ReflexLog } from '../log.ts';
+
+  let { seed, kind = 'normal', method: forceMethod, group: forceGroup }: { seed: number; kind?: 'normal' | 'review'; method?: Method; group?: string } = $props();
+
+  // svelte-ignore state_referenced_locally
+  const settings = { ...modeSettings(reflexMode), ...(forceMethod ? { method: forceMethod } : {}), ...(forceGroup ? { group: forceGroup } : {}) };
+  // svelte-ignore state_referenced_locally
+  const method = kind === 'review' ? null : settings.method;
+  // svelte-ignore state_referenced_locally
+  const label = kind === 'review' ? '復習' : METHODS.find((m) => m.id === method)!.label;
+  // svelte-ignore state_referenced_locally
+  const rng = createRng(seed);
+
+  let run: ReflexRun | null = null;
+  let ready = $state(false);
+  let empty = $state(false);
+  /** 今の項目 */
+  let built = $state<Built | null>(null);
+  let card = $state<RCard | null>(null);
+  let again = $state(false);
+  let serial = $state(0);
+  let phase = $state<'ask' | 'feedback'>('ask');
+  let chosen = $state<number | null>(null);
+  let result = $state<Grade | null>(null);
+  let flipped = $state(false);
+  let left = $state(0);
+  let total = $state(0);
+  let streak = $state(0);
+  let bestStreak = 0;
+  let reporting = $state(false);
+  let reported = $state('');
+  const logs: ReflexLog[] = [];
+  const startedAt = Date.now();
+
+  let bar: HTMLElement | undefined = $state();
+  let streakEl: HTMLElement | undefined = $state();
+  let timer: QuestionTimer | null = null;
+  let barAnim: Animation | null = null;
+  let deadline = 0;
+  let advanceT = 0;
+  let closed = false;
+  const now = () => performance.now();
+
+  onMount(() => {
+    loadReflex()
+      .then(() => {
+        if (closed) return;
+        const st = store.progress;
+        let keys: string[];
+        if (kind === 'review') {
+          keys = reviewOrder(st.review, rng).map((e) => e.key).filter((k) => qById.has(k) || cardById.has(k)).slice(0, 20);
+        } else {
+          const pool = { questions: rx.questions ?? [], cards: rx.cards };
+          keys = reflexPick(reflexCandidates(pool, settings), st.items, settings, today(), rng);
+        }
+        run = new ReflexRun(keys, rng, { requeue: method !== 'attack' });
+        total = keys.length;
+        ready = true;
+        if (!keys.length) empty = true;
+        else show();
+      })
+      .catch(() => (ready = true));
+    const vis = () => (document.visibilityState === 'hidden' ? pause() : resume());
+    document.addEventListener('visibilitychange', vis);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      closed = true;
+      stopTimer();
+      clearTimeout(advanceT);
+      document.removeEventListener('visibilitychange', vis);
+      window.removeEventListener('keydown', onKey);
+    };
+  });
+
+  // ---- 表示 ----
+  async function show() {
+    const cur = run?.current;
+    if (!cur) return finish();
+    left = run!.left;
+    again = cur.again;
+    phase = 'ask';
+    chosen = null;
+    result = null;
+    flipped = false;
+    serial++;
+    const q = qById.get(cur.key);
+    if (q) {
+      card = null;
+      built = buildChoices(q, rng);
+      if (!built) {
+        run!.settle(true);
+        return show();
+      }
+      await tick();
+      requestAnimationFrame(() => startTimer(built!.limitMs));
+    } else {
+      built = null;
+      card = cardById.get(cur.key) ?? null;
+      if (!card) {
+        run!.settle(true);
+        return show();
+      }
+    }
+  }
+
+  // ---- タイマー（細いバーが縮む。時間切れは setTimeout。一時停止は両方止める） ----
+  function startTimer(limitMs: number) {
+    if (closed || phase !== 'ask') return;
+    timer = new QuestionTimer(limitMs, now());
+    barAnim?.cancel();
+    barAnim = bar?.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: limitMs, fill: 'forwards' }) ?? null;
+    arm();
+    if (paused()) pause();
+  }
+  function arm() {
+    clearTimeout(deadline);
+    if (!timer) return;
+    deadline = window.setTimeout(() => answer(null), timer.remaining(now()) + 5);
+  }
+  function stopTimer() {
+    clearTimeout(deadline);
+    barAnim?.pause();
+  }
+  const paused = () => reporting || document.visibilityState === 'hidden';
+  function pause() {
+    if (!timer || phase !== 'ask') return;
+    timer.pause(now());
+    clearTimeout(deadline);
+    barAnim?.pause();
+  }
+  function resume() {
+    if (!timer || phase !== 'ask' || paused()) return;
+    timer.resume(now());
+    barAnim?.play();
+    arm();
+  }
+
+  // ---- 回答 ----
+  function answer(k: number | null) {
+    if (phase !== 'ask' || !built || !timer || !run || timer.paused) return;
+    const g = grade(k, built.answer, timer.elapsed(now()), built.limitMs);
+    stopTimer();
+    chosen = k;
+    result = g;
+    phase = 'feedback';
+    const key = built.q.id;
+    const first = run.settle(g.ok);
+    if (first) recordAnswer(key, key, g.ok, [`group:${built.q.group}`], g.slow ? 'low' : undefined, g.ms);
+    logs.push({ key, ok: g.ok, timeout: g.timeout, slow: g.slow, ms: g.ms, first, again, card: false });
+    streakStep(g.ok);
+    haptic(g.ok ? 'light' : 'error');
+    advanceT = window.setTimeout(next, g.ok ? ADVANCE_OK_MS : g.timeout ? ADVANCE_TIMEOUT_MS : ADVANCE_NG_MS);
+  }
+  function judge(level: 0 | 1 | 2) {
+    if (phase !== 'ask' || !card || !run) return;
+    const ok = level > 0;
+    phase = 'feedback';
+    const first = run.settle(ok);
+    if (first) recordAnswer(card.id, card.id, ok, [`group:${card.group}`], level === 1 ? 'low' : level === 2 ? 'high' : undefined);
+    logs.push({ key: card.id, ok, timeout: false, slow: level === 1, ms: 0, first, again, card: true });
+    streakStep(ok);
+    haptic(ok ? 'light' : 'error');
+    advanceT = window.setTimeout(next, 180);
+  }
+  function streakStep(ok: boolean) {
+    streak = ok ? streak + 1 : 0;
+    bestStreak = Math.max(bestStreak, streak);
+    // 5問ごとに小さく弾む（控えめに）
+    if (ok && streak % 5 === 0) tick().then(() => streakEl && bump(streakEl, 1.25));
+  }
+  function next() {
+    clearTimeout(advanceT);
+    if (closed || phase !== 'feedback') return;
+    show();
+  }
+  /** 不正解の表示中はタップで早送り */
+  function skip() {
+    if (phase === 'feedback') next();
+  }
+  function flip() {
+    if (phase !== 'ask' || !card) return;
+    flipped = !flipped;
+  }
+
+  function finish() {
+    if (closed) return;
+    closed = true;
+    stopTimer();
+    router.replace({ name: 'reflex/result', params: { logs, method, kind, bestStreak, startedAt, finishedAt: Date.now(), total } });
+  }
+  function close() {
+    closed = true;
+    stopTimer();
+    clearTimeout(advanceT);
+    router.pop();
+  }
+
+  // ---- キーボード: 1〜4 で回答、Enter・Space で早送り。カードは Space でめくり 1/2/3 ----
+  function onKey(e: KeyboardEvent) {
+    if (reporting || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'Escape') return close();
+    if (phase === 'feedback' && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      return skip();
+    }
+    if (phase !== 'ask') return;
+    if (built && /^[1-4]$/.test(e.key)) {
+      e.preventDefault();
+      answer(+e.key - 1);
+    } else if (card) {
+      if (e.key === ' ' || (e.key === 'Enter' && !flipped)) {
+        e.preventDefault();
+        flip();
+      } else if (flipped && /^[1-3]$/.test(e.key)) {
+        e.preventDefault();
+        judge((3 - +e.key) as 0 | 1 | 2);
+      }
+    }
+  }
+
+  // ---- 報告 ----
+  function openReport() {
+    reporting = true;
+    pause();
+  }
+  function closeReport() {
+    reporting = false;
+    resume();
+  }
+  function report(reason: ReportReason, comment: string) {
+    const key = built?.q.id ?? card?.id;
+    if (key) saveReports(MODE_ID, addReport(loadReports(MODE_ID), { key, reason, comment: comment || undefined, at: new Date().toISOString() }));
+    closeReport();
+    haptic('success');
+    reported = '報告しました';
+    setTimeout(() => (reported = ''), 2000);
+  }
+
+  /** 問題が変わるとき: 120ms で浮かぶだけ（遷移は最小限） */
+  function appear(node: HTMLElement) {
+    if (reducedMotion()) return;
+    node.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, easing: 'ease-out' });
+  }
+  const sec = (ms: number) => (ms / 1000).toFixed(1);
+</script>
+
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+<div class="rq" onclick={() => phase === 'feedback' && result && !result.ok && skip()}>
+  <header>
+    <button class="close press" onclick={close} aria-label="やめる"><Icon name="close" size={22} /></button>
+    <span class="mid">
+      <span class="lbl">{label}</span>
+      {#if ready && !empty}<span class="left en" aria-label="残り {left} 問">残り {left}</span>{/if}
+    </span>
+    <span class="right">
+      <span class="streak en" class:on={streak >= 2} bind:this={streakEl} aria-label="連続正解 {streak}"><Icon name="flame" size={15} />{streak}</span>
+      <button class="flag press" onclick={openReport} aria-label="この問題を報告" disabled={!built && !card}><Icon name="flag" size={17} /></button>
+    </span>
+  </header>
+  <div class="track"><div class="bar" class:hide={!!card} bind:this={bar}></div></div>
+  <p class="note" aria-live="polite">{reported || (again ? 'もう一度' : '')}</p>
+
+  {#if ready && empty}
+    <div class="empty">
+      {#if kind === 'review'}<p>復習リストは空です。</p>{:else if method === 'weak'}<p>弱点の問題はまだありません。</p><p class="sub">まちがえた・時間切れ・遅かった問題がここに入ります。</p>{:else}<p>出題できる問題がありません。</p>{/if}
+      <button class="btn press" onclick={close}>戻る</button>
+    </div>
+  {:else if ready && rx.error && !rx.questions}
+    <div class="empty"><p>{rx.error}</p><button class="btn press" onclick={close}>戻る</button></div>
+  {/if}
+
+  {#key serial}
+    {#if built}
+      <div class="stage" class:imgq={!!built.choices[0].image} use:appear>
+        <div class="prompt"><RPrompt q={built.q} /></div>
+        <div class="fb" aria-live="polite">
+          {#if result}
+            {#if result.ok}
+              <span class="okl"><span class="ring"></span>{result.slow ? 'あやしい（遅め）' : '正解'}<b class="en">{sec(result.ms)}秒</b></span>
+            {:else}
+              <span class="ngl"><span class="cross"><Icon name="x" size={12} stroke={3.4} /></span>{result.timeout ? '時間切れ' : '不正解'}</span>
+              <span class="ans">{built.choices[built.answer].image ? '正解は ✓ の図' : `正解：${built.choices[built.answer].text}`}</span>
+              <span class="ref">教科書 p.{built.q.ref_page_a5}（第{built.q.chapter}章）</span>
+            {/if}
+          {/if}
+        </div>
+        <div class="choices" class:img={!!built.choices[0].image}>
+          {#each built.choices as c, k}
+            {@const isAns = phase === 'feedback' && k === built.answer}
+            {@const isMine = phase === 'feedback' && k === chosen && k !== built.answer}
+            <button
+              class="ch press"
+              class:en={c.latin}
+              class:correct={isAns}
+              class:wrong={isMine}
+              class:dim={phase === 'feedback' && !isAns && !isMine}
+              disabled={phase !== 'ask'}
+              onclick={(e) => { e.stopPropagation(); answer(k); }}
+            >
+              <span class="kn en">{k + 1}</span>
+              {#if c.image}<img src={c.image} alt={c.text} draggable="false" />{:else}<span class="ct">{c.text}</span>{/if}
+              {#if isAns}<span class="mk"><Icon name="check" size={18} stroke={3} /></span>{:else if isMine}<span class="mk"><Icon name="x" size={18} stroke={3} /></span>{/if}
+            </button>
+          {/each}
+        </div>
+      </div>
+    {:else if card}
+      <div class="stage" use:appear>
+        <button class="card press" class:flipped onclick={flip} disabled={phase !== 'ask'} aria-label={flipped ? '表に戻す' : 'めくる'}>
+          <span class="cg">{card.group}</span>
+          <span class="cw en">{card.word}</span>
+          {#if flipped}
+            <span class="ci" use:appear>{card.image}</span>
+            <span class="cref">教科書 p.{card.ref_page_a5}（第{card.chapter}章）</span>
+          {:else}
+            <span class="tap">タップでめくる</span>
+          {/if}
+        </button>
+        {#if flipped}
+          <div class="judge">
+            <button class="j press" onclick={() => judge(0)} disabled={phase !== 'ask'}><span class="en kn2">3</span>出ない</button>
+            <button class="j press" onclick={() => judge(1)} disabled={phase !== 'ask'}><span class="en kn2">2</span>あやしい</button>
+            <button class="j pri press" onclick={() => judge(2)} disabled={phase !== 'ask'}><span class="en kn2">1</span>すぐ出た</button>
+          </div>
+        {:else}
+          <div class="judge one"><button class="j pri press" onclick={flip}>めくる</button></div>
+        {/if}
+      </div>
+    {/if}
+  {/key}
+
+  {#if reporting && (built || card)}
+    <ReportSheet id={built?.q.id ?? card?.id ?? ''} onsend={report} onclose={closeReport} />
+  {/if}
+</div>
+
+<style>
+  .rq {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: var(--pad-top) var(--pad-x-r) var(--pad-bottom) var(--pad-x);
+    background: var(--bg);
+  }
+  header {
+    flex: none;
+    height: 44px;
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    margin-left: -10px;
+  }
+  .close {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: var(--text2);
+    border-radius: 22px;
+  }
+  .mid {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+  }
+  .lbl {
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .left {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text3);
+    font-variant-numeric: tabular-nums;
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .streak {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px 8px 2px 6px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text3);
+    font-variant-numeric: tabular-nums;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .streak.on {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .flag {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    color: var(--text3);
+  }
+  .track {
+    flex: none;
+    height: 5px;
+    margin-top: 6px;
+    border-radius: 3px;
+    background: var(--fill);
+    overflow: hidden;
+  }
+  .bar {
+    height: 100%;
+    background: var(--ink);
+    transform-origin: left center;
+  }
+  .bar.hide {
+    opacity: 0;
+  }
+  .note {
+    flex: none;
+    height: 20px;
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: center;
+  }
+  .stage {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .prompt {
+    flex: 1;
+    min-height: 0;
+  }
+  /* 正誤の行（場所は最初から確保。問題文が動かない） */
+  .fb {
+    flex: none;
+    min-height: 46px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .okl,
+  .ngl {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 17px;
+    font-weight: 800;
+  }
+  .okl {
+    color: var(--accent);
+  }
+  .okl b {
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .ring {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+  }
+  .cross {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .ans {
+    font-weight: 700;
+  }
+  .ref {
+    width: 100%;
+    font-size: 11px;
+    color: var(--text3);
+  }
+  /* 2×2 の大きな選択肢（親指で押せる） */
+  .choices {
+    flex: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .ch {
+    position: relative;
+    min-height: 96px;
+    padding: 18px 10px 12px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    border: 2px solid var(--line-strong);
+    background: var(--bg);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+    transition: background-color 0.15s, border-color 0.15s, opacity 0.15s, color 0.15s, transform var(--dur-press, 300ms) var(--ease-press, ease-out);
+  }
+  .ch.en {
+    font-size: 22px;
+  }
+  .ch:active {
+    background: var(--fill);
+  }
+  .kn {
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text3);
+  }
+  .ch.correct {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .ch.correct .kn {
+    color: var(--on-accent);
+  }
+  .ch.wrong {
+    border-style: dashed;
+    border-color: var(--ink);
+    background: var(--fill-strong);
+    color: var(--text2);
+  }
+  .ch.wrong .ct {
+    text-decoration: line-through;
+  }
+  .ch.dim {
+    opacity: 0.35;
+  }
+  .mk {
+    position: absolute;
+    right: 9px;
+    top: 7px;
+  }
+  .choices.img .ch {
+    background: #fff;
+    padding: 18px 6px 6px;
+    aspect-ratio: 1 / 0.82;
+    min-height: 0;
+  }
+  .choices.img .ch.correct {
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  .choices.img .ch.correct .mk {
+    color: var(--accent);
+  }
+  .choices.img .ch.wrong .mk,
+  .choices.img .kn {
+    color: #111114;
+  }
+  /* 図を選ぶ問題: 問題文は短いので小さくし、図の4択に場所を譲る（1枚を大きく） */
+  .imgq .prompt {
+    flex: none;
+    padding: 8px 0 0;
+  }
+  .imgq .choices {
+    flex: 1;
+    min-height: 0;
+    grid-template-rows: 1fr 1fr;
+  }
+  .imgq .choices.img .ch {
+    aspect-ratio: auto;
+  }
+  .ch img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+  /* 暗記カード */
+  .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px;
+    border: var(--panel-border);
+    border-radius: 24px;
+    text-align: center;
+  }
+  .card:disabled {
+    cursor: default;
+  }
+  .cg {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text3);
+  }
+  .cw {
+    font-size: clamp(40px, 13vw, 58px);
+    font-weight: 850;
+    letter-spacing: -0.03em;
+  }
+  .ci {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+  .cref {
+    font-size: 11px;
+    color: var(--text3);
+  }
+  .tap {
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .judge {
+    flex: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 10px;
+  }
+  .judge.one {
+    grid-template-columns: 1fr;
+  }
+  .j {
+    position: relative;
+    min-height: 64px;
+    border-radius: 18px;
+    border: var(--frame) solid var(--ink);
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .j.pri {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .kn2 {
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+  .empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .empty .sub {
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .btn {
+    margin-top: 12px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 700;
+  }
+</style>

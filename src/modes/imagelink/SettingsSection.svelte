@@ -7,7 +7,7 @@
   import { modeSettings, updateModeSettings } from '../../core/store.svelte.ts';
   import { router } from '../../core/router.svelte.ts';
   import { haptic } from '../../core/haptics.ts';
-  import { loadReports, saveReports, exportReports } from '../../core/reports.ts';
+  import ReportsGroup from '../../components/ReportsGroup.svelte';
   import { imagelinkMode } from './mode.ts';
   import { METHODS, TOTAL_COUNTS, TYPE_LABELS, ALL_TYPES, DIFFS, TAGS, PARTS, PART_COLORS, MODE_ID, allowedTypes, parseKey, type IlSettings } from './quiz.ts';
   import { il, questionById, loadIndex } from './state.svelte.ts';
@@ -29,37 +29,10 @@
   });
   const noTypes = $derived(allowedTypes(s).size === 0);
 
-  // ---- 報告 ----
-  let reports = $state(loadReports(MODE_ID));
-  let armed = $state(false);
-  async function exportR() {
-    const json = exportReports(MODE_ID, reports, (key) => {
-      const r = questionById(parseKey(key)?.id ?? '');
-      return r ? { id: r.id, type: r.type, chapter: r.chapter, question: r.question, prompt: r.prompt_en ?? r.prompt_ja, answer: r.answer ?? r.answer_figure } : { id: parseKey(key)?.id };
-    });
-    const name = `imagelink-reports-${new Date().toISOString().slice(0, 10)}.json`;
-    const file = new File([json], name, { type: 'application/json' });
-    try {
-      if (navigator.canShare?.({ files: [file] })) return void (await navigator.share({ files: [file] }));
-    } catch {
-      return;
-    }
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(file);
-    a.download = name;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  }
-  function clearR() {
-    if (!armed) {
-      armed = true;
-      haptic('light');
-      setTimeout(() => (armed = false), 4000);
-      return;
-    }
-    saveReports(MODE_ID, []);
-    reports = [];
-    armed = false;
+  /** 報告の書き出しに、問題の中身を添える（読み込み済みの部だけ） */
+  function describe(key: string) {
+    const r = questionById(parseKey(key)?.id ?? '');
+    return r ? { id: r.id, type: r.type, chapter: r.chapter, question: r.question, prompt: r.prompt_en ?? r.prompt_ja, answer: r.answer ?? r.answer_figure } : { id: parseKey(key)?.id };
   }
 </script>
 
@@ -131,16 +104,7 @@
   </div>
 </div>
 
-<h2 class="ui-h2">報告した問題</h2>
-<div class="ui-group">
-  <div class="ui-item">
-    <div class="ui-txt"><span>{reports.length} 件</span><span class="ui-hint">クイズ中の 🚩 から報告した問題（この端末に保存）</span></div>
-  </div>
-  {#if reports.length}
-    <button class="ui-item link" onclick={exportR}><span>JSON で書き出す</span><Icon name="chevron" size={18} /></button>
-    <button class="ui-item link danger" onclick={clearR}><span>{armed ? 'もう一度タップで消去' : '報告をすべて消す'}</span></button>
-  {/if}
-</div>
+<ReportsGroup modeId={MODE_ID} fileName="imagelink-reports" {describe} />
 
 <style>
   .row {
@@ -186,9 +150,6 @@
   .link {
     text-align: left;
     color: var(--text);
-  }
-  .danger {
-    color: var(--text2);
   }
   .bulk {
     margin: 10px 4px 0;

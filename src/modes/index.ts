@@ -5,8 +5,9 @@ import { etymologyMode } from './etymology/mode.ts';
 import { soundMode } from './sound/mode.ts';
 import { chunksMode } from './chunks/mode.ts';
 import { imagelinkMode } from './imagelink/mode.ts';
+import { reflexMode } from './reflex/mode.ts';
 
-export const MODES: QuizMode[] = [etymologyMode, soundMode, chunksMode, imagelinkMode];
+export const MODES: QuizMode[] = [etymologyMode, soundMode, chunksMode, imagelinkMode, reflexMode];
 
 export function getMode(id: string): QuizMode {
   return MODES.find((m) => m.id === id) ?? MODES[0];
