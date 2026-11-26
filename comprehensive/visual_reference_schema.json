@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "groups",
+    "rendering"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "title",
+          "day",
+          "description",
+          "nodes",
+          "questionIds",
+          "itemIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "contrast",
+              "morphology",
+              "wordFamily",
+              "collocation",
+              "preposition",
+              "questionResponse",
+              "paraphraseFlow",
+              "grammarStructure",
+              "soundContrast",
+              "connectedSpeech",
+              "numberListening",
+              "listeningPassage",
+              "conversationFlow",
+              "practicalReading",
+              "topicVocabulary",
+              "sentenceExpansion"
+            ]
+          },
+          "day": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "nodes": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "english",
+                "japanese"
+              ],
+              "properties": {
+                "english": {
+                  "type": "string"
+                },
+                "japanese": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "questionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "rendering": {
+      "type": "object"
+    }
+  }
+}

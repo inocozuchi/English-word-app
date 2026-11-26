@@ -1,0 +1,643 @@
+{
+  "schemaVersion": 1,
+  "templates": [
+    "chunk-10d-001",
+    "chunk-10d-002",
+    "chunk-10d-003",
+    "chunk-10d-004",
+    "chunk-10d-005",
+    "chunk-10d-006",
+    "chunk-10d-007",
+    "chunk-10d-008",
+    "chunk-10d-009",
+    "chunk-10d-010",
+    "chunk-10d-011",
+    "idiom-55-007"
+  ],
+  "exercises": [
+    {
+      "day": 37,
+      "english": "scissors",
+      "japanese": "はさみ",
+      "example": "It's something you use to cut paper.",
+      "alternative": "You use it to cut paper.",
+      "itemId": "chunk-10d-001",
+      "questionIds": [
+        "q-10d-0001",
+        "q-10d-0002"
+      ],
+      "template": "It's something you use to"
+    },
+    {
+      "day": 37,
+      "english": "kettle",
+      "japanese": "やかん",
+      "example": "It's something you use to boil water.",
+      "alternative": "You use it to boil water.",
+      "itemId": "chunk-10d-001",
+      "questionIds": [
+        "q-10d-0003",
+        "q-10d-0004"
+      ],
+      "template": "It's something you use to"
+    },
+    {
+      "day": 37,
+      "english": "umbrella",
+      "japanese": "傘",
+      "example": "It's something you use when it rains.",
+      "alternative": "It keeps you dry in the rain.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-10d-0005",
+        "q-10d-0006"
+      ],
+      "template": "It's something that"
+    },
+    {
+      "day": 37,
+      "english": "fridge",
+      "japanese": "冷蔵庫",
+      "example": "It's something that keeps food cold.",
+      "alternative": "It keeps food cold.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-10d-0007",
+        "q-10d-0008"
+      ],
+      "template": "It's something that"
+    },
+    {
+      "day": 37,
+      "english": "charger",
+      "japanese": "充電器",
+      "example": "It's something you use to charge your phone.",
+      "alternative": "You use it to charge a phone.",
+      "itemId": "chunk-10d-001",
+      "questionIds": [
+        "q-10d-0009",
+        "q-10d-0010"
+      ],
+      "template": "It's something you use to"
+    },
+    {
+      "day": 37,
+      "english": "towel",
+      "japanese": "タオル",
+      "example": "It's something you use to dry yourself.",
+      "alternative": "You use it after a shower.",
+      "itemId": "chunk-10d-001",
+      "questionIds": [
+        "q-10d-0011",
+        "q-10d-0012"
+      ],
+      "template": "It's something you use to"
+    },
+    {
+      "day": 40,
+      "english": "library",
+      "japanese": "図書館",
+      "example": "It's a place where you can borrow books.",
+      "alternative": "You can borrow books there.",
+      "itemId": "chunk-10d-003",
+      "questionIds": [
+        "q-10d-0013",
+        "q-10d-0014"
+      ],
+      "template": "It's a place where"
+    },
+    {
+      "day": 40,
+      "english": "pharmacy",
+      "japanese": "薬局",
+      "example": "It's a place where you can buy medicine.",
+      "alternative": "You can buy medicine there.",
+      "itemId": "chunk-10d-003",
+      "questionIds": [
+        "q-10d-0015",
+        "q-10d-0016"
+      ],
+      "template": "It's a place where"
+    },
+    {
+      "day": 40,
+      "english": "laundromat",
+      "japanese": "コインランドリー",
+      "example": "It's a place where you can wash your clothes.",
+      "alternative": "You can wash clothes there.",
+      "itemId": "chunk-10d-003",
+      "questionIds": [
+        "q-10d-0017",
+        "q-10d-0018"
+      ],
+      "template": "It's a place where"
+    },
+    {
+      "day": 40,
+      "english": "mechanic",
+      "japanese": "整備士",
+      "example": "It's a person who fixes cars.",
+      "alternative": "Someone who repairs cars.",
+      "itemId": "chunk-10d-004",
+      "questionIds": [
+        "q-10d-0019",
+        "q-10d-0020"
+      ],
+      "template": "It's a person who"
+    },
+    {
+      "day": 40,
+      "english": "receptionist",
+      "japanese": "受付係",
+      "example": "It's a person who welcomes visitors.",
+      "alternative": "Someone who helps visitors at a front desk.",
+      "itemId": "chunk-10d-004",
+      "questionIds": [
+        "q-10d-0021",
+        "q-10d-0022"
+      ],
+      "template": "It's a person who"
+    },
+    {
+      "day": 40,
+      "english": "librarian",
+      "japanese": "図書館員",
+      "example": "It's a person who works in a library.",
+      "alternative": "Someone who works in a library.",
+      "itemId": "chunk-10d-004",
+      "questionIds": [
+        "q-10d-0023",
+        "q-10d-0024"
+      ],
+      "template": "It's a person who"
+    },
+    {
+      "day": 39,
+      "english": "kiwifruit",
+      "japanese": "キウイフルーツ",
+      "example": "It's a kind of fruit with green or yellow flesh.",
+      "alternative": "It's a fruit with small black seeds.",
+      "itemId": "chunk-10d-005",
+      "questionIds": [
+        "q-10d-0025",
+        "q-10d-0026"
+      ],
+      "template": "It's a kind of"
+    },
+    {
+      "day": 39,
+      "english": "backpack",
+      "japanese": "リュック",
+      "example": "It's a bag you carry on your back.",
+      "alternative": "It's something you wear on your back to carry things.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-10d-0027",
+        "q-10d-0028"
+      ],
+      "template": "It's something that"
+    },
+    {
+      "day": 39,
+      "english": "receipt",
+      "japanese": "レシート",
+      "example": "It's a piece of paper that shows what you paid.",
+      "alternative": "It shows how much you paid.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-10d-0029",
+        "q-10d-0030"
+      ],
+      "template": "It's something that"
+    },
+    {
+      "day": 39,
+      "english": "tram",
+      "japanese": "路面電車",
+      "example": "It's like a train that runs on city streets.",
+      "alternative": "It's similar to a train.",
+      "itemId": "chunk-10d-009",
+      "questionIds": [
+        "q-10d-0031",
+        "q-10d-0032"
+      ],
+      "template": "It's like"
+    },
+    {
+      "day": 39,
+      "english": "hostel",
+      "japanese": "ホステル",
+      "example": "It's like a hotel, but often cheaper.",
+      "alternative": "It's a place where travellers can stay.",
+      "itemId": "chunk-10d-009",
+      "questionIds": [
+        "q-10d-0033",
+        "q-10d-0034"
+      ],
+      "template": "It's like"
+    },
+    {
+      "day": 39,
+      "english": "tablet",
+      "japanese": "タブレット端末",
+      "example": "It looks like a large smartphone.",
+      "alternative": "It's like a phone with a bigger screen.",
+      "itemId": "chunk-10d-006",
+      "questionIds": [
+        "q-10d-0035",
+        "q-10d-0036"
+      ],
+      "template": "It looks like"
+    },
+    {
+      "day": 45,
+      "english": "expensive",
+      "japanese": "高価な",
+      "example": "It's the opposite of cheap.",
+      "alternative": "It costs a lot of money.",
+      "itemId": "chunk-10d-008",
+      "questionIds": [
+        "q-10d-0037",
+        "q-10d-0038"
+      ],
+      "template": "It's the opposite of"
+    },
+    {
+      "day": 45,
+      "english": "crowded",
+      "japanese": "混雑した",
+      "example": "It's when there are too many people in one place.",
+      "alternative": "There are a lot of people there.",
+      "itemId": "chunk-10d-010",
+      "questionIds": [
+        "q-10d-0039",
+        "q-10d-0040"
+      ],
+      "template": "It's when"
+    },
+    {
+      "day": 45,
+      "english": "homesick",
+      "japanese": "ホームシックの",
+      "example": "It's when you miss your home.",
+      "alternative": "You miss your family and home.",
+      "itemId": "chunk-10d-010",
+      "questionIds": [
+        "q-10d-0041",
+        "q-10d-0042"
+      ],
+      "template": "It's when"
+    },
+    {
+      "day": 45,
+      "english": "confused",
+      "japanese": "混乱した",
+      "example": "It's when you don't understand what's happening.",
+      "alternative": "You are not sure what is happening.",
+      "itemId": "chunk-10d-010",
+      "questionIds": [
+        "q-10d-0043",
+        "q-10d-0044"
+      ],
+      "template": "It's when"
+    },
+    {
+      "day": 45,
+      "english": "silent",
+      "japanese": "静まり返った",
+      "example": "It's the opposite of noisy.",
+      "alternative": "There is no sound.",
+      "itemId": "chunk-10d-008",
+      "questionIds": [
+        "q-10d-0045",
+        "q-10d-0046"
+      ],
+      "template": "It's the opposite of"
+    },
+    {
+      "day": 45,
+      "english": "exhausted",
+      "japanese": "へとへとの",
+      "example": "It means very tired.",
+      "alternative": "You are extremely tired.",
+      "itemId": "chunk-10d-010",
+      "questionIds": [
+        "q-10d-0047",
+        "q-10d-0048"
+      ],
+      "template": "It's when"
+    },
+    {
+      "day": 44,
+      "english": "延期する",
+      "japanese": "予定を後にする",
+      "example": "Let's do it another day.",
+      "alternative": "Can we do it later?",
+      "itemId": "chunk-10d-011",
+      "questionIds": [
+        "q-10d-0049",
+        "q-10d-0050"
+      ],
+      "template": "What I mean is"
+    },
+    {
+      "day": 44,
+      "english": "再検討する",
+      "japanese": "もう一度考える",
+      "example": "Let's think about it again.",
+      "alternative": "We should think about it again.",
+      "itemId": "chunk-10d-011",
+      "questionIds": [
+        "q-10d-0051",
+        "q-10d-0052"
+      ],
+      "template": "What I mean is"
+    },
+    {
+      "day": 44,
+      "english": "認識の相違",
+      "japanese": "考え方が違う",
+      "example": "We see things differently.",
+      "alternative": "We have different ideas.",
+      "itemId": "idiom-55-007",
+      "questionIds": [
+        "q-10d-0053",
+        "q-10d-0054"
+      ],
+      "template": "in other words"
+    },
+    {
+      "day": 44,
+      "english": "都合が悪い",
+      "japanese": "その時間は無理",
+      "example": "I can't make it at that time.",
+      "alternative": "That time doesn't work for me.",
+      "itemId": "chunk-10d-011",
+      "questionIds": [
+        "q-10d-0055",
+        "q-10d-0056"
+      ],
+      "template": "What I mean is"
+    },
+    {
+      "day": 44,
+      "english": "理解が追いつかない",
+      "japanese": "話が速くて分からない",
+      "example": "You're speaking too fast for me.",
+      "alternative": "I can't follow what you're saying.",
+      "itemId": "chunk-10d-011",
+      "questionIds": [
+        "q-10d-0057",
+        "q-10d-0058"
+      ],
+      "template": "What I mean is"
+    },
+    {
+      "day": 44,
+      "english": "代替手段",
+      "japanese": "別の方法",
+      "example": "Is there another way to do it?",
+      "alternative": "Can we do it another way?",
+      "itemId": "idiom-55-007",
+      "questionIds": [
+        "q-10d-0059",
+        "q-10d-0060"
+      ],
+      "template": "in other words"
+    },
+    {
+      "day": 55,
+      "english": "increase",
+      "japanese": "増加する",
+      "example": "It means to become larger in number or amount.",
+      "alternative": "It means to go up.",
+      "itemId": "chunk-10d-011",
+      "questionIds": [
+        "q-10d-0061",
+        "q-10d-0062"
+      ],
+      "template": "What I mean is"
+    },
+    {
+      "day": 55,
+      "english": "decrease",
+      "japanese": "減少する",
+      "example": "It means to become smaller in number or amount.",
+      "alternative": "It means to go down.",
+      "itemId": "chunk-10d-011",
+      "questionIds": [
+        "q-10d-0063",
+        "q-10d-0064"
+      ],
+      "template": "What I mean is"
+    },
+    {
+      "day": 55,
+      "english": "benefit",
+      "japanese": "利点",
+      "example": "It's something good that you get from something.",
+      "alternative": "It's a good result or advantage.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-10d-0065",
+        "q-10d-0066"
+      ],
+      "template": "It's something that"
+    },
+    {
+      "day": 55,
+      "english": "evidence",
+      "japanese": "証拠",
+      "example": "It's information that helps show something is true.",
+      "alternative": "It's information that supports a claim.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-10d-0067",
+        "q-10d-0068"
+      ],
+      "template": "It's something that"
+    },
+    {
+      "day": 55,
+      "english": "compare",
+      "japanese": "比較する",
+      "example": "It means to look at how things are similar or different.",
+      "alternative": "It means to look at similarities and differences.",
+      "itemId": "idiom-55-007",
+      "questionIds": [
+        "q-10d-0069",
+        "q-10d-0070"
+      ],
+      "template": "in other words"
+    },
+    {
+      "day": 55,
+      "english": "summarise",
+      "japanese": "要約する",
+      "example": "It means to explain the main points briefly.",
+      "alternative": "It means to give the main ideas in a few words.",
+      "itemId": "idiom-55-007",
+      "questionIds": [
+        "q-10d-0071",
+        "q-10d-0072"
+      ],
+      "template": "in other words"
+    },
+    {
+      "day": 37,
+      "english": "extension cord",
+      "japanese": "延長コード",
+      "example": "It's a cable that lets you use a plug farther away.",
+      "alternative": "It helps you connect a device to a distant socket.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-11b-0109",
+        "q-11b-0110"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 40,
+      "english": "pedestrian crossing",
+      "japanese": "横断歩道",
+      "example": "It's a place where people can cross the road.",
+      "alternative": "People use it to cross the street.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-11b-0111",
+        "q-11b-0112"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 41,
+      "english": "deadline",
+      "japanese": "締め切り",
+      "example": "It's the last time or date to finish something.",
+      "alternative": "It's when you must hand in your work by.",
+      "itemId": "vocabulary-41-002",
+      "questionIds": [
+        "q-11b-0113",
+        "q-11b-0114"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 41,
+      "english": "attendance",
+      "japanese": "出席",
+      "example": "It means being present in class.",
+      "alternative": "It means going to class and being there.",
+      "itemId": "vocabulary-11a-0023",
+      "questionIds": [
+        "q-11b-0115",
+        "q-11b-0116"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 39,
+      "english": "refund",
+      "japanese": "返金",
+      "example": "It's money you get back after paying for something.",
+      "alternative": "The shop gives your money back.",
+      "itemId": "vocabulary-39-004",
+      "questionIds": [
+        "q-11b-0117",
+        "q-11b-0118"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 45,
+      "english": "relieved",
+      "japanese": "ほっとした",
+      "example": "It means you feel better because a worry is gone.",
+      "alternative": "You are no longer worried.",
+      "itemId": "vocabulary-45-005",
+      "questionIds": [
+        "q-11b-0119",
+        "q-11b-0120"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 40,
+      "english": "detour",
+      "japanese": "迂回路",
+      "example": "It's a different route you take to avoid a problem.",
+      "alternative": "It's another way to get somewhere.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-11b-0121",
+        "q-11b-0122"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 51,
+      "english": "affordable",
+      "japanese": "手頃な価格の",
+      "example": "It means you can pay for it without spending too much.",
+      "alternative": "It doesn't cost too much.",
+      "itemId": "vocabulary-32-010",
+      "questionIds": [
+        "q-11b-0123",
+        "q-11b-0124"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 41,
+      "english": "compulsory",
+      "japanese": "必須の",
+      "example": "It means you have to do it.",
+      "alternative": "It is not optional.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-11b-0125",
+        "q-11b-0126"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 54,
+      "english": "evidence",
+      "japanese": "根拠・証拠",
+      "example": "It's information that helps show something is true.",
+      "alternative": "It helps support a claim.",
+      "itemId": "vocabulary-54-002",
+      "questionIds": [
+        "q-11b-0127",
+        "q-11b-0128"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 55,
+      "english": "summarise",
+      "japanese": "要約する",
+      "example": "It means giving the main points in fewer words.",
+      "alternative": "You explain the most important ideas briefly.",
+      "itemId": "vocabulary-55-002",
+      "questionIds": [
+        "q-11b-0129",
+        "q-11b-0130"
+      ],
+      "template": "簡単な英語で説明する"
+    },
+    {
+      "day": 52,
+      "english": "consequence",
+      "japanese": "結果",
+      "example": "It's something that happens because of an action.",
+      "alternative": "It's the result of something.",
+      "itemId": "chunk-10d-002",
+      "questionIds": [
+        "q-11b-0131",
+        "q-11b-0132"
+      ],
+      "template": "簡単な英語で説明する"
+    }
+  ]
+}

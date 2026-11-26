@@ -1,0 +1,1 @@
+追加辞典 vocabulary_reference.json は別形式。Claude Code は辞典表示に統合し、既存 course の問題を自動ルートへ優先度に応じて追加する。自由英作文の別解は自己採点を許可する。不規則動詞の kana は原形のみ。

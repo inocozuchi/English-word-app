@@ -1,0 +1,1 @@
+16 scripted scenarios, 10 fictional reading documents, 68 new questions, 26 visual groups. Branches cover alternative replies and clarification, not arbitrary free-text conversation. Existing course and visual arrays preserved; schemas and graph targets checked. Runtime untested.

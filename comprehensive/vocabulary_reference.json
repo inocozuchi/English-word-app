@@ -1,0 +1,1302 @@
+{
+  "schemaVersion": 1,
+  "irregularVerbs": [
+    {
+      "id": "irregular-001",
+      "base": "be",
+      "past": [
+        "was",
+        "were"
+      ],
+      "participle": [
+        "been"
+      ],
+      "kana": "ビー",
+      "japanese": "〜である",
+      "itemId": "vocabulary-01-008",
+      "note": ""
+    },
+    {
+      "id": "irregular-002",
+      "base": "go",
+      "past": [
+        "went"
+      ],
+      "participle": [
+        "gone"
+      ],
+      "kana": "ゴウ",
+      "japanese": "行く",
+      "itemId": "vocabulary-02-001",
+      "note": ""
+    },
+    {
+      "id": "irregular-003",
+      "base": "come",
+      "past": [
+        "came"
+      ],
+      "participle": [
+        "come"
+      ],
+      "kana": "カム",
+      "japanese": "来る",
+      "itemId": "vocabulary-02-002",
+      "note": ""
+    },
+    {
+      "id": "irregular-004",
+      "base": "get",
+      "past": [
+        "got"
+      ],
+      "participle": [
+        "got",
+        "gotten"
+      ],
+      "kana": "ゲット",
+      "japanese": "得る",
+      "itemId": "vocabulary-02-003",
+      "note": "got は英・NZ英語で一般的。gotten は主に北米英語。"
+    },
+    {
+      "id": "irregular-005",
+      "base": "have",
+      "past": [
+        "had"
+      ],
+      "participle": [
+        "had"
+      ],
+      "kana": "ハヴ",
+      "japanese": "持つ",
+      "itemId": "vocabulary-02-004",
+      "note": ""
+    },
+    {
+      "id": "irregular-006",
+      "base": "do",
+      "past": [
+        "did"
+      ],
+      "participle": [
+        "done"
+      ],
+      "kana": "ドゥー",
+      "japanese": "する",
+      "itemId": "vocabulary-02-005",
+      "note": ""
+    },
+    {
+      "id": "irregular-007",
+      "base": "make",
+      "past": [
+        "made"
+      ],
+      "participle": [
+        "made"
+      ],
+      "kana": "メイク",
+      "japanese": "作る",
+      "itemId": "vocabulary-02-006",
+      "note": ""
+    },
+    {
+      "id": "irregular-008",
+      "base": "take",
+      "past": [
+        "took"
+      ],
+      "participle": [
+        "taken"
+      ],
+      "kana": "テイク",
+      "japanese": "取る",
+      "itemId": "vocabulary-02-007",
+      "note": ""
+    },
+    {
+      "id": "irregular-009",
+      "base": "know",
+      "past": [
+        "knew"
+      ],
+      "participle": [
+        "known"
+      ],
+      "kana": "ノウ",
+      "japanese": "知る",
+      "itemId": "vocabulary-02-011",
+      "note": ""
+    },
+    {
+      "id": "irregular-010",
+      "base": "think",
+      "past": [
+        "thought"
+      ],
+      "participle": [
+        "thought"
+      ],
+      "kana": "スィンク",
+      "japanese": "考える",
+      "itemId": "vocabulary-02-012",
+      "note": ""
+    },
+    {
+      "id": "irregular-011",
+      "base": "eat",
+      "past": [
+        "ate"
+      ],
+      "participle": [
+        "eaten"
+      ],
+      "kana": "イート",
+      "japanese": "食べる",
+      "itemId": "vocabulary-02-016",
+      "note": ""
+    },
+    {
+      "id": "irregular-012",
+      "base": "drink",
+      "past": [
+        "drank"
+      ],
+      "participle": [
+        "drunk"
+      ],
+      "kana": "ドリンク",
+      "japanese": "飲む",
+      "itemId": "vocabulary-02-017",
+      "note": ""
+    },
+    {
+      "id": "irregular-013",
+      "base": "sleep",
+      "past": [
+        "slept"
+      ],
+      "participle": [
+        "slept"
+      ],
+      "kana": "スリープ",
+      "japanese": "眠る",
+      "itemId": "vocabulary-02-018",
+      "note": ""
+    },
+    {
+      "id": "irregular-014",
+      "base": "read",
+      "past": [
+        "read"
+      ],
+      "participle": [
+        "read"
+      ],
+      "kana": "リード",
+      "japanese": "読む",
+      "itemId": "vocabulary-02-019",
+      "note": "過去形・過去分詞の read は「レッド」。"
+    },
+    {
+      "id": "irregular-015",
+      "base": "write",
+      "past": [
+        "wrote"
+      ],
+      "participle": [
+        "written"
+      ],
+      "kana": "ライト",
+      "japanese": "書く",
+      "itemId": "vocabulary-02-020",
+      "note": ""
+    },
+    {
+      "id": "irregular-016",
+      "base": "speak",
+      "past": [
+        "spoke"
+      ],
+      "participle": [
+        "spoken"
+      ],
+      "kana": "スピーク",
+      "japanese": "話す",
+      "itemId": "vocabulary-03-001",
+      "note": ""
+    },
+    {
+      "id": "irregular-017",
+      "base": "hear",
+      "past": [
+        "heard"
+      ],
+      "participle": [
+        "heard"
+      ],
+      "kana": "ヒア",
+      "japanese": "聞こえる",
+      "itemId": "vocabulary-03-003",
+      "note": ""
+    },
+    {
+      "id": "irregular-018",
+      "base": "see",
+      "past": [
+        "saw"
+      ],
+      "participle": [
+        "seen"
+      ],
+      "kana": "スィー",
+      "japanese": "見る",
+      "itemId": "vocabulary-03-004",
+      "note": ""
+    },
+    {
+      "id": "irregular-019",
+      "base": "understand",
+      "past": [
+        "understood"
+      ],
+      "participle": [
+        "understood"
+      ],
+      "kana": "アンダースタンド",
+      "japanese": "理解する",
+      "itemId": "vocabulary-03-007",
+      "note": ""
+    },
+    {
+      "id": "irregular-020",
+      "base": "forget",
+      "past": [
+        "forgot"
+      ],
+      "participle": [
+        "forgotten"
+      ],
+      "kana": "フォゲット",
+      "japanese": "忘れる",
+      "itemId": "vocabulary-03-009",
+      "note": ""
+    },
+    {
+      "id": "irregular-021",
+      "base": "find",
+      "past": [
+        "found"
+      ],
+      "participle": [
+        "found"
+      ],
+      "kana": "ファインド",
+      "japanese": "見つける",
+      "itemId": "vocabulary-03-016",
+      "note": ""
+    },
+    {
+      "id": "irregular-022",
+      "base": "meet",
+      "past": [
+        "met"
+      ],
+      "participle": [
+        "met"
+      ],
+      "kana": "ミート",
+      "japanese": "会う",
+      "itemId": "vocabulary-05-007",
+      "note": ""
+    },
+    {
+      "id": "irregular-023",
+      "base": "buy",
+      "past": [
+        "bought"
+      ],
+      "participle": [
+        "bought"
+      ],
+      "kana": "バイ",
+      "japanese": "買う",
+      "itemId": "vocabulary-05-008",
+      "note": ""
+    },
+    {
+      "id": "irregular-024",
+      "base": "pay",
+      "past": [
+        "paid"
+      ],
+      "participle": [
+        "paid"
+      ],
+      "kana": "ペイ",
+      "japanese": "支払う",
+      "itemId": "vocabulary-05-009",
+      "note": ""
+    },
+    {
+      "id": "irregular-025",
+      "base": "leave",
+      "past": [
+        "left"
+      ],
+      "participle": [
+        "left"
+      ],
+      "kana": "リーヴ",
+      "japanese": "去る",
+      "itemId": "vocabulary-05-010",
+      "note": ""
+    },
+    {
+      "id": "irregular-026",
+      "base": "bring",
+      "past": [
+        "brought"
+      ],
+      "participle": [
+        "brought"
+      ],
+      "kana": "ブリング",
+      "japanese": "持ってくる",
+      "itemId": "vocabulary-05-012",
+      "note": ""
+    },
+    {
+      "id": "irregular-027",
+      "base": "give",
+      "past": [
+        "gave"
+      ],
+      "participle": [
+        "given"
+      ],
+      "kana": "ギヴ",
+      "japanese": "与える",
+      "itemId": "vocabulary-05-013",
+      "note": ""
+    },
+    {
+      "id": "irregular-028",
+      "base": "tell",
+      "past": [
+        "told"
+      ],
+      "participle": [
+        "told"
+      ],
+      "kana": "テル",
+      "japanese": "伝える",
+      "itemId": "vocabulary-05-014",
+      "note": ""
+    },
+    {
+      "id": "irregular-029",
+      "base": "say",
+      "past": [
+        "said"
+      ],
+      "participle": [
+        "said"
+      ],
+      "kana": "セイ",
+      "japanese": "言う",
+      "itemId": "vocabulary-05-015",
+      "note": ""
+    },
+    {
+      "id": "irregular-030",
+      "base": "feel",
+      "past": [
+        "felt"
+      ],
+      "participle": [
+        "felt"
+      ],
+      "kana": "フィール",
+      "japanese": "感じる",
+      "itemId": "vocabulary-05-016",
+      "note": ""
+    },
+    {
+      "id": "irregular-031",
+      "base": "lose",
+      "past": [
+        "lost"
+      ],
+      "participle": [
+        "lost"
+      ],
+      "kana": "ルーズ",
+      "japanese": "失う",
+      "itemId": "vocabulary-05-017",
+      "note": ""
+    },
+    {
+      "id": "irregular-032",
+      "base": "sit",
+      "past": [
+        "sat"
+      ],
+      "participle": [
+        "sat"
+      ],
+      "kana": "スィット",
+      "japanese": "座る",
+      "itemId": "vocabulary-08-001",
+      "note": ""
+    },
+    {
+      "id": "irregular-033",
+      "base": "stand",
+      "past": [
+        "stood"
+      ],
+      "participle": [
+        "stood"
+      ],
+      "kana": "スタンド",
+      "japanese": "立つ",
+      "itemId": "vocabulary-08-002",
+      "note": ""
+    },
+    {
+      "id": "irregular-034",
+      "base": "run",
+      "past": [
+        "ran"
+      ],
+      "participle": [
+        "run"
+      ],
+      "kana": "ラン",
+      "japanese": "走る",
+      "itemId": "vocabulary-08-003",
+      "note": ""
+    },
+    {
+      "id": "irregular-035",
+      "base": "swim",
+      "past": [
+        "swam"
+      ],
+      "participle": [
+        "swum"
+      ],
+      "kana": "スウィム",
+      "japanese": "泳ぐ",
+      "itemId": "vocabulary-08-004",
+      "note": ""
+    },
+    {
+      "id": "irregular-036",
+      "base": "wear",
+      "past": [
+        "wore"
+      ],
+      "participle": [
+        "worn"
+      ],
+      "kana": "ウェア",
+      "japanese": "着る",
+      "itemId": "vocabulary-08-006",
+      "note": ""
+    },
+    {
+      "id": "irregular-037",
+      "base": "show",
+      "past": [
+        "showed"
+      ],
+      "participle": [
+        "shown",
+        "showed"
+      ],
+      "kana": "ショウ",
+      "japanese": "見せる",
+      "itemId": "vocabulary-09-001",
+      "note": ""
+    },
+    {
+      "id": "irregular-038",
+      "base": "lend",
+      "past": [
+        "lent"
+      ],
+      "participle": [
+        "lent"
+      ],
+      "kana": "レンド",
+      "japanese": "貸す",
+      "itemId": "vocabulary-09-006",
+      "note": ""
+    },
+    {
+      "id": "irregular-039",
+      "base": "choose",
+      "past": [
+        "chose"
+      ],
+      "participle": [
+        "chosen"
+      ],
+      "kana": "チューズ",
+      "japanese": "選ぶ",
+      "itemId": "vocabulary-09-008",
+      "note": ""
+    },
+    {
+      "id": "irregular-040",
+      "base": "keep",
+      "past": [
+        "kept"
+      ],
+      "participle": [
+        "kept"
+      ],
+      "kana": "キープ",
+      "japanese": "保つ",
+      "itemId": "vocabulary-18-004",
+      "note": ""
+    },
+    {
+      "id": "irregular-041",
+      "base": "begin",
+      "past": [
+        "began"
+      ],
+      "participle": [
+        "begun"
+      ],
+      "kana": "ビギン",
+      "japanese": "始める",
+      "itemId": "vocabulary-23-003",
+      "note": ""
+    },
+    {
+      "id": "irregular-042",
+      "base": "send",
+      "past": [
+        "sent"
+      ],
+      "participle": [
+        "sent"
+      ],
+      "kana": "センド",
+      "japanese": "送る",
+      "itemId": "vocabulary-24-005",
+      "note": ""
+    },
+    {
+      "id": "irregular-043",
+      "base": "build",
+      "past": [
+        "built"
+      ],
+      "participle": [
+        "built"
+      ],
+      "kana": "ビルド",
+      "japanese": "建てる",
+      "itemId": "vocabulary-25-001",
+      "note": ""
+    },
+    {
+      "id": "irregular-044",
+      "base": "hold",
+      "past": [
+        "held"
+      ],
+      "participle": [
+        "held"
+      ],
+      "kana": "ホウルド",
+      "japanese": "持つ",
+      "itemId": "vocabulary-34-009",
+      "note": ""
+    },
+    {
+      "id": "irregular-045",
+      "base": "put",
+      "past": [
+        "put"
+      ],
+      "participle": [
+        "put"
+      ],
+      "kana": "プット",
+      "japanese": "置く",
+      "itemId": "vocab-extra-0001",
+      "note": ""
+    },
+    {
+      "id": "irregular-046",
+      "base": "let",
+      "past": [
+        "let"
+      ],
+      "participle": [
+        "let"
+      ],
+      "kana": "レット",
+      "japanese": "〜させる",
+      "itemId": "vocab-extra-0002",
+      "note": ""
+    },
+    {
+      "id": "irregular-047",
+      "base": "fall",
+      "past": [
+        "fell"
+      ],
+      "participle": [
+        "fallen"
+      ],
+      "kana": "フォール",
+      "japanese": "落ちる",
+      "itemId": "vocab-extra-0023",
+      "note": ""
+    },
+    {
+      "id": "irregular-048",
+      "base": "cut",
+      "past": [
+        "cut"
+      ],
+      "participle": [
+        "cut"
+      ],
+      "kana": "カット",
+      "japanese": "切る",
+      "itemId": "vocab-extra-0024",
+      "note": ""
+    },
+    {
+      "id": "irregular-049",
+      "base": "catch",
+      "past": [
+        "caught"
+      ],
+      "participle": [
+        "caught"
+      ],
+      "kana": "キャッチ",
+      "japanese": "捕まえる",
+      "itemId": "vocabulary-44-007",
+      "note": ""
+    },
+    {
+      "id": "irregular-050",
+      "base": "win",
+      "past": [
+        "won"
+      ],
+      "participle": [
+        "won"
+      ],
+      "kana": "ウィン",
+      "japanese": "勝つ",
+      "itemId": "vocab-extra-0025",
+      "note": ""
+    },
+    {
+      "id": "irregular-051",
+      "base": "sell",
+      "past": [
+        "sold"
+      ],
+      "participle": [
+        "sold"
+      ],
+      "kana": "セル",
+      "japanese": "売る",
+      "itemId": "vocab-extra-0026",
+      "note": ""
+    },
+    {
+      "id": "irregular-052",
+      "base": "cost",
+      "past": [
+        "cost"
+      ],
+      "participle": [
+        "cost"
+      ],
+      "kana": "コスト",
+      "japanese": "費用がかかる",
+      "itemId": "vocab-extra-0027",
+      "note": ""
+    },
+    {
+      "id": "irregular-053",
+      "base": "draw",
+      "past": [
+        "drew"
+      ],
+      "participle": [
+        "drawn"
+      ],
+      "kana": "ドロー",
+      "japanese": "描く",
+      "itemId": "vocab-extra-0033",
+      "note": ""
+    },
+    {
+      "id": "irregular-054",
+      "base": "drive",
+      "past": [
+        "drove"
+      ],
+      "participle": [
+        "driven"
+      ],
+      "kana": "ドライヴ",
+      "japanese": "運転する",
+      "itemId": "vocab-extra-0034",
+      "note": ""
+    },
+    {
+      "id": "irregular-055",
+      "base": "ride",
+      "past": [
+        "rode"
+      ],
+      "participle": [
+        "ridden"
+      ],
+      "kana": "ライド",
+      "japanese": "乗る",
+      "itemId": "vocab-extra-0035",
+      "note": ""
+    },
+    {
+      "id": "irregular-056",
+      "base": "become",
+      "past": [
+        "became"
+      ],
+      "participle": [
+        "become"
+      ],
+      "kana": "ビカム",
+      "japanese": "なる",
+      "itemId": "vocab-extra-0098",
+      "note": ""
+    },
+    {
+      "id": "irregular-057",
+      "base": "spend",
+      "past": [
+        "spent"
+      ],
+      "participle": [
+        "spent"
+      ],
+      "kana": "スペンド",
+      "japanese": "費やす",
+      "itemId": "vocab-extra-0101",
+      "note": ""
+    },
+    {
+      "id": "irregular-058",
+      "base": "break",
+      "past": [
+        "broke"
+      ],
+      "participle": [
+        "broken"
+      ],
+      "kana": "ブレイク",
+      "japanese": "壊す",
+      "itemId": "vocabulary-10-016",
+      "note": ""
+    },
+    {
+      "id": "irregular-059",
+      "base": "teach",
+      "past": [
+        "taught"
+      ],
+      "participle": [
+        "taught"
+      ],
+      "kana": "ティーチ",
+      "japanese": "教える",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-060",
+      "base": "wake",
+      "past": [
+        "woke"
+      ],
+      "participle": [
+        "woken"
+      ],
+      "kana": "ウェイク",
+      "japanese": "目覚める",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-061",
+      "base": "rise",
+      "past": [
+        "rose"
+      ],
+      "participle": [
+        "risen"
+      ],
+      "kana": "ライズ",
+      "japanese": "上がる",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-062",
+      "base": "shake",
+      "past": [
+        "shook"
+      ],
+      "participle": [
+        "shaken"
+      ],
+      "kana": "シェイク",
+      "japanese": "振る",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-063",
+      "base": "throw",
+      "past": [
+        "threw"
+      ],
+      "participle": [
+        "thrown"
+      ],
+      "kana": "スロウ",
+      "japanese": "投げる",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-064",
+      "base": "hit",
+      "past": [
+        "hit"
+      ],
+      "participle": [
+        "hit"
+      ],
+      "kana": "ヒット",
+      "japanese": "当たる",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-065",
+      "base": "hurt",
+      "past": [
+        "hurt"
+      ],
+      "participle": [
+        "hurt"
+      ],
+      "kana": "ハート",
+      "japanese": "痛む",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-066",
+      "base": "set",
+      "past": [
+        "set"
+      ],
+      "participle": [
+        "set"
+      ],
+      "kana": "セット",
+      "japanese": "設定する",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-067",
+      "base": "shut",
+      "past": [
+        "shut"
+      ],
+      "participle": [
+        "shut"
+      ],
+      "kana": "シャット",
+      "japanese": "閉める",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-068",
+      "base": "feed",
+      "past": [
+        "fed"
+      ],
+      "participle": [
+        "fed"
+      ],
+      "kana": "フィード",
+      "japanese": "食べ物を与える",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-069",
+      "base": "fight",
+      "past": [
+        "fought"
+      ],
+      "participle": [
+        "fought"
+      ],
+      "kana": "ファイト",
+      "japanese": "争う",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-070",
+      "base": "fly",
+      "past": [
+        "flew"
+      ],
+      "participle": [
+        "flown"
+      ],
+      "kana": "フライ",
+      "japanese": "飛ぶ",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-071",
+      "base": "hide",
+      "past": [
+        "hid"
+      ],
+      "participle": [
+        "hidden"
+      ],
+      "kana": "ハイド",
+      "japanese": "隠す",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-072",
+      "base": "steal",
+      "past": [
+        "stole"
+      ],
+      "participle": [
+        "stolen"
+      ],
+      "kana": "スティール",
+      "japanese": "盗む",
+      "itemId": null,
+      "note": ""
+    },
+    {
+      "id": "irregular-073",
+      "base": "freeze",
+      "past": [
+        "froze"
+      ],
+      "participle": [
+        "frozen"
+      ],
+      "kana": "フリーズ",
+      "japanese": "凍る",
+      "itemId": null,
+      "note": ""
+    }
+  ],
+  "verbSenses": [
+    {
+      "id": "sense-001",
+      "base": "get",
+      "phrase": "get home",
+      "japanese": "家に着く",
+      "example": "I get home at six.",
+      "exampleJapanese": "6時に帰宅します。",
+      "itemId": "vocabulary-02-003"
+    },
+    {
+      "id": "sense-002",
+      "base": "get",
+      "phrase": "get cold",
+      "japanese": "寒くなる",
+      "example": "It's getting cold.",
+      "exampleJapanese": "寒くなってきました。",
+      "itemId": "vocabulary-02-003"
+    },
+    {
+      "id": "sense-003",
+      "base": "get",
+      "phrase": "get a message",
+      "japanese": "メッセージを受け取る",
+      "example": "I got your message.",
+      "exampleJapanese": "メッセージを受け取りました。",
+      "itemId": "vocabulary-02-003"
+    },
+    {
+      "id": "sense-004",
+      "base": "get",
+      "phrase": "get it",
+      "japanese": "理解する",
+      "example": "I get it now.",
+      "exampleJapanese": "今分かりました。",
+      "itemId": "vocabulary-02-003"
+    },
+    {
+      "id": "sense-005",
+      "base": "take",
+      "phrase": "take a bus",
+      "japanese": "バスに乗る",
+      "example": "I take a bus to school.",
+      "exampleJapanese": "バスで学校に行きます。",
+      "itemId": "vocabulary-02-007"
+    },
+    {
+      "id": "sense-006",
+      "base": "take",
+      "phrase": "take time",
+      "japanese": "時間がかかる",
+      "example": "It takes ten minutes.",
+      "exampleJapanese": "10分かかります。",
+      "itemId": "vocabulary-02-007"
+    },
+    {
+      "id": "sense-007",
+      "base": "take",
+      "phrase": "take notes",
+      "japanese": "メモを取る",
+      "example": "I take notes in class.",
+      "exampleJapanese": "授業でメモを取ります。",
+      "itemId": "vocabulary-02-007"
+    },
+    {
+      "id": "sense-008",
+      "base": "make",
+      "phrase": "make a mistake",
+      "japanese": "間違える",
+      "example": "I made a mistake.",
+      "exampleJapanese": "間違えました。",
+      "itemId": "vocabulary-02-006"
+    },
+    {
+      "id": "sense-009",
+      "base": "make",
+      "phrase": "make friends",
+      "japanese": "友達を作る",
+      "example": "I want to make friends.",
+      "exampleJapanese": "友達を作りたいです。",
+      "itemId": "vocabulary-02-006"
+    },
+    {
+      "id": "sense-010",
+      "base": "make",
+      "phrase": "make someone happy",
+      "japanese": "人を喜ばせる",
+      "example": "That makes me happy.",
+      "exampleJapanese": "それは私を幸せな気持ちにします。",
+      "itemId": "vocabulary-02-006"
+    },
+    {
+      "id": "sense-011",
+      "base": "have",
+      "phrase": "have breakfast",
+      "japanese": "朝食を食べる",
+      "example": "I have breakfast at seven.",
+      "exampleJapanese": "7時に朝食を食べます。",
+      "itemId": "vocabulary-02-004"
+    },
+    {
+      "id": "sense-012",
+      "base": "have",
+      "phrase": "have a cold",
+      "japanese": "風邪をひいている",
+      "example": "I have a cold.",
+      "exampleJapanese": "風邪をひいています。",
+      "itemId": "vocabulary-02-004"
+    },
+    {
+      "id": "sense-013",
+      "base": "have",
+      "phrase": "have time",
+      "japanese": "時間がある",
+      "example": "Do you have time?",
+      "exampleJapanese": "時間はありますか？",
+      "itemId": "vocabulary-02-004"
+    },
+    {
+      "id": "sense-014",
+      "base": "do",
+      "phrase": "do homework",
+      "japanese": "宿題をする",
+      "example": "I do my homework after dinner.",
+      "exampleJapanese": "夕食後に宿題をします。",
+      "itemId": "vocabulary-02-005"
+    },
+    {
+      "id": "sense-015",
+      "base": "do",
+      "phrase": "do the dishes",
+      "japanese": "皿洗いをする",
+      "example": "I'll do the dishes.",
+      "exampleJapanese": "皿洗いをします。",
+      "itemId": "vocabulary-02-005"
+    },
+    {
+      "id": "sense-016",
+      "base": "do",
+      "phrase": "do well",
+      "japanese": "うまくやる",
+      "example": "You did well.",
+      "exampleJapanese": "よくできました。",
+      "itemId": "vocabulary-02-005"
+    },
+    {
+      "id": "sense-017",
+      "base": "keep",
+      "phrase": "keep warm",
+      "japanese": "暖かくしておく",
+      "example": "Keep warm tonight.",
+      "exampleJapanese": "今夜は暖かくしてね。",
+      "itemId": "vocabulary-18-004"
+    },
+    {
+      "id": "sense-018",
+      "base": "keep",
+      "phrase": "keep a promise",
+      "japanese": "約束を守る",
+      "example": "I keep my promises.",
+      "exampleJapanese": "約束を守ります。",
+      "itemId": "vocabulary-18-004"
+    },
+    {
+      "id": "sense-019",
+      "base": "look",
+      "phrase": "look tired",
+      "japanese": "疲れて見える",
+      "example": "You look tired.",
+      "exampleJapanese": "疲れているようですね。",
+      "itemId": "vocabulary-03-005"
+    },
+    {
+      "id": "sense-020",
+      "base": "look",
+      "phrase": "look at",
+      "japanese": "〜を見る",
+      "example": "Look at this picture.",
+      "exampleJapanese": "この写真を見てください。",
+      "itemId": "vocabulary-03-005"
+    },
+    {
+      "id": "sense-021",
+      "base": "feel",
+      "phrase": "feel better",
+      "japanese": "気分がよくなる",
+      "example": "I feel better now.",
+      "exampleJapanese": "今は気分がよくなりました。",
+      "itemId": "vocabulary-05-016"
+    },
+    {
+      "id": "sense-022",
+      "base": "feel",
+      "phrase": "feel like",
+      "japanese": "〜したい気分",
+      "example": "I feel like going out.",
+      "exampleJapanese": "外出したい気分です。",
+      "itemId": "vocabulary-05-016"
+    },
+    {
+      "id": "sense-023",
+      "base": "run",
+      "phrase": "run a shop",
+      "japanese": "店を経営する",
+      "example": "She runs a small shop.",
+      "exampleJapanese": "彼女は小さな店を経営しています。",
+      "itemId": "vocabulary-08-003"
+    },
+    {
+      "id": "sense-024",
+      "base": "run",
+      "phrase": "run late",
+      "japanese": "予定より遅れる",
+      "example": "I'm running late.",
+      "exampleJapanese": "遅れそうです。",
+      "itemId": "vocabulary-08-003"
+    },
+    {
+      "id": "sense-025",
+      "base": "leave",
+      "phrase": "leave something behind",
+      "japanese": "物を置き忘れる",
+      "example": "I left my bag behind.",
+      "exampleJapanese": "かばんを置き忘れました。",
+      "itemId": "vocabulary-05-010"
+    },
+    {
+      "id": "sense-026",
+      "base": "leave",
+      "phrase": "leave for",
+      "japanese": "〜へ向けて出発する",
+      "example": "We leave for Auckland tomorrow.",
+      "exampleJapanese": "明日オークランドへ出発します。",
+      "itemId": "vocabulary-05-010"
+    },
+    {
+      "id": "sense-027",
+      "base": "mean",
+      "phrase": "mean something",
+      "japanese": "〜を意味する",
+      "example": "What does this mean?",
+      "exampleJapanese": "これはどういう意味ですか？",
+      "itemId": "vocabulary-26-010"
+    },
+    {
+      "id": "sense-028",
+      "base": "mean",
+      "phrase": "mean to",
+      "japanese": "〜するつもりである",
+      "example": "I didn't mean to be rude.",
+      "exampleJapanese": "失礼なことをするつもりはありませんでした。",
+      "itemId": "vocabulary-26-010"
+    },
+    {
+      "id": "sense-029",
+      "base": "work",
+      "phrase": "work well",
+      "japanese": "うまく機能する",
+      "example": "This app works well.",
+      "exampleJapanese": "このアプリはうまく動きます。",
+      "itemId": "vocabulary-02-014"
+    },
+    {
+      "id": "sense-030",
+      "base": "work",
+      "phrase": "work on",
+      "japanese": "〜に取り組む",
+      "example": "I'm working on my English.",
+      "exampleJapanese": "英語の勉強に取り組んでいます。",
+      "itemId": "vocabulary-02-014"
+    }
+  ]
+}

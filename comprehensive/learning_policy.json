@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "minutes": 20,
+      "budget": {
+        "review": 6,
+        "new": 5,
+        "practice": 7,
+        "finish": 2
+      },
+      "newItemCap": 8,
+      "optionalPriorities": [
+        "core"
+      ]
+    },
+    {
+      "minutes": 60,
+      "budget": {
+        "review": 15,
+        "new": 15,
+        "practice": 25,
+        "finish": 5
+      },
+      "newItemCap": 20,
+      "optionalPriorities": [
+        "core",
+        "recommended"
+      ]
+    },
+    {
+      "minutes": 90,
+      "budget": {
+        "review": 20,
+        "new": 25,
+        "practice": 38,
+        "finish": 7
+      },
+      "newItemCap": 30,
+      "optionalPriorities": [
+        "core",
+        "recommended"
+      ]
+    },
+    {
+      "minutes": 120,
+      "budget": {
+        "review": 30,
+        "new": 30,
+        "practice": 50,
+        "finish": 10
+      },
+      "newItemCap": 40,
+      "optionalPriorities": [
+        "core",
+        "recommended",
+        "extra"
+      ]
+    }
+  ],
+  "reviewOffsets": [
+    0,
+    1,
+    3,
+    7,
+    14,
+    30
+  ],
+  "reviewDays": [
+    7,
+    14,
+    21,
+    28,
+    35,
+    42,
+    49,
+    56
+  ],
+  "assessmentDays": [
+    57,
+    58,
+    59,
+    60
+  ],
+  "rules": {
+    "timeBudget": "soft wall-clock budget; stop after current question, save and offer optional continuation; no mandatory completion of all core questions",
+    "priority": "core first within budget; alternate skill types; no duplicate question in session except retry",
+    "backlog": "if due review estimated time exceeds review budget, halve new item cap; carry overdue items without blocking day progression; no avalanche",
+    "reviewDay": "sample due items and earlier days across skills; no new items required",
+    "assessment": "Day0 and Day60 independent forms from assessment_reference; Day60 practice separate; pause/resume without answer leakage; 20 minute profile may split assessment",
+    "audioUnavailable": "skip without penalty; record unavailable separately",
+    "openAnswers": "self-grade after model answer; no AI or exact-match rejection of plausible alternatives",
+    "resume": "persist day, queue IDs, cursor, answers, elapsed active time and selected profile after each response",
+    "timing": "exclude pauses and audio loading; estimate from personal median after sufficient observations; default estimates are heuristic",
+    "mastery": "recognition alone never implies retention; use delayed recall and production evidence",
+    "survival": "optional short session, not a separate mandatory mode"
+  },
+  "days": [
+    {
+      "day": 1,
+      "kind": "lesson",
+      "candidateQuestions": 74,
+      "candidateItems": 28,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 12
+      }
+    },
+    {
+      "day": 2,
+      "kind": "lesson",
+      "candidateQuestions": 110,
+      "candidateItems": 36,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 48
+      }
+    },
+    {
+      "day": 3,
+      "kind": "lesson",
+      "candidateQuestions": 92,
+      "candidateItems": 36,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 30
+      }
+    },
+    {
+      "day": 4,
+      "kind": "lesson",
+      "candidateQuestions": 126,
+      "candidateItems": 41,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 64
+      }
+    },
+    {
+      "day": 5,
+      "kind": "lesson",
+      "candidateQuestions": 156,
+      "candidateItems": 33,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 21,
+        "extra": 73
+      }
+    },
+    {
+      "day": 6,
+      "kind": "lesson",
+      "candidateQuestions": 77,
+      "candidateItems": 31,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 15
+      }
+    },
+    {
+      "day": 7,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 8,
+      "kind": "lesson",
+      "candidateQuestions": 106,
+      "candidateItems": 34,
+      "priorityCounts": {
+        "core": 76,
+        "recommended": 30
+      }
+    },
+    {
+      "day": 9,
+      "kind": "lesson",
+      "candidateQuestions": 106,
+      "candidateItems": 34,
+      "priorityCounts": {
+        "core": 76,
+        "recommended": 30
+      }
+    },
+    {
+      "day": 10,
+      "kind": "lesson",
+      "candidateQuestions": 103,
+      "candidateItems": 33,
+      "priorityCounts": {
+        "core": 76,
+        "recommended": 27
+      }
+    },
+    {
+      "day": 11,
+      "kind": "lesson",
+      "candidateQuestions": 118,
+      "candidateItems": 40,
+      "priorityCounts": {
+        "core": 76,
+        "recommended": 42
+      }
+    },
+    {
+      "day": 12,
+      "kind": "lesson",
+      "candidateQuestions": 109,
+      "candidateItems": 37,
+      "priorityCounts": {
+        "core": 76,
+        "recommended": 33
+      }
+    },
+    {
+      "day": 13,
+      "kind": "lesson",
+      "candidateQuestions": 106,
+      "candidateItems": 36,
+      "priorityCounts": {
+        "core": 76,
+        "recommended": 30
+      }
+    },
+    {
+      "day": 14,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 15,
+      "kind": "lesson",
+      "candidateQuestions": 166,
+      "candidateItems": 58,
+      "priorityCounts": {
+        "core": 67,
+        "recommended": 99
+      }
+    },
+    {
+      "day": 16,
+      "kind": "lesson",
+      "candidateQuestions": 109,
+      "candidateItems": 39,
+      "priorityCounts": {
+        "core": 67,
+        "recommended": 42
+      }
+    },
+    {
+      "day": 17,
+      "kind": "lesson",
+      "candidateQuestions": 91,
+      "candidateItems": 31,
+      "priorityCounts": {
+        "core": 67,
+        "recommended": 24
+      }
+    },
+    {
+      "day": 18,
+      "kind": "lesson",
+      "candidateQuestions": 103,
+      "candidateItems": 33,
+      "priorityCounts": {
+        "core": 67,
+        "recommended": 36
+      }
+    },
+    {
+      "day": 19,
+      "kind": "lesson",
+      "candidateQuestions": 103,
+      "candidateItems": 37,
+      "priorityCounts": {
+        "core": 67,
+        "recommended": 36
+      }
+    },
+    {
+      "day": 20,
+      "kind": "lesson",
+      "candidateQuestions": 97,
+      "candidateItems": 35,
+      "priorityCounts": {
+        "core": 67,
+        "recommended": 30
+      }
+    },
+    {
+      "day": 21,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 22,
+      "kind": "lesson",
+      "candidateQuestions": 154,
+      "candidateItems": 22,
+      "priorityCounts": {
+        "core": 69,
+        "extra": 73,
+        "recommended": 12
+      }
+    },
+    {
+      "day": 23,
+      "kind": "lesson",
+      "candidateQuestions": 81,
+      "candidateItems": 13,
+      "priorityCounts": {
+        "core": 69,
+        "recommended": 12
+      }
+    },
+    {
+      "day": 24,
+      "kind": "lesson",
+      "candidateQuestions": 81,
+      "candidateItems": 14,
+      "priorityCounts": {
+        "core": 69,
+        "recommended": 12
+      }
+    },
+    {
+      "day": 25,
+      "kind": "lesson",
+      "candidateQuestions": 75,
+      "candidateItems": 19,
+      "priorityCounts": {
+        "core": 69,
+        "recommended": 6
+      }
+    },
+    {
+      "day": 26,
+      "kind": "lesson",
+      "candidateQuestions": 75,
+      "candidateItems": 16,
+      "priorityCounts": {
+        "core": 69,
+        "recommended": 6
+      }
+    },
+    {
+      "day": 27,
+      "kind": "lesson",
+      "candidateQuestions": 85,
+      "candidateItems": 26,
+      "priorityCounts": {
+        "core": 69,
+        "recommended": 16
+      }
+    },
+    {
+      "day": 28,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 29,
+      "kind": "lesson",
+      "candidateQuestions": 83,
+      "candidateItems": 17,
+      "priorityCounts": {
+        "core": 65,
+        "recommended": 18
+      }
+    },
+    {
+      "day": 30,
+      "kind": "lesson",
+      "candidateQuestions": 71,
+      "candidateItems": 17,
+      "priorityCounts": {
+        "core": 65,
+        "recommended": 6
+      }
+    },
+    {
+      "day": 31,
+      "kind": "lesson",
+      "candidateQuestions": 68,
+      "candidateItems": 16,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 6
+      }
+    },
+    {
+      "day": 32,
+      "kind": "lesson",
+      "candidateQuestions": 80,
+      "candidateItems": 16,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 18
+      }
+    },
+    {
+      "day": 33,
+      "kind": "lesson",
+      "candidateQuestions": 137,
+      "candidateItems": 33,
+      "priorityCounts": {
+        "core": 65,
+        "recommended": 72
+      }
+    },
+    {
+      "day": 34,
+      "kind": "lesson",
+      "candidateQuestions": 383,
+      "candidateItems": 65,
+      "priorityCounts": {
+        "core": 62,
+        "recommended": 321
+      }
+    },
+    {
+      "day": 35,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 36,
+      "kind": "lesson",
+      "candidateQuestions": 59,
+      "candidateItems": 13,
+      "priorityCounts": {
+        "core": 50,
+        "recommended": 9
+      }
+    },
+    {
+      "day": 37,
+      "kind": "lesson",
+      "candidateQuestions": 137,
+      "candidateItems": 27,
+      "priorityCounts": {
+        "core": 49,
+        "recommended": 88
+      }
+    },
+    {
+      "day": 38,
+      "kind": "lesson",
+      "candidateQuestions": 59,
+      "candidateItems": 12,
+      "priorityCounts": {
+        "core": 50,
+        "recommended": 9
+      }
+    },
+    {
+      "day": 39,
+      "kind": "lesson",
+      "candidateQuestions": 81,
+      "candidateItems": 16,
+      "priorityCounts": {
+        "core": 50,
+        "recommended": 31
+      }
+    },
+    {
+      "day": 40,
+      "kind": "lesson",
+      "candidateQuestions": 158,
+      "candidateItems": 24,
+      "priorityCounts": {
+        "core": 49,
+        "recommended": 109
+      }
+    },
+    {
+      "day": 41,
+      "kind": "lesson",
+      "candidateQuestions": 133,
+      "candidateItems": 25,
+      "priorityCounts": {
+        "core": 49,
+        "recommended": 84
+      }
+    },
+    {
+      "day": 42,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 43,
+      "kind": "lesson",
+      "candidateQuestions": 96,
+      "candidateItems": 23,
+      "priorityCounts": {
+        "core": 55,
+        "recommended": 41
+      }
+    },
+    {
+      "day": 44,
+      "kind": "lesson",
+      "candidateQuestions": 218,
+      "candidateItems": 31,
+      "priorityCounts": {
+        "core": 52,
+        "recommended": 166
+      }
+    },
+    {
+      "day": 45,
+      "kind": "lesson",
+      "candidateQuestions": 105,
+      "candidateItems": 21,
+      "priorityCounts": {
+        "core": 49,
+        "recommended": 56
+      }
+    },
+    {
+      "day": 46,
+      "kind": "lesson",
+      "candidateQuestions": 64,
+      "candidateItems": 13,
+      "priorityCounts": {
+        "core": 49,
+        "recommended": 15
+      }
+    },
+    {
+      "day": 47,
+      "kind": "lesson",
+      "candidateQuestions": 56,
+      "candidateItems": 12,
+      "priorityCounts": {
+        "core": 46,
+        "recommended": 10
+      }
+    },
+    {
+      "day": 48,
+      "kind": "lesson",
+      "candidateQuestions": 50,
+      "candidateItems": 13,
+      "priorityCounts": {
+        "core": 50
+      }
+    },
+    {
+      "day": 49,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 50,
+      "kind": "lesson",
+      "candidateQuestions": 78,
+      "candidateItems": 10,
+      "priorityCounts": {
+        "core": 45,
+        "recommended": 33
+      }
+    },
+    {
+      "day": 51,
+      "kind": "lesson",
+      "candidateQuestions": 91,
+      "candidateItems": 16,
+      "priorityCounts": {
+        "core": 41,
+        "recommended": 50
+      }
+    },
+    {
+      "day": 52,
+      "kind": "lesson",
+      "candidateQuestions": 41,
+      "candidateItems": 9,
+      "priorityCounts": {
+        "core": 37,
+        "recommended": 4
+      }
+    },
+    {
+      "day": 53,
+      "kind": "lesson",
+      "candidateQuestions": 51,
+      "candidateItems": 9,
+      "priorityCounts": {
+        "core": 37,
+        "recommended": 14
+      }
+    },
+    {
+      "day": 54,
+      "kind": "lesson",
+      "candidateQuestions": 48,
+      "candidateItems": 9,
+      "priorityCounts": {
+        "core": 37,
+        "recommended": 11
+      }
+    },
+    {
+      "day": 55,
+      "kind": "lesson",
+      "candidateQuestions": 60,
+      "candidateItems": 10,
+      "priorityCounts": {
+        "core": 37,
+        "recommended": 23
+      }
+    },
+    {
+      "day": 56,
+      "kind": "review",
+      "candidateQuestions": 0,
+      "candidateItems": 0,
+      "priorityCounts": {}
+    },
+    {
+      "day": 57,
+      "kind": "assessment",
+      "candidateQuestions": 25,
+      "candidateItems": 0,
+      "priorityCounts": {
+        "core": 25
+      }
+    },
+    {
+      "day": 58,
+      "kind": "assessment",
+      "candidateQuestions": 25,
+      "candidateItems": 0,
+      "priorityCounts": {
+        "core": 25
+      }
+    },
+    {
+      "day": 59,
+      "kind": "assessment",
+      "candidateQuestions": 25,
+      "candidateItems": 0,
+      "priorityCounts": {
+        "core": 25
+      }
+    },
+    {
+      "day": 60,
+      "kind": "assessment",
+      "candidateQuestions": 25,
+      "candidateItems": 0,
+      "priorityCounts": {
+        "core": 25
+      }
+    }
+  ]
+}

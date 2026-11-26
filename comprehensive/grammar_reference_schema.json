@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "groups",
+    "grading"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "day",
+          "title",
+          "rule",
+          "diagram",
+          "examples",
+          "questionIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "day": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "title": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string"
+          },
+          "diagram": {
+            "type": "string"
+          },
+          "examples": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "english",
+                "japanese",
+                "incorrect"
+              ]
+            }
+          },
+          "questionIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "grading": {
+      "type": "string"
+    }
+  }
+}

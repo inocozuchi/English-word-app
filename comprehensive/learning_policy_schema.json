@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "profiles",
+    "reviewOffsets",
+    "reviewDays",
+    "assessmentDays",
+    "rules",
+    "days"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "minutes",
+          "budget",
+          "newItemCap",
+          "optionalPriorities"
+        ],
+        "properties": {
+          "minutes": {
+            "enum": [
+              20,
+              60,
+              90,
+              120
+            ]
+          },
+          "budget": {
+            "type": "object",
+            "required": [
+              "review",
+              "new",
+              "practice",
+              "finish"
+            ],
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "newItemCap": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "optionalPriorities": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "core",
+                "recommended",
+                "extra"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "days": {
+      "type": "array",
+      "minItems": 60,
+      "maxItems": 60,
+      "items": {
+        "type": "object",
+        "required": [
+          "day",
+          "kind",
+          "candidateQuestions",
+          "candidateItems",
+          "priorityCounts"
+        ]
+      }
+    },
+    "rules": {
+      "type": "object"
+    }
+  }
+}

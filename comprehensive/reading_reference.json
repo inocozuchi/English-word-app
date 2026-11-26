@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "documents": [
+    {
+      "id": "reading-10g-001",
+      "day": 40,
+      "title": "バス時刻表",
+      "text": "Campus shuttle: City stop 8:10, 8:40, 9:10. Campus arrival 8:30, 9:00, 9:30. No Sunday service.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0049",
+        "q-10g-0050"
+      ]
+    },
+    {
+      "id": "reading-10g-002",
+      "day": 39,
+      "title": "カフェメニュー",
+      "text": "Tea $4.00; coffee $5.00; sandwich $8.50. Oat milk available for an extra $1.00.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0051",
+        "q-10g-0052"
+      ]
+    },
+    {
+      "id": "reading-10g-003",
+      "day": 41,
+      "title": "授業メール",
+      "text": "Hi class, tomorrow's lesson will start at 10 am in Room B12 instead of Room A10. Please bring your workbook. Thanks, Sam.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0053",
+        "q-10g-0054"
+      ]
+    },
+    {
+      "id": "reading-10g-004",
+      "day": 37,
+      "title": "家庭のルール",
+      "text": "Please leave your shoes by the front door. Dinner is usually at 6 pm. If you will be late, please send us a message.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0055",
+        "q-10g-0056"
+      ]
+    },
+    {
+      "id": "reading-10g-005",
+      "day": 40,
+      "title": "施設掲示",
+      "text": "Library opening hours: Monday to Friday 8 am–8 pm; Saturday 10 am–4 pm; closed Sunday. Return books at the desk.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0057",
+        "q-10g-0058"
+      ]
+    },
+    {
+      "id": "reading-10g-006",
+      "day": 39,
+      "title": "返品案内",
+      "text": "Keep your receipt. Unused items may be returned within 14 days. This policy does not limit your legal rights.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0059",
+        "q-10g-0060"
+      ]
+    },
+    {
+      "id": "reading-10g-007",
+      "day": 41,
+      "title": "課題指示",
+      "text": "Write 150 words about a place you know. Include two reasons why you like it. Submit your work by Friday at 5 pm.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0061",
+        "q-10g-0062"
+      ]
+    },
+    {
+      "id": "reading-10g-008",
+      "day": 46,
+      "title": "予約確認",
+      "text": "Your appointment is on Tuesday at 2:30 pm. Please arrive ten minutes early and bring your ID.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0063",
+        "q-10g-0064"
+      ]
+    },
+    {
+      "id": "reading-10g-009",
+      "day": 47,
+      "title": "ごみ分別案内",
+      "text": "Put clean paper and cardboard in the recycling bin. Food scraps go in the food waste bin. Do not put plastic bags in either bin.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0065",
+        "q-10g-0066"
+      ]
+    },
+    {
+      "id": "reading-10g-010",
+      "day": 55,
+      "title": "短い説明文",
+      "text": "Many students use public transport because it is cheaper than owning a car. However, buses may be less convenient in areas with few services. More frequent buses could help.",
+      "fictional": true,
+      "questionIds": [
+        "q-10g-0067",
+        "q-10g-0068"
+      ]
+    },
+    {
+      "id": "reading-11d-001",
+      "day": 37,
+      "title": "家の連絡メモ",
+      "text": "Dinner is at 6:30 tonight. If you will be late, please send a message before six. Your meal will be in the fridge.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0049",
+        "q-11d-0050"
+      ]
+    },
+    {
+      "id": "reading-11d-002",
+      "day": 39,
+      "title": "交換条件",
+      "text": "You may exchange unused items within 14 days. Bring your receipt. Items marked final sale cannot be exchanged.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0051",
+        "q-11d-0052"
+      ]
+    },
+    {
+      "id": "reading-11d-003",
+      "day": 40,
+      "title": "バス運休案内",
+      "text": "Route 8 will not stop at King Street on Sunday. Please use the stop on Queen Street instead. Normal service resumes on Monday.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0053",
+        "q-11d-0054"
+      ]
+    },
+    {
+      "id": "reading-11d-004",
+      "day": 41,
+      "title": "授業メール",
+      "text": "Tomorrow’s tutorial has moved to Room 204. The start time remains 10 am. Bring your notes from Chapter 3.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0055",
+        "q-11d-0056"
+      ]
+    },
+    {
+      "id": "reading-11d-005",
+      "day": 41,
+      "title": "課題要項",
+      "text": "Write 150–200 words about a local issue. Include one example and submit your work online by Friday at noon.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0057",
+        "q-11d-0058"
+      ]
+    },
+    {
+      "id": "reading-11d-006",
+      "day": 46,
+      "title": "施設案内",
+      "text": "The reception desk is open from 8 am to 5 pm on weekdays. For non-urgent enquiries after hours, email the office.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0059",
+        "q-11d-0060"
+      ]
+    },
+    {
+      "id": "reading-11d-007",
+      "day": 47,
+      "title": "地域の掲示",
+      "text": "Please put clean paper and cardboard in the recycling bin. Food waste and plastic bags must go in separate bins.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0061",
+        "q-11d-0062"
+      ]
+    },
+    {
+      "id": "reading-11d-008",
+      "day": 52,
+      "title": "原因と結果",
+      "text": "The library extended its opening hours during exams. As a result, students had more time to study after class. However, staffing costs increased.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0063",
+        "q-11d-0064"
+      ]
+    },
+    {
+      "id": "reading-11d-009",
+      "day": 53,
+      "title": "比較と対照",
+      "text": "Online classes allow students to study from home. In-person classes offer more opportunities for face-to-face discussion. Both formats can be useful depending on the learner’s needs.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0065",
+        "q-11d-0066"
+      ]
+    },
+    {
+      "id": "reading-11d-010",
+      "day": 55,
+      "title": "主張と要点",
+      "text": "A campus garden can provide a place for students to relax. It can also support practical learning. Although it requires maintenance, the benefits may justify the cost.",
+      "fictional": true,
+      "questionIds": [
+        "q-11d-0067",
+        "q-11d-0068"
+      ]
+    }
+  ]
+}

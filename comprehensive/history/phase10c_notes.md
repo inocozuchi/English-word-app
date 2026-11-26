@@ -1,0 +1,1 @@
+35 original question/response pairs, 140 exercises, 7 visual groups. Existing arrays preserved; main and visual schemas validated. Reference pairs checked for item IDs. Rendering and human proofreading pending.
