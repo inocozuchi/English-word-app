@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- EIGO LOOP: 自動で次々と回って覚える「ループ」。太い輪と矢印、中に E -->
+  <rect width="1024" height="1024" fill="#3d5afe"/>
+  <!-- 輪（右上を少し空けて矢印に） -->
+  <path d="M 742 300 A 300 300 0 1 0 812 512" fill="none" stroke="#fff" stroke-width="78" stroke-linecap="round"/>
+  <!-- 矢印の先 -->
+  <path d="M 700 214 L 852 268 L 760 398 Z" fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round"/>
+  <!-- E（太い3本の横棒と縦棒） -->
+  <g fill="#fff">
+    <rect x="418" y="372" width="70" height="280" rx="10"/>
+    <rect x="418" y="372" width="196" height="64" rx="10"/>
+    <rect x="418" y="480" width="170" height="64" rx="10"/>
+    <rect x="418" y="588" width="196" height="64" rx="10"/>
+  </g>
+</svg>

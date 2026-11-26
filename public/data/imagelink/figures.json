@@ -1,0 +1,853 @@
+{
+ "figures": [
+  {
+   "id": "fig_001",
+   "file": "figures/fig_001.svg",
+   "captions": [
+    "現在形：時間の区切りがない「いつもそう」",
+    "現在形：いつもそう"
+   ],
+   "chapters": [
+    27,
+    125
+   ]
+  },
+  {
+   "id": "fig_002",
+   "file": "figures/fig_002.svg",
+   "captions": [
+    "現在進行形：動作の途中を切り取る",
+    "現在進行形：今まさに途中",
+    "進行形のイメージ"
+   ],
+   "chapters": [
+    27,
+    28,
+    126
+   ]
+  },
+  {
+   "id": "fig_003",
+   "file": "figures/fig_003.svg",
+   "captions": [
+    "過去形：今から切り離された「その時」",
+    "過去形：今から切り離された時点",
+    "過去形のイメージ"
+   ],
+   "chapters": [
+    29,
+    30,
+    127
+   ]
+  },
+  {
+   "id": "fig_004",
+   "file": "figures/fig_004.svg",
+   "captions": [
+    "現在完了形：過去の出来事を今につなげて持っている",
+    "現在完了形：過去と今のつながり",
+    "現在完了形のイメージ"
+   ],
+   "chapters": [
+    49,
+    50,
+    128
+   ]
+  },
+  {
+   "id": "fig_005",
+   "file": "figures/fig_005.svg",
+   "captions": [
+    "現在完了進行形：過去から今まで続けている"
+   ],
+   "chapters": [
+    129
+   ]
+  },
+  {
+   "id": "fig_006",
+   "file": "figures/fig_006.svg",
+   "captions": [
+    "will と be going to の違い",
+    "未来の2つの言い方",
+    "will と be going to"
+   ],
+   "chapters": [
+    33,
+    34,
+    130
+   ]
+  },
+  {
+   "id": "fig_007",
+   "file": "figures/fig_007.svg",
+   "captions": [
+    "未来進行形：未来のある時点で進行中"
+   ],
+   "chapters": [
+    131
+   ]
+  },
+  {
+   "id": "fig_008",
+   "file": "figures/fig_008.svg",
+   "captions": [
+    "能動態と受動態：矢印（動作）の向きは同じで、どこから見るかが違う",
+    "動作の発信源から見るか、受け手から見るか",
+    "英語は動作の発信源から始めるのが基本",
+    "受け身の形"
+   ],
+   "chapters": [
+    47,
+    48,
+    58,
+    132
+   ]
+  },
+  {
+   "id": "fig_009",
+   "file": "figures/fig_009.svg",
+   "captions": [
+    "助動詞は話し手の「心の判断」。確信・強さの目安",
+    "助動詞の強さの目安（文脈で変わります）"
+   ],
+   "chapters": [
+    35,
+    133
+   ]
+  },
+  {
+   "id": "fig_010",
+   "file": "figures/fig_010.svg",
+   "captions": [
+    "must・have to・should の義務の強さ",
+    "must・have to・should の強さ"
+   ],
+   "chapters": [
+    37,
+    145
+   ]
+  },
+  {
+   "id": "fig_011",
+   "file": "figures/fig_011.svg",
+   "captions": [
+    "must は話し手の判断、have to は外的な事情"
+   ],
+   "chapters": [
+    140
+   ]
+  },
+  {
+   "id": "fig_012",
+   "file": "figures/fig_012.svg",
+   "captions": [
+    "to 不定詞と動名詞のイメージの違い",
+    "動名詞は「実際に動いている行為」",
+    "to は「これから向かう先」",
+    "to と -ing の違い",
+    "to 不定詞のイメージ",
+    "動名詞と to 不定詞",
+    "try to do と try -ing：これから向かうか、実際にやってみるか",
+    "stop to do と stop -ing"
+   ],
+   "chapters": [
+    38,
+    39,
+    41,
+    42,
+    121,
+    122,
+    148,
+    149
+   ]
+  },
+  {
+   "id": "fig_013",
+   "file": "figures/fig_013.svg",
+   "captions": [
+    "分詞は形容詞のように名詞を説明する",
+    "-ing は「〜している」、過去分詞は「〜された」",
+    "分詞の2つの形"
+   ],
+   "chapters": [
+    52,
+    53,
+    150
+   ]
+  },
+  {
+   "id": "fig_014",
+   "file": "figures/fig_014.svg",
+   "captions": [
+    "名詞の補足説明は後ろに置く",
+    "関係代名詞：名詞のあとに説明を続ける",
+    "関係代名詞の働き"
+   ],
+   "chapters": [
+    52,
+    54,
+    55
+   ]
+  },
+  {
+   "id": "fig_015",
+   "file": "figures/fig_015.svg",
+   "captions": [
+    "五文型を「◯（モノ）」「→（動き）」「＝（イコール）」で表す",
+    "五文型の見取り図"
+   ],
+   "chapters": [
+    43,
+    44
+   ]
+  },
+  {
+   "id": "fig_016",
+   "file": "figures/fig_016.svg",
+   "captions": [
+    "as のコアイメージ「広げて重ね合わせる」と as〜as"
+   ],
+   "chapters": [
+    104
+   ]
+  },
+  {
+   "id": "fig_017",
+   "file": "figures/fig_017.svg",
+   "captions": [
+    "冠詞は名詞を入れる「枠組み」：無冠詞・a・the",
+    "英語の名詞は「輪郭」と「中身」の組み合わせ"
+   ],
+   "chapters": [
+    7,
+    8
+   ]
+  },
+  {
+   "id": "fig_018",
+   "file": "figures/fig_018.svg",
+   "captions": [
+    "可算名詞と不可算名詞：輪郭があるかどうか",
+    "複数形にできるのは輪郭のある名詞"
+   ],
+   "chapters": [
+    9,
+    10
+   ]
+  },
+  {
+   "id": "fig_019",
+   "file": "figures/fig_019.svg",
+   "captions": [
+    "some と any のイメージ"
+   ],
+   "chapters": [
+    11
+   ]
+  },
+  {
+   "id": "fig_020",
+   "file": "figures/fig_020.svg",
+   "captions": [
+    "主な前置詞のコアイメージ一覧",
+    "前置詞は「位置関係」のイメージで捉える"
+   ],
+   "chapters": [
+    17,
+    159
+   ]
+  },
+  {
+   "id": "fig_021",
+   "file": "figures/fig_021.svg",
+   "captions": [
+    "atのコアイメージ：点"
+   ],
+   "chapters": [
+    160
+   ]
+  },
+  {
+   "id": "fig_022",
+   "file": "figures/fig_022.svg",
+   "captions": [
+    "inのコアイメージ：空間の中"
+   ],
+   "chapters": [
+    161
+   ]
+  },
+  {
+   "id": "fig_023",
+   "file": "figures/fig_023.svg",
+   "captions": [
+    "onのコアイメージ：接触"
+   ],
+   "chapters": [
+    163
+   ]
+  },
+  {
+   "id": "fig_024",
+   "file": "figures/fig_024.svg",
+   "captions": [
+    "toのコアイメージ：到達点"
+   ],
+   "chapters": [
+    166
+   ]
+  },
+  {
+   "id": "fig_025",
+   "file": "figures/fig_025.svg",
+   "captions": [
+    "forのコアイメージ：方向・目的"
+   ],
+   "chapters": [
+    167
+   ]
+  },
+  {
+   "id": "fig_026",
+   "file": "figures/fig_026.svg",
+   "captions": [
+    "fromのコアイメージ：起点"
+   ],
+   "chapters": [
+    169
+   ]
+  },
+  {
+   "id": "fig_027",
+   "file": "figures/fig_027.svg",
+   "captions": [
+    "ofのコアイメージ：全体の一部・所属"
+   ],
+   "chapters": [
+    173
+   ]
+  },
+  {
+   "id": "fig_028",
+   "file": "figures/fig_028.svg",
+   "captions": [
+    "byのコアイメージ：そば・経由"
+   ],
+   "chapters": [
+    178
+   ]
+  },
+  {
+   "id": "fig_029",
+   "file": "figures/fig_029.svg",
+   "captions": [
+    "withのコアイメージ：一緒に"
+   ],
+   "chapters": [
+    184
+   ]
+  },
+  {
+   "id": "fig_030",
+   "file": "figures/fig_030.svg",
+   "captions": [
+    "aboutのコアイメージ：周辺"
+   ],
+   "chapters": [
+    187
+   ]
+  },
+  {
+   "id": "fig_031",
+   "file": "figures/fig_031.svg",
+   "captions": [
+    "about と around"
+   ],
+   "chapters": [
+    187
+   ]
+  },
+  {
+   "id": "fig_032",
+   "file": "figures/fig_032.svg",
+   "captions": [
+    "場所の at と in：点として見るか、空間として見るか"
+   ],
+   "chapters": [
+    162
+   ]
+  },
+  {
+   "id": "fig_033",
+   "file": "figures/fig_033.svg",
+   "captions": [
+    "時間の at・on・in：点・マス・箱"
+   ],
+   "chapters": [
+    165
+   ]
+  },
+  {
+   "id": "fig_034",
+   "file": "figures/fig_034.svg",
+   "captions": [
+    "in time と on time"
+   ],
+   "chapters": [
+    164
+   ]
+  },
+  {
+   "id": "fig_035",
+   "file": "figures/fig_035.svg",
+   "captions": [
+    "for は「長さ」、during は「どの期間か」"
+   ],
+   "chapters": [
+    168
+   ]
+  },
+  {
+   "id": "fig_036",
+   "file": "figures/fig_036.svg",
+   "captions": [
+    "from は起点、since は「起点から今まで」"
+   ],
+   "chapters": [
+    170
+   ]
+  },
+  {
+   "id": "fig_037",
+   "file": "figures/fig_037.svg",
+   "captions": [
+    "by は期限、until は継続の終点"
+   ],
+   "chapters": [
+    179
+   ]
+  },
+  {
+   "id": "fig_038",
+   "file": "figures/fig_038.svg",
+   "captions": [
+    "result in と result from：矢印の向き"
+   ],
+   "chapters": [
+    171
+   ]
+  },
+  {
+   "id": "fig_039",
+   "file": "figures/fig_039.svg",
+   "captions": [
+    "by と through"
+   ],
+   "chapters": [
+    180
+   ]
+  },
+  {
+   "id": "fig_040",
+   "file": "figures/fig_040.svg",
+   "captions": [
+    "by・near・beside：対象との距離"
+   ],
+   "chapters": [
+    181
+   ]
+  },
+  {
+   "id": "fig_041",
+   "file": "figures/fig_041.svg",
+   "captions": [
+    "by と with の違い"
+   ],
+   "chapters": [
+    185
+   ]
+  },
+  {
+   "id": "fig_042",
+   "file": "figures/fig_042.svg",
+   "captions": [
+    "交通手段の by・in・on"
+   ],
+   "chapters": [
+    172
+   ]
+  },
+  {
+   "id": "fig_043",
+   "file": "figures/fig_043.svg",
+   "captions": [
+    "仮定法：過去形で現実から距離をとる"
+   ],
+   "chapters": [
+    56
+   ]
+  },
+  {
+   "id": "fig_044",
+   "file": "figures/fig_044.svg",
+   "captions": [
+    "There 構文：存在にスポットライトを当てる",
+    "There is / are のイメージ"
+   ],
+   "chapters": [
+    31,
+    32
+   ]
+  },
+  {
+   "id": "fig_045",
+   "file": "figures/fig_045.svg",
+   "captions": [
+    "this・that・these・those：話し手からの距離と数"
+   ],
+   "chapters": [
+    24
+   ]
+  },
+  {
+   "id": "fig_046",
+   "file": "figures/fig_046.svg",
+   "captions": [
+    "比較級・最上級",
+    "比較の3つの形"
+   ],
+   "chapters": [
+    45,
+    46
+   ]
+  },
+  {
+   "id": "fig_047",
+   "file": "figures/fig_047.svg",
+   "captions": [
+    "使役動詞 make・have・get・let の違い"
+   ],
+   "chapters": [
+    81
+   ]
+  },
+  {
+   "id": "fig_048",
+   "file": "figures/fig_048.svg",
+   "captions": [
+    "日本語と英語の語順：周辺から中心へ／中心から周辺へ",
+    "英語は「誰が・どうする・何を」から始める",
+    "英語は中心から話し始める"
+   ],
+   "chapters": [
+    1,
+    4,
+    6
+   ]
+  },
+  {
+   "id": "fig_049",
+   "file": "figures/fig_049.svg",
+   "captions": [
+    "get のコアイメージ"
+   ],
+   "chapters": [
+    83,
+    84
+   ]
+  },
+  {
+   "id": "fig_050",
+   "file": "figures/fig_050.svg",
+   "captions": [
+    "take のコアイメージ"
+   ],
+   "chapters": [
+    75
+   ]
+  },
+  {
+   "id": "fig_051",
+   "file": "figures/fig_051.svg",
+   "captions": [
+    "have のコアイメージ",
+    "have：自分の領域にある"
+   ],
+   "chapters": [
+    76,
+    77
+   ]
+  },
+  {
+   "id": "fig_052",
+   "file": "figures/fig_052.svg",
+   "captions": [
+    "make のコアイメージ"
+   ],
+   "chapters": [
+    74
+   ]
+  },
+  {
+   "id": "fig_053",
+   "file": "figures/fig_053.svg",
+   "captions": [
+    "give のコアイメージ"
+   ],
+   "chapters": [
+    65
+   ]
+  },
+  {
+   "id": "fig_054",
+   "file": "figures/fig_054.svg",
+   "captions": [
+    "go と come：話題の中心から見た動き",
+    "come は中心に近づく",
+    "go は中心から離れる"
+   ],
+   "chapters": [
+    70,
+    71,
+    72
+   ]
+  },
+  {
+   "id": "fig_055",
+   "file": "figures/fig_055.svg",
+   "captions": [
+    "see・look・watch の違い",
+    "see は「自然に目に入る」",
+    "look は意識して目を向ける"
+   ],
+   "chapters": [
+    63,
+    103,
+    119
+   ]
+  },
+  {
+   "id": "fig_056",
+   "file": "figures/fig_056.svg",
+   "captions": [
+    "hear と listen"
+   ],
+   "chapters": [
+    116
+   ]
+  },
+  {
+   "id": "fig_057",
+   "file": "figures/fig_057.svg",
+   "captions": [
+    "keep と hold"
+   ],
+   "chapters": [
+    117
+   ]
+  },
+  {
+   "id": "fig_058",
+   "file": "figures/fig_058.svg",
+   "captions": [
+    "speak・talk・say・tell の位置づけ（目安）"
+   ],
+   "chapters": [
+    118
+   ]
+  },
+  {
+   "id": "fig_059",
+   "file": "figures/fig_059.svg",
+   "captions": [
+    "look・seem・appear の目安"
+   ],
+   "chapters": [
+    120
+   ]
+  },
+  {
+   "id": "fig_060",
+   "file": "figures/fig_060.svg",
+   "captions": [
+    "still と yet",
+    "yet は「期待している未来の出来事」"
+   ],
+   "chapters": [
+    108,
+    109
+   ]
+  },
+  {
+   "id": "fig_061",
+   "file": "figures/fig_061.svg",
+   "captions": [
+    "so のコアイメージ"
+   ],
+   "chapters": [
+    105
+   ]
+  },
+  {
+   "id": "fig_062",
+   "file": "figures/fig_062.svg",
+   "captions": [
+    "but：流れの向きを変える"
+   ],
+   "chapters": [
+    106
+   ]
+  },
+  {
+   "id": "fig_063",
+   "file": "figures/fig_063.svg",
+   "captions": [
+    "just のコアイメージ"
+   ],
+   "chapters": [
+    107
+   ]
+  },
+  {
+   "id": "fig_064",
+   "file": "figures/fig_064.svg",
+   "captions": [
+    "even のコアイメージ"
+   ],
+   "chapters": [
+    110
+   ]
+  },
+  {
+   "id": "fig_065",
+   "file": "figures/fig_065.svg",
+   "captions": [
+    "ago と before：基準が「今」か「ある時点」か"
+   ],
+   "chapters": [
+    113
+   ]
+  },
+  {
+   "id": "fig_066",
+   "file": "figures/fig_066.svg",
+   "captions": [
+    "out のコアイメージ"
+   ],
+   "chapters": [
+    115
+   ]
+  },
+  {
+   "id": "fig_067",
+   "file": "figures/fig_067.svg",
+   "captions": [
+    "put のコアイメージ"
+   ],
+   "chapters": [
+    95
+   ]
+  },
+  {
+   "id": "fig_068",
+   "file": "figures/fig_068.svg",
+   "captions": [
+    "turn のコアイメージ"
+   ],
+   "chapters": [
+    96
+   ]
+  },
+  {
+   "id": "fig_069",
+   "file": "figures/fig_069.svg",
+   "captions": [
+    "leave：離れる・後に残す"
+   ],
+   "chapters": [
+    102
+   ]
+  },
+  {
+   "id": "fig_070",
+   "file": "figures/fig_070.svg",
+   "captions": [
+    "work のコアイメージ"
+   ],
+   "chapters": [
+    60
+   ]
+  },
+  {
+   "id": "fig_071",
+   "file": "figures/fig_071.svg",
+   "captions": [
+    "find のコアイメージ"
+   ],
+   "chapters": [
+    61
+   ]
+  },
+  {
+   "id": "fig_072",
+   "file": "figures/fig_072.svg",
+   "captions": [
+    "think のコアイメージ"
+   ],
+   "chapters": [
+    67
+   ]
+  },
+  {
+   "id": "fig_073",
+   "file": "figures/fig_073.svg",
+   "captions": [
+    "catch のコアイメージ"
+   ],
+   "chapters": [
+    99
+   ]
+  },
+  {
+   "id": "fig_074",
+   "file": "figures/fig_074.svg",
+   "captions": [
+    "close のコアイメージ"
+   ],
+   "chapters": [
+    100
+   ]
+  },
+  {
+   "id": "fig_075",
+   "file": "figures/fig_075.svg",
+   "captions": [
+    "call のコアイメージ"
+   ],
+   "chapters": [
+    98
+   ]
+  },
+  {
+   "id": "fig_076",
+   "file": "figures/fig_076.svg",
+   "captions": [
+    "know・know about・know of：知っている深さ"
+   ],
+   "chapters": [
+    124
+   ]
+  },
+  {
+   "id": "fig_077",
+   "file": "figures/fig_077.svg",
+   "captions": [
+    "feel のコアイメージ"
+   ],
+   "chapters": [
+    101
+   ]
+  }
+ ]
+}

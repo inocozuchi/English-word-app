@@ -1,0 +1,215 @@
+<script lang="ts">
+  import PageHero from '../components/PageHero.svelte';
+  // 復習リスト: まちがえた問題の一覧。連続正解の進み具合を点で示し、手動で外すこともできる
+  import Page from '../components/Page.svelte';
+  import Icon from '../components/Icon.svelte';
+  import { router } from '../core/router.svelte.ts';
+  import { store, activeMode, loadData, removeFromReview } from '../core/store.svelte.ts';
+  import { reviewOrder } from '../core/review.ts';
+  import { createRng } from '../core/rng.ts';
+  import { haptic } from '../core/haptics.ts';
+  import { flip } from 'svelte/animate';
+  import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
+
+  loadData();
+  const mode = $derived(activeMode());
+  const goal = $derived(store.settings.reviewGoal);
+  // 並び順は開いた時点で固定（外したときに他の行が入れ替わらないように）
+  // svelte-ignore state_referenced_locally
+  const order = new Map((mode.ready() ? reviewOrder(store.progress.review, createRng(1)) : []).map((e, k) => [e.key, k]));
+  const entries = $derived(
+    (mode.ready() ? reviewOrder(store.progress.review, createRng(1)) : [])
+      .map((e) => ({ e, lb: mode.label(e.key) }))
+      .filter((x) => !!x.lb)
+      .sort((a, b) => (order.get(a.e.key) ?? 1e9) - (order.get(b.e.key) ?? 1e9)),
+  );
+  const flipOpts = () => {
+    const s = spring(SPRINGS.card);
+    return { duration: reducedMotion() ? 0 : s.duration, easing: s.ease };
+  };
+  /** 外した行は左へ抜ける */
+  function leave(_n: Element) {
+    if (reducedMotion()) return { duration: 120, css: (t: number) => `opacity:${t}` };
+    return { duration: 240, css: (t: number, u: number) => `transform:translate3d(${-u * 40}px,0,0);opacity:${t}` };
+  }
+  function remove(key: string) {
+    haptic('light');
+    removeFromReview(key);
+  }
+
+  function start() {
+    haptic('light');
+    router.push({ name: 'quiz', params: { seed: Date.now(), kind: 'review' } }, 'modal');
+  }
+  function open(key: string) {
+    const r = mode.detailRoute(key);
+    if (r) router.push(r);
+  }
+</script>
+
+<Page title="復習リスト">
+  <PageHero ja="復習リスト" en="Review *list*" />
+  <p class="lead">まちがえた問題が自動で入ります。<b>{goal}回続けて正解</b>するとリストから外れます。</p>
+
+  {#if entries.length}
+    <ul class="ui-group list">
+      {#each entries as { e, lb } (e.key)}
+        <li animate:flip={flipOpts()} out:leave>
+          <button class="row" onclick={() => open(e.key)}>
+            <span class="main">
+              {#if lb!.tag}<span class="tag">{lb!.tag}</span>{/if}
+              <span class="t" class:en={lb!.latin}>{lb!.title}</span>
+              <span class="s">{lb!.sub}</span>
+            </span>
+            <span class="dots" aria-label="連続正解 {e.streak}/{goal}">
+              {#each Array(goal) as _, k}<span class="dot" class:on={k < e.streak}></span>{/each}
+            </span>
+          </button>
+          <button class="remove press" onclick={() => remove(e.key)} aria-label="{lb!.title} をリストから外す">外す</button>
+        </li>
+      {/each}
+    </ul>
+  {:else}
+    <div class="empty">
+      <Icon name="review" size={32} />
+      <p>復習リストは空です</p>
+      <p class="sub">クイズでまちがえた問題が、ここに自動で入ります。</p>
+    </div>
+  {/if}
+
+  {#snippet footer()}
+    <button class="start press" disabled={!entries.length} onclick={start}>
+      <span class="display">Review</span><span class="ja">復習する（{Math.min(entries.length, store.settings.count)}問）</span>
+    </button>
+  {/snippet}
+</Page>
+
+<style>
+  .lead {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+  .lead b {
+    color: var(--text);
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .list li {
+    display: flex;
+    align-items: center;
+  }
+  .list li + li {
+    border-top: 1.5px solid var(--line);
+  }
+  .list li {
+    background: var(--bg);
+  }
+  .row {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 6px 12px 18px;
+    text-align: left;
+  }
+  .main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .t {
+    font-size: 17px;
+    font-weight: 650;
+  }
+  .tag {
+    align-self: flex-start;
+    margin-bottom: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text2);
+    border: 1px solid var(--line-strong);
+    border-radius: 5px;
+    padding: 0 5px;
+    white-space: nowrap;
+  }
+  .s {
+    font-size: 13px;
+    color: var(--text2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dots {
+    display: flex;
+    gap: 4px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text3);
+  }
+  .dot.on {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .remove {
+    flex: none;
+    margin-right: 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+    background: var(--fill);
+  }
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 48px 0;
+    color: var(--text3);
+    text-align: center;
+  }
+  .empty p {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .empty .sub {
+    color: var(--text2);
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .start {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 20px;
+    border: var(--frame) solid var(--ink);
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .start:disabled {
+    background: var(--fill);
+    color: var(--text3);
+    border-color: var(--line-strong);
+  }
+  .start .display {
+    font-size: 26px;
+  }
+  .start .ja {
+    font-size: 14px;
+    font-weight: 700;
+  }
+</style>

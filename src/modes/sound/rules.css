@@ -1,0 +1,31 @@
+/* 音声変化のルール色。値はデータ（rules[].color）から state.svelte.ts が --rule-<id>-lt / -dk に入れる */
+:root {
+  --rule-link: var(--rule-link-lt, #c0392b);
+  --rule-elide: var(--rule-elide-lt, #2f5d9e);
+  --rule-assim: var(--rule-assim-lt, #e08a1e);
+  --rule-flap: var(--rule-flap-lt, #1e7fc4);
+  --rule-contraction: var(--rule-contraction-lt, #1f7a68);
+  --rule-hdrop: var(--rule-hdrop-lt, #7b4fa0);
+  /* t の行方の黄色マーカー */
+  --marker: #ffe066;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --rule-link: var(--rule-link-dk, #e07a70);
+    --rule-elide: var(--rule-elide-dk, #8aa5cf);
+    --rule-assim: var(--rule-assim-dk, #eeb978);
+    --rule-flap: var(--rule-flap-dk, #7cb8e2);
+    --rule-contraction: var(--rule-contraction-dk, #79b3a7);
+    --rule-hdrop: var(--rule-hdrop-dk, #b49ac9);
+    --marker: rgba(255, 214, 0, 0.38);
+  }
+}
+:root[data-theme='dark'] {
+  --rule-link: var(--rule-link-dk, #e07a70);
+  --rule-elide: var(--rule-elide-dk, #8aa5cf);
+  --rule-assim: var(--rule-assim-dk, #eeb978);
+  --rule-flap: var(--rule-flap-dk, #7cb8e2);
+  --rule-contraction: var(--rule-contraction-dk, #79b3a7);
+  --rule-hdrop: var(--rule-hdrop-dk, #b49ac9);
+  --marker: rgba(255, 214, 0, 0.38);
+}
