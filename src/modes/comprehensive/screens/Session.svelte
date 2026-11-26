@@ -5,7 +5,10 @@
   //   学習時間は目安。過ぎたら「今の問題のあと」に続けるか終えるかを聞く（強制終了しない）。残りは次回へ繰り越す。
   import { onMount } from 'svelte';
   import Icon from '../../../components/Icon.svelte';
+  import Num from '../../../components/Num.svelte';
+  import { stagger } from '../../../core/transitions.ts';
   import ReportSheet from '../../../components/ReportSheet.svelte';
+  import PauseOverlay from '../../../components/PauseOverlay.svelte';
   import { router } from '../../../core/router.svelte.ts';
   import { store, modeSettings } from '../../../core/store.svelte.ts';
   import { createRng, shuffle } from '../../../core/rng.ts';
@@ -30,6 +33,8 @@
   let ready = $state(false);
   let askTime = $state(false);
   let reporting = $state(false);
+  /** 一時停止（ボタン・アプリを離れたとき）。学習した時間を数えない */
+  let stopped = $state(false);
   let reported = $state('');
   let closed = false;
   const settings = $derived(modeSettings(compMode));
@@ -85,12 +90,20 @@
     });
     // 学習した時間（画面が見えている間だけ）
     const iv = setInterval(() => {
-      if (!s || s.finished || document.visibilityState === 'hidden' || reporting) return;
+      if (!s || s.finished || document.visibilityState === 'hidden' || reporting || stopped) return;
       s = { ...s, activeMs: s.activeMs + 1000 };
       if (s.activeMs % 15000 === 0) saveSession(s);
     }, 1000);
     window.addEventListener('keydown', onKey);
+    const vis = () => {
+      if (document.visibilityState === 'hidden' && s && !s.finished) {
+        stopped = true;
+        saveSession(s);
+      }
+    };
+    document.addEventListener('visibilitychange', vis);
     return () => {
+      document.removeEventListener('visibilitychange', vis);
       closed = true;
       clearInterval(iv);
       window.removeEventListener('keydown', onKey);
@@ -178,6 +191,10 @@
     const el = e.target as HTMLElement | null;
     const typing = !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
     if (e.key === 'Escape' && !reporting) close();
+    if (stopped) {
+      if (e.key === 'Enter' && !typing) stopped = false;
+      return;
+    }
     if (!s || !task || typing || reporting) return;
     if (e.key === 'Enter' && s.results[task.id]) {
       e.preventDefault();
@@ -213,6 +230,15 @@
       leftSec: estimateSec(ix, s.tasks.filter((t) => !s!.results[t.id]), medians()),
     };
   });
+  /** 段階が変わったときのラベル: 小さく弾んで出る */
+  function bannerIn(node: HTMLElement) {
+    if (reducedMotion()) return;
+    node.animate([{ opacity: 0, transform: 'translateY(-6px) scale(0.9)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
+  }
+  /** まとめ: 見出し・数字・ボタンが下から順に */
+  function endIn(node: HTMLElement) {
+    stagger([...node.children], { step: 60, distance: 30, delay: 60 });
+  }
   const showDiagHint = $derived(!!s && s.kind === 'normal' && s.cursor === 0 && !extra().diag?.baseline?.finishedAt && s.day <= 3);
   const finalDue = $derived(!!s && s.day >= 60 && !extra().diag?.final?.finishedAt);
 </script>
@@ -227,6 +253,7 @@
       {/if}
     </span>
     <span class="right">
+      {#if task && !s?.finished}<button class="flag press" onclick={() => { stopped = true; if (s) saveSession(s); haptic('light'); }} aria-label="一時停止"><Icon name="pause" size={18} stroke={2.6} /></button>{/if}
       {#if task && !s?.finished}<button class="flag press" onclick={() => (reporting = true)} aria-label="この問題を報告"><Icon name="flag" size={17} /></button>{/if}
     </span>
   </header>
@@ -240,7 +267,7 @@
       <p class="loading">{comp.error || '今日の学習を準備しています…'}</p>
     {:else if s && !s.finished && task && ix}
       {#if task.stage !== prevStage}
-        <p class="banner" aria-live="polite">{s.cursor === 0 && dayInfo && s.kind === 'normal' ? `${dayInfo.topic} · ` : ''}{STAGE_LABEL[task.stage]}{task.reason === 'carry' ? '（前の日からの繰り越し）' : ''}</p>
+        <p class="banner" aria-live="polite" use:bannerIn>{s.cursor === 0 && dayInfo && s.kind === 'normal' ? `${dayInfo.topic} · ` : ''}{STAGE_LABEL[task.stage]}{task.reason === 'carry' ? '（前の日からの繰り越し）' : ''}</p>
       {/if}
       {#if showDiagHint}
         <button class="diag-hint press" onclick={() => router.push({ name: 'comp/diag', params: { form: 'baseline' } })}>
@@ -266,13 +293,13 @@
         {/if}
       {/key}
     {:else if s && summary}
-      <div class="end scroll">
+      <div class="end scroll" use:endIn>
         <p class="eyebrow-en">{s.kind === 'review' ? 'Review' : 'Today'}</p>
         <h2 class="display">{#if summary.left}Good <span class="acc">work</span>{:else}All <span class="acc">done</span>{/if}</h2>
         <div class="kpi">
-          <div><b class="en">{summary.answered}</b><span>答えた問題</span></div>
-          <div><b class="en">{summary.answered ? Math.round((summary.ok / summary.answered) * 100) : 0}<small>%</small></b><span>正解（自己採点を含む）</span></div>
-          <div><b class="en">{Math.max(1, minutesDone)}</b><span>学習した分</span></div>
+          <div><b class="en"><Num value={summary.answered} delay={300} /></b><span>答えた問題</span></div>
+          <div><b class="en"><Num value={summary.answered ? Math.round((summary.ok / summary.answered) * 100) : 0} delay={420} /><small>%</small></b><span>正解（自己採点を含む）</span></div>
+          <div><b class="en"><Num value={Math.max(1, minutesDone)} delay={540} /></b><span>学習した分</span></div>
         </div>
         <ul class="facts">
           {#if summary.learned}<li>新しく学んだ項目 {summary.learned}</li>{/if}
@@ -293,6 +320,9 @@
     {/if}
   </div>
 
+  {#if stopped && s && !s.finished}
+    <PauseOverlay progress="{done} / {total} · {minutesDone}分" note="学習した時間は数えていません。アプリを閉じても、ホームの「続きから再開する」で続けられます。" onresume={() => { stopped = false; haptic('light'); }} onsuspend={close} />
+  {/if}
   {#if askTime && s}
     <div class="scrim"></div>
     <div class="sheet" role="dialog" aria-modal="true" aria-label="目安の時間">
@@ -322,7 +352,7 @@
     flex: none;
     height: 44px;
     display: grid;
-    grid-template-columns: 44px 1fr 44px;
+    grid-template-columns: 44px 1fr auto;
     align-items: center;
     margin-left: -10px;
   }
