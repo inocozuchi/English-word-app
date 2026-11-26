@@ -600,6 +600,166 @@ try {
     await page.context().close();
   }
 
+  // ---------- イメージリンクモード ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    const ilSettings = (il) => page.evaluate((il) => {
+      const s = JSON.parse(localStorage.getItem('eq.settings.v2') || '{}');
+      localStorage.setItem('eq.settings.v2', JSON.stringify({ ...s, activeMode: 'imagelink', count: 5, modes: { ...(s.modes ?? {}), imagelink: { answerSec: 20, advanceOkSec: 15, advanceNgSec: 15, ...il } } }));
+    }, il);
+    const ilProgress = () => page.evaluate(() => JSON.parse(localStorage.getItem('eq.progress.imagelink.v1') || '{}'));
+    const fetched = [];
+    page.on('request', (r) => r.url().includes('/data/imagelink/questions/') && fetched.push(r.url().split('/').pop()));
+    await page.goto(URL);
+    await page.waitForSelector('button.start');
+    ok(fetched.length === 0, '語源モードの起動ではイメージリンクのデータを読まない');
+
+    // 設定でモードを切り替える
+    await page.getByRole('button', { name: '設定' }).tap();
+    await settle();
+    await top().locator('.mode-row', { hasText: 'イメージリンク' }).tap();
+    await sleep(300);
+    ok((await settingsOf(page)).activeMode === 'imagelink', 'イメージリンクモードに切り替えられる');
+    ok((await top().locator('.ui-h2', { hasText: '出題方法' }).count()) === 1, '出題方法の設定が出る');
+    ok((await top().locator('[role=radio]', { hasText: '英作・語順トレーニング' }).count()) === 1, '出題方法が7種ある（英作・語順トレーニング）');
+
+    // 部を絞ると、その部だけを読む
+    fetched.length = 0;
+    await ilSettings({ method: 'total', parts: [3], types: ['en2ja'] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await sleep(800);
+    ok(fetched.length === 1 && fetched[0] === 'part3.json', `選んだ部の JSON だけを読む（${fetched.join(',')}）`);
+
+    // 4択: キーボードの 1〜4 と Enter
+    await page.locator('button.start').tap();
+    await settle();
+    ok((await top().locator('.choice').count()) === 4, '4択が出る');
+    ok((await top().locator('.count').getAttribute('aria-label')).replace(/\s/g, '').endsWith('/10'), '総合テストは選んだ問題数（10問）');
+    await page.keyboard.press('1');
+    await sleep(500);
+    ok((await top().locator('.explain .ref').textContent()).includes('教科書 p.'), 'キー 1 で選べて、答え合わせに教科書のページが出る');
+    const before = await top().locator('.count').getAttribute('aria-label');
+    await page.keyboard.press('Enter');
+    await settle();
+    ok((await top().locator('.count').getAttribute('aria-label')) !== before && (await top().locator('.explain').count()) === 0, 'Enter で次の問題へ');
+    const pr = await ilProgress();
+    const k0 = Object.keys(pr.items ?? {})[0];
+    ok(/^c\d+:q_/.test(k0) && pr.items[k0].box >= 1 && pr.items[k0].seen === 1, '記録はモードごとに章つきのキーで保存（箱は1〜5）');
+
+    // 報告
+    await top().getByRole('button', { name: 'この問題を報告' }).tap();
+    await sleep(500);
+    await page.locator('.reason', { hasText: '日本語が不自然' }).tap();
+    await page.getByRole('button', { name: '報告する' }).tap();
+    await sleep(300);
+    const reps = await page.evaluate(() => JSON.parse(localStorage.getItem('eq.reports.imagelink.v1') || '[]'));
+    ok(reps.length === 1 && reps[0].reason === 'unnatural' && /^c\d+:/.test(reps[0].key), '問題を報告すると端末に保存される');
+    await top().locator('.close').tap();
+    await settle();
+
+    // 並べ替え
+    await ilSettings({ method: 'compose', types: ['order'], chapters: [1] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    const n = await top().locator('.bank .tok').count();
+    ok(n > 1 && (await top().getByRole('button', { name: '答え合わせ' }).isDisabled()), '並べ替え: 全部並べるまで答え合わせできない');
+    for (let k = 0; k < n; k++) await top().locator('.bank .tok:not(.used)').first().tap();
+    await top().getByRole('button', { name: '答え合わせ' }).tap();
+    await sleep(500);
+    ok((await top().locator('.status').count()) === 1 && (await top().locator('.ab').count()) === 1, '並べ替え: 答え合わせで正誤と正解の英文が出る');
+    await top().locator('.close').tap();
+    await settle();
+
+    // 英作文（自己採点）
+    await ilSettings({ method: 'compose', types: ['translate'], chapters: [1] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    await top().locator('textarea').fill('test');
+    await top().getByRole('button', { name: '模範解答を見る' }).tap();
+    await sleep(300);
+    await top().getByRole('button', { name: 'あやしい' }).tap();
+    await sleep(400);
+    const pr2 = await ilProgress();
+    ok(Object.values(pr2.items).some((x) => x.conf === 'low'), '英作文: 自己採点の「あやしい」は自信なしとして記録');
+    await top().locator('.close').tap();
+    await settle();
+
+    // 苦手克服: 自信なしの問題が出る
+    await ilSettings({ method: 'weak', types: ['translate'], chapters: [1] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    ok((await top().locator('.count').getAttribute('aria-label')).replace(/\s/g, '').endsWith('/1'), '苦手克服: 自信なしの問題だけが出る');
+    await top().locator('.close').tap();
+    await settle();
+
+    // フラッシュカード
+    await ilSettings({ method: 'flash', chapters: [1] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    await top().locator('.fc').tap();
+    await sleep(500);
+    ok((await top().locator('.fc.flipped').count()) === 1, 'フラッシュカード: タップで裏面');
+    await top().getByRole('button', { name: '覚えた' }).tap();
+    await sleep(300);
+    ok((await top().locator('.status.ok').count()) === 1, 'フラッシュカード: 覚えた で正解');
+    await top().locator('.close').tap();
+    await settle();
+
+    // 図を選ぶ（2×2）と拡大
+    await ilSettings({ method: 'figure', types: ['fig_choose'] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    ok((await top().locator('.choices.grid .cimg').count()) === 4, '図を選ぶ問題は画像の 2×2');
+    const imgOk = await top().locator('.cimg').first().evaluate((im) => im.complete && im.naturalWidth > 0);
+    ok(imgOk, '図の SVG が表示できる');
+    await top().locator('.close').tap();
+    await settle();
+    await ilSettings({ method: 'figure', types: ['fig_caption'] });
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    await top().locator('.fig img').dblclick();
+    await sleep(400);
+    ok((await page.locator('body > .lb').count()) === 1, '図をダブルタップで拡大');
+    await page.getByRole('button', { name: '閉じる' }).tap();
+    await sleep(200);
+    ok((await page.locator('.lb').count()) === 0, '拡大を閉じられる');
+    await top().locator('.close').tap();
+    await settle();
+
+    // 章と達成度 → 章のミニテスト（絞り込みはどの出題方法にも掛かるので外しておく）
+    await ilSettings({});
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.getByRole('button', { name: '章と達成度' }).tap();
+    await settle();
+    ok((await top().locator('.list .row').count()) === 59, '章と達成度: 第1部の59章が並ぶ');
+    await top().locator('.tab').nth(3).tap();
+    await sleep(200);
+    ok((await top().locator('.list .row .no').first().textContent()).trim() === '125', '部のタブで切り替えられる');
+    await top().locator('.list .row').first().tap();
+    await settle();
+    ok((await top().locator('.count').getAttribute('aria-label')).replace(/\s/g, '').endsWith('/10'), '章をタップでその章のミニテスト（10問）');
+    ok((await top().locator('.ct .no').first().textContent()).includes('第125章'), 'ミニテストはその章の問題');
+    await top().locator('.close').tap();
+    await settle();
+    ok((await depth()) === 2, 'ミニテストを閉じると章の一覧に戻る');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
   // ---------- 動きを減らす設定 ----------
   {
     const { page, errors, top, depth, settle } = await newPage(browser, { reducedMotion: 'reduce' });
