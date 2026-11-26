@@ -6,7 +6,7 @@
   import Num from '../../../components/Num.svelte';
   import { router } from '../../../core/router.svelte.ts';
   import { store, updateExtra } from '../../../core/store.svelte.ts';
-  import { rise, burst } from '../../../core/transitions.ts';
+  import { rise, burst, stagger } from '../../../core/transitions.ts';
   import { summarize, type ReflexLog } from '../log.ts';
   import { better, METHODS, type AttackRecord, type Method } from '../engine.ts';
   import { qById, cardById } from '../state.svelte.ts';
@@ -43,6 +43,14 @@
     return () => clearTimeout(t);
   });
   const sec = (ms: number) => (ms / 1000).toFixed(2);
+  /** 3つの数字が左から順に浮かぶ */
+  function kpiIn(node: HTMLElement) {
+    stagger([...node.children], { step: 70, distance: 10, delay: 260 });
+  }
+  /** 「詳しく読む」の行が上から順に */
+  function rowsIn(node: HTMLElement) {
+    stagger([...node.children].slice(0, 12), { step: 35, distance: 10, delay: 420 });
+  }
   // svelte-ignore state_referenced_locally
   const title = kind === 'review' ? '復習' : METHODS.find((m) => m.id === method)?.label ?? '';
   const rows = [...sum.missed.map((k) => ({ k, why: '×' })), ...sum.slow.map((k) => ({ k, why: '遅め' }))];
@@ -53,7 +61,7 @@
     <div class="hero" in:rise>
       <p class="eyebrow-en">Reflex · {title}</p>
       <p class="score en" bind:this={scoreEl}><Num value={score} duration={500} /><span class="sl">/</span><span class="tt">{sum.firstTotal}</span></p>
-      <div class="kpi">
+      <div class="kpi" use:kpiIn>
         <div><span class="v en">{rate}<small>%</small></span><span class="c">正答率</span></div>
         <div><span class="v en">{sum.avgMs ? sec(sum.avgMs) : '—'}<small>秒</small></span><span class="c">平均反応時間</span></div>
         <div><span class="v en">{bestStreak}</span><span class="c">最高の連続正解</span></div>
@@ -68,7 +76,7 @@
 
     {#if rows.length}
       <h2 class="ui-h2">詳しく読む <span class="n">{rows.length}</span></h2>
-      <ul class="list" in:rise={{ delay: 60 }}>
+      <ul class="list" use:rowsIn>
         {#each rows as r}
           {@const lb = itemLabel(r.k)}
           {@const src = qById.get(r.k) ?? cardById.get(r.k)}

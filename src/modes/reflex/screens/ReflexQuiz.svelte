@@ -11,8 +11,8 @@
   import { reviewOrder } from '../../../core/review.ts';
   import { createRng } from '../../../core/rng.ts';
   import { haptic } from '../../../core/haptics.ts';
-  import { bump } from '../../../core/transitions.ts';
-  import { reducedMotion } from '../../../core/spring.ts';
+  import { bump, burst, popScale, shake } from '../../../core/transitions.ts';
+  import { reducedMotion, spring, SPRINGS } from '../../../core/spring.ts';
   import { loadReports, saveReports, addReport, type ReportReason } from '../../../core/reports.ts';
   import { reflexMode } from '../mode.ts';
   import {
@@ -32,7 +32,7 @@
     type Method,
   } from '../engine.ts';
   import type { RCard } from '../types.ts';
-  import { rx, loadReflex, qById, cardById } from '../state.svelte.ts';
+  import { rx, loadReflex, qById, cardById, figSrc, figAspect } from '../state.svelte.ts';
   import RPrompt from '../RPrompt.svelte';
   import type { ReflexLog } from '../log.ts';
 
@@ -60,6 +60,9 @@
   let result = $state<Grade | null>(null);
   let flipped = $state(false);
   let left = $state(0);
+  /** 残り時間が3割を切った（バーの色を変える） */
+  let late = $state(false);
+  let stageEl: HTMLElement | undefined = $state();
   let total = $state(0);
   let streak = $state(0);
   let bestStreak = 0;
@@ -73,6 +76,7 @@
   let timer: QuestionTimer | null = null;
   let barAnim: Animation | null = null;
   let deadline = 0;
+  let lateT = 0;
   let advanceT = 0;
   let closed = false;
   const now = () => performance.now();
@@ -127,8 +131,13 @@
         run!.settle(true);
         return show();
       }
+      late = false;
       await tick();
-      requestAnimationFrame(() => startTimer(built!.limitMs));
+      // 図が描けるようになってから時間を計り始める（読み込み中に時間が減らないように）
+      const imgs = [...(stageEl?.querySelectorAll('img') ?? [])];
+      await Promise.all(imgs.map((im) => im.decode().catch(() => {})));
+      const at = serial;
+      requestAnimationFrame(() => at === serial && startTimer(built!.limitMs));
     } else {
       built = null;
       card = cardById.get(cur.key) ?? null;
@@ -150,11 +159,15 @@
   }
   function arm() {
     clearTimeout(deadline);
+    clearTimeout(lateT);
     if (!timer) return;
-    deadline = window.setTimeout(() => answer(null), timer.remaining(now()) + 5);
+    const rem = timer.remaining(now());
+    deadline = window.setTimeout(() => answer(null), rem + 5);
+    lateT = window.setTimeout(() => (late = true), Math.max(0, rem - timer.limitMs * 0.3));
   }
   function stopTimer() {
     clearTimeout(deadline);
+    clearTimeout(lateT);
     barAnim?.pause();
   }
   const paused = () => reporting || document.visibilityState === 'hidden';
@@ -162,6 +175,7 @@
     if (!timer || phase !== 'ask') return;
     timer.pause(now());
     clearTimeout(deadline);
+    clearTimeout(lateT);
     barAnim?.pause();
   }
   function resume() {
@@ -185,6 +199,12 @@
     logs.push({ key, ok: g.ok, timeout: g.timeout, slow: g.slow, ms: g.ms, first, again, card: false });
     streakStep(g.ok);
     haptic(g.ok ? 'light' : 'error');
+    tick().then(() => {
+      const btns = stageEl?.querySelectorAll<HTMLElement>('.ch');
+      if (!btns) return;
+      popScale(btns[built!.answer]);
+      if (k !== null && !g.ok) shake(btns[k]);
+    });
     advanceT = window.setTimeout(next, g.ok ? ADVANCE_OK_MS : g.timeout ? ADVANCE_TIMEOUT_MS : ADVANCE_NG_MS);
   }
   function judge(level: 0 | 1 | 2) {
@@ -201,8 +221,16 @@
   function streakStep(ok: boolean) {
     streak = ok ? streak + 1 : 0;
     bestStreak = Math.max(bestStreak, streak);
-    // 5問ごとに小さく弾む（控えめに）
-    if (ok && streak % 5 === 0) tick().then(() => streakEl && bump(streakEl, 1.25));
+    if (!ok || !streakEl) return;
+    // 正解のたびに小さく弾み、5問ごとに少し大きく弾んで小さな紙吹雪（控えめに）
+    const el = streakEl;
+    tick().then(() => {
+      bump(el, streak % 5 === 0 ? 1.35 : 1.12);
+      if (streak % 5 === 0) {
+        burst(el, 10);
+        haptic('success');
+      }
+    });
   }
   function next() {
     clearTimeout(advanceT);
@@ -213,9 +241,22 @@
   function skip() {
     if (phase === 'feedback') next();
   }
-  function flip() {
-    if (phase !== 'ask' || !card) return;
+  let cardEl: HTMLElement | undefined = $state();
+  let flipping = false;
+  /** カードをめくる: 縦軸で 90° 回って裏返る（transform だけ。全体 200ms） */
+  async function flip() {
+    if (phase !== 'ask' || !card || flipping) return;
+    if (reducedMotion() || !cardEl) {
+      flipped = !flipped;
+      return;
+    }
+    flipping = true;
+    const el = cardEl;
+    await el.animate([{ transform: 'perspective(900px) rotateY(0)' }, { transform: 'perspective(900px) rotateY(90deg)' }], { duration: 90, easing: 'ease-in' }).finished.catch(() => {});
     flipped = !flipped;
+    await tick();
+    await el.animate([{ transform: 'perspective(900px) rotateY(-90deg)' }, { transform: 'perspective(900px) rotateY(0)' }], { duration: 110, easing: 'cubic-bezier(.2,.8,.2,1)' }).finished.catch(() => {});
+    flipping = false;
   }
 
   function finish() {
@@ -277,6 +318,22 @@
     if (reducedMotion()) return;
     node.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, easing: 'ease-out' });
   }
+  /** 新しい問題: 問題文は少し上がりながら、選択肢は 25ms ずつずらして浮かぶ（全体で 200ms 以内） */
+  function enter(node: HTMLElement) {
+    if (reducedMotion()) return;
+    const ease = 'cubic-bezier(.2,.8,.2,1)';
+    node.querySelector('.prompt')?.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 160, easing: ease });
+    node.querySelectorAll('.ch').forEach((el, k) =>
+      el.animate([{ opacity: 0, transform: 'translateY(10px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 140, delay: 20 + k * 25, easing: ease, fill: 'backwards' }),
+    );
+  }
+  /** 正誤の行: 小さく弾んで出る */
+  function pop(node: HTMLElement) {
+    if (reducedMotion()) return;
+    const sp = spring(SPRINGS.pop);
+    node.animate([{ opacity: 0, transform: 'scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: Math.min(sp.duration, 320), easing: sp.easing });
+  }
+  const isWide = (b: Built) => b.choices.every((c) => c.figure && (figAspect(c.figure) ?? 1) >= 1.8);
   const sec = (ms: number) => (ms / 1000).toFixed(1);
 </script>
 
@@ -293,7 +350,7 @@
       <button class="flag press" onclick={openReport} aria-label="この問題を報告" disabled={!built && !card}><Icon name="flag" size={17} /></button>
     </span>
   </header>
-  <div class="track"><div class="bar" class:hide={!!card} bind:this={bar}></div></div>
+  <div class="track"><div class="bar" class:hide={!!card} class:late bind:this={bar}></div></div>
   <p class="note" aria-live="polite">{reported || (again ? 'もう一度' : '')}</p>
 
   {#if ready && empty}
@@ -307,10 +364,11 @@
 
   {#key serial}
     {#if built}
-      <div class="stage" class:imgq={!!built.choices[0].image} use:appear>
+      <div class="stage" class:imgq={!!built.choices[0].image} bind:this={stageEl} use:enter>
         <div class="prompt"><RPrompt q={built.q} /></div>
         <div class="fb" aria-live="polite">
           {#if result}
+            <span class="fbin" use:pop>
             {#if result.ok}
               <span class="okl"><span class="ring"></span>{result.slow ? 'あやしい（遅め）' : '正解'}<b class="en">{sec(result.ms)}秒</b></span>
             {:else}
@@ -318,9 +376,10 @@
               <span class="ans">{built.choices[built.answer].image ? '正解は ✓ の図' : `正解：${built.choices[built.answer].text}`}</span>
               <span class="ref">教科書 p.{built.q.ref_page_a5}（第{built.q.chapter}章）</span>
             {/if}
+            </span>
           {/if}
         </div>
-        <div class="choices" class:img={!!built.choices[0].image}>
+        <div class="choices" class:img={!!built.choices[0].image} class:wide={isWide(built)}>
           {#each built.choices as c, k}
             {@const isAns = phase === 'feedback' && k === built.answer}
             {@const isMine = phase === 'feedback' && k === chosen && k !== built.answer}
@@ -334,7 +393,7 @@
               onclick={(e) => { e.stopPropagation(); answer(k); }}
             >
               <span class="kn en">{k + 1}</span>
-              {#if c.image}<img src={c.image} alt={c.text} draggable="false" />{:else}<span class="ct">{c.text}</span>{/if}
+              {#if c.figure}<img src={figSrc(c.figure)} alt={c.text} draggable="false" />{:else}<span class="ct">{c.text}</span>{/if}
               {#if isAns}<span class="mk"><Icon name="check" size={18} stroke={3} /></span>{:else if isMine}<span class="mk"><Icon name="x" size={18} stroke={3} /></span>{/if}
             </button>
           {/each}
@@ -342,7 +401,7 @@
       </div>
     {:else if card}
       <div class="stage" use:appear>
-        <button class="card press" class:flipped onclick={flip} disabled={phase !== 'ask'} aria-label={flipped ? '表に戻す' : 'めくる'}>
+        <button class="card press" class:flipped bind:this={cardEl} onclick={flip} disabled={phase !== 'ask'} aria-label={flipped ? '表に戻す' : 'めくる'}>
           <span class="cg">{card.group}</span>
           <span class="cw en">{card.word}</span>
           {#if flipped}
@@ -453,6 +512,12 @@
     background: var(--ink);
     transform-origin: left center;
   }
+  .bar {
+    transition: background-color 0.25s;
+  }
+  .bar.late {
+    background: var(--accent);
+  }
   .bar.hide {
     opacity: 0;
   }
@@ -487,6 +552,14 @@
     gap: 2px 10px;
     font-size: 13px;
     text-align: center;
+  }
+  .fbin {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px 10px;
   }
   .okl,
   .ngl {
@@ -616,6 +689,21 @@
   }
   .imgq .choices.img .ch {
     aspect-ratio: auto;
+  }
+  /* 横長の図（3:1 など）は1列に並べ、横幅いっぱいに大きく見せる */
+  .imgq .choices.wide {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .choices.wide .ch {
+    padding: 6px 10px 6px 30px;
+  }
+  .choices.wide .kn {
+    top: 50%;
+    translate: 0 -50%;
+    left: 11px;
+    font-size: 14px;
   }
   .ch img {
     width: 100%;

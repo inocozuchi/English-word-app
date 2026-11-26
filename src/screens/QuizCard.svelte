@@ -35,6 +35,13 @@
   const interactive = $derived(!!(q.interactive && mode.Interact));
   /** 画像の選択肢は 2×2 に並べる */
   const grid = $derived(q.choices.length > 0 && q.choices.every((c) => c.image));
+  /** 画像の縦横比（読み込んだら分かる）。横長の図ばかりなら1列に並べて大きく見せる */
+  let aspects = $state<Record<string, number>>({});
+  const wide = $derived(grid && q.choices.every((c) => (aspects[c.image!] ?? 0) >= 1.8));
+  function measure(e: Event) {
+    const im = e.currentTarget as HTMLImageElement;
+    if (im.naturalWidth && im.naturalHeight) aspects[im.getAttribute('src')!] = im.naturalWidth / im.naturalHeight;
+  }
   const note = $derived(typeof mode.note === 'function' ? mode.note(q) : (mode.note ?? null));
 
   const REVIEW_NOTE: Record<Exclude<ReviewEvent, null>, string> = {
@@ -107,7 +114,7 @@
   {/if}
 </div>
 
-<div class="choices" class:grid>
+<div class="choices" class:grid class:wide>
   {#each q.choices as c, k}
     {@const isAns = phase === 'reveal' && k === q.answer}
     {@const isMine = phase === 'reveal' && k === chosen && k !== q.answer}
@@ -122,7 +129,7 @@
       use:choiceFx={k}
     >
       {#if c.image}
-        <img class="cimg" src={c.image} alt={c.text} draggable="false" />
+        <img class="cimg" src={c.image} alt={c.text} draggable="false" onload={measure} />
         <span class="cnum en">{k + 1}</span>
       {:else}
       {#if c.color}<span class="cdot" style:--c={c.color}></span>{/if}
@@ -346,6 +353,21 @@
   .grid .choice.wrong {
     background: #fff;
     padding-top: 6px;
+  }
+  .choices.grid.wide {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .grid.wide .choice {
+    aspect-ratio: auto;
+    height: clamp(70px, 12.5vh, 118px);
+    padding: 5px 10px 5px 30px;
+  }
+  .grid.wide .cnum {
+    top: 50%;
+    translate: 0 -50%;
+    left: 11px;
+    font-size: 14px;
   }
   .cimg {
     width: 100%;
