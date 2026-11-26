@@ -6,6 +6,7 @@
   import { onMount, tick } from 'svelte';
   import Icon from '../../../components/Icon.svelte';
   import ReportSheet from '../../../components/ReportSheet.svelte';
+  import PauseOverlay from '../../../components/PauseOverlay.svelte';
   import { router } from '../../../core/router.svelte.ts';
   import { store, modeSettings, recordAnswer, today } from '../../../core/store.svelte.ts';
   import { reviewOrder } from '../../../core/review.ts';
@@ -67,6 +68,8 @@
   let streak = $state(0);
   let bestStreak = 0;
   let reporting = $state(false);
+  /** 一時停止（ボタン・アプリを離れたとき）。「再開する」を押すまで止まったまま */
+  let stopped = $state(false);
   let reported = $state('');
   const logs: ReflexLog[] = [];
   const startedAt = Date.now();
@@ -100,7 +103,13 @@
         else show();
       })
       .catch(() => (ready = true));
-    const vis = () => (document.visibilityState === 'hidden' ? pause() : resume());
+    // アプリを離れたら一時停止のまま（戻っても勝手に再開しない）
+    const vis = () => {
+      if (document.visibilityState === 'hidden' && !closed && ready && !empty) {
+        stopped = true;
+        pause();
+      }
+    };
     document.addEventListener('visibilitychange', vis);
     window.addEventListener('keydown', onKey);
     return () => {
@@ -170,7 +179,7 @@
     clearTimeout(lateT);
     barAnim?.pause();
   }
-  const paused = () => reporting || document.visibilityState === 'hidden';
+  const paused = () => reporting || stopped || document.visibilityState === 'hidden';
   function pause() {
     if (!timer || phase !== 'ask') return;
     timer.pause(now());
@@ -275,6 +284,14 @@
   // ---- キーボード: 1〜4 で回答、Enter・Space で早送り。カードは Space でめくり 1/2/3 ----
   function onKey(e: KeyboardEvent) {
     if (reporting || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'p' || e.key === 'P') {
+      e.preventDefault();
+      return stopped ? unstop() : stop();
+    }
+    if (stopped) {
+      if (e.key === 'Enter') unstop();
+      return;
+    }
     if (e.key === 'Escape') return close();
     if (phase === 'feedback' && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
@@ -296,6 +313,17 @@
   }
 
   // ---- 報告 ----
+  function stop() {
+    if (closed || !ready || empty) return;
+    stopped = true;
+    pause();
+    haptic('light');
+  }
+  function unstop() {
+    stopped = false;
+    resume();
+    haptic('light');
+  }
   function openReport() {
     reporting = true;
     pause();
@@ -347,6 +375,7 @@
     </span>
     <span class="right">
       <span class="streak en" class:on={streak >= 2} bind:this={streakEl} aria-label="連続正解 {streak}"><Icon name="flame" size={15} />{streak}</span>
+      <button class="flag press" onclick={(e) => { e.stopPropagation(); stop(); }} aria-label="一時停止"><Icon name="pause" size={18} stroke={2.6} /></button>
       <button class="flag press" onclick={openReport} aria-label="この問題を報告" disabled={!built && !card}><Icon name="flag" size={17} /></button>
     </span>
   </header>
@@ -429,6 +458,9 @@
     {/if}
   {/key}
 
+  {#if stopped}
+    <PauseOverlay progress="残り {left} 問" note="制限時間は止まっています。再開すると、この問題の残り時間から続きます。" onresume={unstop} onsuspend={close} />
+  {/if}
   {#if reporting && (built || card)}
     <ReportSheet id={built?.q.id ?? card?.id ?? ''} onsend={report} onclose={closeReport} />
   {/if}

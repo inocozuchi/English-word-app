@@ -10,6 +10,7 @@
   import { isDue } from '../core/srs.ts';
   import { reviewCount } from '../core/review.ts';
   import { haptic } from '../core/haptics.ts';
+  import { loadSuspend, clearSuspend } from '../core/suspend.ts';
 
   loadData();
   const mode = $derived(activeMode());
@@ -27,6 +28,20 @@
     }
     return n;
   });
+  // 中断したクイズ（共通のクイズ画面のモードだけ）。ホームに戻るたびに読み直す
+  let susVer = $state(0);
+  const suspended = $derived((void router.stack.length, void susVer, mode.quizRoute ? null : loadSuspend(mode.id)));
+  function resumeQuiz() {
+    const sus = suspended;
+    if (!sus) return;
+    haptic('light');
+    router.push({ name: 'quiz', params: { seed: sus.seed, kind: sus.kind, override: sus.override, resume: true } }, 'modal');
+  }
+  function discard() {
+    clearSuspend();
+    haptic('light');
+    susVer++;
+  }
   const summary = $derived(mode.hideCount ? mode.summary(modeSettings(mode)) : `${store.settings.count}問 · ${mode.summary(modeSettings(mode))}`);
 
   // 大見出し: \n で改行、*語* をアクセント色に
@@ -63,6 +78,15 @@
 
   <!-- 今のモード（切り替えは設定で。ここは表示だけ） -->
   <p class="mode-line" data-intro><span class="eyebrow-en">Mode</span><span class="mname">{mode.title}</span>{#if mode.stat()}<span class="stat">{mode.stat()}</span>{/if}</p>
+  {#if suspended}
+    <div class="resume-card" data-intro>
+      <button class="rc-main press" onclick={resumeQuiz}>
+        <span class="rc-ic" aria-hidden="true">▶</span>
+        <span class="rc-txt"><b>中断したクイズを再開</b><span>{suspended.i} / {suspended.qs.length} 問まで · {suspended.kind === 'review' ? '復習' : mode.title}</span></span>
+      </button>
+      <button class="rc-x press" onclick={discard} aria-label="中断したクイズを破棄">✕</button>
+    </div>
+  {/if}
   <button class="start press" data-intro onclick={() => start('normal')} aria-label="スタート（{mode.title}）">
     <span class="start-en display">Start</span>
     <span class="start-ja">{mode.startLabel?.() ?? 'スタート'}</span>
@@ -76,20 +100,20 @@
       <span class="r-title">復習する</span>
       <span class="r-sub">{inReview ? 'まちがえた問題だけを出題' : 'まちがえた問題がここに入ります'}</span>
     </span>
-    <span class="r-num en"><Num value={inReview} /></span>
+    <span class="r-num en"><Num value={inReview} delay={520} /></span>
   </button>
 
   <div class="stats" data-intro>
     <div class="stat-c">
-      <span class="num en"><Num value={days} /></span>
+      <span class="num en"><Num value={days} delay={520} /></span>
       <span class="cap">連続日数</span>
     </div>
     <div class="stat-c">
-      <span class="num en"><Num value={todayCount} /></span>
+      <span class="num en"><Num value={todayCount} delay={520} /></span>
       <span class="cap">今日の回答</span>
     </div>
     <div class="stat-c">
-      <span class="num en"><Num value={due} /></span>
+      <span class="num en"><Num value={due} delay={520} /></span>
       <span class="cap">期限の来た問題</span>
     </div>
   </div>
@@ -216,6 +240,52 @@
     place-items: center;
     background: var(--on-accent);
     color: var(--accent);
+  }
+
+  /* 中断したクイズ: スタートの上に。押すと続きから */
+  .resume-card {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .rc-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 60px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: var(--frame) solid var(--accent);
+    color: var(--text);
+    text-align: left;
+  }
+  .rc-ic {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: var(--on-accent);
+    flex: none;
+  }
+  .rc-txt {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .rc-txt b {
+    font-size: 16px;
+    color: var(--text);
+  }
+  .rc-x {
+    width: 52px;
+    border-radius: 18px;
+    border: 2px solid var(--line-strong);
+    color: var(--text2);
+    font-size: 16px;
   }
 
   /* 復習: スタートの次に押しやすい位置 */

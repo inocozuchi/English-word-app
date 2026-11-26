@@ -19,14 +19,19 @@
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
   import { bump } from '../core/transitions.ts';
   import { overlay } from '../core/overlay.svelte.ts';
+  import PauseOverlay from '../components/PauseOverlay.svelte';
+  import { loadSuspend, saveSuspend, clearSuspend } from '../core/suspend.ts';
 
   let {
     seed,
     kind = 'normal',
     override,
+    resume = false,
   }: {
     seed: number;
     kind?: SessionKind;
+    /** 中断したクイズの続き（core/suspend.ts） */
+    resume?: boolean;
     /** このセッションだけ出題範囲を変える（イメージリンクの章別ミニテストなど。モードの設定に重ねる） */
     override?: Record<string, unknown>;
   } = $props();
@@ -45,10 +50,14 @@
   /** 報告のシートを開いている */
   let reporting = $state(false);
   let reportedMsg = $state('');
-  const paused = $derived(held || hidden || dragging || reporting || overlay.count > 0);
+  /** 一時停止ボタン・アプリを離れたときの一時停止（「再開する」を押すまで続く） */
+  let stopped = $state(false);
+  const paused = $derived(held || hidden || dragging || reporting || stopped || overlay.count > 0);
   /** Interact で答えた問題の正誤 */
   let result = $state<boolean | null>(null);
-  const logs: AnswerLog[] = [];
+  // 答えた問題の記録（画面には出さない。表示は marks）
+  // svelte-ignore non_reactive_update
+  let logs: AnswerLog[] = [];
   /** 各問の結果（ヘッダーの点） */
   let marks = $state<('ok' | 'ng')[]>([]);
   /** 連続正解 */
@@ -67,6 +76,19 @@
       await loadData();
       if (override) await mode.load(ms);
       const s = store.settings;
+      const sus = resume ? loadSuspend(mode.id) : null;
+      if (sus) {
+        // 中断したところから（答えた問題はもう記録してあるので、次の問題から）
+        logs = sus.logs;
+        marks = sus.marks;
+        combo = sus.combo;
+        i = Math.min(sus.i, sus.qs.length - 1);
+        qs = sus.qs;
+        ready = true;
+        if (qs.length) requestAnimationFrame(startAsk);
+        return;
+      }
+      clearSuspend();
       qs = buildSession({
         mode,
         modeSettings: ms,
@@ -83,7 +105,14 @@
       ready = true;
       if (qs.length) requestAnimationFrame(startAsk);
     })();
-    const vis = () => (hidden = document.visibilityState === 'hidden');
+    const vis = () => {
+      hidden = document.visibilityState === 'hidden';
+      // アプリを離れたら一時停止のまま（戻っても勝手に再開しない）。続きも保存しておく
+      if (hidden && ready && qs.length && !done) {
+        stopped = true;
+        suspend();
+      }
+    };
     document.addEventListener('visibilitychange', vis);
     window.addEventListener('keydown', onKey);
     return () => {
@@ -161,6 +190,7 @@
     logs.push(r ? { q, chosen: null, review: event, ok: r.ok, given: r.given } : { q, chosen: k, review: event });
     marks[i] = correct ? 'ok' : 'ng';
     combo = correct ? combo + 1 : 0;
+    suspend();
     haptic(correct ? 'success' : 'error');
     tick().then(() => dots[i] && bump(dots[i], 1.6));
     startTimer(q.advanceSec ?? (correct ? timing.advanceOkSec : timing.advanceNgSec), next);
@@ -169,6 +199,19 @@
   // ---- キーボード: 1〜4 で選ぶ、Enter で次へ（入力欄の中では使わない） ----
   function onKey(e: KeyboardEvent) {
     if (e.defaultPrevented || reporting || overlay.count > 0 || e.metaKey || e.ctrlKey || e.altKey || !q) return;
+    {
+      const t = e.target as HTMLElement | null;
+      const inField = !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA');
+      if (!inField && (e.key === 'p' || e.key === 'P' || (e.key === ' ' && phase === 'ask'))) {
+        e.preventDefault();
+        stopped ? unpause() : pause();
+        return;
+      }
+      if (stopped) {
+        if (e.key === 'Enter') unpause();
+        return;
+      }
+    }
     const el = e.target as HTMLElement | null;
     const typing = !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
     if (phase === 'ask' && !typing && !q.interactive && /^[1-9]$/.test(e.key)) {
@@ -259,6 +302,7 @@
       done = true;
       timer?.cancel();
       if (from) await slide(from, 0, 0);
+      clearSuspend();
       router.replace({ name: 'result', params: { logs, kind, marks: [...marks], override } });
       return;
     }
@@ -371,7 +415,24 @@
     }
   }
 
+  /** 続きを保存する（次に出す問題 = 答えた数） */
+  function suspend() {
+    if (!qs.length || logs.length >= qs.length) return;
+    saveSuspend({ v: 1, modeId: mode.id, kind, seed, override, qs: $state.snapshot(qs) as Question[], i: logs.length, logs: $state.snapshot(logs) as AnswerLog[], marks: [...marks], combo, savedAt: Date.now() });
+  }
+  function pause() {
+    if (!qs.length || done) return;
+    stopped = true;
+    haptic('light');
+    suspend();
+  }
+  function unpause() {
+    stopped = false;
+    haptic('light');
+  }
+  /** 中断してホームへ（続きはホームの「中断したクイズを再開」から） */
   function close() {
+    if (!done && qs.length) suspend();
     done = true;
     timer?.cancel();
     router.pop();
@@ -400,7 +461,10 @@
   onmouseup={touchEnd}
 >
   <header>
-    <button class="close press" onclick={close} aria-label="やめる"><Icon name="close" size={22} /></button>
+    <span class="lefts">
+      <button class="close press" onclick={close} aria-label="中断して閉じる（続きはホームから）"><Icon name="close" size={22} /></button>
+      <button class="pz press" onclick={pause} aria-label="一時停止"><Icon name="pause" size={20} stroke={2.6} /></button>
+    </span>
     <span class="count en" aria-label="{i + 1} / {qs.length}">
       {#if useDots}
         <span class="dots">
@@ -459,6 +523,9 @@
       </div>
     {/each}
   </div>
+  {#if stopped && ready && qs.length}
+    <PauseOverlay progress="{marks.filter(Boolean).length} / {qs.length} 問" onresume={unpause} onsuspend={close} />
+  {/if}
   {#if reporting && q}
     <ReportSheet id={q.key} onsend={report} onclose={() => (reporting = false)} />
   {/if}
@@ -480,6 +547,18 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 0 var(--pad-x-r) 0 calc(var(--pad-x) - 10px);
+  }
+  .lefts {
+    display: flex;
+    align-items: center;
+  }
+  .pz {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    color: var(--text);
   }
   .close {
     width: 44px;
