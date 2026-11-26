@@ -49,7 +49,8 @@ export function serviceWorker(): Plugin {
       const out = config.build.outDir;
       const files = walk(out)
         .map((p) => relative(out, p).split(sep).join('/'))
-        .filter((f) => f !== 'sw.js' && !f.endsWith('.map'))
+        // データの説明・検査スクリプト（data/imagelink/README.md・validate.py）は配るがキャッシュしない
+        .filter((f) => f !== 'sw.js' && !f.endsWith('.map') && !f.endsWith('.md') && !f.endsWith('.py'))
         .sort();
       const hash = createHash('sha256');
       for (const f of files) hash.update(f).update(readFileSync(join(out, f)));
