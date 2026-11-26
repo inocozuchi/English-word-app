@@ -132,6 +132,7 @@ try {
     await page.reload();
     await page.waitForSelector('button.start');
     await sleep(300);
+    await sleep(1500); // 数字は 0 から数え上がる
     ok(+(await page.locator('.stat-c .num').nth(1).textContent()) === 5, '再読み込みしても学習記録が残る');
     ok(+(await page.locator('.stat-c .num').nth(0).textContent()) === 1, '連続日数が1日になる');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
@@ -334,6 +335,7 @@ try {
     await page.reload();
     await page.waitForSelector('button.start');
     await sleep(300);
+    await sleep(1500);
     ok((await page.locator('.review .r-num').textContent()).trim() === '2', 'ホームに復習リストの件数が出る');
     // 一覧
     await page.locator('nav button', { hasText: '復習リスト' }).tap();
@@ -408,6 +410,7 @@ try {
     await sleep(300);
     ok((await settingsOf(page)).activeMode === 'sound', '設定でモードを切り替えて保存できる');
     ok((await top().locator('.ui-h2', { hasText: '出題パターン' }).count()) === 1, '音声変化モードの設定（出題パターン）が出る');
+    await sleep(1300);
     ok((await top().locator('.ui-val').nth(1).textContent()).includes('10'), '不正解のときの自動で次へは音声変化の初期値（10秒）');
     await top().locator('header .back').tap();
     await settle();
@@ -733,7 +736,7 @@ try {
     await top().locator('.fig img').dblclick();
     await sleep(400);
     ok((await page.locator('body > .lb').count()) === 1, '図をダブルタップで拡大');
-    await page.getByRole('button', { name: '閉じる' }).tap();
+    await page.getByRole('button', { name: '閉じる', exact: true }).tap();
     await sleep(200);
     ok((await page.locator('.lb').count()) === 0, '拡大を閉じられる');
     await top().locator('.close').tap();
@@ -999,6 +1002,82 @@ try {
     await top().getByRole('button', { name: /学習レポートをコピー/ }).tap();
     await settle();
     ok((await top().locator('textarea').inputValue()).includes('学習レポート'), '学習レポート（ChatGPT に貼り付ける文章）');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+  // ---------- 一時停止・中断と再開 ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify(toV2({ advanceSec: 3, answerSec: 5, count: 5, formats: ['ej'] }))));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    await top().locator('.choice').first().tap();
+    await sleep(300);
+    // 一時停止ボタン → 押すまで止まったまま（自動で次へ進まない）
+    await top().getByRole('button', { name: '一時停止' }).tap();
+    await sleep(200);
+    ok((await top().locator('.po').count()) === 1, '一時停止ボタンで一時停止の画面');
+    await sleep(4000);
+    ok((await top().locator('.explain').count()) === 1, '一時停止中は自動で次へ進まない');
+    await top().getByRole('button', { name: '再開する' }).tap();
+    await sleep(300);
+    ok((await top().locator('.po').count()) === 0, '「再開する」で続きから');
+    await sleep(3500);
+    ok((await top().locator('.explain').count()) === 0, '再開後は自動で次の問題へ');
+    // アプリを離れると一時停止のまま（戻っても勝手に再開しない）
+    await page.evaluate(() => {
+      Object.defineProperty(document, 'visibilityState', { value: 'hidden', configurable: true });
+      document.dispatchEvent(new Event('visibilitychange'));
+      Object.defineProperty(document, 'visibilityState', { value: 'visible', configurable: true });
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await sleep(300);
+    ok((await top().locator('.po').count()) === 1, 'アプリを離れて戻ると一時停止のまま');
+    await sleep(5500);
+    ok((await top().locator('.status').count()) === 0, '一時停止中は時間切れにならない');
+    // 中断してホームへ → アプリを閉じても（再読み込み）続きから
+    await top().getByRole('button', { name: '中断してホームへ' }).tap();
+    await settle();
+    ok((await depth()) === 1 && (await page.locator('.rc-main').count()) === 1, '中断するとホームに「中断したクイズを再開」');
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await sleep(500);
+    ok((await page.locator('.rc-main').textContent()).includes('1 / 5'), 'アプリを閉じても中断したクイズが残る（1 / 5 問まで）');
+    await page.locator('.rc-main').tap();
+    await settle();
+    ok((await top().locator('.dot.ok, .dot.ng').count()) === 1 && (await top().locator('.dot.cur').count()) === 1, '再開すると2問目から（1問目の結果も残る）');
+    const before = await page.evaluate(() => Object.values(JSON.parse(localStorage.getItem('eq.progress.etymology.v1')).days)[0].a);
+    ok(before === 1, '再開しても1問目を二重に記録しない');
+    // 最後まで解くと中断の記録は消える
+    for (let k = 0; k < 4; k++) {
+      await top().locator('.choice').first().tap();
+      await sleep(200);
+      await page.keyboard.press('Enter');
+      await settle();
+    }
+    await sleep(500);
+    ok((await page.evaluate(() => localStorage.getItem('eq.quiz.suspend.v1'))) === null, '最後まで解くと中断の記録は消える');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+  {
+    const { page, errors, top, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify({ activeMode: 'imagelink-reflex', modes: { 'imagelink-reflex': { method: 'warmup' } } })));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await page.locator('button.start').tap();
+    await settle();
+    await top().getByRole('button', { name: '一時停止' }).tap();
+    await sleep(6500);
+    ok((await top().locator('.po').count()) === 1 && (await top().locator('.ngl').count()) === 0, '反射版: 一時停止中は時間切れにならない');
+    await top().getByRole('button', { name: '再開する' }).tap();
+    await sleep(200);
+    ok((await top().locator('.po').count()) === 0, '反射版: 再開できる');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }
