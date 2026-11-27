@@ -4,6 +4,7 @@
   import Toggle from '../components/Toggle.svelte';
   import Segmented from '../components/Segmented.svelte';
   import SliderRow from '../components/SliderRow.svelte';
+  import SituationToggles from '../components/SituationToggles.svelte';
   import { store, updateSettings, replaceAll, activeMode, modes, switchMode, timingOf, updateTiming, allProgress } from '../core/store.svelte.ts';
   import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS, emptyProgress } from '../core/storage.ts';
   import { haptic } from '../core/haptics.ts';
@@ -145,6 +146,10 @@
     </div>
   </div>
 
+  <h2 class="ui-h2">今の状況に合わせる</h2>
+  <SituationToggles />
+  <p class="sit-hint">学習中も、一時停止の画面から切り替えられます。</p>
+
   <h2 class="ui-h2">復習リスト</h2>
   <div class="ui-group">
     <div class="ui-item col">
@@ -197,6 +202,11 @@
 </Page>
 
 <style>
+  .sit-hint {
+    font-size: 11px;
+    color: var(--text3);
+    margin: 8px 4px 0;
+  }
   .mode-name {
     font-weight: 700;
   }

@@ -18,7 +18,7 @@
   import { reducedMotion } from '../../../core/spring.ts';
   import { loadReports, saveReports, addReport, type ReportReason } from '../../../core/reports.ts';
   import { compMode } from '../mode.ts';
-  import { planSession, planReview, courseDayFor, INITIAL_DAY, STAGE_LABEL, AFTER_COURSE, MODE_ID, estimateSec, type Stage, type Task } from '../course.ts';
+  import { allowedBy, planSession, planReview, courseDayFor, INITIAL_DAY, STAGE_LABEL, AFTER_COURSE, MODE_ID, estimateSec, type Stage, type Task } from '../course.ts';
   import { newSession, applyResult, advance, resumeCursor, isOk, type SessionState, type Result, type ConvState } from '../session.ts';
   import { choicesFromPrompt } from '../grade.ts';
   import { scoreDiag, DOMAIN_STAGES } from '../diag.ts';
@@ -40,6 +40,17 @@
   const settings = $derived(modeSettings(compMode));
   const ix = $derived(comp.index);
 
+  /** 今の状況（設定の「音声を使う」「文字を入力する問題」） */
+  const situation = () => ({ audio: store.settings.audio, typing: store.settings.typing });
+  // 学習中に状況を変えたら、合わない問題は記録せずに飛ばす（あとで状況が戻れば、また出る）
+  $effect(() => {
+    const sit = { audio: store.settings.audio, typing: store.settings.typing };
+    if (!s || !task || !q || s.results[task.id] || s.pending?.taskId === task.id) return;
+    if (!allowedBy(q, sit)) {
+      s = advance(applyResult(s, task.id, { v: 'excluded', hints: 0, ms: 0 }));
+      saveSession(s);
+    }
+  });
   /** 苦手な段階（段階ごとの正答率が低い・診断で低かった分野） */
   function weakStages(): Set<Stage> {
     const out = new Set<Stage>();
@@ -65,7 +76,7 @@
       } else if (kind === 'review') {
         const rng = createRng(seed);
         const ks = keys ?? reviewOrder(store.progress.review, rng).map((e) => e.key);
-        s = newSession({ id: `r${seed}`, date: today, day: extra().cd?.day ?? 1, kind: 'review', minutes: settings.minutes, tasks: planReview(ix, ks, extra().qs ?? {}, rng, 20) });
+        s = newSession({ id: `r${seed}`, date: today, day: extra().cd?.day ?? 1, kind: 'review', minutes: settings.minutes, tasks: planReview(ix, ks, extra().qs ?? {}, rng, 20, situation()) });
       } else {
         // 新しい日: 日程を進め（学習した日ごとに1日）、今日のキューを作る
         const cd = courseDayFor(extra().cd ?? INITIAL_DAY, today);
@@ -82,6 +93,7 @@
           qs: ex.qs ?? {},
           convDone: ex.conv ?? {},
           weak: weakStages(),
+          situation: situation(),
         });
         s = newSession({ id: `s${seed}`, date: today, day: cd.day, kind: 'normal', minutes: settings.minutes, tasks: p.tasks });
       }
@@ -217,7 +229,9 @@
   // ---- まとめ ----
   const summary = $derived.by(() => {
     if (!s || !ix) return null;
-    const rs = Object.entries(s.results).filter(([id]) => s!.tasks.find((t) => t.id === id)?.type === 'question').map(([, r]) => r);
+    const rs = Object.entries(s.results)
+      .filter(([id, r]) => r.v !== 'excluded' && s!.tasks.find((t) => t.id === id)?.type === 'question')
+      .map(([, r]) => r);
     const left = s.tasks.filter((t) => !s!.results[t.id]).length;
     return {
       answered: rs.length,

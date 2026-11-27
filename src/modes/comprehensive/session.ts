@@ -19,7 +19,9 @@ export type Verdict =
   /** 音声が使えなかった（聞き取りとしては記録しない。文字で確認） */
   | 'audio-unavailable'
   /** 学習カードを見た・会話を最後まで進めた */
-  | 'seen';
+  | 'seen'
+  /** 今の状況（音声なし・文字入力なし）で出さないことにした（記録しない） */
+  | 'excluded';
 
 export interface Result {
   v: Verdict;
@@ -113,7 +115,7 @@ export function recordPlan(ix: CompIndex, s: SessionState, task: Task, r: Result
   if (task.type === 'learn' && task.itemId) {
     return { ...empty, ev: { [task.itemId]: { ...prev.ev[task.itemId], r: prev.ev[task.itemId]?.r ?? today } } };
   }
-  if (task.type !== 'question' || !task.qid) return empty;
+  if (task.type !== 'question' || !task.qid || r.v === 'excluded') return empty;
   const q = ix.q.get(task.qid)!;
   if (r.v === 'audio-unavailable') return { ...empty, audioNA: q.id };
   const ok = isOk(r.v);

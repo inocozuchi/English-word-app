@@ -11,6 +11,7 @@ import type { TagStats, Timing } from './mode.ts';
 import { REVIEW_GOAL } from './review.ts';
 
 export type Theme = 'system' | 'light' | 'dark';
+export type TypingMode = 'on' | 'self' | 'skip';
 
 export interface Settings {
   count: number;
@@ -20,6 +21,10 @@ export interface Settings {
   reviewGoal: number;
   /** 使っているモード */
   activeMode: string;
+  /** 音声を使う（false: 聞き取りの問題を出さない・自動で読み上げない。イヤホンがないときなど） */
+  audio: boolean;
+  /** 文字入力の問題: on = 入力して答える / self = 入力せず頭の中で答えて自己採点 / skip = 出さない */
+  typing: TypingMode;
   /** モードごとの設定（秒数 advanceOkSec / advanceNgSec / answerSec と、各モードの出題範囲など）。旧 advanceSec は両方の初期値として読む */
   modes: Record<string, any>;
 }
@@ -33,6 +38,8 @@ export const DEFAULT_SETTINGS: Settings = {
   haptics: true,
   reviewGoal: REVIEW_GOAL.default,
   activeMode: LEGACY_MODE,
+  audio: true,
+  typing: 'on',
   modes: {},
 };
 
@@ -120,6 +127,8 @@ export function normalizeSettings(raw: any): Settings {
     haptics: typeof s.haptics === 'boolean' ? s.haptics : d.haptics,
     reviewGoal: clamp(s.reviewGoal, LIMITS.reviewGoal, d.reviewGoal),
     activeMode: typeof s.activeMode === 'string' ? s.activeMode : typeof s.activeDeck === 'string' ? s.activeDeck : d.activeMode,
+    audio: typeof s.audio === 'boolean' ? s.audio : d.audio,
+    typing: s.typing === 'self' || s.typing === 'skip' ? s.typing : 'on',
     modes,
   };
 }

@@ -12,6 +12,7 @@
   import { checkOrder, checkShort, speakText } from './quiz.ts';
   import { speak } from '../../core/speech.ts';
   import { haptic } from '../../core/haptics.ts';
+  import { store } from '../../core/store.svelte.ts';
   import { spring, SPRINGS, reducedMotion } from '../../core/spring.ts';
   import { stagger, shake } from '../../core/transitions.ts';
   import { autoSpeakOn } from './autoSpeak.ts';
@@ -21,7 +22,8 @@
   let { q, phase, onanswer, status }: { q: IlQuestion; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet } = $props();
   const r = $derived(q.data.raw);
   const kind = $derived(q.data.kind);
-  const shortMode = $derived(kind === 'exercise' && r.answer_mode === 'short');
+  // 文字入力を「頭の中で」にしているときは、入力せずに答えを見て自己採点
+  const shortMode = $derived(kind === 'exercise' && r.answer_mode === 'short' && store.settings.typing !== 'self');
 
   let root: HTMLElement;
   // ---- 並べ替え ----

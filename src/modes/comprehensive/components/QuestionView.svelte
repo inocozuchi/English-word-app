@@ -13,6 +13,8 @@
   import { haptic } from '../../../core/haptics.ts';
   import { stagger } from '../../../core/transitions.ts';
   import { compMode } from '../mode.ts';
+  import { store } from '../../../core/store.svelte.ts';
+  import { needsTyping } from '../course.ts';
   import { RATES, VOICE_LANGS } from '../settings.ts';
   import Speak from './Speak.svelte';
   import Passage from './Passage.svelte';
@@ -47,7 +49,9 @@
   /** 読解の資料があれば、問題文から資料の本文を外す */
   const promptText = $derived(doc && q.prompt.startsWith(doc.text) ? q.prompt.slice(doc.text.length).trim() : q.prompt);
   const multiline = $derived(['translation', 'dictation', 'paraphrase', 'correction'].includes(q.kind) && !q.subtype?.includes('fill'));
-  const hintable = $derived(!open && !choices && !jaAnswer && ['recall', 'translation', 'dictation', 'correction', 'listening'].includes(q.kind));
+  /** 「頭の中で答える」: 入力せずに答えを見て自己採点 */
+  const thinkOnly = $derived(store.settings.typing === 'self' && needsTyping(q) && !open);
+  const hintable = $derived(!thinkOnly && !open && !choices && !jaAnswer && ['recall', 'translation', 'dictation', 'correction', 'listening'].includes(q.kind));
   const phase = $derived(result ? 'done' : pending ? 'judge' : 'ask');
   const KIND_LABEL: Record<string, string> = {
     recall: '思い出して書く',
@@ -80,7 +84,7 @@
     const check = () => (voiceOk = canSpeak() && (englishVoices().length > 0 || speechSynthesis.getVoices().length === 0));
     check();
     const off = onVoicesChanged(check);
-    if (isAudio && phase === 'ask' && s.autoPlay && q.audioText && canSpeak()) setTimeout(play, 350);
+    if (isAudio && phase === 'ask' && s.autoPlay && store.settings.audio && q.audioText && canSpeak()) setTimeout(play, 350);
     return () => {
       document.removeEventListener('visibilitychange', vis);
       off();
@@ -98,7 +102,7 @@
   function submit(given = text) {
     if (phase !== 'ask') return;
     const ms = Math.round(elapsed());
-    if (open) {
+    if (open || thinkOnly) {
       onpending({ given: given.trim(), hints, ms, plays });
       return;
     }
@@ -195,7 +199,7 @@
             {#if result.hints}<span class="tagx">ヒントあり</span>{/if}
           </p>
         {:else}
-          <p class="verdict">{open ? '模範解答と比べて、自分で判定してください' : '登録された答えと一致しませんでした。模範解答と比べて判定してください'}</p>
+          <p class="verdict">{open || thinkOnly ? '模範解答と比べて、自分で判定してください' : '登録された答えと一致しませんでした。模範解答と比べて判定してください'}</p>
         {/if}
         {#if given}
           <div class="box mine"><span class="lbl">あなたの答え</span>
@@ -238,6 +242,12 @@
           {#each choices as c, k}<button class="choice en press" onclick={() => submit(c)}><span class="kn">{k + 1}</span>{c}</button>{/each}
         </div>
         <div class="acts one"><button class="sec press" onclick={skip}>わからない</button></div>
+      {:else if thinkOnly}
+        <p class="think">頭の中で答えてから、答えを見て自分で判定します（入力なし）</p>
+        <div class="acts">
+          <button class="sec press" onclick={skip}>わからない</button>
+          <button class="pri press" onclick={() => submit('')}>答えを見る</button>
+        </div>
       {:else}
         {#if multiline || open}
           <textarea
@@ -519,6 +529,12 @@
   }
   .acts button:disabled {
     opacity: 0.35;
+  }
+  .think {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text2);
+    text-align: center;
   }
   .ask {
     font-size: 13px;

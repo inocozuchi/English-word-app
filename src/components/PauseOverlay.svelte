@@ -3,13 +3,16 @@
   // 「再開する」は親指の届く下側に大きく。中断すると続きはホームから
   import { spring, SPRINGS, reducedMotion } from '../core/spring.ts';
   import Icon from './Icon.svelte';
+  import SituationToggles from './SituationToggles.svelte';
 
   let {
     progress = '',
     note = 'タイマーは止まっています。アプリを閉じても、ここから続けられます。',
     onresume,
     onsuspend,
-  }: { progress?: string; note?: string; onresume: () => void; onsuspend?: () => void } = $props();
+    situation = true,
+  }: { progress?: string; note?: string; onresume: () => void; onsuspend?: () => void; situation?: boolean } = $props();
+  let showSit = $state(false);
 
   function fadeIn(node: HTMLElement) {
     if (reducedMotion()) return;
@@ -36,6 +39,10 @@
     <p class="ttl display">一時停止中</p>
     {#if progress}<p class="prog en">{progress}</p>{/if}
     <p class="note">{note}</p>
+    {#if situation}
+      <button class="sit-btn" onclick={() => (showSit = !showSit)} aria-expanded={showSit}>{showSit ? '閉じる' : '音声・文字入力の出し方を変える'}</button>
+      {#if showSit}<div class="sit"><SituationToggles compact /></div>{/if}
+    {/if}
     <div class="acts">
       <!-- svelte-ignore a11y_autofocus -->
       <button class="resume press" onclick={onresume} autofocus><span aria-hidden="true">▶</span>再開する</button>
@@ -86,6 +93,16 @@
     font-size: 13px;
     color: var(--text2);
     line-height: 1.6;
+  }
+  .sit-btn {
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    min-height: 36px;
+  }
+  .sit {
+    margin-top: 2px;
   }
   .acts {
     display: flex;

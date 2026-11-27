@@ -6,7 +6,7 @@
   import type { ConvState } from '../session.ts';
   import Speak from './Speak.svelte';
   import { speak } from '../../../core/speech.ts';
-  import { modeSettings } from '../../../core/store.svelte.ts';
+  import { modeSettings, store } from '../../../core/store.svelte.ts';
   import { compMode } from '../mode.ts';
   import { VOICE_LANGS } from '../settings.ts';
   import { haptic } from '../../../core/haptics.ts';
@@ -34,7 +34,7 @@
     const n = node;
     if (!n?.speaker || spoken === n.id + cur.path.length) return;
     spoken = n.id + cur.path.length;
-    if (s.autoPlay) setTimeout(() => say(n.speaker!, n.slow), 250);
+    if (s.autoPlay && store.settings.audio) setTimeout(() => say(n.speaker!, n.slow), 250);
   });
 
   function choose(text: string, next: string, fb?: string) {

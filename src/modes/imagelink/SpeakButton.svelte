@@ -2,6 +2,7 @@
   // 🔊 英文を読み上げる（Web Speech API、en-US）
   import Icon from '../../components/Icon.svelte';
   import { canSpeak, speak } from '../../core/speech.ts';
+  import { store } from '../../core/store.svelte.ts';
   let { text, size = 40 }: { text: string; size?: number } = $props();
   let playing = $state(false);
   function play(e: Event) {
@@ -11,7 +12,7 @@
   }
 </script>
 
-{#if canSpeak()}
+{#if canSpeak() && store.settings.audio}
   <button class="sp press" class:playing style:--s="{size}px" onclick={play} aria-label="読み上げ"><Icon name="speaker" size={Math.round(size * 0.5)} stroke={2.2} /></button>
 {/if}
 

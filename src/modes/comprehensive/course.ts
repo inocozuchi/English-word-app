@@ -8,6 +8,7 @@ import type { ItemState, SrsConfig } from '../../core/srs.ts';
 import { isDue } from '../../core/srs.ts';
 import type { Rng } from '../../core/rng.ts';
 import { shuffle } from '../../core/rng.ts';
+import { isOpenKind, choicesFromPrompt } from './grade.ts';
 import type { CompData, CQuestion, Item, Visual, Scenario, ReadingDoc, GrammarGroup, PronGroup, Profile, Priority, Day } from './types.ts';
 
 export const MODE_ID = 'comprehensive';
@@ -119,6 +120,17 @@ export function stageOf(ix: CompIndex, q: CQuestion): Stage {
   return it ? it.kind : 'vocabulary';
 }
 
+/** 音声が要る問題（聞き取り・書き取り） */
+export const needsAudio = (q: CQuestion) => q.kind === 'listening' || q.kind === 'dictation';
+/** 文字の入力が要る問題（自由回答・選ぶ問題は入力なしでも進められる） */
+export const needsTyping = (q: CQuestion) => !isOpenKind(q.kind, q.subtype) && !choicesFromPrompt(q.prompt, q.acceptedAnswers);
+/** 今の状況（設定）で出してよい問題か */
+export interface Situation {
+  audio: boolean;
+  typing: 'on' | 'self' | 'skip';
+}
+export const allowedBy = (q: CQuestion, sit?: Situation) => !sit || ((sit.audio || !needsAudio(q)) && (sit.typing !== 'skip' || !needsTyping(q)));
+
 /** 記録の単位（itemIds が空なら問題ID） */
 export const keysOf = (q: CQuestion) => (q.itemIds.length ? q.itemIds : [q.id]);
 
@@ -225,6 +237,8 @@ export interface PlanInput {
   convDone: Record<string, number>;
   /** 苦手な段階（診断・正答率から）。復習で先に出す */
   weak?: Set<Stage>;
+  /** 今の状況（音声を使わない・文字を入力しない）。合わない問題は出さない（記録もしない） */
+  situation?: Situation;
 }
 
 export interface Plan {
@@ -239,12 +253,12 @@ export interface Plan {
 const PRI_ORDER: Record<Priority, number> = { core: 0, recommended: 1, extra: 2 };
 
 /** 項目の復習に使う問題を選ぶ（前回と違う種類をなるべく選ぶ） */
-function questionForKey(ix: CompIndex, key: string, qs: Record<string, QRec>, rng: Rng): string | null {
+function questionForKey(ix: CompIndex, key: string, qs: Record<string, QRec>, rng: Rng, sit?: Situation): string | null {
   if (ix.q.has(key)) return key;
   const list = ix.itemQs.get(key) ?? [];
   if (!list.length) return null;
   const sorted = shuffle(list, rng).sort((a, b) => (qs[a]?.l ?? -1) - (qs[b]?.l ?? -1));
-  return sorted[0];
+  return (sit ? sorted.find((id) => allowedBy(ix.q.get(id)!, sit)) : sorted[0]) ?? sorted[0];
 }
 
 /** 段階を交互に（同じ種類が続かないように） */
@@ -277,7 +291,7 @@ export function planSession(input: PlanInput): Plan {
   /** 同じ問題・別名・同じ英語表記の項目を同じセッションで重ねない */
   const take = (qid: string) => {
     const q = ix.q.get(qid);
-    if (!q || used.has(qid)) return false;
+    if (!q || used.has(qid) || !allowedBy(q, input.situation)) return false;
     const dk = ix.dupKey.get(qid);
     if (dk && usedDup.has(dk)) return false;
     const se = q.itemIds.map((i) => ix.sameEn.get(i)).filter(Boolean) as string[];
@@ -294,7 +308,7 @@ export function planSession(input: PlanInput): Plan {
   const keyDay = (k: string) => ix.item.get(k)?.day ?? ix.q.get(k)?.day ?? 0;
   const jit = new Map(dueKeys.map(([k]) => [k, rng()]));
   const weak = input.weak ?? new Set<Stage>();
-  const keyQ = new Map(dueKeys.map(([k]) => [k, questionForKey(ix, k, qs, rng)]));
+  const keyQ = new Map(dueKeys.map(([k]) => [k, questionForKey(ix, k, qs, rng, input.situation)]));
   const isWeakKey = (k: string) => {
     const q = ix.q.get(keyQ.get(k) ?? '');
     return q && weak.has(stageOf(ix, q)) ? 0 : 1;
@@ -400,13 +414,13 @@ function order(tasks: Task[]): Task[] {
 }
 
 /** 復習リストだけのキュー（ホームの「復習する」） */
-export function planReview(ix: CompIndex, keys: string[], qs: Record<string, QRec>, rng: Rng, limit: number): Task[] {
+export function planReview(ix: CompIndex, keys: string[], qs: Record<string, QRec>, rng: Rng, limit: number, sit?: Situation): Task[] {
   const out: Task[] = [];
   const seen = new Set<string>();
   for (const k of keys) {
     if (out.length >= limit) break;
-    const qid = questionForKey(ix, k, qs, rng);
-    if (!qid || seen.has(qid)) continue;
+    const qid = questionForKey(ix, k, qs, rng, sit);
+    if (!qid || seen.has(qid) || !allowedBy(ix.q.get(qid)!, sit)) continue;
     seen.add(qid);
     out.push({ id: `${qid}~${out.length}`, type: 'question', stage: 'review', qid, reason: 'due' });
   }

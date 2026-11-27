@@ -6,7 +6,7 @@
   import ItemInfo from './ItemInfo.svelte';
   import Visual from './Visual.svelte';
   import { speak } from '../../../core/speech.ts';
-  import { modeSettings } from '../../../core/store.svelte.ts';
+  import { modeSettings, store } from '../../../core/store.svelte.ts';
   import { compMode } from '../mode.ts';
   import { VOICE_LANGS } from '../settings.ts';
   import { onMount } from 'svelte';
@@ -15,7 +15,7 @@
   const visuals = $derived((ix.itemVisual.get(item.id) ?? []).slice(0, 2));
   onMount(() => {
     const s = modeSettings(compMode);
-    if (s.autoPlay) setTimeout(() => speak(item.english, undefined, { rate: s.rate, langs: VOICE_LANGS }), 300);
+    if (s.autoPlay && store.settings.audio) setTimeout(() => speak(item.english, undefined, { rate: s.rate, langs: VOICE_LANGS }), 300);
   });
   function next() {
     if (!done) onseen();

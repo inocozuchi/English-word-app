@@ -59,7 +59,9 @@ export const imagelinkMode: QuizMode<IlSettings> = {
   },
   candidates(s) {
     if (!il.index) return [];
-    return ilCandidates(loadedQuestions(neededParts(s, il.index.chapters)), s);
+    // 文字入力を「出さない」設定なら、入力が必須の練習問題（short）を外す
+    const qs = loadedQuestions(neededParts(s, il.index.chapters));
+    return ilCandidates(store.settings.typing === 'skip' ? qs.filter((q) => !(q.type === 'exercise' && q.answer_mode === 'short')) : qs, s);
   },
   pick: (input, s) => ilPick(input, s),
   question(key, rng) {
