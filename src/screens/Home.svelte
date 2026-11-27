@@ -12,6 +12,7 @@
   import { haptic } from '../core/haptics.ts';
   import { loadSuspend, clearSuspend } from '../core/suspend.ts';
   import HomeBackdrop from '../components/HomeBackdrop.svelte';
+  import { sync } from '../sync/sync.svelte.ts';
 
   loadData();
   const mode = $derived(activeMode());
@@ -19,6 +20,9 @@
   const days = $derived(streak(store.progress.days, t));
   const todayCount = $derived(store.progress.days[dayKey(t)]?.a ?? 0);
   const inReview = $derived(reviewCount(store.progress.review));
+  const SYNC_LABEL = { off: 'オフ', idle: '同期済み', syncing: '同期中', error: 'あとでもう一度', offline: 'オフライン' } as const;
+  /** 今日の目標（1回分の問題数 × 2）。届いたら印が付く */
+  const goal = $derived(Math.max(10, store.settings.count * 2));
   /** 時間帯のあいさつ（日付と同じく午前4時区切り）と、続けている日数 */
   const greeting = $derived.by(() => {
     void t;
@@ -74,7 +78,7 @@
     if (router.stack.length !== 1 || e.repeat || e.metaKey || e.ctrlKey || e.altKey) return;
     const t = e.target as HTMLElement | null;
     if (t && t !== document.body) return;
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || (store.settings.spaceNext && e.code === 'Space')) {
       e.preventDefault();
       start('normal');
     } else if ((e.key === 'r' || e.key === 'R') && inReview) {
@@ -90,15 +94,24 @@
   <HomeBackdrop />
   <header data-intro>
     <div class="logo en" aria-label="EIGO LOOP"><span>EIGO</span><span>LOOP</span></div>
+    {#if sync.code}
+      <!-- 同期の状態（押すと設定へ） -->
+      <button class="sync press {sync.status}" onclick={() => router.push({ name: 'settings' })} aria-label="同期: {SYNC_LABEL[sync.status]}" title="同期: {SYNC_LABEL[sync.status]}">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 6.5A5.2 5.2 0 0 0 3.4 4.8M3 9.5a5.2 5.2 0 0 0 9.6 1.7" /><path d="M3.2 2.2v2.8H6M12.8 13.8V11H10" /></svg>
+        <span class="en">{sync.status === 'syncing' ? 'Sync' : sync.status === 'idle' ? 'Synced' : sync.status === 'offline' ? 'Offline' : 'Retry'}</span>
+      </button>
+    {/if}
     <button class="icon press" onclick={() => router.push({ name: 'settings' })} aria-label="設定"><Icon name="gear" size={24} /></button>
   </header>
 
   <div class="hero" data-intro>
     <p class="greet eyebrow-en">{greeting}</p>
     <p class="tagline">{mode.tagline}</p>
-    <h1 class="display">
-      {#each hero as line, li}{#if li > 0}<br />{/if}{#each line as part}{#if part.acc}<span class="acc">{part.t}</span>{:else}{part.t}{/if}{/each}{/each}
+    {#key mode.id}
+    <h1 class="display" aria-label={hero.map((l) => l.map((p) => p.t).join('')).join(' ')}>
+      {#each hero as line, li}{#if li > 0}<br />{/if}{#each line as part, pi}{#each part.t.split(/(\s+)/).filter(Boolean) as w, wi}{#if /^\s+$/.test(w)}{w}{:else}<span class="hw" aria-hidden="true"><span class:acc={part.acc} style="--i: {li * 3 + pi + wi}">{w}</span></span>{/if}{/each}{/each}{/each}
     </h1>
+    {/key}
   </div>
 
   <div class="side">
@@ -134,9 +147,10 @@
       <span class="num en"><Num value={days} delay={520} /></span>
       <span class="cap">連続日数</span>
     </div>
-    <div class="stat-c">
-      <span class="num en"><Num value={todayCount} delay={520} /></span>
-      <span class="cap">今日の回答</span>
+    <div class="stat-c today" class:met={todayCount >= goal}>
+      <span class="num en"><Num value={todayCount} delay={520} /><span class="of">/{goal}</span></span>
+      <span class="cap">{todayCount >= goal ? '今日の目標 達成' : '今日の回答'}</span>
+      <span class="goal" aria-hidden="true"><span style="transform: scaleX({Math.min(1, todayCount / goal)})"></span></span>
     </div>
     <div class="stat-c">
       <span class="num en"><Num value={due} delay={520} /></span>
@@ -170,6 +184,110 @@
   nav button,
   .resume-card {
     background: var(--bg);
+  }
+  /* 見出しの語が1つずつ下からせり上がる（枠の外は見せない） */
+  .hw {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.06em;
+    margin-bottom: -0.06em;
+  }
+  .hw > span {
+    display: inline-block;
+    animation: wordUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--intro-delay, 0.18s) + var(--i) * 70ms);
+  }
+  /* 起動して配置が決まるまで（core/boot.ts）は止めておく */
+  :global(html:not(.booted)) .hw > span {
+    animation-play-state: paused;
+  }
+  @keyframes wordUp {
+    from {
+      transform: translateY(105%);
+    }
+  }
+  .sync {
+    margin-left: auto;
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 30px;
+    padding: 0 10px 0 8px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line-strong);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--text2);
+    background: var(--bg);
+  }
+  .sync svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sync.idle {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .sync.syncing svg {
+    animation: syncSpin 1s linear infinite;
+  }
+  .sync.error {
+    color: var(--text);
+    border-color: var(--ink);
+  }
+  @keyframes syncSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .of {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text3);
+    margin-left: 2px;
+    letter-spacing: 0;
+  }
+  .today {
+    position: relative;
+  }
+  /* 今日の目標までの細い棒（下の枠に沿って伸びる） */
+  .goal {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 5px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--fill);
+    overflow: hidden;
+  }
+  .goal > span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform-origin: left;
+    transition: transform 0.9s var(--ease-pop, cubic-bezier(0.2, 0.8, 0.2, 1)) 0.6s;
+  }
+  .today.met .num {
+    color: var(--accent);
+  }
+  .today.met .cap {
+    color: var(--accent);
+    font-weight: 800;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hw > span,
+    .sync.syncing svg {
+      animation: none;
+    }
   }
   .greet {
     color: var(--accent);
@@ -405,7 +523,7 @@
   .stat-c {
     display: flex;
     flex-direction: column;
-    padding: 10px 14px 9px;
+    padding: 10px 14px 13px;
     gap: 1px;
   }
   .stat-c + .stat-c {

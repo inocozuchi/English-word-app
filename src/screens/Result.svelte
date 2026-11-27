@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isNextKey, inField } from '../core/keys.ts';
   import { onMount } from 'svelte';
   import Num from '../components/Num.svelte';
   import { router } from '../core/router.svelte.ts';
@@ -57,9 +58,23 @@
   });
 
   const message = rate === 100 ? '全問正解！' : rate >= 80 ? 'いい調子です' : rate >= 50 ? 'もう一息' : 'まちがえた問題は復習リストに入りました';
+  // パソコン: 次へのキー（Enter・スペース）でもう一度、Esc でホームへ（結果画面が一番上のときだけ）
+  let resRoot: HTMLElement | undefined = $state();
+  function onResKey(e: KeyboardEvent) {
+    if (e.defaultPrevented || e.repeat || inField(e.target) || e.metaKey || e.ctrlKey || e.altKey || resRoot?.closest('[inert]')) return;
+    if (isNextKey(e, store.settings)) {
+      e.preventDefault();
+      resRoot?.querySelector<HTMLButtonElement>('button.primary')?.click();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      router.pop();
+    }
+  }
 </script>
 
-<div class="result">
+<svelte:window onkeydown={onResKey} />
+
+<div class="result" bind:this={resRoot}>
   <div class="scroll body">
     <div class="hero" in:rise>
       <p class="eyebrow-en">{kind === 'review' ? 'Review result' : 'Result'}</p>
@@ -68,6 +83,8 @@
       {#if marks.length}
         <p class="dots" bind:this={dotsEl} aria-hidden="true">{#each marks as m}<span class="mk {m}"></span>{/each}</p>
       {/if}
+      <!-- 正答率の棒（8割の印つき。数え上げと一緒に伸びる） -->
+      <div class="bar" aria-hidden="true"><span class="fill" class:great={rate >= 80} style="transform: scaleX({rate / 100})"></span><span class="mark80"></span></div>
       <p class="rate">正答率 {rate}% {#if days > 0}<span class="dot">·</span><Icon name="flame" size={15} /> {days}日連続{/if}</p>
     </div>
 
@@ -142,6 +159,34 @@
     line-height: 1.05;
     margin: 6px 0;
     font-variant-numeric: tabular-nums;
+  }
+  .bar {
+    position: relative;
+    width: min(260px, 70%);
+    height: 10px;
+    margin: 2px auto 12px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    overflow: hidden;
+  }
+  .fill {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s;
+  }
+  .fill.great {
+    background: var(--accent);
+  }
+  .mark80 {
+    position: absolute;
+    left: 80%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--line-strong);
+    z-index: 1;
   }
   .dots {
     display: flex;
