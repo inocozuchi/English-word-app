@@ -70,6 +70,8 @@ export function parseConfig(text: string): Record<string, string> | null {
   return out.apiKey && out.projectId ? out : null;
 }
 
+/** 同期のときに読んだ中身（書き戻す前に、その間に書き換えられていないか確かめる） */
+const readAt = new Map<string, string | null>();
 const local: Local = {
   keys() {
     const ks = new Set<string>();
@@ -81,9 +83,16 @@ const local: Local = {
   },
   get(k) {
     const v = localStorage.getItem(k);
+    readAt.set(k, v);
     return v ?? (localAt(k) > 0 ? 'null' : null);
   },
   set(k, text, at) {
+    // 同期の途中でこの端末が書き換えていたら（単語を足した・答えたなど）上書きしない。
+    // 置き場には今回まとめた分を置き、次の同期でこの端末の新しい分とまとめる（まとめは合わせるだけなので失わない）
+    if (localStorage.getItem(k) !== readAt.get(k)) {
+      again = true;
+      return;
+    }
     try {
       if (text === 'null') localStorage.removeItem(k);
       else localStorage.setItem(k, text);
@@ -113,6 +122,13 @@ async function getRemote(): Promise<Remote | null> {
 }
 
 let running: Promise<void> | null = null;
+let failures = 0;
+let timer = 0;
+/** 少しあとで同期する（続けて呼ばれたら最後の1回だけ） */
+function soon(ms: number) {
+  clearTimeout(timer);
+  timer = window.setTimeout(() => void syncNow(), ms);
+}
 let again = false;
 /** 同期する（同期中なら終わってからもう一度）。クイズ・学習の途中は終わるまで待つ */
 export function syncNow(): Promise<void> {
@@ -143,10 +159,14 @@ export function syncNow(): Promise<void> {
         writeSaved(sync.saved);
         sync.status = 'idle';
         sync.error = '';
+        failures = 0;
       } while (again);
     } catch (e) {
       sync.status = navigator.onLine === false ? 'offline' : 'error';
       sync.error = explain(e);
+      // 少しずつ間をあけてもう一度（30秒 → 2分 → 5分ごと）。オフラインなら online のときに
+      if (sync.status === 'error') soon([30_000, 120_000][failures] ?? 300_000);
+      failures++;
     } finally {
       running = null;
     }
@@ -210,11 +230,11 @@ export function initSync() {
   if (started) return;
   started = true;
   sync.status = sync.code && sync.config ? 'idle' : 'off';
-  let timer = 0;
-  const soon = (ms: number) => {
-    clearTimeout(timer);
-    timer = window.setTimeout(() => void syncNow(), ms);
-  };
+  // パソコンで2つのタブを開いているとき: ほかのタブが保存した記録を読み直す（同期していなくても）
+  addEventListener('storage', (e: StorageEvent) => {
+    if (!e.key || !isSyncKey(e.key) || router.top.kind === 'modal') return;
+    apply([e.key]);
+  });
   onTouched(() => sync.code && soon(6000));
   document.addEventListener('visibilitychange', () => {
     if (!sync.code) return;
