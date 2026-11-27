@@ -5,6 +5,7 @@
 //   eq.progress.<モードID>.v1  モードごとの学習記録（間隔反復・日ごとの回答数・復習リスト・タグ別正答率）
 // 旧形式（語源英単語だけだった頃の ety.settings.v1 / ety.progress.v1）は、最初の読み込み時に
 // 語源英単語モードのデータとして移行する。旧データは消さずに残す（戻し用）。
+import { touched } from '../sync/touch.ts';
 import type { ItemState } from './srs.ts';
 import type { ReviewList } from './review.ts';
 import type { TagStats, Timing } from './mode.ts';
@@ -90,6 +91,7 @@ function read<T>(key: string): T | null {
 function write(key: string, value: unknown) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
+    touched(key);
   } catch {
     /* 容量不足・保存不可でもアプリは続ける */
   }

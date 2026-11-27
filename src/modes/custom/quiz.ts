@@ -30,6 +30,8 @@ export interface CWord {
 
 export interface CustomSettings {
   words: CWord[];
+  /** 消した単語の id と時刻（同期でほかの端末から戻らないように） */
+  gone?: Record<string, number>;
   patterns: Pattern[];
 }
 
@@ -46,7 +48,9 @@ export function normalizeCustomSettings(raw: unknown): CustomSettings {
     words.push({ id, en, ja, ...(str(w.ex) ? { ex: str(w.ex) } : {}), ...(str(w.note) ? { note: str(w.note) } : {}), added: typeof w.added === 'number' ? w.added : 0 });
   }
   const ps = (Array.isArray(r.patterns) ? r.patterns : []).filter((p: unknown): p is Pattern => PATTERNS.some((x) => x.id === p));
-  return { words, patterns: ps.length ? [...new Set<Pattern>(ps)] : ['ej', 'je'] };
+  const gone: Record<string, number> = {};
+  if (r.gone && typeof r.gone === 'object') for (const [k, v] of Object.entries(r.gone)) if (typeof v === 'number') gone[k] = v;
+  return { words: words.filter((w) => !gone[w.id]), patterns: ps.length ? [...new Set<Pattern>(ps)] : ['ej', 'je'], ...(Object.keys(gone).length ? { gone } : {}) };
 }
 
 /** 照合用（大文字小文字・前後の空白・文末の句読点・連続する空白は無視） */

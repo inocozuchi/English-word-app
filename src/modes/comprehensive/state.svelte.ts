@@ -2,6 +2,7 @@
 //   教材: src/generated/comprehensive.json を、このモードを使うときだけ読む（別チャンク。オフラインは SW のキャッシュ）
 //   記録: 共通の eq.progress.comprehensive.v1（間隔反復・日ごとの回答数・復習リスト・タグ）＋ extra（下の CompExtra）
 //   セッション: eq.comp.session.v1（キュー・カーソル・結果・会話のノード。回答のたびに保存）
+import { touched, onPulled } from '../../sync/touch.ts';
 import type { CompData } from './types.ts';
 import { buildIndex, MODE_ID, type CompIndex, type Evidence, type QRec, type CourseDayState, INITIAL_DAY } from './course.ts';
 import type { SessionState, Result } from './session.ts';
@@ -75,6 +76,7 @@ export function saveSession(s: SessionState | null) {
   try {
     if (s) localStorage.setItem(SESSION_KEY, JSON.stringify(s));
     else localStorage.removeItem(SESSION_KEY);
+    touched(SESSION_KEY);
   } catch {
     /* 保存できなくても続ける */
   }
@@ -143,3 +145,8 @@ export function toggleFav(id: string) {
 
 export const nowDay = () => dayNumber(Date.now());
 void store;
+
+// 同期でほかの端末のセッションを取り込んだら読み直す
+onPulled((keys) => {
+  if (keys.includes(SESSION_KEY)) comp.session = loadSession();
+});

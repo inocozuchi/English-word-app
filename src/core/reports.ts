@@ -1,3 +1,4 @@
+import { touched } from '../sync/touch.ts';
 // 「この問題を報告」: 問題IDと理由を端末に保存する（モードごと）。設定画面から JSON で書き出せる。
 // 保存先: eq.reports.<モードID>.v1
 export const REPORT_REASONS = [
@@ -31,6 +32,7 @@ export function loadReports(modeId: string): Report[] {
 export function saveReports(modeId: string, list: Report[]) {
   try {
     localStorage.setItem(storageKey(modeId), JSON.stringify(list));
+    touched(storageKey(modeId));
   } catch {
     /* 保存できなくても続ける */
   }

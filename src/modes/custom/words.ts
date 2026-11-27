@@ -7,8 +7,8 @@ import { MODE_ID, newId, normWord, normalizeCustomSettings, type CWord, type Cus
 const current = () => normalizeCustomSettings(store.settings.modes[MODE_ID]);
 export const customWords = (): CWord[] => current().words;
 
-function save(words: CWord[]) {
-  const s = current();
+function save(words: CWord[], gone?: Record<string, number>) {
+  const s = { ...current(), ...(gone ? { gone } : {}) };
   // updateModeSettings は今のモードでなくても、そのモードの設定を書き換える（id と正規化だけ使う）
   const target = { id: MODE_ID, normalizeSettings: normalizeCustomSettings } as unknown as QuizMode<CustomSettings>;
   updateModeSettings(target, { ...s, words });
@@ -36,6 +36,6 @@ export function updateWord(id: string, patch: Partial<Omit<CWord, 'id' | 'added'
 }
 
 export function removeWord(id: string) {
-  save(customWords().filter((w) => w.id !== id));
+  save(customWords().filter((w) => w.id !== id), { ...(current().gone ?? {}), [id]: Date.now() });
 }
 
