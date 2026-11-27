@@ -1306,6 +1306,11 @@ try {
     await page.keyboard.press('Alt+ArrowLeft');
     await settle();
     ok((await depth()) === 1, 'パソコン: Alt+← で前の画面へ戻る');
+    await page.getByRole('button', { name: '設定' }).click();
+    await settle();
+    await top().locator('button.back').click();
+    await settle();
+    ok((await depth()) === 1, 'パソコン: 設定の戻るボタンをクリックして戻れる');
     ok(errors.length === 0, `パソコン: コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }

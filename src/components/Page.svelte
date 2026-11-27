@@ -66,10 +66,12 @@
     color: var(--accent);
     border-radius: 22px;
   }
+  /* 見出しの小さな題名は飾り（下の戻るボタンへのクリックを奪わない。広い画面でも戻るボタンと重ならない位置に） */
   .small-title {
     position: absolute;
-    left: 64px;
-    right: 64px;
+    left: calc(var(--pad-x) + 44px);
+    right: calc(var(--pad-x-r) + 44px);
+    pointer-events: none;
     bottom: 0;
     height: 44px;
     line-height: 44px;
