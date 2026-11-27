@@ -1,0 +1,32 @@
+rules_version = '2';
+// EIGO LOOP の同期の置き場（docs/firebase-sync.md）。
+//   eigo/{id}          … 目次 { ver, keys, at }。id は同期コードの SHA-256（64桁の16進）
+//   eigo/{id}/c/{doc}  … 記録の中身（gzip）{ d: bytes, z: bool }
+// コードを知っている端末だけが場所を計算できる。一覧は出さない（ほかの人の場所を探せない）。
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function okId(id) {
+      return id.matches('^[0-9a-f]{64}$');
+    }
+    match /eigo/{id} {
+      allow get: if okId(id);
+      allow create, update: if okId(id)
+        && request.resource.data.keys().hasOnly(['ver', 'keys', 'at'])
+        && request.resource.data.ver is int
+        && request.resource.data.keys is map
+        && request.resource.data.keys.size() <= 40
+        && (resource == null || request.resource.data.ver == resource.data.ver + 1);
+      allow list, delete: if false;
+
+      match /c/{doc} {
+        allow get, delete: if okId(id) && doc.size() <= 200;
+        allow create, update: if okId(id) && doc.size() <= 200
+          && request.resource.data.keys().hasOnly(['d', 'z'])
+          && request.resource.data.d is bytes
+          && request.resource.data.d.size() <= 750000
+          && request.resource.data.z is bool;
+        allow list: if false;
+      }
+    }
+  }
+}

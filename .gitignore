@@ -4,3 +4,6 @@ src/generated
 *.log
 .DS_Store
 screenshots/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
