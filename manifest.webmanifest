@@ -1,12 +1,12 @@
 {
   "name": "EIGO LOOP — 英語ループ",
   "short_name": "EIGO LOOP",
-  "description": "通学中に1タップで回せる英語クイズ（語源英単語・音声変化）",
+  "description": "通学中に1タップで回せる英語クイズ（語源・音声変化・会話・イメージリンク・総合英語・自由英単語）",
   "lang": "ja",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
