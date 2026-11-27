@@ -498,6 +498,11 @@
         {#if kind === 'review'}
           <p>復習リストは空です。</p>
           <p class="sub">まちがえた問題が自動で入ります。</p>
+        {:else if mode.emptyHint}
+          {@const h = mode.emptyHint()}
+          <p>{h.text}</p>
+          <p class="sub">{h.sub}</p>
+          <button class="btn press" onclick={() => router.replace(h.action.route)}>{h.action.label}</button>
         {:else}
           <p>出題できる問題がありません。</p>
           <p class="sub">設定で出題範囲や出題形式を確認してください。</p>

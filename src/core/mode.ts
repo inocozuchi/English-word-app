@@ -140,6 +140,8 @@ export interface QuizMode<S = any> {
   srs?: SrsConfig;
   /** 4択以外の回答の操作（Question.interactive のとき、カード全体を描く。status は正誤の行） */
   Interact?: Component<{ q: Question<any>; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet }>;
+  /** 出題できる問題がないときの案内（省略時は「設定で出題範囲を確認」） */
+  emptyHint?(): { text: string; sub: string; action: { label: string; route: Route } };
   /** ホームのスタートの要約に共通の問題数（10問 など）を付けない（問題数をモードが決める） */
   hideCount?: boolean;
   /** ホームのスタートの文言（例: 今日の学習を始める / 続きから再開する）。省略時は「スタート」 */
