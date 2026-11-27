@@ -10,7 +10,8 @@ const APP = `http://localhost:${PORT}/`;
 const server = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], { cwd: new URL('../..', import.meta.url).pathname, stdio: 'ignore' });
 await new Promise((r) => setTimeout(r, 2000));
 const EMU = process.env.FIRESTORE_EMULATOR_HOST ?? '127.0.0.1:8086';
-const CONFIG = `const firebaseConfig = {\n  apiKey: "demo-key",\n  projectId: "demo-eigo",\n  appId: "1:1:web:1",\n  emulatorHost: "${EMU}"\n};`;
+// 試験はエミュレーターにつなぐ（組み込みの本物の設定より、この端末に保存した設定が先）
+const SYNC = { code: null, config: { apiKey: 'demo-key', projectId: 'demo-eigo', appId: '1:1:web:1', emulatorHost: EMU } };
 
 let failed = 0;
 const ok = (c, m) => (console.log(`${c ? '✓' : '✗'} ${m}`), c || failed++);
@@ -37,10 +38,12 @@ const P = 'eq.progress.etymology.v1';
 const W = (id, en, ja) => ({ id, en, ja, added: 1 });
 try {
   const A = await device({ width: 393, height: 852 }, {
+    'eq.sync.v1': SYNC,
     [P]: prog({ 'ej:abstract': st(1000) }),
     'eq.settings.v2': { activeMode: 'etymology', count: 10, typing: 'skip', modes: { custom: { words: [W('w1', 'deadline', '締め切り'), W('w2', 'submit', '提出する')] } } },
   });
   const B = await device({ width: 1280, height: 800 }, {
+    'eq.sync.v1': SYNC,
     [P]: prog({ 'ej:accept': st(2000) }),
     'eq.settings.v2': { activeMode: 'etymology', count: 10, typing: 'on', modes: { custom: { words: [W('w3', 'borrow', '借りる')] } } },
   });
@@ -48,8 +51,6 @@ try {
   await A.page.getByRole('button', { name: '設定' }).tap?.().catch(() => {});
   await A.page.getByRole('button', { name: '設定' }).click();
   await sleep(900);
-  await A.top().locator('textarea').first().fill(CONFIG);
-  await A.top().getByRole('button', { name: 'demo-eigo を使う' }).click();
   await A.top().getByRole('button', { name: '同期を始める' }).click();
   await A.top().getByText('同期済み').waitFor({ timeout: 15000 });
   ok(true, '1台目: 同期を始めると「同期済み」');
@@ -58,8 +59,6 @@ try {
   // 2台目: コードを入れる
   await B.page.getByRole('button', { name: '設定' }).click();
   await sleep(900);
-  await B.top().locator('textarea').first().fill(CONFIG);
-  await B.top().getByRole('button', { name: 'demo-eigo を使う' }).click();
   await B.top().getByRole('button', { name: 'コードを入れる' }).click();
   await B.top().locator('.code-in').fill(code.toLowerCase().replace(/-/g, ' '));
   await B.top().getByRole('button', { name: 'このコードで同期' }).click();

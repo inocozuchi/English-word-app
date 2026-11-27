@@ -44,7 +44,8 @@ class SyncState {
     return this.saved.code;
   }
   get config() {
-    return FIREBASE_CONFIG ?? this.saved.config ?? null;
+    // 貼り付けた設定（試験用のエミュレーターなど）があればそちらを使う
+    return this.saved.config ?? FIREBASE_CONFIG ?? null;
   }
 }
 export const sync = new SyncState();

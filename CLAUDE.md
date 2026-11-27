@@ -199,7 +199,7 @@ src/
   - `eq.reports.<モードID>.v1`: 「この問題を報告」（`core/reports.ts`。イメージリンクの設定から JSON で書き出す）
   - 旧形式（`ety.settings.v1` / `ety.progress.v1`）は最初の起動時に語源英単語モードへ移行し、旧データは残す。書き出し・読み込みは全モード（旧ファイルも読める）。
 - **複数端末の同期**（`src/sync/`。手順は `docs/firebase-sync.md`）: Google の無料サービス Firebase（Cloud Firestore・**認証なし**・`firestore/lite`）。設定したときだけ。
-  接続設定は `sync/config.ts`（null なら設定画面に firebaseConfig を貼る。端末ごとに `eq.sync.v1`）。1台目で20文字の同期コードを作り、ほかの端末で入れる。
+  接続設定は `sync/config.ts`（プロジェクト `eigo-loop` を組み込み済み。端末に保存した設定 `eq.sync.v1` の config があればそちらが先＝試験のエミュレーター用）。1台目で20文字の同期コードを作り、ほかの端末で入れる。
   置き場は `eigo/{SHA-256(コード)}`（目次 `{ver, keys}`）と `eigo/{…}/c/{保存キー~印~番号}`（gzip の Bytes、700KB ごと）。決まりは `firestore.rules`（一覧不可・64桁の16進だけ・版は+1だけ）。
   手順 `engine.ts` の `syncOnce`: 目次を読み、保存キーごとに中身が違えば読んでまとめ（`merge.ts`）、違えば置いて目次を版つきトランザクションで更新（重なったらやり直し）。まとめは `canonical`（キーを並べた JSON）で、どちらの端末でも同じ印になる。
   まとめ方: 学習記録は問題ごとに `last` が新しい方・日ごとは多い方・復習リストは合わせて片方で外れたものは外す・extra は中まで合わせて葉は新しい方。
