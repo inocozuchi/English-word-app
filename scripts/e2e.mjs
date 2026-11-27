@@ -1249,6 +1249,67 @@ try {
     }
   }
 
+  // ---------- パソコン（マウス・キーボード）: スワイプの代わり ----------
+  {
+    const { page, errors, top, depth, settle } = await newPage(browser, { viewport: { width: 1280, height: 800 }, isMobile: false, hasTouch: false });
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify(toV2({ advanceSec: 15, answerSec: 15, count: 5 }))));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    await sleep(800);
+    await page.keyboard.press('Enter');
+    await settle();
+    ok((await depth()) === 2, 'パソコン: ホームで Enter を押すとスタート');
+    await top().locator('.choice').first().waitFor();
+    ok((await top().locator('.card:not(.peek) .ck').count()) === 4, 'パソコン: 選択肢にキー（1〜4）が出る');
+    // ゆっくりクリック（長押し相当）でも選べる
+    const c0 = top().locator('.card:not(.peek) .choice').first();
+    const b0 = await c0.boundingBox();
+    await page.mouse.move(b0.x + 20, b0.y + b0.height / 2);
+    await page.mouse.down();
+    await sleep(700);
+    await page.mouse.up();
+    await sleep(400);
+    ok((await top().locator('.status').count()) > 0 && /正解|不正解/.test((await top().locator('.status').first().textContent()) ?? ''), 'パソコン: ゆっくりクリックしても選択が消えない（長押しの一時停止にならない）');
+    const next = top().locator('button.swipe-hint');
+    ok(await next.isVisible() && /次へ/.test((await next.textContent()) ?? ''), 'パソコン: 解説中に「次へ」ボタンが出る');
+    const dot = async () => (await top().locator('.count').getAttribute('aria-label')) ?? '';
+    const before = await dot();
+    await next.click();
+    await sleep(900);
+    ok((await dot()) !== before, `パソコン: 「次へ」ボタンで次の問題へ（${before} → ${await dot()}）`);
+    // 2問目: 答えてからマウスでドラッグ（左へ）して次へ
+    await page.keyboard.press('1');
+    await sleep(500);
+    const before2 = await dot();
+    await page.mouse.move(900, 400);
+    await page.mouse.down();
+    for (let x = 900; x >= 600; x -= 30) {
+      await page.mouse.move(x, 402);
+      await sleep(16);
+    }
+    await page.mouse.up();
+    await sleep(900);
+    ok((await dot()) !== before2, `パソコン: マウスで左へドラッグしても次へ（${before2} → ${await dot()}）`);
+    await page.keyboard.press('Escape');
+    await settle();
+    ok((await depth()) === 1, 'パソコン: Esc でクイズをやめる');
+    // ページは Esc / Alt+← で戻る
+    await page.getByRole('button', { name: '設定' }).click();
+    await settle();
+    ok((await depth()) === 2, 'パソコン: 設定を開く');
+    await page.keyboard.press('Escape');
+    await settle();
+    ok((await depth()) === 1, 'パソコン: Esc で前の画面へ戻る');
+    await page.getByRole('button', { name: '設定' }).click();
+    await settle();
+    await page.keyboard.press('Alt+ArrowLeft');
+    await settle();
+    ok((await depth()) === 1, 'パソコン: Alt+← で前の画面へ戻る');
+    ok(errors.length === 0, `パソコン: コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
   // ---------- 動きを減らす設定 ----------
   {
     const { page, errors, top, depth, settle } = await newPage(browser, { reducedMotion: 'reduce' });
