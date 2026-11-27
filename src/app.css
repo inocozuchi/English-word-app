@@ -386,3 +386,30 @@ input[type='range']::-moz-range-thumb {
     transition: none;
   }
 }
+
+/* ---------- 横画面・iPad・パソコン ----------
+   広い画面では中身を中央の列にまとめる（各画面は左右の余白に --pad-x / --pad-x-r を使う）。
+   クイズなど「問題と選択肢を左右に並べる」画面は横向きのとき --pad-x-wide（広い列）を使う */
+:root {
+  --pad-x-wide: var(--pad-x);
+  --pad-x-wide-r: var(--pad-x-r);
+}
+@media (min-width: 760px) {
+  :root {
+    --pad-x: max(calc(var(--safe-left) + 8px), 32px, calc(50vw - 360px));
+    --pad-x-r: max(calc(var(--safe-right) + 8px), 32px, calc(50vw - 360px));
+  }
+}
+@media (orientation: landscape) and (min-width: 640px) {
+  :root {
+    --pad-x-wide: max(calc(var(--safe-left) + 8px), 28px, calc(50vw - 540px));
+    --pad-x-wide-r: max(calc(var(--safe-right) + 8px), 28px, calc(50vw - 540px));
+  }
+}
+/* マウス・トラックパッドではポインターを合わせたときに少し持ち上げる（タッチ端末では出さない） */
+@media (hover: hover) and (pointer: fine) {
+  button:not(:disabled),
+  [role='button'] {
+    cursor: pointer;
+  }
+}

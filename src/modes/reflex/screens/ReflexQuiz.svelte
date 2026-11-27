@@ -472,7 +472,7 @@
     inset: 0;
     display: flex;
     flex-direction: column;
-    padding: var(--pad-top) var(--pad-x-r) var(--pad-bottom) var(--pad-x);
+    padding: var(--pad-top) var(--pad-x-wide-r) var(--pad-bottom) var(--pad-x-wide);
     background: var(--bg);
   }
   header {
@@ -577,6 +577,26 @@
   .prompt {
     flex: 1;
     min-height: 0;
+  }
+  /* 横向き: 問題と正誤を左、選択肢を右に */
+  @media (orientation: landscape) and (min-width: 640px) {
+    .stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(50%, 560px));
+      grid-template-rows: minmax(0, 1fr) auto;
+      column-gap: clamp(20px, 3vw, 40px);
+    }
+    .prompt {
+      grid-area: 1 / 1;
+    }
+    .fb {
+      grid-area: 2 / 1;
+    }
+    .stage > .choices {
+      grid-area: 1 / 2 / 3 / 3;
+      align-self: center;
+      max-height: 100%;
+    }
   }
   /* 正誤の行（場所は最初から確保。問題文が動かない） */
   .fb {

@@ -736,6 +736,50 @@
     background: var(--bg);
     will-change: transform;
   }
+  /* 横向き（iPad・パソコン・横にしたスマホ）: 問題・解説を左、選択肢を右に並べる */
+  @media (orientation: landscape) and (min-width: 640px) {
+    header {
+      padding-left: calc(var(--pad-x-wide) - 10px);
+      padding-right: var(--pad-x-wide-r);
+    }
+    .card {
+      flex-direction: row;
+      align-items: stretch;
+      gap: clamp(20px, 3.2vw, 44px);
+      padding-left: var(--pad-x-wide);
+      padding-right: var(--pad-x-wide-r);
+    }
+    .card > :global(.upper) {
+      flex: 1 1 0;
+      min-width: 0;
+      margin-bottom: 0;
+    }
+    .card > :global(.choices) {
+      flex: 0 0 min(46%, 500px);
+      align-self: center;
+      max-height: 100%;
+      overflow-y: auto;
+      padding: 4px 2px;
+    }
+    .card > :global(.interact) {
+      flex: 1;
+    }
+    .track {
+      margin-left: var(--pad-x-wide);
+      margin-right: var(--pad-x-wide-r);
+    }
+  }
+  /* 横にしたスマホ: 選択肢を詰める */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .card > :global(.choices) {
+      gap: 6px;
+    }
+    .card > :global(.choices button) {
+      min-height: 44px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+  }
 
   .empty {
     position: absolute;

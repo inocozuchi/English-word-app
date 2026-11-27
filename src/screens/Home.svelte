@@ -76,6 +76,7 @@
     </h1>
   </div>
 
+  <div class="side">
   <!-- 今のモード（切り替えは設定で。ここは表示だけ） -->
   <p class="mode-line" data-intro><span class="eyebrow-en">Mode</span><span class="mname">{mode.title}</span>{#if mode.stat()}<span class="stat">{mode.stat()}</span>{/if}</p>
   {#if suspended}
@@ -125,6 +126,7 @@
     <button class="press" onclick={() => router.push({ name: 'review' })}><Icon name="review" size={20} /><span>復習リスト</span></button>
     <button class="press" onclick={() => router.push({ name: 'stats' })}><Icon name="chart" size={20} /><span>記録</span></button>
   </nav>
+  </div>
 </div>
 
 <style>
@@ -379,8 +381,62 @@
     font-weight: 700;
   }
 
+  /* 縦向きでは .side は箱を作らない（中身がそのまま .home の行になる） */
+  .side {
+    display: contents;
+  }
+  /* 横向き（iPad・パソコン・横にしたスマホ）: 見出しを左、スタートと記録を右に並べる */
+  @media (orientation: landscape) and (min-width: 640px) {
+    .home {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(54%, 540px));
+      grid-template-rows: auto minmax(0, 1fr);
+      column-gap: clamp(24px, 5vw, 64px);
+      row-gap: 8px;
+      padding-left: var(--pad-x-wide);
+      padding-right: var(--pad-x-wide-r);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    header {
+      grid-column: 1 / -1;
+    }
+    .hero {
+      align-self: center;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6.2vw, 92px);
+    }
+    .side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+  /* 横にしたスマホ（背が低い）: さらに詰める */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .side {
+      justify-content: flex-start;
+      gap: 8px;
+    }
+    .start {
+      min-height: 104px !important;
+      padding-top: 10px !important;
+    }
+    .start-en {
+      font-size: 40px !important;
+    }
+    .review {
+      min-height: 50px !important;
+    }
+    nav button {
+      height: 46px !important;
+    }
+  }
+
   /* 背の低い画面（iPhone SE など）では詰める */
-  @media (max-height: 740px) {
+  @media (max-height: 740px) and (orientation: portrait) {
     .home {
       gap: 9px;
     }
