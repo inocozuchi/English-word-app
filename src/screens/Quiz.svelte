@@ -344,6 +344,8 @@
     suppressClick = true;
     setTimeout(() => (suppressClick = false), 350);
   }
+  /** マウスのボタンを押している間（パソコンでもドラッグで「スワイプ」できる） */
+  let mouseDown = false;
   function touchStart(e: TouchEvent | MouseEvent) {
     if (e.type === 'touchstart') lastTouch = Date.now();
     else if (Date.now() - lastTouch < 800) return; // タッチ後の互換マウスイベントは無視
@@ -353,14 +355,23 @@
     axis = null;
     hist = [{ t: e.timeStamp, x: x0 }];
     clearTimeout(holdTimer);
+    if (e.type === 'mousedown') {
+      // マウスでは長押しの一時停止をしない（ゆっくりクリックしても選択が消えないように。一時停止はボタンか P キー）
+      mouseDown = (e as MouseEvent).button === 0;
+      return;
+    }
     // 長押しで一時停止（普通のタップを長押しと取り違えないよう、少し長めに）
     holdTimer = window.setTimeout(() => {
       held = true;
       haptic('light');
     }, 450);
   }
-  function touchMove(e: TouchEvent) {
-    const pt = e.touches[0];
+  function touchMove(e: TouchEvent | MouseEvent) {
+    if (e.type === 'mousemove') {
+      if (!mouseDown || Date.now() - lastTouch < 800) return;
+      if (!((e as MouseEvent).buttons & 1)) return void touchEnd(new Event('mouseup'));
+    }
+    const pt = 'touches' in e ? e.touches[0] : e;
     const dx = pt.clientX - x0, dy = pt.clientY - y0;
     if (!axis && Math.hypot(dx, dy) > 10) {
       axis = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'x' : 'y';
@@ -381,6 +392,10 @@
   }
   async function touchEnd(e: Event) {
     if (e.type !== 'touchend' && e.type !== 'touchcancel' && Date.now() - lastTouch < 800) return;
+    if (e.type === 'mouseup' || e.type === 'mouseleave') {
+      if (!mouseDown) return;
+      mouseDown = false;
+    }
     clearTimeout(holdTimer);
     if (dragging) {
       const a = hist[0], b = hist[hist.length - 1];
@@ -458,12 +473,14 @@
   ontouchend={touchEnd}
   ontouchcancel={touchEnd}
   onmousedown={touchStart}
+  onmousemove={touchMove}
   onmouseup={touchEnd}
+  onmouseleave={touchEnd}
 >
   <header>
     <span class="lefts">
-      <button class="close press" onclick={close} aria-label="中断して閉じる（続きはホームから）"><Icon name="close" size={22} /></button>
-      <button class="pz press" onclick={pause} aria-label="一時停止"><Icon name="pause" size={20} stroke={2.6} /></button>
+      <button class="close press" onclick={close} aria-label="中断して閉じる（続きはホームから）" title="中断して閉じる（Esc）"><Icon name="close" size={22} /></button>
+      <button class="pz press" onclick={pause} aria-label="一時停止" title="一時停止（P）"><Icon name="pause" size={20} stroke={2.6} /></button>
     </span>
     <span class="count en" aria-label="{i + 1} / {qs.length}">
       {#if useDots}
@@ -487,7 +504,11 @@
       {#key combo}<span class="combo" use:comboFx><b class="en">{combo}</b>連続正解</span>{/key}
     {/if}
     <span class="pause-note" aria-live="polite"><Icon name="pause" size={14} stroke={2.4} />一時停止中</span>
-    <span class="swipe-hint" class:show={phase === 'reveal' && !paused && !reportedMsg}><Icon name="back" size={14} stroke={2.4} />スワイプで次へ</span>
+    <!-- 次へ: タッチ端末は「スワイプで次へ」（押しても進む）、パソコンは「次へ」ボタン（Enter / →） -->
+    <button class="swipe-hint" class:show={phase === 'reveal' && !paused && !reportedMsg} tabindex={phase === 'reveal' ? 0 : -1} onclick={() => phase === 'reveal' && next()} onmousedown={(e) => e.stopPropagation()}>
+      <span class="sh-touch"><Icon name="back" size={14} stroke={2.4} />スワイプで次へ</span>
+      <span class="sh-fine">次へ<kbd>Enter</kbd><span class="sh-arrow"><Icon name="chevron" size={14} stroke={2.6} /></span></span>
+    </button>
     <span class="reported" class:show={!!reportedMsg} aria-live="polite">{reportedMsg}</span>
   </div>
 
@@ -698,6 +719,61 @@
   }
   .swipe-hint {
     right: 0;
+    font: inherit;
+    color: inherit;
+  }
+  .swipe-hint.show {
+    pointer-events: auto;
+  }
+  .sh-touch,
+  .sh-fine {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .sh-fine {
+    display: none;
+  }
+  kbd {
+    font: 700 10px/1 var(--font-en);
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 1.5px solid var(--line-strong);
+    color: var(--text2);
+  }
+  /* パソコン（マウス・トラックパッド）: 押せる「次へ」ボタンにする */
+  @media (hover: hover) and (pointer: fine) {
+    .sh-touch {
+      display: none;
+    }
+    .sh-fine {
+      display: flex;
+      gap: 6px;
+    }
+    .swipe-hint {
+      top: -6px;
+      padding: 5px 8px 5px 12px;
+      border-radius: 999px;
+      border: 2px solid var(--ink);
+      color: var(--text);
+      font-weight: 800;
+      transition: opacity 0.25s, transform 0.25s, background-color 0.15s;
+    }
+    .swipe-hint:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .swipe-hint:hover kbd {
+      color: inherit;
+      border-color: currentColor;
+    }
+    .sh-arrow {
+      display: grid;
+      transition: transform 0.25s var(--ease-pop, ease-out);
+    }
+    .swipe-hint:hover .sh-arrow {
+      transform: translateX(3px);
+    }
   }
   .reported {
     position: absolute;
@@ -764,7 +840,8 @@
     .card > :global(.interact) {
       flex: 1;
     }
-    .track {
+    .track,
+    .sub-row {
       margin-left: var(--pad-x-wide);
       margin-right: var(--pad-x-wide-r);
     }

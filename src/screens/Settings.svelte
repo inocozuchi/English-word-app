@@ -122,7 +122,7 @@
       label="不正解・時間切れのとき 自動で次へ"
       value={timing.advanceNgSec}
       range={LIMITS.advanceSec}
-      hint="答えたあと解説を表示する時間（モードごと）。左へスワイプすればすぐ次へ進めます"
+      hint="答えたあと解説を表示する時間（モードごと）。左へスワイプ（パソコンは「次へ」・Enter・→）ですぐ次へ進めます"
       onchange={(v) => updateTiming(mode, { advanceNgSec: v })}
     />
     <SliderRow

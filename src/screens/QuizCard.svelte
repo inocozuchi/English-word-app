@@ -135,6 +135,7 @@
       {#if c.color}<span class="cdot" style:--c={c.color}></span>{/if}
       {#if c.tag}<span class="tag">{c.tag}</span>{/if}
       <span class="ct">{c.text}</span>
+      {#if phase !== 'reveal' && k < 9}<kbd class="ck en" aria-hidden="true">{k + 1}</kbd>{/if}
       {/if}
       {#if isAns}<span class="mark"><span class="mini-ring"></span></span>
       {:else if isMine}<span class="mine">あなたの答え</span><span class="mark"><Icon name="x" size={18} stroke={2.8} /></span>{/if}
@@ -322,6 +323,39 @@
   }
   .choice.dim {
     opacity: 0.4;
+  }
+  /* パソコン: 選択肢のキー（1〜4）を右端に小さく */
+  .ck {
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ck {
+      display: grid;
+      place-items: center;
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      translate: 0 -50%;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 1.5px solid var(--line-strong);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    /* 答えたあとの選択肢（disabled）はマウスのイベントを受けないので、下のカードに通してドラッグで「次へ」できるようにする */
+    .choice:disabled {
+      pointer-events: none;
+    }
+    .choice:not(:disabled):hover {
+      border-color: var(--ink);
+    }
+    .choice:not(:disabled):hover .ck {
+      border-color: var(--ink);
+      color: var(--text);
+    }
   }
   .mark {
     position: absolute;
