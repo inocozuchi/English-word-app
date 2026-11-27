@@ -5,6 +5,7 @@
   import Segmented from '../components/Segmented.svelte';
   import SliderRow from '../components/SliderRow.svelte';
   import SituationToggles from '../components/SituationToggles.svelte';
+  import SyncSection from '../sync/SyncSection.svelte';
   import { store, updateSettings, replaceAll, activeMode, modes, switchMode, timingOf, updateTiming, allProgress } from '../core/store.svelte.ts';
   import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS, emptyProgress } from '../core/storage.ts';
   import { haptic } from '../core/haptics.ts';
@@ -175,6 +176,9 @@
       <Toggle label="触覚フィードバック" checked={s.haptics} onchange={(v) => { updateSettings({ haptics: v }); haptic('light'); }} />
     </div>
   </div>
+
+  <h2 class="ui-h2">複数の端末で使う</h2>
+  <SyncSection />
 
   <h2 class="ui-h2">データ</h2>
   <div class="ui-group">
