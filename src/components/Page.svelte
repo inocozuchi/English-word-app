@@ -26,7 +26,7 @@
 <div class="page">
   <header class:scrolled>
     {#if back}
-      <button class="back press" onclick={() => router.pop()} aria-label="戻る"><Icon name="back" size={26} /></button>
+      <button class="back press" onclick={() => router.pop()} aria-label="戻る" title="戻る（Esc）"><Icon name="back" size={26} /></button>
     {/if}
     <span class="small-title" class:show={scrolled}>{title}</span>
   </header>

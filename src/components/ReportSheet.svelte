@@ -17,6 +17,7 @@
   }
 </script>
 
+<svelte:window onkeydowncapture={(e) => { if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); onclose(); } }} />
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 <div class="scrim" use:fadeIn onclick={onclose} ontouchstart={(e) => e.stopPropagation()}></div>
 <div class="sheet" role="dialog" tabindex="-1" aria-modal="true" aria-label="この問題を報告" use:sheetIn ontouchstart={(e) => e.stopPropagation()}>

@@ -30,6 +30,42 @@
   $effect(() => () => {
     if (zoomed) overlay.count--;
   });
+  /** Esc で拡大を閉じる（クイズの Esc＝やめる より先に受け取る） */
+  function esc(e: KeyboardEvent) {
+    if (zoomed && e.key === 'Escape') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      close();
+    }
+  }
+  /** マウスでは図をつかんで動かせる（タッチは指でスクロール） */
+  function pan(node: HTMLElement) {
+    let sx = 0, sy = 0, l = 0, t = 0, id = -1;
+    const down = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      id = e.pointerId;
+      sx = e.clientX;
+      sy = e.clientY;
+      l = node.scrollLeft;
+      t = node.scrollTop;
+      node.setPointerCapture(id);
+      node.classList.add('grabbing');
+    };
+    const move = (e: PointerEvent) => {
+      if (e.pointerId !== id) return;
+      node.scrollLeft = l - (e.clientX - sx);
+      node.scrollTop = t - (e.clientY - sy);
+    };
+    const up = (e: PointerEvent) => {
+      if (e.pointerId !== id) return;
+      id = -1;
+      node.classList.remove('grabbing');
+    };
+    node.addEventListener('pointerdown', down);
+    node.addEventListener('pointermove', move);
+    node.addEventListener('pointerup', up);
+    node.addEventListener('pointercancel', up);
+  }
   /** 拡大表示は body の直下に移す（クイズのカードは transform で動くので、その中だと画面全体を覆えない）。
    *  最初は図の真ん中が見えるようにスクロールしておく */
   function zoomIn(node: HTMLElement) {
@@ -44,6 +80,8 @@
   }
 </script>
 
+<svelte:window onkeydowncapture={esc} />
+
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 <div class="fig" class:compact onclick={tap}>
   <img {src} {alt} draggable="false" />
@@ -52,9 +90,9 @@
 
 {#if zoomed}
   <div class="lb" role="dialog" tabindex="-1" aria-modal="true" aria-label="図の拡大" use:zoomIn ontouchstart={(e) => e.stopPropagation()}>
-    <div class="lb-scroll"><img {src} {alt} draggable="false" /></div>
+    <div class="lb-scroll" use:pan><img {src} {alt} draggable="false" /></div>
     <button class="lb-close press" onclick={close} aria-label="閉じる"><Icon name="close" size={22} /></button>
-    <p class="lb-hint">スクロールで図を動かせます</p>
+    <p class="lb-hint">ドラッグ・スクロールで図を動かせます（Esc で閉じる）</p>
   </div>
 {/if}
 
@@ -129,5 +167,13 @@
     font-size: 12px;
     color: #6b6b73;
     padding-top: 8px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .lb-scroll {
+      cursor: grab;
+    }
+    .lb-scroll:global(.grabbing) {
+      cursor: grabbing;
+    }
   }
 </style>

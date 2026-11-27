@@ -8,6 +8,7 @@
   import Settings from './screens/Settings.svelte';
   import Stats from './screens/Stats.svelte';
   import ReviewList from './screens/ReviewList.svelte';
+  import { overlay } from './core/overlay.svelte.ts';
 
   // 画面の登録: 共通の画面 + 各デッキの画面（'ety/word' など）
   const SCREENS: Record<string, Component<any>> = {
@@ -24,6 +25,29 @@
     return { destroy: router.register(id, node) };
   }
 
+  // パソコン: Esc・Alt+←・マウスの「戻る」ボタンで前の画面へ（スワイプバックの代わり）。
+  // クイズなど全画面の学習（modal）は各画面が Esc を扱う。入力中・重なり表示中は使わない
+  function canGoBack(t: EventTarget | null) {
+    const el = t as HTMLElement | null;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return false;
+    if (overlay.count > 0 || document.querySelector('[aria-modal="true"]')) return false;
+    const top = router.top;
+    return router.stack.length > 1 && top.kind === 'push';
+  }
+  function onkey(e: KeyboardEvent) {
+    if (e.defaultPrevented || e.repeat) return;
+    if ((e.key === 'Escape' || (e.altKey && e.key === 'ArrowLeft')) && canGoBack(e.target)) {
+      e.preventDefault();
+      router.pop();
+    }
+  }
+  function onmouseup(e: MouseEvent) {
+    if (e.button === 3 && canGoBack(e.target)) {
+      e.preventDefault();
+      router.pop();
+    }
+  }
+
   // テーマ（設定で固定した場合）とステータスバーの色
   $effect(() => {
     const t = store.settings.theme;
@@ -37,6 +61,8 @@
     });
   });
 </script>
+
+<svelte:window onkeydown={onkey} {onmouseup} />
 
 {#each router.stack as e, i (e.id)}
   {@const depth = router.stack.length - 1 - i}
