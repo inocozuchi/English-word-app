@@ -59,3 +59,12 @@ describe('自由英単語', () => {
     expect(newId(1, 0.1)).not.toBe(newId(1, 0.2));
   });
 });
+
+import { typingOf } from '../src/core/storage.ts';
+describe('文字入力と自己採点', () => {
+  it('自己採点を出さないとき「頭の中で」は「出さない」と同じ', () => {
+    expect(typingOf({ typing: 'self', selfGrade: false })).toBe('skip');
+    expect(typingOf({ typing: 'self', selfGrade: true })).toBe('self');
+    expect(typingOf({ typing: 'on', selfGrade: false })).toBe('on');
+  });
+});

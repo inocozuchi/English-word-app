@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { typingOf } from '../../../core/storage.ts';
   // 1問（7種類: recall / listening / translation / dictation / paraphrase / reading / correction）。
   //   答える → 自動で一致 → 正解 / 一致しない → 模範解答と比べて自己採点（自動の不一致を誤答にしない）。
   //   自由に書く問題（言い換え・会話の返答）は最初から模範解答と比べて自己採点。
@@ -50,7 +51,7 @@
   const promptText = $derived(doc && q.prompt.startsWith(doc.text) ? q.prompt.slice(doc.text.length).trim() : q.prompt);
   const multiline = $derived(['translation', 'dictation', 'paraphrase', 'correction'].includes(q.kind) && !q.subtype?.includes('fill'));
   /** 「頭の中で答える」: 入力せずに答えを見て自己採点 */
-  const thinkOnly = $derived(store.settings.typing === 'self' && needsTyping(q) && !open);
+  const thinkOnly = $derived(typingOf(store.settings) === 'self' && needsTyping(q) && !open);
   const hintable = $derived(!thinkOnly && !open && !choices && !jaAnswer && ['recall', 'translation', 'dictation', 'correction', 'listening'].includes(q.kind));
   const phase = $derived(result ? 'done' : pending ? 'judge' : 'ask');
   const KIND_LABEL: Record<string, string> = {
@@ -111,6 +112,10 @@
     if (g.verdict === 'correct') {
       haptic('success');
       onresult({ v: 'correct', given: given.trim(), hints, ms, plays });
+    } else if (!store.settings.selfGrade) {
+      // 自己採点を使わない設定: 一致しなければ誤答（模範解答と語の違いは見せる）
+      haptic('error');
+      onresult({ v: 'wrong', given: given.trim(), hints, ms, plays });
     } else {
       haptic('light');
       onpending({ given: given.trim(), hints, ms, plays });

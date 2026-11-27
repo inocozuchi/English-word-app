@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { typingOf } from '../../../core/storage.ts';
   // 今日の学習（ワンボタンで自動に進む）。
   //   復習 → 単語 → 熟語 → チャンク → 文法 → 英作文 → 言い換え → 音声 → 会話 → 読解 → 混合 → 間違い直し（空の段階は飛ばす）
   //   1問ごとにセッションを保存し、閉じても続きから。記録は1回だけ（state.svelte.ts の commitResult）。
@@ -41,10 +42,10 @@
   const ix = $derived(comp.index);
 
   /** 今の状況（設定の「音声を使う」「文字を入力する問題」） */
-  const situation = () => ({ audio: store.settings.audio, typing: store.settings.typing });
+  const situation = () => ({ audio: store.settings.audio, typing: typingOf(store.settings), selfGrade: store.settings.selfGrade });
   // 学習中に状況を変えたら、合わない問題は記録せずに飛ばす（あとで状況が戻れば、また出る）
   $effect(() => {
-    const sit = { audio: store.settings.audio, typing: store.settings.typing };
+    const sit = situation();
     if (!s || !task || !q || s.results[task.id] || s.pending?.taskId === task.id) return;
     if (!allowedBy(q, sit)) {
       s = advance(applyResult(s, task.id, { v: 'excluded', hints: 0, ms: 0 }));

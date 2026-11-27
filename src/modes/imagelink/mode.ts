@@ -1,5 +1,6 @@
 // イメージリンクモード: 英語の語・文法を「コアイメージ」で理解する（教科書「英語イメージリンク 完全版テキスト」全187章・10,695問）
 // データは public/data/imagelink/（README.md）。起動時には読まず、出題範囲の部の JSON だけを読む（state.svelte.ts）。
+import { typingOf } from '../../core/storage.ts';
 import type { QuizMode } from '../../core/mode.ts';
 import type { IlSettings } from './quiz.ts';
 import {
@@ -61,7 +62,13 @@ export const imagelinkMode: QuizMode<IlSettings> = {
     if (!il.index) return [];
     // 文字入力を「出さない」設定なら、入力が必須の練習問題（short）を外す
     const qs = loadedQuestions(neededParts(s, il.index.chapters));
-    return ilCandidates(store.settings.typing === 'skip' ? qs.filter((q) => !(q.type === 'exercise' && q.answer_mode === 'short')) : qs, s);
+    // 自己採点を出さない設定なら、英作文・自己採点の練習問題・カードを外す
+    const st = store.settings;
+    const skipShort = typingOf(st) === 'skip';
+    const ok = (q: (typeof qs)[number]) =>
+      !(skipShort && q.type === 'exercise' && q.answer_mode === 'short') &&
+      (st.selfGrade || !(q.type === 'translate' || q.type === 'flashcard' || (q.type === 'exercise' && q.answer_mode !== 'short')));
+    return ilCandidates(qs.filter(ok), s);
   },
   pick: (input, s) => ilPick(input, s),
   question(key, rng) {

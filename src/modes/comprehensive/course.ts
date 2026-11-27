@@ -124,12 +124,17 @@ export function stageOf(ix: CompIndex, q: CQuestion): Stage {
 export const needsAudio = (q: CQuestion) => q.kind === 'listening' || q.kind === 'dictation';
 /** 文字の入力が要る問題（自由回答・選ぶ問題は入力なしでも進められる） */
 export const needsTyping = (q: CQuestion) => !isOpenKind(q.kind, q.subtype) && !choicesFromPrompt(q.prompt, q.acceptedAnswers);
+/** 最初から自己採点の問題（言い換え・会話の返答） */
+export const needsSelf = (q: CQuestion) => isOpenKind(q.kind, q.subtype);
 /** 今の状況（設定）で出してよい問題か */
 export interface Situation {
   audio: boolean;
   typing: 'on' | 'self' | 'skip';
+  /** false: 自己採点の問題を出さない（省略時は出す） */
+  selfGrade?: boolean;
 }
-export const allowedBy = (q: CQuestion, sit?: Situation) => !sit || ((sit.audio || !needsAudio(q)) && (sit.typing !== 'skip' || !needsTyping(q)));
+export const allowedBy = (q: CQuestion, sit?: Situation) =>
+  !sit || ((sit.audio || !needsAudio(q)) && (sit.typing !== 'skip' || !needsTyping(q)) && (sit.selfGrade !== false || !needsSelf(q)));
 
 /** 記録の単位（itemIds が空なら問題ID） */
 export const keysOf = (q: CQuestion) => (q.itemIds.length ? q.itemIds : [q.id]);

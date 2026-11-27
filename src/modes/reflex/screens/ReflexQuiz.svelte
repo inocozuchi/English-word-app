@@ -91,10 +91,11 @@
         const st = store.progress;
         let keys: string[];
         if (kind === 'review') {
-          keys = reviewOrder(st.review, rng).map((e) => e.key).filter((k) => qById.has(k) || cardById.has(k)).slice(0, 20);
+          keys = reviewOrder(st.review, rng).map((e) => e.key).filter((k) => qById.has(k) || (store.settings.selfGrade && cardById.has(k))).slice(0, 20);
         } else {
           const pool = { questions: rx.questions ?? [], cards: rx.cards };
-          keys = reflexPick(reflexCandidates(pool, settings), st.items, settings, today(), rng);
+          // 暗記カード（すぐ出た／あやしい／出ない）は自己採点なので、自己採点を出さない設定では出さない
+          keys = method === 'cards' && !store.settings.selfGrade ? [] : reflexPick(reflexCandidates(pool, settings), st.items, settings, today(), rng);
         }
         run = new ReflexRun(keys, rng, { requeue: method !== 'attack' });
         total = keys.length;
@@ -384,7 +385,7 @@
 
   {#if ready && empty}
     <div class="empty">
-      {#if kind === 'review'}<p>復習リストは空です。</p>{:else if method === 'weak'}<p>弱点の問題はまだありません。</p><p class="sub">まちがえた・時間切れ・遅かった問題がここに入ります。</p>{:else}<p>出題できる問題がありません。</p>{/if}
+      {#if kind === 'review'}<p>復習リストは空です。</p>{:else if method === 'cards' && !store.settings.selfGrade}<p>暗記カードは自己採点なので出していません。</p><p class="sub">設定の「自己採点の問題を出す」をオンにすると使えます。</p>{:else if method === 'weak'}<p>弱点の問題はまだありません。</p><p class="sub">まちがえた・時間切れ・遅かった問題がここに入ります。</p>{:else}<p>出題できる問題がありません。</p>{/if}
       <button class="btn press" onclick={close}>戻る</button>
     </div>
   {:else if ready && rx.error && !rx.questions}

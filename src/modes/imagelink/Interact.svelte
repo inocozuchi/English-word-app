@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { typingOf } from '../../core/storage.ts';
   // 4択以外の問題（カード全体を描く）:
   //   order      語句をタップで枠に並べる（枠の語をタップで戻す）→ 答え合わせ
   //   translate  英文を入力 → 模範解答を見る → 合っていた／あやしい／違った（自己採点）
@@ -23,7 +24,7 @@
   const r = $derived(q.data.raw);
   const kind = $derived(q.data.kind);
   // 文字入力を「頭の中で」にしているときは、入力せずに答えを見て自己採点
-  const shortMode = $derived(kind === 'exercise' && r.answer_mode === 'short' && store.settings.typing !== 'self');
+  const shortMode = $derived(kind === 'exercise' && r.answer_mode === 'short' && typingOf(store.settings) !== 'self');
 
   let root: HTMLElement;
   // ---- 並べ替え ----

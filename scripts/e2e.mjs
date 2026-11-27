@@ -1218,8 +1218,11 @@ try {
     await sleep(200);
     await top().getByRole('button', { name: '出さない', exact: true }).tap();
     await sleep(200);
+    await top().getByRole('switch', { name: '自己採点の問題を出す' }).tap();
+    await sleep(200);
     const st = await settingsOf(page);
     ok(st.audio === false && st.typing === 'skip', `設定で音声・文字入力の出し方を変えられる（audio=${st.audio}, typing=${st.typing}）`);
+    ok(st.selfGrade === false, '自己採点の問題をオフにできる');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
   }

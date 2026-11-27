@@ -1,5 +1,6 @@
 // 自由英単語: 自分で登録した英単語と日本語訳だけでクイズをする（英→日・日→英・つづり）
 // 単語リストは screens/Words.svelte で追加・編集・まとめて追加・書き出し。保存は settings.modes.custom.words
+import { typingOf } from '../../core/storage.ts';
 import type { QuizMode } from '../../core/mode.ts';
 import type { CustomSettings } from './quiz.ts';
 import { MODE_ID, PATTERNS, MIN_WORDS, normalizeCustomSettings, customCandidates, customQuestion } from './quiz.ts';
@@ -22,7 +23,7 @@ export const customMode: QuizMode<CustomSettings> = {
   normalizeSettings: normalizeCustomSettings,
   load: async () => {},
   ready: () => true,
-  candidates: (s) => customCandidates(s, store.settings.typing),
+  candidates: (s) => customCandidates(s, typingOf(store.settings)),
   question: (key, rng) => customQuestion(words(), key, rng),
   label(key) {
     const id = key.replace(/^(ej|je|sp):/, '');

@@ -25,12 +25,19 @@
     </div>
     <Toggle label="音声を使う" checked={s.audio} onchange={(v) => { updateSettings({ audio: v }); if (!v) stopSpeaking(); }} />
   </div>
+  <div class="ui-item">
+    <div class="ui-txt">
+      <span>自己採点の問題を出す</span>
+      <span class="ui-hint">{s.selfGrade ? '英作文・言い換え・カードなど、自分で合否を決める問題も出します' : '自分で合否を決める問題は出さず、入力の答えが合わなければ不正解にします'}</span>
+    </div>
+    <Toggle label="自己採点の問題を出す" checked={s.selfGrade} onchange={(v) => updateSettings({ selfGrade: v })} />
+  </div>
   <div class="ui-item col">
     <div class="ui-line"><span>文字を入力する問題</span></div>
     <Segmented options={TYPING} value={s.typing} onchange={(v) => updateSettings({ typing: v })} />
     {#if !compact}
       <span class="ui-hint">
-        {s.typing === 'on' ? '英語や日本語を入力して答えます' : s.typing === 'self' ? '入力せずに頭の中で答え、答えを見て自分で判定します（片手でも進められます）' : '入力が必要な問題は出しません（選ぶ問題・カード・会話だけ）'}
+        {s.typing === 'on' ? '英語や日本語を入力して答えます' : s.typing === 'self' ? (s.selfGrade ? '入力せずに頭の中で答え、答えを見て自分で判定します（片手でも進められます）' : '「頭の中で」は自己採点なので、今は入力が必要な問題を出しません') : '入力が必要な問題は出しません（選ぶ問題・カード・会話だけ）'}
       </span>
     {/if}
   </div>

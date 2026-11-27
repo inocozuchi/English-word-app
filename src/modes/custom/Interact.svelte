@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { typingOf } from '../../core/storage.ts';
   // つづり: 意味を見て英単語を入力する。大文字小文字・前後の空白・文末の記号は無視。
   // 「文字を入力する問題」を「頭の中で」にしているときは、入力せずに答えを見て自己採点
   import type { Snippet } from 'svelte';
@@ -12,7 +13,7 @@
 
   let { q, phase, onanswer, status }: { q: CQuestion; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet } = $props();
   const w = $derived(q.data.word);
-  const think = $derived(store.settings.typing === 'self');
+  const think = $derived(typingOf(store.settings) === 'self');
   let text = $state('');
   let shown = $state(false);
   let given = $state('');

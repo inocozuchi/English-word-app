@@ -23,6 +23,7 @@ import {
   type QRec,
   needsAudio,
   needsTyping,
+  needsSelf,
   type Evidence,
 } from '../src/modes/comprehensive/course.ts';
 import { newSession, applyResult, advance, resumeCursor, recordPlan, isOk } from '../src/modes/comprehensive/session.ts';
@@ -207,6 +208,20 @@ describe('音声・文字入力の出し分け', () => {
     const off = qsOf(plan({ day: 8, minutes: 120, situation: { audio: true, typing: 'skip' } }));
     expect(off.some(needsTyping)).toBe(false);
     expect(off.length).toBeGreaterThan(0);
+  });
+});
+
+describe('自己採点の出し分け', () => {
+  it('自己採点を出さない日は言い換え・会話の返答を出さない', () => {
+    const qs = (p: ReturnType<typeof plan>) => p.tasks.filter((t) => t.qid).map((t) => IX.q.get(t.qid!)!);
+    let seen = false;
+    for (const day of [3, 10, 20, 40]) {
+      seen ||= qs(plan({ day, minutes: 120 })).some(needsSelf);
+      const off = qs(plan({ day, minutes: 120, situation: { audio: true, typing: 'on', selfGrade: false } }));
+      expect(off.some(needsSelf)).toBe(false);
+      expect(off.length).toBeGreaterThan(0);
+    }
+    expect(seen).toBe(true);
   });
 });
 
