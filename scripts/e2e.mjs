@@ -125,7 +125,7 @@ try {
     await settle();
     ok((await depth()) === 1, '✕ でホームに戻る');
     await sleep(800); // 数字が数え上がるのを待つ
-    const todayNum = await page.locator('.stat-c .num').nth(1).textContent();
+    const todayNum = (await page.locator('.stat-c .num').nth(1).textContent()).split('/')[0];
     ok(+todayNum === 5, `ホームの「今日の回答」が更新される（${todayNum}）`);
 
     // 再読み込みしても記録が残る
@@ -133,7 +133,7 @@ try {
     await page.waitForSelector('button.start');
     await sleep(300);
     await sleep(1500); // 数字は 0 から数え上がる
-    ok(+(await page.locator('.stat-c .num').nth(1).textContent()) === 5, '再読み込みしても学習記録が残る');
+    ok(+(await page.locator('.stat-c .num').nth(1).textContent()).split('/')[0] === 5, '再読み込みしても学習記録が残る');
     ok(+(await page.locator('.stat-c .num').nth(0).textContent()) === 1, '連続日数が1日になる');
     ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
     await page.context().close();
@@ -415,7 +415,7 @@ try {
     await top().locator('header .back').tap();
     await settle();
     ok((await page.locator('.mode-line').textContent()).includes('音声変化'), 'ホームのスタート上に今のモード名が出る');
-    ok((await page.locator('.stat-c .num').nth(1).textContent()).trim() === '0', '今日の回答はモードごとに別（音声変化は 0）');
+    ok((await page.locator('.stat-c .num').nth(1).textContent()).split('/')[0].trim() === '0', '今日の回答はモードごとに別（音声変化は 0）');
     await page.reload();
     await page.waitForSelector('button.start');
     ok((await page.locator('.mode-line').textContent()).includes('音声変化'), '再起動しても選んだモードのまま');
@@ -1278,8 +1278,9 @@ try {
     await next.click();
     await sleep(900);
     ok((await dot()) !== before, `パソコン: 「次へ」ボタンで次の問題へ（${before} → ${await dot()}）`);
-    // 2問目: 答えてからマウスでドラッグ（左へ）して次へ
-    await page.keyboard.press('1');
+    // 2問目: A キーで選び、マウスで左へドラッグして次へ
+    ok((await top().locator('.card:not(.peek) .ck').first().textContent()) === 'A', 'パソコン: 選択肢の印は A S D F');
+    await page.keyboard.press('a');
     await sleep(500);
     const before2 = await dot();
     await page.mouse.move(900, 400);
@@ -1291,6 +1292,15 @@ try {
     await page.mouse.up();
     await sleep(900);
     ok((await dot()) !== before2, `パソコン: マウスで左へドラッグしても次へ（${before2} → ${await dot()}）`);
+    // 3問目: S キーで選び、スペースキーで次へ
+    await sleep(300);
+    const before3 = await dot();
+    await page.keyboard.press('s');
+    await sleep(500);
+    ok(/正解|不正解/.test((await top().locator('.card:not(.peek) .status').first().textContent()) ?? ''), 'パソコン: S キーで2番目を選べる');
+    await page.keyboard.press('Space');
+    await sleep(900);
+    ok((await dot()) !== before3, `パソコン: スペースキーで次へ（${before3} → ${await dot()}）`);
     await page.keyboard.press('Escape');
     await settle();
     ok((await depth()) === 1, 'パソコン: Esc でクイズをやめる');
