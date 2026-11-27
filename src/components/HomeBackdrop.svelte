@@ -57,11 +57,6 @@
 </script>
 
 <div class="bd" class:idle aria-hidden="true" use:parallax>
-  <svg class="ring" viewBox="0 0 200 200">
-    <circle cx="100" cy="100" r="78" />
-    <path d="M100 22 a78 78 0 0 1 72 48" class="arc" />
-    <path d="M160 58 l14 14 l4 -19" class="head" />
-  </svg>
   {#each rows as row, r (r + row.map((w) => w.t).join('|'))}
     <div class="row r{r}" style:--d="{86 + r * 22}s">
       <!-- 同じ並びを2つ続けて、半分動いたら最初に戻す（つなぎ目が見えない） -->
@@ -72,6 +67,11 @@
       </div>
     </div>
   {/each}
+  <!-- 輪の矢印（アイコンと同じ「LOOP」）: 290° の弧と、その終わりの接線に合わせた矢じり -->
+  <svg class="ring" viewBox="0 0 200 200">
+    <path d="M139.0 32.5 A78 78 0 1 1 49.9 40.2" />
+    <path d="M34.6 36.1 L58.3 33.2 L51.3 56.0" />
+  </svg>
 </div>
 
 <style>
@@ -120,19 +120,20 @@
       transform: translate3d(-50%, 0, 0);
     }
   }
+  /* 輪郭文字: 可変フォントの字形は輪郭が重なっているので、線だけ描くと「t」の横棒などの中にも線が出る。
+     線（2倍の太さ）を先に描き、背景色で塗りつぶして内側を隠す（paint-order）。半透明にすると透けるので、色の濃さで薄くする */
   .w {
     font-size: clamp(54px, 13vw, 150px);
-    letter-spacing: -0.03em;
-    color: transparent;
-    -webkit-text-stroke: 1.4px var(--line-strong);
-    opacity: 0.55;
+    letter-spacing: -0.01em;
+    color: var(--bg);
+    -webkit-text-stroke: 2.6px color-mix(in srgb, var(--line-strong) 62%, var(--bg));
+    paint-order: stroke fill;
     text-transform: none;
     /* 語と語の間（各語の右に付けるので、半分動いたところがちょうど最初と同じになる） */
     padding-right: 0.42em;
   }
   .w.known {
-    -webkit-text-stroke-color: var(--accent);
-    opacity: 0.32;
+    -webkit-text-stroke-color: color-mix(in srgb, var(--accent) 34%, var(--bg));
   }
   .ring {
     position: absolute;
@@ -147,10 +148,6 @@
     opacity: 0.1;
     will-change: transform;
     animation: spin 60s linear infinite;
-  }
-  .ring .arc,
-  .ring .head {
-    stroke-width: 9;
   }
   @keyframes spin {
     to {
