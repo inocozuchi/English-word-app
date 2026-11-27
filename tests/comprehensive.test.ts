@@ -21,6 +21,8 @@ import {
   profileFor,
   type PlanInput,
   type QRec,
+  needsAudio,
+  needsTyping,
   type Evidence,
 } from '../src/modes/comprehensive/course.ts';
 import { newSession, applyResult, advance, resumeCursor, recordPlan, isOk } from '../src/modes/comprehensive/session.ts';
@@ -189,6 +191,24 @@ describe('日程の進み方', () => {
 
 const plan = (over: Partial<PlanInput> = {}) =>
   planSession({ ix: IX, minutes: 60, day: 1, today: T, rng: createRng(1), items: {}, ev: {}, qs: {}, convDone: {}, ...over });
+
+describe('音声・文字入力の出し分け', () => {
+  const qsOf = (p: ReturnType<typeof plan>) => p.tasks.filter((t) => t.qid).map((t) => IX.q.get(t.qid!)!);
+  it('音声を使わない日は聞き取り・書き取りを出さない', () => {
+    for (const day of [5, 12, 30]) {
+      const all = qsOf(plan({ day, minutes: 120 }));
+      const off = qsOf(plan({ day, minutes: 120, situation: { audio: false, typing: 'on' } }));
+      expect(off.some(needsAudio)).toBe(false);
+      expect(off.length).toBeGreaterThan(0);
+      void all;
+    }
+  });
+  it('文字入力を出さない日は入力が要る問題を出さない（選択肢・自己採点の問題は出す）', () => {
+    const off = qsOf(plan({ day: 8, minutes: 120, situation: { audio: true, typing: 'skip' } }));
+    expect(off.some(needsTyping)).toBe(false);
+    expect(off.length).toBeGreaterThan(0);
+  });
+});
 
 describe('今日のキュー', () => {
   it('Day1・60分: 段階の順・予算の中・問題は重ならない', () => {

@@ -1156,6 +1156,96 @@ try {
     await page.context().close();
   }
 
+  // ---------- 自由英単語 ----------
+  {
+    const { page, errors, top, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.evaluate(() => localStorage.setItem('eq.settings.v2', JSON.stringify({ activeMode: 'custom', count: 5, modes: {} })));
+    await page.reload();
+    await page.waitForSelector('button.start');
+    // 単語が足りないとき: 追加の案内
+    await page.locator('button.start').tap();
+    await settle();
+    ok((await top().getByText('単語を追加').count()) > 0 || (await top().locator('.empty').count()) > 0, '単語がないときは追加の案内が出る');
+    await top().locator('.empty .btn').tap();
+    await settle();
+    const scr = top();
+    await scr.getByPlaceholder('例: deadline').fill('deadline');
+    await scr.getByPlaceholder('例: 締め切り').fill('締め切り');
+    await scr.getByRole('button', { name: '追加する' }).tap();
+    await sleep(300);
+    ok((await scr.locator('.list .row').count()) === 1, '1語を追加できる');
+    await scr.getByPlaceholder('例: deadline').fill('Deadline');
+    await sleep(100);
+    ok(await scr.getByRole('button', { name: '追加する' }).isDisabled(), '同じ英単語は追加できない（大文字小文字を無視）');
+    await scr.getByPlaceholder('例: deadline').fill('');
+    await scr.getByRole('button', { name: 'まとめて追加' }).tap();
+    await scr.locator('textarea').fill('submit, 提出する\ntake notes\tメモを取る\nborrow - 借りる\nりんご');
+    await sleep(100);
+    await scr.getByRole('button', { name: /語を追加$/ }).tap();
+    await sleep(400);
+    ok((await scr.locator('.list .row').count()) === 4, 'まとめて追加で3語増える（読めない行は飛ばす）');
+    // 編集して保存
+    await scr.locator('.list .row', { hasText: 'borrow' }).tap();
+    await scr.locator('.edit').getByLabel('日本語訳').fill('借りる（無料で）');
+    await scr.getByRole('button', { name: '保存' }).tap();
+    await sleep(200);
+    ok((await scr.locator('.list .row', { hasText: '借りる（無料で）' }).count()) === 1, '単語を編集できる');
+    // クイズ
+    await scr.getByRole('button', { name: 'この単語でクイズ' }).tap();
+    await settle();
+    await top().locator('.choice').first().waitFor();
+    ok((await top().locator('.choice').count()) === 4, '自分の単語で4択が出る');
+    const texts = await top().locator('.card:not(.peek) .choice').allTextContents();
+    ok(texts.every((t) => /提出|締め切り|メモ|借り|submit|deadline|take notes|borrow/.test(t)), `選択肢は登録した単語だけ（${texts.join(' / ')}）`);
+    await top().locator('.choice').first().tap();
+    await sleep(400);
+    ok(/正解|不正解/.test((await top().locator('.status').textContent()) ?? ''), '答え合わせが出る');
+    const st = await settingsOf(page);
+    ok(st.modes?.custom?.words?.length === 4, '単語は設定（バックアップ対象）に保存される');
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+  // ---------- 今の状況に合わせる（音声・文字入力）----------
+  {
+    const { page, errors, top, settle } = await newPage(browser);
+    await page.goto(URL);
+    await page.waitForSelector('button.start');
+    await page.getByRole('button', { name: '設定' }).tap();
+    await settle();
+    await top().getByRole('switch', { name: '音声を使う' }).tap();
+    await sleep(200);
+    await top().getByRole('button', { name: '出さない', exact: true }).tap();
+    await sleep(200);
+    const st = await settingsOf(page);
+    ok(st.audio === false && st.typing === 'skip', `設定で音声・文字入力の出し方を変えられる（audio=${st.audio}, typing=${st.typing}）`);
+    ok(errors.length === 0, `コンソールエラーなし ${errors.join(' / ')}`);
+    await page.context().close();
+  }
+
+  // ---------- 横向き（iPad・パソコン）----------
+  {
+    for (const [w, h, name] of [[1180, 820, 'iPad 横'], [844, 390, 'スマホ 横'], [1440, 900, 'パソコン']]) {
+      const { page, errors, top, settle } = await newPage(browser, { viewport: { width: w, height: h }, isMobile: false, hasTouch: false });
+      await page.goto(URL);
+      await page.waitForSelector('button.start');
+      const sb = await page.locator('button.start').boundingBox();
+      ok(sb && sb.x + sb.width <= w && sb.y >= 0, `${name}: スタートが画面内`);
+      await page.locator('button.start').click();
+      await settle();
+      const c = await top().locator('.card:not(.peek) .choices').boundingBox();
+      const u = await top().locator('.card:not(.peek) .upper').boundingBox();
+      ok(c && u && c.x > u.x + u.width - 4, `${name}: 問題と選択肢が左右に並ぶ`);
+      const last = await top().locator('.card:not(.peek) .choice').last().boundingBox();
+      ok(last && last.y + last.height <= h + 1, `${name}: 4つめの選択肢まで画面に収まる`);
+      const sw = await page.evaluate(() => document.documentElement.scrollWidth);
+      ok(sw <= w, `${name}: 横にはみ出さない`);
+      ok(errors.length === 0, `${name}: コンソールエラーなし ${errors.join(' / ')}`);
+      await page.context().close();
+    }
+  }
+
   // ---------- 動きを減らす設定 ----------
   {
     const { page, errors, top, depth, settle } = await newPage(browser, { reducedMotion: 'reduce' });
