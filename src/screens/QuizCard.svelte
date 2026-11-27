@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { finePointer } from '../core/pointer.ts';
+  import { choiceCap } from '../core/keys.ts';
+  import { store } from '../core/store.svelte.ts';
   // クイズの1枚分（問題文 or 解説 ＋ 4択）。クイズ画面はこれを横に並べてめくる。
   import Icon from '../components/Icon.svelte';
   import type { QuizMode, Question, InteractResult } from '../core/mode.ts';
@@ -130,12 +133,12 @@
     >
       {#if c.image}
         <img class="cimg" src={c.image} alt={c.text} draggable="false" onload={measure} />
-        <span class="cnum en">{k + 1}</span>
+        <span class="cnum en">{finePointer() ? choiceCap(k, store.settings) : k + 1}</span>
       {:else}
       {#if c.color}<span class="cdot" style:--c={c.color}></span>{/if}
       {#if c.tag}<span class="tag">{c.tag}</span>{/if}
       <span class="ct">{c.text}</span>
-      {#if phase !== 'reveal' && k < 9}<kbd class="ck en" aria-hidden="true">{k + 1}</kbd>{/if}
+      {#if phase !== 'reveal' && k < 9}<kbd class="ck en" aria-hidden="true">{choiceCap(k, store.settings)}</kbd>{/if}
       {/if}
       {#if isAns}<span class="mark"><span class="mini-ring"></span></span>
       {:else if isMine}<span class="mine">あなたの答え</span><span class="mark"><Icon name="x" size={18} stroke={2.8} /></span>{/if}

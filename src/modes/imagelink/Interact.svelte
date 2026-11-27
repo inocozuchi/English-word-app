@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { choiceIndex, isNextKey } from '../../core/keys.ts';
   import { tapWord, finePointer } from '../../core/pointer.ts';
   import { typingOf } from '../../core/storage.ts';
   // 4択以外の問題（カード全体を描く）:
@@ -117,11 +118,13 @@
         e.preventDefault();
       }
     } else if (kind === 'flashcard' && !typing) {
-      if (e.key === ' ' || (e.key === 'Enter' && !flipped)) {
+      // めくる: Space・Enter。めくったあと: 1つめのキー（A など）＝もう一度、2つめ（S など）＝覚えた
+      const k = choiceIndex(e, store.settings);
+      if (!flipped && (e.key === ' ' || isNextKey(e, store.settings))) {
         flip();
         e.preventDefault();
-      } else if (flipped && (e.key === '1' || e.key === '2')) {
-        grade(e.key === '1' ? 0 : 2);
+      } else if (flipped && (k === 0 || k === 1)) {
+        grade(k === 0 ? 0 : 2);
         e.preventDefault();
       }
     } else if (shortMode) {
@@ -133,8 +136,9 @@
       if (!shown && e.key === 'Enter') {
         show();
         e.preventDefault();
-      } else if (shown && !typing && /^[123]$/.test(e.key)) {
-        grade((+e.key - 1) as 0 | 1 | 2);
+      } else if (shown && !typing && choiceIndex(e, store.settings) >= 0 && choiceIndex(e, store.settings) < 3) {
+        // 違った／あやしい／合っていた = 1〜3つめのキー（A S D など）
+        grade(choiceIndex(e, store.settings) as 0 | 1 | 2);
         e.preventDefault();
       }
     }

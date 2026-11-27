@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { choiceIndex, isNextKey, inField } from '../../../core/keys.ts';
   import { tapWord, finePointer } from '../../../core/pointer.ts';
   // 反射版のクイズ: 問題ごとの3〜5秒の制限時間（細いバー）、選んだ瞬間に採点、
   // 正解は0.4秒・不正解は1.5秒（時間切れは1秒）で自動で次へ（タップで早送り）。解説は出さない。
@@ -286,30 +287,35 @@
   // ---- キーボード: 1〜4 で回答、Enter・Space で早送り。カードは Space でめくり 1/2/3 ----
   function onKey(e: KeyboardEvent) {
     if (reporting || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.key === 'p' || e.key === 'P') {
+    if (inField(e.target)) return;
+    if (e.code === 'KeyP' || e.key === 'p' || e.key === 'P') {
       e.preventDefault();
       return stopped ? unstop() : stop();
     }
     if (stopped) {
-      if (e.key === 'Enter') unstop();
+      if (isNextKey(e, store.settings)) {
+        e.preventDefault();
+        unstop();
+      }
       return;
     }
     if (e.key === 'Escape') return close();
-    if (phase === 'feedback' && (e.key === 'Enter' || e.key === ' ')) {
+    if (phase === 'feedback' && (isNextKey(e, store.settings) || e.key === ' ')) {
       e.preventDefault();
       return skip();
     }
     if (phase !== 'ask') return;
-    if (built && /^[1-4]$/.test(e.key)) {
+    const k = choiceIndex(e, store.settings);
+    if (built && k >= 0 && k < built.choices.length) {
       e.preventDefault();
-      answer(+e.key - 1);
+      answer(k);
     } else if (card) {
       if (e.key === ' ' || (e.key === 'Enter' && !flipped)) {
         e.preventDefault();
         flip();
-      } else if (flipped && /^[1-3]$/.test(e.key)) {
+      } else if (flipped && k >= 0 && k < 3) {
         e.preventDefault();
-        judge((3 - +e.key) as 0 | 1 | 2);
+        judge((2 - k) as 0 | 1 | 2);
       }
     }
   }

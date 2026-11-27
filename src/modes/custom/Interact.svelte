@@ -10,6 +10,7 @@
   import { haptic } from '../../core/haptics.ts';
   import { stagger } from '../../core/transitions.ts';
   import WordCard from './WordCard.svelte';
+  import { choiceIndex, isNextKey, inField } from '../../core/keys.ts';
 
   let { q, phase, onanswer, status }: { q: CQuestion; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet } = $props();
   const w = $derived(q.data.word);
@@ -42,6 +43,19 @@
       check();
     }
   }
+  /** 「頭の中で」のとき: 次へのキーで答えを見る、選ぶキー（A S D など）で 違った／あやしい／合っていた */
+  function onWinKey(e: KeyboardEvent) {
+    if (phase !== 'ask' || !think || inField(e.target) || e.metaKey || e.ctrlKey || e.altKey || root?.closest('[inert]')) return;
+    const k = choiceIndex(e, store.settings);
+    if (!shown && isNextKey(e, store.settings)) {
+      e.preventDefault();
+      shown = true;
+    } else if (shown && k >= 0 && k < 3) {
+      e.preventDefault();
+      judge(k as 0 | 1 | 2);
+    }
+  }
+  let root: HTMLElement | undefined = $state();
   function riseIn(node: HTMLElement) {
     stagger([...node.children], { step: 50, distance: 12 });
   }
@@ -52,7 +66,9 @@
   });
 </script>
 
-<div class="sp">
+<svelte:window onkeydown={onWinKey} />
+
+<div class="sp" bind:this={root}>
   <div class="top scroll">
     <div class="status-slot">{#if phase === 'reveal'}{@render status()}{/if}</div>
     <p class="ask">この意味の英単語を{think ? '思い浮かべる' : '書く'}</p>

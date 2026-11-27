@@ -10,7 +10,7 @@ import type { ItemState } from '../core/srs.ts';
 const isObj = (x: unknown): x is Record<string, any> => !!x && typeof x === 'object' && !Array.isArray(x);
 
 /** この端末だけの設定（同期しない） */
-export const LOCAL_SETTINGS = ['audio', 'typing', 'selfGrade', 'theme', 'haptics'] as const;
+export const LOCAL_SETTINGS = ['audio', 'typing', 'selfGrade', 'theme', 'haptics', 'choiceKeys', 'spaceNext'] as const;
 
 function newerItem(a: ItemState | undefined, b: ItemState | undefined): ItemState | undefined {
   if (!a) return b;

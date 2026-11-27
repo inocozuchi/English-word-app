@@ -6,6 +6,7 @@
   import SliderRow from '../components/SliderRow.svelte';
   import SituationToggles from '../components/SituationToggles.svelte';
   import SyncSection from '../sync/SyncSection.svelte';
+  import { CHOICE_KEYS } from '../core/keys.ts';
   import { store, updateSettings, replaceAll, activeMode, modes, switchMode, timingOf, updateTiming, allProgress } from '../core/store.svelte.ts';
   import { LIMITS, exportData, parseImport, DEFAULT_SETTINGS, emptyProgress } from '../core/storage.ts';
   import { haptic } from '../core/haptics.ts';
@@ -179,6 +180,19 @@
 
   <h2 class="ui-h2">複数の端末で使う</h2>
   <SyncSection />
+
+  <h2 class="ui-h2">キーボード</h2>
+  <div class="ui-group">
+    <div class="ui-item col">
+      <div class="ui-line"><span>選択肢を選ぶキー</span></div>
+      <Segmented options={CHOICE_KEYS.map((k) => ({ value: k.id, label: k.label }))} value={s.choiceKeys} onchange={(v) => updateSettings({ choiceKeys: v })} />
+      <p class="ui-hint">左から1〜4番目の選択肢（自己採点は 違った・あやしい・合っていた の順）。数字の 1〜4 もいつでも使えます。文字を入力する問題では入力が優先です</p>
+    </div>
+    <div class="ui-item">
+      <div class="ui-txt"><span>スペースキーでも次へ</span><span class="ui-hint">Enter・→ はいつでも次へ。P で一時停止、Esc でやめる・戻る</span></div>
+      <Toggle label="スペースキーでも次へ" checked={s.spaceNext} onchange={(v) => updateSettings({ spaceNext: v })} />
+    </div>
+  </div>
 
   <h2 class="ui-h2">データ</h2>
   <div class="ui-group">

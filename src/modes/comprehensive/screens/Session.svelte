@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { choiceIndex, isNextKey } from '../../../core/keys.ts';
   import { typingOf } from '../../../core/storage.ts';
   // 今日の学習（ワンボタンで自動に進む）。
   //   復習 → 単語 → 熟語 → チャンク → 文法 → 英作文 → 言い換え → 音声 → 会話 → 読解 → 混合 → 間違い直し（空の段階は飛ばす）
@@ -205,17 +206,33 @@
     const typing = !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
     if (e.key === 'Escape' && !reporting) close();
     if (stopped) {
-      if (e.key === 'Enter' && !typing) stopped = false;
+      if (isNextKey(e, store.settings) && !typing) {
+        e.preventDefault();
+        stopped = false;
+      }
       return;
     }
-    if (!s || !task || typing || reporting) return;
-    if (e.key === 'Enter' && s.results[task.id]) {
+    if (!s || !task || typing || reporting || e.metaKey || e.ctrlKey || e.altKey) return;
+    if ((e.code === 'KeyP' || e.key === 'p') && !e.repeat) {
       e.preventDefault();
-      next();
+      stopped = true;
+      return;
     }
-    if (/^[1-4]$/.test(e.key) && choices && !s.results[task.id]) {
-      const b = body?.querySelectorAll<HTMLButtonElement>('.choice')[+e.key - 1];
-      b?.click();
+    const k = choiceIndex(e, store.settings);
+    if (isNextKey(e, store.settings) && !e.repeat) {
+      // 答えたあとは次へ。答える前は、その画面のいちばん大事なボタン（覚えた・次へ／答えを見る／次へ）を押す
+      e.preventDefault();
+      if (s.results[task.id]) return next();
+      const pri = [...(body?.querySelectorAll<HTMLButtonElement>('.acts.one .pri, .bottom .pri, .acts:not(.three) .pri') ?? [])].find((b) => !b.disabled && b.offsetParent);
+      pri?.click();
+    } else if (k >= 0 && !s.results[task.id]) {
+      // 選択肢、または自己採点（違った／あやしい／合っていた）
+      const opts = [...(body?.querySelectorAll<HTMLButtonElement>('.choice') ?? [])];
+      const btn = opts.length ? opts[k] : [...(body?.querySelectorAll<HTMLButtonElement>('.acts.three button') ?? [])][k];
+      if (btn && !btn.disabled) {
+        e.preventDefault();
+        btn.click();
+      }
     }
   }
   function report(reason: ReportReason, comment: string) {

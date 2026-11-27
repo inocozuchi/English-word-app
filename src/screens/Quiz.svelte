@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { choiceIndex, isNextKey } from '../core/keys.ts';
   // 共通のクイズ画面。問題文と解説の中身はモード（mode.Prompt / mode.Explain）が描く。
   // 問題の切り替えは「カルーセル」: 次の問題のカードが右に並んでいて、
   // 左スワイプでは指についてきて、自動で進むときも同じ動きで横にめくれる。
@@ -202,25 +203,28 @@
     {
       const t = e.target as HTMLElement | null;
       const inField = !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA');
-      if (!inField && (e.key === 'p' || e.key === 'P' || (e.key === ' ' && phase === 'ask'))) {
+      if (!inField && (e.code === 'KeyP' || e.key === 'p' || e.key === 'P')) {
         e.preventDefault();
         stopped ? unpause() : pause();
         return;
       }
       if (stopped) {
-        if (e.key === 'Enter') unpause();
+        if (!inField && isNextKey(e, store.settings)) {
+          e.preventDefault();
+          unpause();
+        }
         return;
       }
     }
     const el = e.target as HTMLElement | null;
     const typing = !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
-    if (phase === 'ask' && !typing && !q.interactive && /^[1-9]$/.test(e.key)) {
-      const k = +e.key - 1;
+    const k = typing ? -1 : choiceIndex(e, store.settings);
+    if (phase === 'ask' && !q.interactive && k >= 0) {
       if (k < q.choices.length) {
         e.preventDefault();
         answer(k);
       }
-    } else if (phase === 'reveal' && (e.key === 'Enter' || e.key === 'ArrowRight') && !e.repeat) {
+    } else if (phase === 'reveal' && !typing && isNextKey(e, store.settings) && !e.repeat) {
       e.preventDefault();
       next();
     } else if (e.key === 'Escape' && !typing) close();

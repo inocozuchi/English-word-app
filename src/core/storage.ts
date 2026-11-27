@@ -28,6 +28,10 @@ export interface Settings {
   typing: TypingMode;
   /** 自己採点の問題（英作文・言い換え・カードなど、自分で合否を決める問題）を出す */
   selfGrade: boolean;
+  /** パソコンで選択肢を選ぶキー（A S D F など。core/keys.ts） */
+  choiceKeys: 'asdf' | 'jkl' | 'qwer' | 'num';
+  /** スペースキーでも次へ進む */
+  spaceNext: boolean;
   /** モードごとの設定（秒数 advanceOkSec / advanceNgSec / answerSec と、各モードの出題範囲など）。旧 advanceSec は両方の初期値として読む */
   modes: Record<string, any>;
 }
@@ -47,6 +51,8 @@ export const DEFAULT_SETTINGS: Settings = {
   audio: true,
   typing: 'on',
   selfGrade: true,
+  choiceKeys: 'asdf',
+  spaceNext: true,
   modes: {},
 };
 
@@ -138,6 +144,8 @@ export function normalizeSettings(raw: any): Settings {
     audio: typeof s.audio === 'boolean' ? s.audio : d.audio,
     typing: s.typing === 'self' || s.typing === 'skip' ? s.typing : 'on',
     selfGrade: typeof s.selfGrade === 'boolean' ? s.selfGrade : d.selfGrade,
+    choiceKeys: ['asdf', 'jkl', 'qwer', 'num'].includes(s.choiceKeys) ? s.choiceKeys : d.choiceKeys,
+    spaceNext: typeof s.spaceNext === 'boolean' ? s.spaceNext : d.spaceNext,
     modes,
   };
 }

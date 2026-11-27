@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isNextKey, inField } from '../../../core/keys.ts';
   // 反射版の結果: 正解数・平均反応時間・最高の連続正解。タイムアタックはベスト記録と比べる。
   // まちがえた・遅かった問題の「詳しく読む」はここにまとめる（1問ごとの画面には出さない）
   import { onMount } from 'svelte';
@@ -54,9 +55,23 @@
   // svelte-ignore state_referenced_locally
   const title = kind === 'review' ? '復習' : METHODS.find((m) => m.id === method)?.label ?? '';
   const rows = [...sum.missed.map((k) => ({ k, why: '×' })), ...sum.slow.map((k) => ({ k, why: '遅め' }))];
+  // パソコン: 次へのキー（Enter・スペース）でもう一度、Esc でホームへ（結果画面が一番上のときだけ）
+  let resRoot: HTMLElement | undefined = $state();
+  function onResKey(e: KeyboardEvent) {
+    if (e.defaultPrevented || e.repeat || inField(e.target) || e.metaKey || e.ctrlKey || e.altKey || resRoot?.closest('[inert]')) return;
+    if (isNextKey(e, store.settings)) {
+      e.preventDefault();
+      resRoot?.querySelector<HTMLButtonElement>('button.primary')?.click();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      router.pop();
+    }
+  }
 </script>
 
-<div class="rr">
+<svelte:window onkeydown={onResKey} />
+
+<div class="rr" bind:this={resRoot}>
   <div class="scroll body">
     <div class="hero" in:rise>
       <p class="eyebrow-en">Reflex · {title}</p>
