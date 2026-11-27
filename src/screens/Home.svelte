@@ -11,6 +11,7 @@
   import { reviewCount } from '../core/review.ts';
   import { haptic } from '../core/haptics.ts';
   import { loadSuspend, clearSuspend } from '../core/suspend.ts';
+  import HomeBackdrop from '../components/HomeBackdrop.svelte';
 
   loadData();
   const mode = $derived(activeMode());
@@ -18,6 +19,13 @@
   const days = $derived(streak(store.progress.days, t));
   const todayCount = $derived(store.progress.days[dayKey(t)]?.a ?? 0);
   const inReview = $derived(reviewCount(store.progress.review));
+  /** 時間帯のあいさつ（日付と同じく午前4時区切り）と、続けている日数 */
+  const greeting = $derived.by(() => {
+    void t;
+    const h = new Date().getHours();
+    const g = h >= 4 && h < 11 ? 'Good morning' : h >= 11 && h < 17 ? 'Good afternoon' : h >= 17 && h < 23 ? 'Good evening' : 'Late night';
+    return days >= 2 ? `${g} · ${days}-day loop` : g;
+  });
   /** 出題範囲で、今日の復習待ち（間隔反復の期限が来ている問題） */
   const due = $derived.by(() => {
     if (!mode.ready()) return 0;
@@ -79,12 +87,14 @@
 <svelte:window onkeydown={homeKey} />
 
 <div class="home" bind:this={root}>
+  <HomeBackdrop />
   <header data-intro>
     <div class="logo en" aria-label="EIGO LOOP"><span>EIGO</span><span>LOOP</span></div>
     <button class="icon press" onclick={() => router.push({ name: 'settings' })} aria-label="設定"><Icon name="gear" size={24} /></button>
   </header>
 
   <div class="hero" data-intro>
+    <p class="greet eyebrow-en">{greeting}</p>
     <p class="tagline">{mode.tagline}</p>
     <h1 class="display">
       {#each hero as line, li}{#if li > 0}<br />{/if}{#each line as part}{#if part.acc}<span class="acc">{part.t}</span>{:else}{part.t}{/if}{/each}{/each}
@@ -152,6 +162,18 @@
     flex-direction: column;
     padding: var(--pad-top) var(--pad-x-r) var(--pad-bottom) var(--pad-x);
     gap: 12px;
+    isolation: isolate;
+  }
+  /* 背景の文字の上でも読めるように、枠のある部品は背景色で塗る */
+  .review,
+  .stats,
+  nav button,
+  .resume-card {
+    background: var(--bg);
+  }
+  .greet {
+    color: var(--accent);
+    margin-bottom: -2px;
   }
   header {
     display: flex;

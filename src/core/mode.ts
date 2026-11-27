@@ -142,6 +142,8 @@ export interface QuizMode<S = any> {
   Interact?: Component<{ q: Question<any>; phase: 'ask' | 'reveal'; onanswer: (r: InteractResult) => void; status: Snippet }>;
   /** 出題できる問題がないときの案内（省略時は「設定で出題範囲を確認」） */
   emptyHint?(): { text: string; sub: string; action: { label: string; route: Route } };
+  /** ホームの背景に流す語（t = 表示する英語、id = 記録のキーの末尾。学習した語はアクセント色）。省略時は基本の語 */
+  backdrop?(): { t: string; id: string }[];
   /** ホームのスタートの要約に共通の問題数（10問 など）を付けない（問題数をモードが決める） */
   hideCount?: boolean;
   /** ホームのスタートの文言（例: 今日の学習を始める / 続きから再開する）。省略時は「スタート」 */

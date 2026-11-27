@@ -1,5 +1,6 @@
 // 自由英単語: 自分で登録した英単語と日本語訳だけでクイズをする（英→日・日→英・つづり）
 // 単語リストは screens/Words.svelte で追加・編集・まとめて追加・書き出し。保存は settings.modes.custom.words
+import { customWords } from './words.ts';
 import { typingOf } from '../../core/storage.ts';
 import type { QuizMode } from '../../core/mode.ts';
 import type { CustomSettings } from './quiz.ts';
@@ -35,6 +36,7 @@ export const customMode: QuizMode<CustomSettings> = {
     if (!s.words.length) return '単語を登録して始めましょう';
     return `${s.words.length}語 · ${s.patterns.map((p) => PATTERNS.find((x) => x.id === p)!.label).join('・')}`;
   },
+  backdrop: () => customWords().map((w) => ({ t: w.en, id: w.id })),
   stat: () => `${words().length}語`,
   emptyHint() {
     const n = words().length;

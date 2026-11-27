@@ -60,6 +60,7 @@ export const etymologyMode: QuizMode<Scope> = {
     return { name: 'ety/root', params: { id: s.phrase.root } };
   },
   summary: (s) => settingsSummary(ety.index, s),
+  backdrop: () => (ety.index?.ds.words ?? []).map((w) => ({ t: w.w, id: w.w })),
   stat: () => (ety.index ? `${ety.index.ds.words.length.toLocaleString()}語 · ${ety.index.ds.roots.length}語源` : ''),
   Prompt,
   Explain,

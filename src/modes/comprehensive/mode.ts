@@ -63,6 +63,7 @@ export const compMode: QuizMode<CompSettings> = {
     if (d >= AFTER_COURSE) return `60日を修了 · 復習 · ${s.minutes}分`;
     return `Day ${d}${info ? ` · ${info.topic}` : ''} · ${s.minutes}分`;
   },
+  backdrop: () => (comp.index?.d.items ?? []).filter((it) => it.english.length <= 22).map((it) => ({ t: it.english, id: it.id })),
   stat: () => (comp.index ? `60日 · ${comp.index.d.counts.items.toLocaleString()}項目 · ${comp.index.d.counts.practiceQuestions.toLocaleString()}問` : ''),
   Prompt,
   SettingsSection,

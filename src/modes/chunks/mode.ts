@@ -47,6 +47,7 @@ export const chunksMode: QuizMode<ChunkSettings> = {
     if (s.sections.length < ALL_SECTIONS.length) parts.push(`${s.sections.length}章`);
     return parts.join(' · ');
   },
+  backdrop: () => (chk.index?.d.entries ?? []).filter((e) => e.bare.length <= 24).map((e) => ({ t: e.bare, id: e.id })),
   stat: () => (chk.index ? `${chk.index.d.entries.length}表現 · ${chk.index.d.sections.length}章` : ''),
   Prompt,
   inlineExplain: true,

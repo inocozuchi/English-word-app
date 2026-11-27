@@ -80,6 +80,7 @@ export const soundMode: QuizMode<SoundSettings> = {
     parts.push(narrowed ? '範囲を指定' : '全範囲');
     return parts.join(' · ');
   },
+  backdrop: () => (snd.index?.d.items ?? []).filter((x) => x.text.length <= 22).map((x) => ({ t: x.text, id: x.id })),
   stat: () => (snd.index ? `${snd.index.d.items.length}フレーズ · ${snd.index.d.rules.length}ルール` : ''),
   Prompt,
   inlineExplain: true,
