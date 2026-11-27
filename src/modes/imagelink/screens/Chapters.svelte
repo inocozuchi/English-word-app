@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tapWord, finePointer } from '../../../core/pointer.ts';
   // 章と達成度: 連続日数・今日の回答・習得、部ごとの進み具合、章ごとの正答率と習得数。章をタップでミニテスト
   import Page from '../../../components/Page.svelte';
   import PageHero from '../../../components/PageHero.svelte';
@@ -44,7 +45,7 @@
   <h2 class="ui-h2">部ごとの進み具合</h2>
   <div class="card"><PartBars /></div>
 
-  <h2 class="ui-h2">章 <span class="hint">タップでその章から10問</span></h2>
+  <h2 class="ui-h2">章 <span class="hint">{tapWord()}でその章から10問</span></h2>
   {#if il.error && !il.index}<p class="err">{il.error}</p>{/if}
   <div class="tabs" role="tablist">
     {#each groups as g, k}

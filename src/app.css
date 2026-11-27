@@ -406,10 +406,46 @@ input[type='range']::-moz-range-thumb {
     --pad-x-wide-r: max(calc(var(--safe-right) + 8px), 28px, calc(50vw - 540px));
   }
 }
-/* マウス・トラックパッドではポインターを合わせたときに少し持ち上げる（タッチ端末では出さない） */
+/* ---------- パソコン（マウス・トラックパッド・キーボード） ----------
+   タッチ端末には出さない（iOS で押したあとホバーの見た目が残らないように） */
 @media (hover: hover) and (pointer: fine) {
   button:not(:disabled),
-  [role='button'] {
+  [role='button'],
+  label:has(input[type='checkbox']) {
     cursor: pointer;
+  }
+  /* 押せるものはポインターを合わせると少し浮く（押すと縮む） */
+  .press:not(:disabled):not(.ui-item):hover {
+    transform: translateY(-2px);
+  }
+  .press:not(:disabled):active {
+    transform: scale(0.965);
+  }
+  /* 一覧の行は浮かせず、背景をうっすら */
+  .ui-item:is(button, a):not(:disabled):hover {
+    background: var(--fill);
+  }
+  /* 細いスクロールバー */
+  .scroll,
+  textarea {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+}
+/* キーボード操作のときだけ、いまの場所に太い輪を出す（クリック・タップでは出さない） */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .press:not(:disabled):hover {
+    transform: none !important;
   }
 }

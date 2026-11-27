@@ -61,7 +61,22 @@
     const r = mode.quizRoute?.(kind) ?? { name: 'quiz', params: { seed: Date.now(), kind } };
     router.push({ ...r, params: { seed: Date.now(), kind, ...(r.params ?? {}) } }, 'modal');
   }
+  /** パソコン: ホームで Enter（何も選んでいないとき）でスタート、R で復習 */
+  function homeKey(e: KeyboardEvent) {
+    if (router.stack.length !== 1 || e.repeat || e.metaKey || e.ctrlKey || e.altKey) return;
+    const t = e.target as HTMLElement | null;
+    if (t && t !== document.body) return;
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      start('normal');
+    } else if ((e.key === 'r' || e.key === 'R') && inReview) {
+      e.preventDefault();
+      start('review');
+    }
+  }
 </script>
+
+<svelte:window onkeydown={homeKey} />
 
 <div class="home" bind:this={root}>
   <header data-intro>
@@ -216,6 +231,28 @@
     border-radius: 28px;
     background: var(--accent);
     color: var(--on-accent);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /* パソコン: ポインターを合わせると光が斜めに一度だけ通り、矢印が前へ出る */
+  .start::before {
+    content: '';
+    position: absolute;
+    inset: -20% auto -20% 0;
+    width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: translateX(-160%) skewX(-12deg);
+    pointer-events: none;
+    z-index: -1;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .start:hover::before {
+      transform: translateX(320%) skewX(-12deg);
+      transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .start:hover .arrow {
+      transform: translateX(4px);
+    }
   }
   .start-en {
     font-size: 60px;
@@ -242,6 +279,7 @@
     place-items: center;
     background: var(--on-accent);
     color: var(--accent);
+    transition: transform 0.35s var(--ease-pop, ease-out);
   }
 
   /* 中断したクイズ: スタートの上に。押すと続きから */

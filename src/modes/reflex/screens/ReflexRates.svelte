@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tapWord, finePointer } from '../../../core/pointer.ts';
   // 反射率: 全体とグループ別の反射率（主な指標）、タイムアタックのベスト、問題ごとの状態
   import Page from '../../../components/Page.svelte';
   import PageHero from '../../../components/PageHero.svelte';
@@ -37,7 +38,7 @@
   </div>
   <p class="def">反射できる = 直近3回続けて、制限時間の半分以内に正解</p>
 
-  <h2 class="ui-h2">グループ別 <span class="hint">タップで集中</span></h2>
+  <h2 class="ui-h2">グループ別 <span class="hint">{tapWord()}で集中</span></h2>
   <div class="card"><RateBars /></div>
 
   <h2 class="ui-h2">タイムアタック</h2>

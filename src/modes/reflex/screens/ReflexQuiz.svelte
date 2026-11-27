@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tapWord, finePointer } from '../../../core/pointer.ts';
   // 反射版のクイズ: 問題ごとの3〜5秒の制限時間（細いバー）、選んだ瞬間に採点、
   // 正解は0.4秒・不正解は1.5秒（時間切れは1秒）で自動で次へ（タップで早送り）。解説は出さない。
   // まちがえた問題は 3〜6 問後に出し直し、2回続けて正解で終わり（engine.ts の ReflexRun）。
@@ -443,7 +444,7 @@
             <span class="ci" use:appear>{card.image}</span>
             <span class="cref">教科書 p.{card.ref_page_a5}（第{card.chapter}章）</span>
           {:else}
-            <span class="tap">タップでめくる</span>
+            <span class="tap">{finePointer() ? 'クリック・Space でめくる' : 'タップでめくる'}</span>
           {/if}
         </button>
         {#if flipped}

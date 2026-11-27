@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tapWord, finePointer } from '../../core/pointer.ts';
   import { typingOf } from '../../core/storage.ts';
   // 4択以外の問題（カード全体を描く）:
   //   order      語句をタップで枠に並べる（枠の語をタップで戻す）→ 答え合わせ
@@ -165,7 +166,7 @@
         <span class="face front">
           <span class="fl">{r.tags.join('・') || 'カード'}</span>
           <span class="ft">{r.question}</span>
-          <span class="tap">タップでめくる</span>
+          <span class="tap">{finePointer() ? 'クリック・Space でめくる' : 'タップでめくる'}</span>
         </span>
         <span class="face back scroll">
           <span class="fl">{r.question}</span>
@@ -182,7 +183,7 @@
           {#each picked as k (k)}
             <button class="tok on en press" use:chipIn onclick={() => unpick(k)} disabled={phase === 'reveal'}>{tokens[k]}</button>
           {:else}
-            <span class="ph">下の語句をタップして並べる</span>
+            <span class="ph">下の語句を{tapWord()}して並べる{finePointer() ? '（1〜9 キーでも）' : ''}</span>
           {/each}
         </div>
       {:else if !(kind === 'exercise' && phase === 'reveal' && !shortMode && !text)}
