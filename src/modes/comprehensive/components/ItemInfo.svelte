@@ -7,6 +7,7 @@
   import { isFav, toggleFav } from '../state.svelte.ts';
   import { STAGE_LABEL } from '../course.ts';
   import { comp } from '../state.svelte.ts';
+  import AddToMine from '../../custom/AddToMine.svelte';
 
   let { item, large = false }: { item: Item; large?: boolean } = $props();
   const s = $derived(modeSettings(compMode));
@@ -18,7 +19,8 @@
 <div class="ii" class:large>
   <div class="row">
     <span class="tg">{STAGE_LABEL[item.kind]}</span>
-    <button class="fav press" class:on={fav} onclick={() => toggleFav(item.id)} aria-pressed={fav} aria-label="お気に入り">{fav ? '★' : '☆'}</button>
+    <span class="acts"><AddToMine en={item.english} ja={item.japanese} ex={item.example} />
+    <button class="fav press" class:on={fav} onclick={() => toggleFav(item.id)} aria-pressed={fav} aria-label="お気に入り">{fav ? '★' : '☆'}</button></span>
   </div>
   <p class="en w">{item.english}<Speak text={item.english} size={large ? 44 : 34} /></p>
   {#if s.kana}<p class="kana">{item.kana}</p>{/if}
@@ -30,6 +32,11 @@
 </div>
 
 <style>
+  .acts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .ii {
     display: flex;
     flex-direction: column;

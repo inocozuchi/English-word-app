@@ -11,6 +11,7 @@
   import { store } from '../../../core/store.svelte.ts';
   import { wordStatus, STATUS_LABEL } from '../summary.ts';
   import { dayKey } from '../../../core/day.ts';
+  import AddToMine from '../../custom/AddToMine.svelte';
 
   let { w: text }: { w: string } = $props();
   const ix = ety.index!;
@@ -34,6 +35,7 @@
   <ul class="defs">
     {#each w.defs as d}<li><span class="pos">{d.pos}</span>{d.ja}</li>{/each}
   </ul>
+  <div class="mine-row"><AddToMine en={w.w} ja={w.defs.map((d) => d.ja).join('／')} ex={w.examples[0]?.en} /></div>
 
   {#if w.breakdown.length}
     <h2>語の成り立ち</h2>
@@ -83,6 +85,10 @@
 </Page>
 
 <style>
+  .mine-row {
+    margin-top: 10px;
+    display: flex;
+  }
   .morph-card {
     padding: 14px;
     border: var(--card-border);

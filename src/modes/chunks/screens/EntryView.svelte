@@ -7,6 +7,7 @@
   import { chk } from '../state.svelte.ts';
   import { isMastered } from '../quiz.ts';
   import { dayKey } from '../../../core/day.ts';
+  import AddToMine from '../../custom/AddToMine.svelte';
 
   let { id }: { id: string } = $props();
   const ix = $derived(chk.index!);
@@ -23,6 +24,7 @@
   <div class="card">
     <EntryDetail entry={e} large />
   </div>
+  <div class="mine-row"><AddToMine en={e.bare} ja={e.meaning} ex={e.ex} /></div>
 
   {#if st}
     <p class="learn">
@@ -53,6 +55,10 @@
 </Page>
 
 <style>
+  .mine-row {
+    margin-top: 10px;
+    display: flex;
+  }
   .where {
     font-size: 12px;
     color: var(--text3);
